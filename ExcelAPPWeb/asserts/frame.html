@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/sys.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/leeui/js/leeui.js"></script>
+    <script src="scripts/service.js"></script>
+</head>
+
+<body>
+
+    <style>
+        .choose {
+            position: absolute;
+            right: 16px;
+            top: 33px;
+            z-index: 100;
+            width: 480px;
+        }
+
+        .left {
+            position: absolute;
+            left: 0;
+            top: 36px;
+            width: 200px;
+            bottom: 0;
+            border-right: 1px solid #DDD;
+        }
+
+        .center {
+            left: 201px;
+        }
+
+        .lee-tab-content-item {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            height: auto;
+        }
+
+        .lee-tab-content-item iframe {
+            width: 100%;
+            height: 99%;
+            border: none;
+        }
+
+        .lee-text .lee-text-field, .lee-text-date .lee-text-field, .lee-text-drop-down .lee-text-field, .lee-text-spinner .lee-text-field {
+            border-left-color: #DDD !important;
+            border-top-color: #DDD !important;
+            border-right-color: #DDD !important;
+            box-shadow: none;
+        }
+    </style>
+    <nav class="ui-sys-bar">
+        <div class="ui-sys-commands">
+            <span n-ui-command="minimize" class="-nanui-minimize">&#48;</span>
+            <span n-ui-command="maximize" class="-nanui-maximize">&#49;</span>
+            <span n-ui-command="close" class="-nanui-close">&#114;</span>
+        </div>
+    </nav>
+    <div class="topobar">
+        <span><i class="lee-ion-android-apps" style="font-size:20px;margin-right:10px;"></i>数据导入平台V0.1.1</span>
+    </div>
+
+    <div class="choose">
+        <div class="lee-table-form-border  table-query" style="margin:0;">
+
+            <div class="table-item" style="width:90%;">
+                <div class="table-label" style="font-size: 14px; padding: 8px;">
+                    <span style="font-size: 14px; color: #292929;">选择单位</span>
+                </div>
+                <div class="table-editor">
+                    <input type="text" id="txtOrgInfo" />
+                </div>
+            </div>
+            <div class="table-item" style="width:10%;    line-height: 36px;">
+                <button class="lee-btn lee-btn-xs" id="btnCustom" onclick="getSet()">设置</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="left">
+        <div id="navTree" style="margin-top:10px;"></div>
+    </div>
+    <div class="center">
+        <div id="tabInfo" class="flat">
+            <div title="首页">
+                <iframe src="main.html"></iframe>
+            </div>
+        </div>
+
+    </div>
+    <div class="toolstrip">
+        没有导入数据
+    </div>
+
+    <div id="dataWrapSettings" style="display:none;">
+        <div class="lee-table-form-border  table-query" style="margin:0;">
+
+            <div class="table-item " style="width:100%;">
+
+                <div class="table-label">
+                    服务器地址
+                </div>
+                <div class="table-editor">
+                    <input id="txtDataScource" />
+                </div>
+            </div>
+            <div class="table-item " style="width:100%;">
+
+                <div class="table-label">
+                    数据库类型
+                </div>
+                <div class="table-editor">
+                    <input id="txtDbType" />
+                </div>
+            </div>
+            <div class="table-item " style="width:100%;">
+
+                <div class="table-label">
+                    数据库名称
+                </div>
+                <div class="table-editor">
+                    <input id="txtCatalog" />
+                </div>
+            </div>
+            <div class="table-item " style="width:100%;">
+
+                <div class="table-label">
+                    用户id
+                </div>
+                <div class="table-editor">
+                    <input id="txtUserId" />
+                </div>
+            </div>
+            <div class="table-item " style="width:100%;">
+
+                <div class="table-label">
+                    用户密码
+                </div>
+                <div class="table-editor">
+                    <input id="txtPassword" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var openTabId = [];
+        $("#tabInfo").leeTab();
+        $("#txtOrgInfo").leeLookup({
+            helpID: "LSBZDW",
+            valueField: "LSBZDW_DWBH",
+            textField: "LSBZDW_DWMC",
+            url: "lookup.html?id=",
+            onClearValue: function () {
+                for (var item in openTabId) {
+                    $("#tabInfo").leeUI().removeTabItem(openTabId[item]);
+                }
+            },
+            onChange: function () {
+                for (var item in openTabId) {
+                    $("#tabInfo").leeUI().removeTabItem(openTabId[item]);
+                }
+            },
+            service: {
+                getQueryHelpSwitch: function (helpID, value, codeField, textField, filter) {
+
+                    var defer = $.Deferred();
+                    var data = idp.service.getHelpData(
+                        helpID,
+                        " and LSBZDW_DWBH like '" + value + "%'",
+                        "",
+                        1,
+                        1000
+                    ).done(function (data) {
+
+                        defer.resolve({ res: data.res, data: data.data.Rows });
+                    });
+                    return defer.promise();
+                }
+            },
+            getFilter: function () { }
+        });
+        selectFirst();
+
+        function selectFirst() {
+            idp.service.getHelpData(
+                "LSBZDW",
+                "",
+                "",
+                1,
+                1000
+            ).done(function (data) {
+                if (data.res && data.data.Rows.length > 0) {
+                    $("#txtOrgInfo").leeUI().confirmSelect(data.data.Rows);
+                }
+
+            });
+        }
+        $("#dataWrapSettings input").leeTextBox({});
+        function closeTab(id) {
+
+
+
+            $("#tabInfo").leeUI().removeTabItem(id);
+
+        }
+
+        function getSet() {
+            //alert();
+
+            var model = JSON.parse(APIBridge.GetSettings());
+            for (var key in model) {
+
+                $("#txt" + key).val(model[key]);
+            }
+
+            function getModel() {
+
+                for (var key in model) {
+                    model[key] = $("#txt" + key).val();
+                }
+
+                return model;
+            }
+            $.leeDialog.open({
+                target: $("#dataWrapSettings"),
+                targetBody: true,
+                title: "数据链接设置",
+                name: 'test',
+                isHidden: false,
+                showMax: true,
+                width: 400,
+                slide: false,
+                height: 350,
+                buttons: [
+                    {
+                        id: "dialog_lookup_ok",
+                        text: '选择',
+                        cls: 'lee-btn-primary lee-dialog-btn-ok',
+                        onclick: function (item, dialog) {
+                            APIBridge.SetSettings(JSON.stringify(getModel()));
+                            dialog.close()
+
+                        }
+                    },
+                    {
+                        text: '取消',
+                        cls: 'lee-dialog-btn-cancel ',
+                        onclick: function (item, dialog) {
+                            dialog.close()
+
+                        }
+                    }
+                ]
+            });
+
+            APIBridge.ShowDev();
+        }
+
+
+
+        idp.service.getFunc().done(function (data) {
+            $("#navTree").leeTree({
+                data: data.data,
+                idFieldName: 'ID',
+                parentIDFieldName: "PId",
+                textFieldName: "NAME",
+                onSelect: function (node) {
+                    var tabid = node.data.REFID;
+                    if (node.data.IsDetail) {
+                        if (tabid && node.data.REFType == "1")
+                            f_addTab(tabid, node.data.NAME);
+                        else if (node.data.REFType == "2")
+                            f_addTabURL(node.data);
+                    }
+
+
+                }
+
+            })
+        });
+
+
+
+        function setFilePath(id, path) {
+            document.getElementById(id).contentWindow.ImportController.setFilePath(path);
+        }
+
+
+        function setFilePathNew(id, path) {
+            document.getElementById(id).contentWindow.ImportController.setFilePathNew(path);
+        }
+
+
+        function f_addTabURL(row) {
+
+            console.log(row);
+
+            //openTabId.push(tabid);
+            $("#tabInfo").leeUI().addTabItem({
+                tabid: row.ID,
+                text: row.NAME,
+                url: row.URLInfo,
+                callback: function () {
+
+                }
+            });
+        }
+        function f_addTab(tabid, text) {
+
+            if (!$("#txtOrgInfo").leeUI().getValue()) {
+                Msg.alert("请选择单位信息！");
+                return;
+            }
+
+            openTabId.push(tabid);
+            $("#tabInfo").leeUI().addTabItem({
+                tabid: tabid,
+                text: text,
+                url: "import.html?id=" + tabid + "&dwbh=" + $("#txtOrgInfo").leeUI().getValue(),
+                callback: function () {
+
+                }
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>

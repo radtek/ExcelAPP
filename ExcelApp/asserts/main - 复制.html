@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/sys.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/leeui/js/leeui.js"></script>
+</head>
+
+<body>
+
+    <nav class="ui-sys-bar">
+        <div class="ui-sys-commands">
+            <span n-ui-command="minimize" class="-nanui-minimize">&#48;</span>
+            <span n-ui-command="maximize" class="-nanui-maximize">&#49;</span>
+            <span n-ui-command="close" class="-nanui-close">&#114;</span>
+        </div>
+
+    </nav>
+    <div class="topobar">
+
+        <span><i class="lee-ion-android-apps" style="font-size:20px;margin-right:10px;"></i>数据导入平台V0.1.1</span>
+    </div>
+
+    <div class="left">
+
+    </div>
+    <div class="center">
+        <div class="choose">
+            <div class="lee-table-form-border  table-query" style="margin:0;">
+                <div class="table-item" style="width:33.3%;">
+                    <div class="table-label">
+                        <span>单位信息</span>
+                    </div>
+                    <div class="table-editor">
+                        <input type="text" id="txtOrgInfo" />
+                    </div>
+                </div>
+                <div class="table-item" style="width:33.3%;">
+                    <div class="table-label">
+                        <span>导入类别</span>
+                    </div>
+                    <div class="table-editor">
+                        <input type="text" id="txtLbInfo" />
+                    </div>
+                </div>
+                <div class="table-item" style="width:33.3%;line-height:34px;">
+
+                    <button class="lee-btn lee-btn-primary" id="btnGetRule" onclick="ImportController.getRuleInfo()">加载规则</button>
+                    <!--<span style="color:rgba(0,0,0,.75);font-size:13px;" > Excel导入 临时表TMP_LSBZDW </span>-->
+                </div>
+            </div>
+
+            <div class="lee-table-form-border  table-query" style="margin:0;">
+                <div class="table-item" style="width:33.3%;">
+
+                    <div class="table-label">
+
+                    </div>
+                    <div class="table-editor">
+                        <input id="txtFileInfo" />
+                    </div>
+
+                    <!--<input type="text" id="txtFileInfo" />
+                    <button class="lee-btn ">选择文件</button>-->
+                </div>
+                <!--<div class="table-item" style="width:33.3%;">
+                    <input type="text" id="txtFileInfo" />
+                    <button class="lee-btn ">过滤</button>
+                </div>-->
+                <div class="table-item" style="width:66.6%;line-height:34px;">
+                    <button class="lee-btn ">选择文件</button>
+                    <button class="lee-btn lee-btn-primary">确认上传</button>
+                    <button class="lee-btn lee-btn-danger">取消上传</button>
+                    <span class="export-tip">已经加载数据30条，导入成功0条，失败0条</span>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div>
+            <div></div>
+            <div id="gridInfo" style="border-top:0;"></div>
+        </div>
+        <!--<div class="datawrap">
+            <div class="mask">
+                <img src="css/images/no.png" />
+                <p>没有相关导入规则</p>
+            </div>
+        </div>-->
+    </div>
+    <div class="toolstrip">
+        没有导入数据
+    </div>
+
+    <script>
+
+        var Msg = {
+            alert: function (msg, title) {
+                title = title || "提示";
+                $.leeDialog.alert(msg, title, 'warn');
+            }
+        }
+        $("#txtOrgInfo").leeLookup({
+            helpID: "LSBZDW",
+            valueField: "LSBZDW_DWBH",
+            textField: "LSBZDW_DWMC",
+            url: "lookup.html?id=",
+            getFilter: function () { }
+        });
+        $("#txtLbInfo").leeLookup({
+            helpID: "EACATEGORY",
+            valueField: "ID",
+            textField: "RNAME",
+            url: "lookup.html?id=",
+            getFilter: function () { }
+        });
+
+        $("#txtFileInfo").leeTextBox({});
+        $("#btnGetRule").LeeToolTip({ title: "Excel导入 临时表TMP_LSBZDW" });
+
+        //var rowData =
+        //    { DWBH: "0001", DWMC: "北京新东方集团", P: "北京市", C: "东城区", D: "市辖区", DQ: "华北", DM: "139393939393", FR: "张丽", DH: "13878786763", "EMAIL": "1234@qq.com", ZB: "1000w" };
+
+        var data = [];
+        //data.push({ PDWBH:"",DWBH: "0", DWMC: "北京新东方集团", P: "北京市", C: "东城区", D: "市辖区", DQ: "华北", DM: "139393939393", FR: "张丽", DH: "13878786763", "EMAIL": "1234@qq.com", ZB: "1000w" });
+
+        for (var i = 1; i < 100; i++) {
+
+            data.push({ PDWBH: "", DWBH: i, __hideChild: false, DWMC: "北京新东方集团", P: "北京市", C: "东城区", D: "市辖区", DQ: "华北", DM: "139393939393", FR: "张丽", DH: "13878786763", "EMAIL": "1234@qq.com", ZB: "1000w" });
+        }
+
+        //for (var i = 1; i < 20; i++) {
+        //    for (var j = 1; j < 20; j++) {
+        //        data.push({ PDWBH: i, DWBH: i + "_" + j, __hideChild: true,DWMC: "北京新东方集团", P: "北京市", C: "东城区", D: "市辖区", DQ: "华北", DM: "139393939393", FR: "张丽", DH: "13878786763", "EMAIL": "1234@qq.com", ZB: "1000w" });
+        //        for (var k = 1; k < 10; k++) {
+
+        //            data.push({ PDWBH: i + "_" + j, DWBH: i + "_" + j + "_" + k, DWMC: "北京新东方集团", P: "北京市", C: "东城区", D: "市辖区", DQ: "华北", DM: "139393939393", FR: "张丽", DH: "13878786763", "EMAIL": "1234@qq.com", ZB: "1000w" });
+
+        //        }
+        //    }
+        //}
+
+        var count = 0;
+
+        $("#gridInfo").leeGrid({
+            checkbox: true,
+            rownumbers: true,
+            usePager: false,
+            height: 231,
+            headerRowHeight: 28,
+            //rowHeight: 28,
+            //heightDiff: -2,
+            enabledEdit: true,
+            //tree: {
+            //    columnId: 'id',
+            //    parentIDField: "PDWBH",
+            //    idField: "DWBH",
+            //    isParent: function (data) {
+            //        var exist = 'children' in data;
+            //        if (exist) return true;
+            //        if (data.childrenurl) return true;
+            //        return false;
+            //    },
+            //    isExtend: function (data) {
+            //        console.log(data["__hideChild"]);
+            //        if (data["__hideChild"]) return false;
+            //        var exist = 'children' in data;
+            //        if (exist) return true;
+            //        return false;
+            //    }
+            //},
+            columns: [
+                { id: "id", display: "单位编号", name: "DWBH", width: 100, align: "left", editor: { type: "text" } },
+                { id: "", display: "单位名称", name: "DWMC", width: 100, align: "left" },
+                { id: "", display: "省份", name: "P", width: 100, align: "left" },
+                { id: "", display: "城市", name: "C", width: 100, align: "left" },
+                //{ id: "", display: "地区", name: "D", width: 100, align: "left" },
+                //{ id: "", display: "统一社会信用代码", name: "DM", width: 140, align: "left" },
+                //{ id: "", display: "法人", name: "FR", width: 100, align: "left" },
+                //{ id: "", display: "联系电话", name: "DH", width: 100, align: "left" },
+                //{ id: "", display: "注册邮箱", name: "EMAIL", width: 100, align: "left" },
+                //{ id: "", display: "注册资本", name: "ZB", width: 100, align: "left" },
+                //{ id: "", display: "备注", name: "DWBH", width: 100, align: "left" }
+
+
+            ], data: {
+                Rows: data
+            }
+        });
+
+        count++;
+        var CurModel = null;
+        var hasLoaded = false;
+        var ImportController = {
+
+            getRuleInfo: function () {
+                var dwbh = $("#txtOrgInfo").leeUI().getValue();
+                var lbID = $("#txtLbInfo").leeUI().getValue();
+
+                if (dwbh == "") {
+                    Msg.alert("请选择单位信息！");
+                    return;
+                }
+                if (lbID == "") {
+                    Msg.alert("请选择模板类别！");
+                    return;
+                }
+
+                var res = APIBridge.LoadConfig(dwbh, lbID);
+
+                CurModel = JSON.parse(res);
+                console.log(res);
+            },
+            initTmpView: function () {
+            },
+            initGrid: function () {
+            },
+            setDataWrap: function () {
+            },
+            setImportTips: function () {
+                //设置导入提示信息
+            },
+            setDescription: function () {
+                //设置规则信息
+            },
+            loadExcelData: function () {
+                //加载excel 并插入中间表 返回给grid
+            },
+            beginUpload: function () {
+            },
+            cancelUpload: function () {
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

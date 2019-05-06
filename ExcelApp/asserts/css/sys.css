@@ -1,0 +1,65 @@
+.ui-sys-bar {
+    position: fixed;
+    width: calc(100% - 40px);
+    height: 30px;
+    left: 40px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 2;
+    -webkit-app-region: drag;
+}
+
+
+
+.ui-sys-bar:hover .ui-sys-commands span {
+    color: #fff;
+    opacity: 1;
+}
+
+.ui-sys-bar .ui-sys-commands {
+    -webkit-app-region: no-drag;
+    word-break: keep-all;
+    white-space: nowrap;
+    transition: all ease-in-out 0.3s;
+}
+
+.ui-sys-bar:hover .ui-sys-commands {
+    background: rgb(130, 189, 236);
+}
+
+.ui-sys-bar .ui-sys-commands span {
+    height: 30px;
+    padding: 0 10px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    font-family: Webdings !important;
+    color: #FFF;
+    display: inline-block;
+    transition: all ease-in-out 0.3s;
+}
+
+.ui-sys-bar .ui-sys-commands span:hover {
+    opacity: 1;
+    background: rgba(33, 150, 243,0.8);
+}
+
+.ui-sys-bar .ui-sys-commands span:active {
+    opacity: 1;
+    background: rgba(33, 150, 243,0.9);
+}
+
+.ui-sys-bar .ui-sys-commands span:last-child:hover {
+    opacity: 1;
+    background-color: rgba(204,0,0,1);
+    color: #fff;
+}
+
+.ui-sys-bar .ui-sys-commands span:last-child:active {
+    opacity: 1;
+    background-color: rgba(204,0,0,.5);
+    color: #fff;
+}

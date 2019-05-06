@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/login.css" />
+
+    <link rel="stylesheet" href="css/sys.css" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/leeui/js/leeui.js"></script>
+    <script src="scripts/service.js"></script>
+</head>
+
+<body class="demo-app">
+
+    <nav class="ui-sys-bar">
+        <div class="ui-sys-commands">
+            <!--<span n-ui-command="minimize" class="-nanui-minimize">&#48;</span>
+            <span n-ui-command="maximize" class="-nanui-maximize">&#49;</span>-->
+            <span n-ui-command="close" class="-nanui-close">&#114;</span>
+        </div>
+
+    </nav>
+
+    <div class="login">
+        <!--<div class="login_title">
+            <p>北斗车联网大数据服务平台</p>
+        </div>-->
+        <div class="login_main">
+            <div class="main_left"></div>
+            <div class="main_right">
+                <div class="right_title">用户登录</div>
+                <form action="">
+                    <div class="username">
+                        <img src="css/images/username.png" alt="">
+                        <input id="txtUserName" type="text" placeholder="请输入用户名">
+                    </div>
+                    <div class="password">
+                        <img src="css/images/password.png" alt="">
+                        <input id="txtUserPwd" type="password" placeholder="请输入密码">
+                    </div>
+                    <!--<div class="code">
+                        <img src="./img/code.png" alt="">
+                        <input type="text" placeholder="请输入验证码">
+                        <div class="code_img">
+                            <img src="./img/code_img.png" alt="">
+                        </div>
+                    </div>-->
+                    <div class="yes_login">
+                        <a href="javascript:void(0)" id="loginBtn">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $("#loginBtn").click(function () {
+                    idp.service.login($("#txtUserName").val(), $("#txtUserPwd").val()).done(function (data) {
+                        if (data.res) {
+                            APIBridge.Login(data.data);
+                        } else {
+                            APIBridge.Warn(data.msg);
+                        }
+                    })
+                })
+            });
+        </script>
+
+</body>
+
+</html>

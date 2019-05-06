@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/leeui/js/leeui.js"></script>
+    <script src="scripts/service.js"></script>
+</head>
+
+<body>
+
+    <style>
+        body {
+            font-family: 微软雅黑;
+            overflow: hidden;
+        }
+
+        .lee-text .lee-text-field,
+        .lee-text-date .lee-text-field,
+        .lee-text-drop-down .lee-text-field,
+        .lee-text-spinner .lee-text-field {
+            border-left-color: transparent !important;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            box-shadow: none;
+        }
+
+        .lee-text .lee-right,
+        .lee-text-date .lee-right,
+        .lee-text-drop-down .lee-right,
+        .lee-text-spinner .lee-right {
+            border-left: 0;
+        }
+
+        .lee-right:hover,
+        .lee-right:active,
+        .lee-right-pressed {
+            background: #DDD;
+        }
+
+        .lee-grid-hd-cell-text {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .lee-grid .lee-grid-header,
+        .lee-grid .lee-grid-hd-cell {
+            background: #fafafa;
+        }
+
+
+        .lee-table-form-border .table-item {
+            min-height: 36px;
+        }
+
+        .lee-table-form-border .lee-right,
+        .lee-form .lee-right {
+            height: 22px;
+        }
+
+        .lee-table-form-border .dropdown,
+        .lee-form .dropdown,
+        .lee-table-form-border .popup,
+        .lee-form .popup {
+            line-height: 22px !important;
+            height: 22px !important;
+            min-width: 22px !important;
+        }
+
+        .lee-tab-links {
+            overflow: hidden;
+        }
+
+        .lee-tab-content-item {
+            width: auto;
+        }
+
+        button .icon {
+            display: block;
+            position: absolute;
+        }
+
+        button .icon + span {
+            margin-left: 20px;
+        }
+
+
+        .layui-laydate-content td,
+        .layui-laydate-content th {
+            height: 26px;
+        }
+
+        .layui-laydate .layui-this {
+            background-color: #2196F3 !important;
+        }
+
+        .laydate-month-list > li {
+            margin: 10px 0;
+        }
+
+        .layui-laydate-list > li {
+            height: 32px;
+            line-height: 32px;
+        }
+
+        /*.lee-grid .lee-grid-row-cell, .lee-grid  .lee-grid-hd-cell {
+            border-right: 0;
+        }
+
+
+        .lee-grid .lee-grid-hd-cell-last, .lee-grid .lee-grid-row-cell-last {
+            border-right: 1px solid #DDD;
+        }*/
+
+        .lee-search-wrap {
+            height: 27px;
+            position: relative;
+            z-index: 3;
+        }
+
+
+        .lee-search-words {
+            width: 100%;
+            height: 27px;
+            border: 1px solid #d1d2d3;
+            float: left;
+            font-size: 12px;
+            line-height: 25px;
+            padding: 0 10px;
+            resize: none;
+            max-height: 150px;
+            position: relative;
+            z-index: 0;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .lee-search-wrap .search {
+            position: relative;
+            z-index: 0;
+            background: #fcfcfc;
+            color: #2277da;
+            height: 27px;
+            width: 27px;
+            min-width: 21px;
+            text-align: center;
+            display: inline-block;
+            cursor: pointer;
+            outline: 0;
+            border: 1px solid #d1d2d3;
+            border-radius: 2px;
+            border-top-left-radius: 0;
+            font-size: 14px;
+            border-bottom-left-radius: 0;
+            position: absolute;
+            right: 0;
+            left: unset;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+        }
+
+        .lee-search-wrap .search:hover {
+            background: #f2f2f2;
+            border-color: #b4b7bf;
+        }
+
+
+
+        .close {
+            position: absolute;
+            right: 27px;
+            top: 1px;
+            height: 25px;
+            line-height: 26px;
+            padding: 0 4px;
+            cursor: pointer;
+            display: none;
+            color: #929292;
+        }
+
+        .close:hover {
+            background: #f2f2f2;
+        }
+    </style>
+    <div id="lookupfavor">
+        <div class="datawrap" title="数据">
+
+            <div class="filter" style="padding:5px;">
+                <div class="lee-search-wrap">
+                    <input class="lee-search-words" id="txtKeyWord" type="text" placeholder="请输入查询关键字">
+                    <i class="lee-ion-close close"></i>
+                    <button class="search" id="btnSearch">
+                        <i class="icon-Find" style=" display: block;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="grid"></div>
+        </div>
+
+        <div class="favorwrap" title="收藏">
+
+            <div class="favorgrid"></div>
+        </div>
+    </div>
+    <script>
+
+        var service = idp.service;
+        var lookupHelper;
+
+        function LookupHelper(config) {
+            this.config = config;
+            this.options = {
+                async: false
+            };
+            this.selectField = "";//当前选中过滤字段
+
+        }
+        LookupHelper.prototype = {
+            setOptions: function (opts) {
+                this.options = opts;
+
+                if (opts.keyword) {
+                    $("#txtKeyWord").val(opts.keyword);
+                }
+            },
+            setTreeConfig: function (config) {
+                this.lconfig = config;
+                this.treeConfig = {
+                    //treetype: config.TreeType,
+                    grade: config.PathField,
+                    level: config.LevelField,
+                    isdetail: config.DetailField,
+                    id: config.IDField,
+                    pid: config.PIDField,
+                    rootValue: "",
+                    format: config.GradeFormat,
+                    name: config.NameField,
+                    code: config.CodeField
+
+                };
+            },
+            init: function () {
+                var self = this;
+                // 获取配置信息
+                service.getHelpInfo(this.config.sqlid).done(function (data) {
+                    self.showView(data.data);
+                });
+                var data = JSON.parse(data);
+                //self.setTreeConfig(data)
+
+            },
+            setFileds: function (key) {
+                this.fields = this.fields || [];
+                this.fields.push(key);
+            },
+            getColumns: function (data) {
+                var newCols = data.split(";");
+                var cols = [];
+                for (var item in newCols) {
+                    var row = newCols[item].split(",");
+
+                    cols.push({ id: row[0], display: row[1], name: row[0], width: row[2], align: "left" });
+                    this.setFileds(row[0]);
+
+
+                }
+                return cols;
+            },
+            getGridOptions: function (data) {
+
+                if (data.HelpType == "1") {
+                    this.setTreeConfig(data);
+
+                }
+
+                var self = this;
+                var treeInfo = this.treeConfig;
+
+
+                //判断是否分页
+                var opt = {};
+                opt.height = "100%";
+                opt.dataAction = "server";
+                opt.usePager = true;
+                opt.pageSize = 100;
+                opt.rowHeight = 30;
+                //opt.headerRowHeight = 32;
+                //opt.contentType = "application/json";
+                opt.url = "/MgrList/getListPage";
+                opt.rownumbers = true;
+                opt.columns = this.getColumns(data.ShowCols);
+                opt.parms = $.proxy(this.getParams, this);
+                opt.onDblClickRow = function (data, id, row) {
+                    if (parent.$) {
+                        var _$ = parent.$;
+                        _$("#dialog_lookup_ok").click();
+                    }
+
+                }
+
+
+                opt.customDataService = function (params) {
+                    console.log(arguments);
+                    var defer = $.Deferred();
+                    var data = service.getHelpData(
+                        params[0].value, params[1].value,
+                        params[2].value,
+                        String(params[4].value),
+                        String(params[5].value)
+                    ).done(function (data) {
+                        defer.resolve(data.data);
+                    });
+
+                    return defer.promise();
+                }
+
+                if (this.options.isMul) {
+                    opt.checkbox = true;
+                }
+                if (data.HelpType == "1") {
+                    //树形帮助
+                    opt.tree = this.bulidTreeOptions(treeInfo);
+
+                    opt.treeIconRender = function (rowdata, status) {
+                        // console.log(rowdata); 给tree增加点色彩
+                        if (rowdata.__hasChildren)
+                            return "<i class='tree-grid-icon icon-img icon-folder'></i>";
+                        else
+                            return "<i class='tree-grid-icon icon-img icon-document'></i>";
+                    }
+                    //  如果是异步加载
+                    opt.async = true;
+                    opt.async = this.options.async;
+
+                    if (opt.async) {
+                        opt.onTreeExpand = this.bulidTreeAsyncOptions();
+                        delete opt.url;
+                        opt.data = { Rows: [] };
+                        opt.dataAction = "local";
+                        opt.usePager = false;
+                    }
+
+                }
+                opt.rowClsRender = function (item) {
+                    if (item._istarget == "1") {
+                        return "target";
+                    }
+                }
+                return opt;
+            },
+            bulidTreeOptions: function () {
+                var treeInfo = this.treeConfig;
+                var self = this;
+                var treeOpts = {
+                    columnId: treeInfo.code,
+                    childrenName: "children",
+                    isParent: function (data) {
+                        return data.__hasChildren;
+                        //return data[treeInfo.isdetail] == '0' ? true : false;
+                    },
+                    isExtend: function (data) {
+                        return data.__hasChildren;
+                        //return data[treeInfo.isdetail] == '0' ? true : false;
+                    }
+                }
+                if (treeInfo.treetype == "2" || treeInfo.grade) {//分级码
+                    treeOpts.grade = {
+                        gradeField: treeInfo.grade,
+                        levelField: treeInfo.level,
+                        detailField: treeInfo.isdetail,
+                        format: treeInfo.format,
+                    }
+                } else {
+                    treeOpts.idField = treeInfo.id;
+                    treeOpts.parentIDField = treeInfo.pid;
+                }
+                return treeOpts;
+            },
+            bulidTreeAsyncOptions: function () {
+
+                var treeInfo = this.treeConfig;
+                var self = this;
+                var onTreeExpand = function (rowdata, e) {
+                    var grid = this;
+                    var scrollTop = grid.gridbody.scrollTop();
+
+                    if (rowdata._loaded || (rowdata.children && rowdata.children.length > 0)) return;
+                    if (!rowdata._loaded) {
+                        grid.toggleLoading(true);
+                    }
+                    var levelField = treeInfo.level;
+                    var gradeField = treeInfo.grade;
+                    var parentIDField = treeInfo.id;
+
+                    //idp.service.getChildrenTree(self.config.sqlid, rowdata, bizInfo, function (data) {
+                    //    if (data.Data) {
+                    //        var flag = true;
+                    //        for (var item in data.Data) {
+                    //            if (data.Data[item][treeInfo.isdetail] == "0") {
+                    //                data.Data[item].children = [];
+                    //            }
+                    //        }
+                    //        //
+                    //        grid.append(data.Data, rowdata); //添加数据    
+                    //        e.update();
+                    //        rowdata._loaded = true;
+                    //        grid.gridbody[0].scrollTop = scrollTop;
+                    //    }
+                    //    grid.toggleLoading(false);
+                    //})
+                };
+                return onTreeExpand;
+            },
+            loadFilter: function (fitler) {
+                var self = this;
+                //var bizInfo = this.getBizInfo();
+                //idp.service.searchTree(self.config.sqlid, fitler, bizInfo, function (data) {
+
+
+                //    if (data.Data) {
+                //        //var flag = true;
+                //        for (var item in data.Data) {
+                //            if (data.Data[item][self.setTreeConfig.isdetail] == "0") {
+                //                data.Data[item].children = [];
+                //            }
+                //        }
+                //        self.grid.loadData({ Rows: data.Data }); //添加数据
+                //    }
+                //});
+            },
+            loadRoot: function () {
+                var self = this;
+                //var bizInfo = this.getBizInfo();
+                //idp.service.getRootTree(self.config.sqlid, 1, bizInfo, function (data) {
+                //    if (data.Data) {
+                //        for (var item in data.Data) {
+                //            if (data.Data[item][self.treeConfig.isdetail] == "0") {
+                //                data.Data[item].children = [];
+                //            }
+                //        }
+                //        self.grid.loadData({ Rows: data.Data }); //添加数据
+                //    }
+                //});
+            },
+            getParams: function () {
+
+                var res = { "sqlId": this.config.sqlid, "fields": this.getFilter(), "orders": this.getOrder(), "count": true };
+
+                return res;
+            },
+            getOrder: function () {
+                var orders = [];
+                var grid = $("#grid").leeUI();
+                if (grid) {
+                    var p = grid.options;
+                    if (p.sortName) orders.push({ Field: p.sortName, Order: p.sortOrder });
+                }
+                return orders;
+            },
+            setFilter: function (data) {
+                this.filter = data;
+            },
+            getFilter: function () {
+                var self = this;
+                this.filter = this.filter || [];
+                var qryfilter = [];
+                var keyword = $("#txtKeyWord").val();
+
+                var filter = "";
+                if (keyword) {
+                    if (this.fields.length > 0)
+                        filter += " and (";
+                    $.each(this.fields, function (i, key) {
+
+                        if (i == self.fields.length - 1)
+                            filter += " " + key + " like '%" + keyword + "%' ";
+                        else
+                            filter += " " + key + " like '%" + keyword + "%' or ";
+
+                    });
+                    if (this.fields.length > 0)
+                        filter += " )";
+                }
+
+                return filter;
+            },
+            getSelected: function () {
+                return this.grid.getSelected();
+            },
+            getReturnValue: function () {
+                var self = this;
+                var data = this.grid.getCheckedRows();
+                if (data.length == 0) return null;
+                if (this.config.type == "1" && data) {
+                    if (this.options.isChildOnly) {
+                        for (var item in data) {
+                            if (data[item][self.treeInfo.ischild] == "0") {
+                                leeUI.Error("非明细节点不能选择！");
+                                return false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (this.options.isMul || this.options.isMulGrid)
+                    return data;
+                else
+                    return data;
+            },
+            search: function () {
+                $("#grid").leeUI().options.newPage = 1;
+                if (this.options.async) {
+                    var keyword = $("#txtKeyWord").val();
+                    if (keyword) {
+                        this.loadFilter(this.getFilter());
+                    } else {
+                        this.loadRoot();
+                    }
+                }
+                else {
+                    $("#grid").leeUI().reload();
+                }
+            },
+            bind: function () {
+                var self = this;
+                $("#btnSearch").click(function () {
+                    self.search();
+                });
+                $("#txtKeyWord").keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        self.search();
+                    }
+                    showClose();
+                });
+                $(".close").click(function () {
+                    $("#txtKeyWord").val("");
+                    showClose();
+                    $("#txtKeyWord").focus();
+                });
+
+                function showClose() {
+                    if ($(".lee-search-words").val() == "") {
+                        $(".close").hide();
+                    } else {
+                        $(".close").show();
+                    }
+                }
+            },
+            showView: function (data) {
+                var opts = this.getGridOptions(data);
+                console.log(opts);
+                this.grid = $("#grid").leeGrid(opts);
+                //if (this.options.async) {
+                //    this.loadRoot();
+                //}
+
+            }
+        }
+
+        function getQuery(key) {
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return "";
+        }
+
+
+
+        $(function () {
+            var id = getQuery("id");
+            lookupHelper = new LookupHelper({ "sqlid": id });
+            lookupHelper.bind();
+        });
+    </script>
+</body>
+
+</html>

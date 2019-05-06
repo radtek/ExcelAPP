@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/sys.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/leeui/js/leeui.js"></script>
+</head>
+
+<body>
+
+    <nav class="ui-sys-bar">
+        <div class="ui-sys-commands">
+            <span n-ui-command="minimize" class="-nanui-minimize">&#48;</span>
+            <span n-ui-command="maximize" class="-nanui-maximize">&#49;</span>
+            <span n-ui-command="close" class="-nanui-close">&#114;</span>
+        </div>
+
+    </nav>
+    <div class="topobar">
+
+        <span><i class="lee-ion-android-apps" style="font-size:20px;margin-right:10px;"></i>数据导入平台V0.1.1</span>
+    </div>
+    <div class="progress" id="progresswrap" style="display:none;margin: 15px;">
+        <div class="lee-progress lee-progress-normal lee-progress-show-info">
+            <div class="lee-progress-outer">
+                <div class="lee-progress-inner">
+                    <div class="lee-progress-bg" style="width: 0%; height: 5px;"></div>
+                    <div class="lee-progress-success-bg" style="width: 0%; height: 5px;">
+                    </div>
+                </div>
+            </div> <span class="lee-progress-text">
+                <span class="lee-progress-text-inner">
+                    0%
+                </span>
+            </span>
+        </div>
+        <div id="txt_message">正在导入</div>
+    </div>
+    <div class="left">
+
+    </div>
+    <div class="center">
+        <div class="choose">
+            <div class="lee-table-form-border  table-query" style="margin:0;">
+                <div class="table-item" style="width:33.3%;">
+                    <div class="table-label">
+                        <span>单位信息</span>
+                    </div>
+                    <div class="table-editor">
+                        <input type="text" id="txtOrgInfo" />
+                    </div>
+                </div>
+                <div class="table-item" style="width:33.3%;">
+                    <div class="table-label">
+                        <span>导入类别</span>
+                    </div>
+                    <div class="table-editor">
+                        <input type="text" id="txtLbInfo" />
+                    </div>
+                </div>
+                <div class="table-item" style="width:33.3%;line-height:34px;">
+
+                    <button class="lee-btn lee-btn-primary" id="btnGetRule" onclick="ImportController.getRuleInfo()">加载规则</button>
+                    <button class="lee-btn lee-btn-primary" disabled id="btnUpload" onclick="ImportController.beginUpload()">确认上传</button>
+                    <button class="lee-btn lee-btn-danger" disabled id="btnCancel" onclick="ImportController.cancelUpload()">取消上传</button>
+                    <!--<span style="color:rgba(0,0,0,.75);font-size:13px;" > Excel导入 临时表TMP_LSBZDW </span>-->
+                </div>
+            </div>
+
+            <div class="lee-table-form-border  table-query" style="margin:0;">
+                <div class="table-item" style="width:33.3%;">
+
+                    <div class="table-label">
+                        Excel文件
+                    </div>
+                    <div class="table-editor">
+                        <input id="txtFileInfo" readonly />
+                    </div>
+
+                    <!--<input type="text" id="txtFileInfo" />
+                    <button class="lee-btn ">选择文件</button>-->
+                </div>
+                <!--<div class="table-item" style="width:33.3%;">
+                    <input type="text" id="txtFileInfo" />
+                    <button class="lee-btn ">过滤</button>
+                </div>-->
+                <div class="table-item" style="width:66.6%;line-height:34px;">
+                    <button class="lee-btn " onclick="ImportController.chooseFile()">选择</button>
+                    <button class="lee-btn lee-btn-primary" onclick="ImportController.loadExcelData()">加载数据</button>
+
+                    <span class="export-tip">已经加载数据30条，导入成功0条，失败0条</span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="datawrap">
+            <div class="mask">
+                <img src="css/images/no.png" />
+                <p>没有相关导入规则</p>
+            </div>
+            <div class="data" style="background:#FFF;">
+                <div id="tabinfo" class="flat">
+                    <div title="未上传"></div>
+                    <div title="已上传"></div>
+                </div>
+                <div id="gridInfo" style="border-top:0;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="toolstrip">
+        没有导入数据
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,540 @@
+﻿
+.icon-AddRow {
+    background: url(images/common.png) 0 0 no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Analyze {
+    background: url(images/common.png) no-repeat -21px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-AppendChild {
+    background: url(images/common.png) no-repeat -42px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-AppendSibling {
+    background: url(images/common.png) no-repeat -63px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-ApproveLog {
+    background: url(images/common.png) no-repeat -84px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-AttachmentManage {
+    background: url(images/common.png) no-repeat -105px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Audit {
+    background: url(images/common.png) no-repeat -126px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-BizLog {
+    background: url(images/common.png) no-repeat -147px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-CancelSubmit {
+    background: url(images/common.png) no-repeat -168px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Check {
+    background: url(images/common.png) no-repeat -189px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Clear {
+    background: url(images/common.png) no-repeat -210px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Close {
+    background: url(images/common.png) no-repeat -231px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Collapse {
+    background: url(images/common.png) no-repeat -252px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-CollapseAll {
+    background: url(images/common.png) no-repeat -273px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Confirm, .icon-ok-sign {
+    background: url(images/common.png) no-repeat -294px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Copy {
+    background: url(images/common.png) no-repeat -315px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-CopyRow {
+    background: url(images/common.png) no-repeat -336px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Create {
+    background: url(images/common.png) no-repeat -357px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Delete, .icon-remove-sign {
+    background: url(images/common.png) no-repeat -378px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-DeleteColumn {
+    background: url(images/common.png) no-repeat -399px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-DeleteRow {
+    background: url(images/common.png) no-repeat -420px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-DeselectAll {
+    background: url(images/common.png) no-repeat -441px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Disassemble {
+    background: url(images/common.png) no-repeat -462px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Edit {
+    background: url(images/common.png) no-repeat -483px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Email {
+    background: url(images/common.png) no-repeat -504px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Enable {
+    background: url(images/common.png) no-repeat -525px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Expand {
+    background: url(images/common.png) no-repeat -546px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-ExpandAll {
+    background: url(images/common.png) no-repeat -567px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Expire {
+    background: url(images/common.png) no-repeat -588px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Export {
+    background: url(images/common.png) no-repeat -609px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-ExportExcel {
+    background: url(images/common.png) no-repeat -630px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Filter {
+    background: url(images/common.png) no-repeat -651px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Find {
+    background: url(images/common.png) no-repeat -672px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-First {
+    background: url(images/common.png) no-repeat -693px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Help {
+    background: url(images/common.png) no-repeat -714px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-History {
+    background: url(images/common.png) no-repeat -735px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Import {
+    background: url(images/common.png) no-repeat -756px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-InsertColumn {
+    background: url(images/common.png) no-repeat -777px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-InsertColumns {
+    background: url(images/common.png) no-repeat -798px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-InsertRow {
+    background: url(images/common.png) no-repeat -819px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Last {
+    background: url(images/common.png) no-repeat -840px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Lock {
+    background: url(images/common.png) no-repeat -861px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Message {
+    background: url(images/common.png) no-repeat -882px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-MoveAllLeft {
+    background: url(images/common.png) no-repeat -903px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-MoveAllRight {
+    background: url(images/common.png) no-repeat -924px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-MoveButtom {
+    background: url(images/common.png) no-repeat -945px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-MoveLeft {
+    background: url(images/common.png) no-repeat -966px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-MoveRight {
+    background: url(images/common.png) no-repeat -987px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-MoveTop {
+    background: url(images/common.png) no-repeat -1008px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-New {
+    background: url(images/common.png) no-repeat -1029px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-NewFolder {
+    background: url(images/common.png) no-repeat -1050px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Next {
+    background: url(images/common.png) no-repeat -1071px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Open {
+    background: url(images/common.png) no-repeat -1092px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-PageSetting {
+    background: url(images/common.png) no-repeat -1113px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-ParentDirectory {
+    background: url(images/common.png) no-repeat -1134px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Paste {
+    background: url(images/common.png) no-repeat -1155px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Previous {
+    background: url(images/common.png) no-repeat -1176px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Print {
+    background: url(images/common.png) no-repeat -1197px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Priview {
+    background: url(images/common.png) no-repeat -1218px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-ProcessView {
+    background: url(images/common.png) no-repeat -1239px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Quit {
+    background: url(images/common.png) no-repeat -1260px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Refresh {
+    background: url(images/common.png) no-repeat -1281px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Replace {
+    background: url(images/common.png) no-repeat -1302px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Reset {
+    background: url(images/common.png) no-repeat -1323px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Restore {
+    background: url(images/common.png) no-repeat -1344px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Save {
+    background: url(images/common.png) no-repeat -1365px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-SaveAndNew {
+    background: url(images/common.png) no-repeat -1386px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-SaveAs {
+    background: url(images/common.png) no-repeat -1407px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-SelectAll {
+    background: url(images/common.png) no-repeat -1428px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-SequenceCheck {
+    background: url(images/common.png) no-repeat -1449px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Setting {
+    background: url(images/common.png) no-repeat -1470px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-SpeedLocation {
+    background: url(images/common.png) no-repeat -1491px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Submit {
+    background: url(images/common.png) no-repeat -1512px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Synchronization {
+    background: url(images/common.png) no-repeat -1533px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-TemporarySave {
+    background: url(images/common.png) no-repeat -1554px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-TreeCollapse {
+    background: url(images/common.png) no-repeat -1575px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-TreeDetail, .tree-file {
+    background: url(images/common.png) no-repeat -1596px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Unlock {
+    background: url(images/common.png) no-repeat -1617px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-View {
+    background: url(images/common.png) no-repeat -1638px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-approve {
+    background: url(images/common.png) no-repeat -1659px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-attr {
+    background: url(images/common.png) no-repeat -1680px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-checked {
+    background: url(images/common.png) no-repeat -1701px 0;
+    width: 17px;
+    height: 14px;
+    float: left;
+}
+
+.icon-search {
+    background: url(images/common.png) no-repeat -1723px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-star {
+    background: url(images/common.png) no-repeat -1744px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-star2 {
+    background: url(images/common.png) no-repeat -1765px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-Disable {
+    background: url(images/common.png) no-repeat -1804px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-unchecked {
+    background: url(images/common.png) no-repeat -1786px 0;
+    width: 17px;
+    height: 14px;
+    float: left;
+}
+
+.icon-ViewProcess {
+    background: url(images/common.png) no-repeat -1823px 0;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-check-center {
+    left: 50%;
+    position: relative;
+    margin-left: -7px;
+}
+
+.icon-check-right {
+    float: right !important;
+}

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/laydate/laydate.js"></script>
+    <link rel="stylesheet" href="css/sys.css" />
+    <link rel="stylesheet" href="css/index.css" />
+
+    <script src="libs/leeui/js/leeui.js"></script>
+</head>
+
+<body style="overflow:hidden;">
+
+    <div id="#dataWrapSettings">
+        <div class="lee-table-form-border  table-query" style="margin:0;">
+
+            <!--<div class="table-item " style="width:33.3%;">
+
+                <div class="table-label">
+                    开始时间
+                </div>
+                <div class="table-editor">
+                    <input id="txtDataScource" />
+                </div>
+            </div>
+            <div class="table-item " style="width:33.3%;">
+
+                <div class="table-label">
+                    结束时间
+                </div>
+                <div class="table-editor">
+                    <input id="txtDbType" />
+                </div>
+            </div>
+            <div class="table-item " style="width:33.3%;">
+                <button class="lee-btn " id="btnClearHis" onclick="ImportController.clearHis()">清空历史</button>
+            </div>-->
+
+            <div class="table-item fileWrap" style="width:33.3%;">
+
+                <div class="table-label">
+                    Excel文件
+                </div>
+                <div class="table-editor">
+                    <input id="txtFileInfo" readonly />
+                </div>
+            </div>
+
+            <div class="table-item" style="width:66.6%;line-height:34px;">
+                <button class="lee-btn fileWrap" onclick="ImportController.chooseRelFile()">选择</button>
+                <button class="lee-btn lee-btn-primary" onclick="ImportController.loadExcelData()">加载数据</button>
+                <button class="lee-btn lee-btn-primary" disabled id="btnUpload" onclick="ImportController.beginUpload()">上传并关闭</button>
+            </div>
+        </div>
+        <div><span class="export-tip">说明信息</span></div>
+
+        <div id="gridRel"></div>
+    </div>
+
+
+
+    <script src="scripts/service.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

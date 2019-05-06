@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="libs/leeui/css/common.css" rel="stylesheet" />
+    <link href="libs/leeui/css/bulid.min.css" rel="stylesheet" />
+    <link href="libs/leeui/css/icon.css" rel="stylesheet" />
+    <script src="libs/jquery/jquery-1.10.2.min.js"></script>
+    <script src="libs/laydate/laydate.js"></script>
+    <link rel="stylesheet" href="css/sys.css" />
+    <link rel="stylesheet" href="css/index.css" />
+
+    <script src="libs/leeui/js/leeui.js"></script>
+</head>
+
+<body style="overflow:hidden;">
+
+
+    <div class="progress" id="progresswrap" style="display:none;margin: 15px;">
+        <div class="lee-progress lee-progress-normal lee-progress-show-info">
+            <div class="lee-progress-outer">
+                <div class="lee-progress-inner">
+                    <div class="lee-progress-bg" style="width: 0%; height: 5px;"></div>
+                    <div class="lee-progress-success-bg" style="width: 0%; height: 5px;">
+                    </div>
+                </div>
+            </div> <span class="lee-progress-text">
+                <span class="lee-progress-text-inner">
+                    0%
+                </span>
+            </span>
+        </div>
+        <div id="txt_message">正在导入</div>
+    </div>
+
+    <div class="center" style="top:0;bottom:0;">
+        <div class="choose">
+
+
+            <div class="lee-table-form-border  table-query" style="margin:0;">
+                <div class="table-item fileWrap" style="width:33.3%;">
+
+                    <div class="table-label">
+                        Excel文件
+                    </div>
+                    <div class="table-editor">
+                        <input id="txtFileInfo" readonly />
+                    </div>
+
+                    <!--<input type="text" id="txtFileInfo" />
+                    <button class="lee-btn ">选择文件</button>-->
+                </div>
+                <!--<div class="table-item" style="width:33.3%;">
+                    <input type="text" id="txtFileInfo" />
+                    <button class="lee-btn ">过滤</button>
+                </div>-->
+                <div class="table-item" style="width:66.6%;line-height:34px;">
+                    <button class="lee-btn fileWrap" onclick="ImportController.chooseFile()">选择</button>
+                    <button class="lee-btn lee-btn-primary" onclick="ImportController.loadExcelData()">加载数据</button>
+                    <button class="lee-btn lee-btn-primary" disabled id="btnUpload" onclick="ImportController.beginUpload()">确认上传</button>
+                    <button class="lee-btn lee-btn-danger" disabled id="btnCancel" onclick="ImportController.cancelUpload()">取消上传</button>
+                    <button class="lee-btn " style="display:none;" id="btnCustom" onclick="ImportController.custom()">自定义</button>
+
+                    <span class="export-tip">已经加载数据30条，导入成功0条，失败0条</span>
+                </div>
+            </div>
+        </div>
+        <div class="deleteWrap" style="position: absolute;right: 0;z-index: 1111;width: 100px;top: 40px;">
+            <button class="lee-btn lee-btn-xs lee-btn-danger" id="btnRemove" onclick="ImportController.removeRows()">删除选中行</button>
+        </div>
+        <div class="dateWrap hasWrap" style="position: absolute;right: 0;z-index: 1111;width: 620px;top: 34px;display:none;">
+            <div class="lee-table-form-border  table-query" style="margin:0;">
+                <div class="table-item" style="width:250px;">
+                    <div class="table-label">
+                        开始时间
+                    </div>
+                    <div class="table-editor">
+                        <input id="txtQueryDate" readonly />
+                    </div>
+                </div>
+                <div class="table-item " style="width:250px;">
+                    <div class="table-label">
+                        结束时间
+                    </div>
+                    <div class="table-editor">
+                        <input id="txtQueryDateEnd" readonly />
+                    </div>
+                </div>
+                <div class="table-item" style="width:120px;line-height:34px;">
+                    <button class="lee-btn lee-btn-xs" id="btnCustom" onclick="ImportController.refreshData()">查询</button>
+                    <button class="lee-btn lee-btn-xs" id="btnRef" onclick="ImportController.showREF()">关联导入</button>
+                </div>
+            </div>
+        </div>
+        <div class="datawrap">
+            <div class="mask">
+                <img src="css/images/no.png" />
+                <p>没有相关导入规则</p>
+            </div>
+            <div class="data" style="background:#FFF;">
+                <div id="tabinfo" class="flat">
+                    <div title="未上传"></div>
+                    <div title="已上传"></div>
+                </div>
+                <div id="gridInfo" style="border:0;"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dataWrapSettings" style="display:none;">
+        <div class="lee-table-form-border  table-query" style="margin:0;">
+
+            <!--<div class="table-item " style="width:33.3%;">
+
+                <div class="table-label">
+                    开始时间
+                </div>
+                <div class="table-editor">
+                    <input id="txtDataScource" />
+                </div>
+            </div>
+            <div class="table-item " style="width:33.3%;">
+
+                <div class="table-label">
+                    结束时间
+                </div>
+                <div class="table-editor">
+                    <input id="txtDbType" />
+                </div>
+            </div>
+            <div class="table-item " style="width:33.3%;">
+                <button class="lee-btn " id="btnClearHis" onclick="ImportController.clearHis()">清空历史</button>
+            </div>-->
+
+            <div class="table-item " style="width:33.3%;">
+
+                <div class="table-label">
+                    Excel文件
+                </div>
+                <div class="table-editor">
+                    <input id="txtFileInfoNew" readonly />
+                </div>
+            </div>
+            <div class="dateWrap" style="position: absolute;right: 0;z-index: 1111;width: 411px;top: 0px;">
+                <div class="lee-table-form-border  table-query" style="margin:0;">
+                    <div class="table-item" style="width:300px;">
+                        <div class="table-label">
+                            日期
+                        </div>
+                        <div class="table-editor">
+                            <input id="txtQueryDateRef" readonly />
+                        </div>
+                    </div>
+                    <div class="table-item" style="width:84px;line-height:34px;">
+                        <button class="lee-btn lee-btn-danger" id="btnRemoveRef" onclick="ImportController.removeRef()">清除历史</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-item" style="width:66.6%;line-height:34px;">
+                <button class="lee-btn " onclick="ImportController.chooseRelFile()">选择</button>
+                <button class="lee-btn lee-btn-primary" onclick="ImportController.LoadExcelDataNew()">加载数据</button>
+                <button class="lee-btn lee-btn-primary" disabled id="btnUploadRef" onclick="ImportController.beginUploadRef()">上传并关闭</button>
+            </div>
+        </div>
+        <div><span class="ref-tip">说明信息</span></div>
+        <div id="refWrap">
+            <div id="gridRel"></div>
+        </div>
+    </div>
+
+
+
+    <script src="scripts/service.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>
