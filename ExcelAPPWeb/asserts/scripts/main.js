@@ -120,11 +120,17 @@ var ImportController = {
     },
     initGrid: function (res) {
         $(".datawrap").addClass("hasdata");
-
+        this.matchFields = [];
+        var self = this;
         //加载列信息形成空表格
         var cols = [];
         if (res.Cols && res.Cols.length) {
             $.each(res.Cols, function (i, obj) {
+
+
+                if (obj.IsMatch == "1")
+                    self.matchFields.push(obj.FCode);
+
 
                 var col = {
                     display: obj.FName, name: obj.FCode,
@@ -157,7 +163,7 @@ var ImportController = {
 
 
         function getEditor(obj) {
-            if (obj.IsReadonly == "1") return null;
+            if (obj.IsReadOnly == "1") return null;
             if (obj.FCode == "FLAG") return null;
             if (obj.HelpID) {
                 var opts = {
@@ -195,6 +201,9 @@ var ImportController = {
                     });
                 }
 
+                opts.isMatch = obj.IsMatch;
+                opts.matchName = obj.MatchRule;
+
                 opts.mapFields = arr;
 
                 opts.url = "lookup.html?id=";
@@ -214,15 +223,48 @@ var ImportController = {
                         // 多选模式 返回多条// 多选模式返回逗号合并// 如果是单选模式g
                         var mapFields = p.mapFields;
                         var vsobj = getMapObj(p.mapFields, data[0]);
+
+                        var before = JSON.parse(JSON.stringify(p.gridEditParm.record));
                         var gridManger = p.host_grid;
                         p.gridEditParm.record = $.extend(p.gridEditParm.record, vsobj);
 
                         gridManger.updateRow(p.gridEditParm.rowindex, vsobj);
 
                         gridManger.endEdit();
+
+
+                        if (opts.isMatch == "1")
+                            DealOtherRow(before, vsobj, gridManger, self.matchFields);
                         var cell = gridManger.getCellObj(p.gridEditParm.record, p.gridEditParm.column);
                         window.setTimeout(function () { gridManger._applyEditor(cell) }, 100);
+
+
                     }
+                }
+
+                function DealOtherRow(record, vsobj, gridManger, matchFields) {
+                    var data = $("#gridInfo").leeUI().data;
+
+                    var fields = opts.matchName;
+                    if (!fields) return;
+                    var codeField = fields.split(",")[0];
+
+                    var nameField = fields.split(",")[1];
+                    for (var item in data.Rows) {
+                        var row = data.Rows[item];
+                        var isUpdate = false;
+                        if (record["ID"] != row["ID"]) {
+
+                            if (row[codeField] == record[codeField] && row[nameField] == record[nameField]) {
+                                isUpdate = true;
+                            }
+                            if (isUpdate) {
+                                gridManger.updateRow(row, vsobj);
+                            }
+                        }
+
+                    }
+
                 }
 
                 //opts.service = {
@@ -297,7 +339,7 @@ var ImportController = {
             url: "../api/refresh.ashx",
             usePager: true,
             pageSize: 200,
-
+            pageSizeOptions: [200, 400, 600],
             rowClsRender: function (data) {
                 if (data["COLORZT"] == "1") {
                     return "yellow";
@@ -402,7 +444,7 @@ var ImportController = {
             idp.service.LoadExcelDataLocal(CurModel.ID, data).done(function (data) {
                 Msg.sucess("操作成功！");
                 self.refreshData();
-                if (CurModel.IsREF=="1") {
+                if (CurModel.IsREF == "1") {
                     self.showREF();
                 }
             })
@@ -419,7 +461,7 @@ var ImportController = {
             idp.service.loadExcelData(CurModel.ID, data).done(function (data) {
                 Msg.sucess("操作成功！");
                 self.refreshData();
-                if (CurModel.IsREF=="1") {
+                if (CurModel.IsREF == "1") {
                     self.showREF();
                 }
             })
@@ -489,6 +531,7 @@ var ImportController = {
             url: "../api/ref.ashx",
             usePager: true,
             pageSize: 200,
+            pageSizeOptions: [200, 400, 600],
             heightDiff: -1,
             enabledEdit: true,
             columns: cols,

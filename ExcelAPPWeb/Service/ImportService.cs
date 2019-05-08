@@ -61,6 +61,19 @@ namespace ExcelAPPWeb.Service
 
             if (Flag == "1")
             {
+
+                try
+                {
+
+                    using (var conn = DataBaseManager.GetDbConnection())
+                    {
+                        DealProcNew(model.Tmp.SwitchProc, model, new List<Dictionary<string, object>>(), conn, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+
                 if (!string.IsNullOrEmpty(StartDate))
                     filter += " and CreateTime>='" + StartDate + " 00:00:00'";
                 if (!string.IsNullOrEmpty(EndDate))
@@ -137,6 +150,7 @@ namespace ExcelAPPWeb.Service
                             conn.Execute("update " + tmpTable + " set " + item.FCode + "=" + item.CalcSQL + " and CreateUser=" + token + "CreateUser ", new { CreateUser = UserService.GetUserId() }, transaction);
                         }
                     }
+                    DealProcNew(model.Tmp.LoadProc, model, dt, conn, transaction);
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -484,13 +498,14 @@ namespace ExcelAPPWeb.Service
                         {
                             s++;
 
-                            for (var j = 0; j < cols.Count; j++) {
-                           
+                            for (var j = 0; j < cols.Count; j++)
+                            {
+
                                 hasCols.Add(cols[j], dt.Rows[0][keys[j]].ToString());
                             }
                             continue;
                         }
-                       
+
                         var para = GetParamsRef(keys, row, model, UserService.GetUser());
                         conn.Execute(sql, para, transaction);
                     }

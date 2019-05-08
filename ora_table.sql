@@ -10,6 +10,7 @@ CREATE TABLE EACategory
 	ImprtProc      VARCHAR (100),/*上传存储过程*/
 	CancelProc     VARCHAR (100),/*取消上传存储过程*/
 	LoadProc       VARCHAR (100),/*上传到中间表调用存储过程*/
+	SwitchProc     VARCHAR (100),/*切换执行存储过程*/
 	Note           VARCHAR (100),/*备注*/
 	CreateUser     VARCHAR (50),
 	CreateTime     VARCHAR (20),
@@ -35,7 +36,8 @@ CREATE TABLE EACatCols
 	IsReadonly CHAR (1),/*是否只读*/
 	HelpID     VARCHAR (50),/*帮助ID  EAHelp主键*/
 	BindCol    VARCHAR (50),/*帮助绑定字段*/
-	IsMatch    VARCHAR (50) DEFAULT ('0'), /*暂时不用*/
+	IsMatch    VARCHAR (50) DEFAULT ('0'), /*是否匹配*/
+	MatchName  VARCHAR (200), /*四个字段记录匹配规则*/
 	IsRequire  CHAR (1) DEFAULT ('0'),/*是否必填*/
 	RCols      clob,/*返回字段*/
 	SCols      clob,/*赋值字段*/

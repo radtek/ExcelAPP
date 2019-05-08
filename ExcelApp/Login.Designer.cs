@@ -36,7 +36,7 @@
             this.ActiveBorderColor = System.Drawing.Color.CornflowerBlue;
             this.ActiveShadowColor = System.Drawing.Color.RoyalBlue;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(761, 399);
+            this.ClientSize = new System.Drawing.Size(1000, 320);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.InactiveBorderColor = System.Drawing.Color.RoyalBlue;

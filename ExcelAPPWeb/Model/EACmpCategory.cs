@@ -140,6 +140,9 @@ namespace ExcelAPPWeb.Model
         /// </summary>
         public string MatchName { get; set; }
 
+
+        public string MatchRule { get; set; }
+
         /// <summary>
         /// 默认值
         /// </summary>
@@ -164,6 +167,9 @@ namespace ExcelAPPWeb.Model
         public string FType { get; set; }
         public string IsReadOnly { get; set; }
 
+
+        public string IsMatch { get; set; }
+      
         public string HelpID { get; set; }
 
         public string SCols { get; set; }

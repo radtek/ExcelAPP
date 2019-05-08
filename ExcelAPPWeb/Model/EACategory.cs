@@ -40,8 +40,9 @@ namespace ExcelAPPWeb.Model
         /// </summary>
         public string CancelProc { get; set; }
 
- 
 
+        public string LoadProc { get; set; }
+        public string SwitchProc { get; set; }
 
         /// <summary>
         /// 本地数据源取数执行存储过程
@@ -88,6 +89,9 @@ namespace ExcelAPPWeb.Model
 
         public string IsMatch { get; set; }
         public string IsRequire { get; set; }
+
+        public string MatchRule { get; set; }
+
         public string RCols { get; set; }
         public string SCols { get; set; }
         public int FPrec { get; set; }

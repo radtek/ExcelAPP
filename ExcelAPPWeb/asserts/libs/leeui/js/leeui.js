@@ -10344,7 +10344,7 @@ $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
                     g.dealcolse();
                     g.isopen = false;
                 },
-                url: p.url + p.helpID,
+                url: p.url + p.helpID + "&keyword=" + g.inputText.val(),
                 onLoaded: function () {
                     //alert(1);
                     var lookupHelper = g.getLookUpContext();

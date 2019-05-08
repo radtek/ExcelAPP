@@ -577,6 +577,8 @@
 
         $(function () {
             var id = getQuery("id");
+            var keyword = getQuery("keyword");
+            $("#txtKeyWord").val(keyword);
             lookupHelper = new LookupHelper({ "sqlid": id });
             lookupHelper.bind();
         });
