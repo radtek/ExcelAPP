@@ -232,7 +232,7 @@ var ImportController = {
 
                         gridManger.endEdit();
 
-
+                        vsobj[obj.FCode] = data[0][opts.valueField];
                         if (opts.isMatch == "1")
                             DealOtherRow(before, vsobj, gridManger, self.matchFields);
                         var cell = gridManger.getCellObj(p.gridEditParm.record, p.gridEditParm.column);

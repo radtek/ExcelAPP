@@ -94,6 +94,7 @@ namespace ExcelAPPWeb.Service
         #region 导入excel临时数据并上传到中间表
         public List<Dictionary<string, object>> ImportTmpTable(List<Dictionary<string, object>> dt, Model.EACmpCategory model)
         {
+
             List<Dictionary<string, object>> res = new List<Dictionary<string, object>>();
             var tmpTable = model.TmpTab;
             StringBuilder sb = new StringBuilder();
@@ -125,6 +126,7 @@ namespace ExcelAPPWeb.Service
 
             var sql = sb.Append(values).ToString();
             TableService.CreateTable(model);
+           
             using (var conn = DataBaseManager.GetDbConnection())
             {
                 //conn.Open();
@@ -693,10 +695,10 @@ namespace ExcelAPPWeb.Service
         {
             if (string.IsNullOrEmpty(procName)) return;
             var refid = "";
-            foreach (var item in list)
-            {
-                refid += item["ID"].ToString() + ",";
-            }
+            //foreach (var item in list)
+            //{
+            //    refid += item["ID"].ToString() + ",";
+            //}
 
             var user = UserService.GetUser();
 

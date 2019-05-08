@@ -92,7 +92,9 @@ namespace ExcelAPPWeb
                         break;
                     case "LoadExcelData"://导入本地excelk导入
                         var list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ExportModel>>(context.Request.Form.Get("tmpdata"));
-                        res = newsvr.ImportTmpTable(GetDataMap(ruleInfo, list), ruleInfo);
+                        var mapdata = GetDataMap(ruleInfo, list);
+                        
+                        res = newsvr.ImportTmpTable(mapdata, ruleInfo);
                         break;
                     case "LoadExcelDataLocal"://导入本地数据源
 
@@ -138,7 +140,7 @@ namespace ExcelAPPWeb
             }
             catch (Exception ex)
             {
-                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = false, msg = ex.Message }));
+                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = false, msg = ex.Message + ex.StackTrace }));
 
             }
         }
