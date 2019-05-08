@@ -9,6 +9,7 @@ CREATE TABLE EACategory
 	ImprtType      CHAR (1) DEFAULT ('0'), /*导入类型 1 本地0 excel*/
 	ImprtProc      VARCHAR (100),/*上传存储过程*/
 	CancelProc     VARCHAR (100),/*取消上传存储过程*/
+	LoadProc       VARCHAR (100),/*上传到中间表调用存储过程*/
 	Note           VARCHAR (100),/*备注*/
 	CreateUser     VARCHAR (50),
 	CreateTime     VARCHAR (20),
