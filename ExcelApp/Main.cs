@@ -4,6 +4,7 @@ using NetDimension.NanUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -19,6 +20,9 @@ namespace ExcelApp
 
         public Main() : base("http://localhost/Excel/asserts/frame.html")
         {
+
+            var host = ConfigurationManager.AppSettings["Host"].ToString();
+            this.LoadUrl($"http://{host}/Excel/asserts/frame.html");
             InitializeComponent();
 
             LoadHandler.OnLoadStart += LoadHandler_OnLoadStart;

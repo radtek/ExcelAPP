@@ -4,6 +4,7 @@ using NetDimension.NanUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -18,7 +19,9 @@ namespace ExcelApp
     {
         public Login() : base("http://localhost/Excel/asserts/login.html")
         {
-            //this.LoadUrl("www.baidu.com");
+            var host = ConfigurationManager.AppSettings["Host"].ToString();
+            this.LoadUrl($"http://{host}/Excel/asserts/login.html");
+            //this.LoadUrl("http://www.baidu.com");
             InitializeComponent();
 
             LoadHandler.OnLoadStart += LoadHandler_OnLoadStart;
