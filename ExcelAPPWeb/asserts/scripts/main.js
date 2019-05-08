@@ -402,7 +402,7 @@ var ImportController = {
             idp.service.LoadExcelDataLocal(CurModel.ID, data).done(function (data) {
                 Msg.sucess("操作成功！");
                 self.refreshData();
-                if (CurModel.IsREF) {
+                if (CurModel.IsREF=="1") {
                     self.showREF();
                 }
             })
@@ -419,7 +419,7 @@ var ImportController = {
             idp.service.loadExcelData(CurModel.ID, data).done(function (data) {
                 Msg.sucess("操作成功！");
                 self.refreshData();
-                if (CurModel.IsREF) {
+                if (CurModel.IsREF=="1") {
                     self.showREF();
                 }
             })
