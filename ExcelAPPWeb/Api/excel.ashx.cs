@@ -161,7 +161,10 @@ namespace ExcelAPPWeb
                     var findInfo = ruleInfo.Cols.Where(p => p.FName == label).ToList();
                     if (findInfo.Count > 0)
                     {
-                        dictMap.Add(findInfo[0].FCode, col.ColumnName);
+
+                        var code = findInfo[0].FCode;
+                        if (!dictMap.ContainsKey(code))
+                            dictMap.Add(code, col.ColumnName);
                         continue;
                     }
 
