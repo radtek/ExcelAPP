@@ -112,6 +112,10 @@ var ImportController = {
             if (CurModel.IsCustom == "1") {
                 $("#btnCustom").show().html(CurModel.CustomName);
             }
+            if (CurModel.UPURL) {
+                $("#btnTip").show();
+            }
+
 
         });
 
@@ -383,6 +387,18 @@ var ImportController = {
     setImportTips: function (msg) {
         //设置导入提示信息
         $(".export-tip").html(msg);
+    },
+    showTip: function () {
+        $.leeDialog.open({
+            title: "填报说明",
+            name: 'tipswindow',
+            isHidden: false,
+            showMax: true,
+            width: 900,
+            slide: false,
+            height: 400,
+            url: CurModel.UPURL
+        });
     },
     showREF: function () {
         this.dgRef = $.leeDialog.open({

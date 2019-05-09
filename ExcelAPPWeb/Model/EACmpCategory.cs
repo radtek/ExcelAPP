@@ -100,6 +100,8 @@ namespace ExcelAPPWeb.Model
 
 
 
+        public string UPURL { get; set; }
+
         public string CreateUser { get; set; }
         public string CreateTime { get; set; }
         public string LastModifyUser { get; set; }
