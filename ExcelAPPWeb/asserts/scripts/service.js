@@ -4,6 +4,10 @@ var Msg = {
         title = title || "提示";
         $.leeDialog && $.leeDialog.alert(msg, title, 'warn');
     },
+    danger: function (msg, title, callback) {
+        title = title || "异常";
+        $.leeDialog.alert(msg, title, 'error', callback, { width: 720, height: 350 });
+    },
     sucess: function (msg, title) {
         title = title || "提示";
         $.leeDialog && $.leeDialog.alert(msg, title, 'success');
@@ -174,7 +178,7 @@ idp.service = (function (win, $, core) {
     }
 
 
-    
+
 
     service.removeRef = function (ruleid, date) {
         return this.requestApi("excel.ashx", {
@@ -197,7 +201,7 @@ idp.service = (function (win, $, core) {
             tmpdata: data
         });
     }
-    
+
 
     service.loadExcelDataNew = function (ruleid, data) {
         return this.requestApi("excel.ashx", {
