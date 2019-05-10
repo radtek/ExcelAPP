@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 namespace ExcelAPPWeb.Service
 {
 
@@ -84,6 +84,7 @@ namespace ExcelAPPWeb.Service
                 }
                 catch (Exception ex)
                 {
+                    WriteLogFile("错误获取已上传数据" + ex.ToString());
                 }
 
                
@@ -167,6 +168,7 @@ namespace ExcelAPPWeb.Service
                 catch (Exception ex)
                 {
                     transaction.Rollback();
+                    WriteLogFile("错误导入excel临时数据并上传到中间表" + ex.ToString());
                     throw ex;
                 }
             }
@@ -288,6 +290,7 @@ namespace ExcelAPPWeb.Service
                     catch (Exception ex)
                     {
                         transaction.Rollback();
+                        WriteLogFile("错误上传数据" + ex.ToString());
                         throw ex;
                     }
                 }
@@ -313,15 +316,18 @@ namespace ExcelAPPWeb.Service
                 var value = "";
                 if (row.ContainsKey(key))
                 {
-                    value = row[key].ToString();
+                    if (row[key] != null)
+                    {
+                        value = row[key].ToString();
+                    }
+                    if (key == "FLAG")
+                    {
+                       value = "2";
+                     }
+                     p.Add(i.ToString(), value);
+                    i++;
+                   
                 }
-                if (key == "FLAG")
-                {
-                    value = "2";
-                }
-
-                p.Add(i.ToString(), value);
-                i++;
             }
 
             return p;
@@ -364,6 +370,7 @@ namespace ExcelAPPWeb.Service
                         {
                             count++;
                             conn.Execute(sql, new { ID = row["ID"].ToString() }, transaction);
+                            WriteLogFile("错误取消上传数据" + sql);
 
                         }
 
@@ -389,6 +396,7 @@ namespace ExcelAPPWeb.Service
             }
             catch (Exception ex)
             {
+                WriteLogFile("错误取消上传数据" + ex.ToString());
                 onError(ex.Message);
             }
 
@@ -528,6 +536,7 @@ namespace ExcelAPPWeb.Service
                 catch (Exception ex)
                 {
                     transaction.Rollback();
+                    WriteLogFile("错误导入数据到关联表" + ex.ToString());
                     throw ex;
                 }
             }
@@ -609,6 +618,7 @@ namespace ExcelAPPWeb.Service
             }
             catch (Exception ex)
             {
+                WriteLogFile("错误上传关联数据" + ex.ToString());
                 onError(ex.Message);
             }
         }
@@ -653,10 +663,13 @@ namespace ExcelAPPWeb.Service
                 if (row.ContainsKey(key))
                 {
                     if (row[key] != null)
+                    { 
                         value = row[key].ToString();
+                    }
+                    p.Add(i.ToString(), value);
+                    i++;
                 }
-                p.Add(i.ToString(), value);
-                i++;
+               
             }
 
             return p;
@@ -669,7 +682,7 @@ namespace ExcelAPPWeb.Service
         public void DealAssExtend(string type, List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction trans)
         {
 
-            if (string.IsNullOrEmpty(model.Tmp.ImprtDLL)) return;
+            if (string.IsNullOrEmpty(model.Tmp.ImprtDLL)   || model.Tmp.ImprtDLL.Length<2) return;
             var svr = (IExcelExtend)Activator.CreateInstance(Type.GetType(model.Tmp.ImprtDLL, false, true));
 
             if (svr == null)
@@ -703,7 +716,7 @@ namespace ExcelAPPWeb.Service
 
         public void DealProcNew(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
         {
-            if (string.IsNullOrEmpty(procName)) return;
+            if (string.IsNullOrEmpty(procName)  || procName.Length < 2) return;
             var refid = "";
             //foreach (var item in list)
             //{
@@ -729,7 +742,7 @@ namespace ExcelAPPWeb.Service
 
         public void DealProcNewRq(string  Qsrq,string Jsrq,string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
         {
-            if (string.IsNullOrEmpty(procName)) return;
+            if (string.IsNullOrEmpty(procName) || procName.Length < 2) return;
             var refid = "";
             //foreach (var item in list)
             //{
@@ -769,6 +782,31 @@ namespace ExcelAPPWeb.Service
             Db.Save(model);
         }
         #endregion
+
+        #region 记录操作日志文件版本
+        public static void WriteLogFile(string txt)
+        {
+            string path = @"C:\InterFace\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            try
+            {
+                DateTime now = DateTime.Now;
+                StreamWriter writer = new StreamWriter(path + "GS_InterFace_Log" + now.ToString("yyyyMMdd") + ".txt", true, Encoding.Default);
+                writer.WriteLine(string.Concat(new object[] { now, "      :      ", txt, "\r\n" }));
+                writer.Close();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        #endregion
+
+
+
 
     }
 }
