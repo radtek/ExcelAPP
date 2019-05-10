@@ -1,11 +1,6 @@
 ﻿
 var currentIndex = 0;
 
-
-
-
-
-
 $("#txtQueryDateEnd").leeDate({});
 $("#txtQueryDate").leeDate({});
 
@@ -57,13 +52,19 @@ var ImportController = {
         var grid = $("#gridInfo").leeUI();
         var rows = grid.getCheckedRows();
         if (!rows.length) return;
-        $.leeDialog.confirm("确认要删除选中数据吗？", "提示", function (flag) {
+
+        $.leeDialog.confirm("确认要-删除选中数据吗？", "提示", function (flag) {
             if (flag) {
+                Msg.load();
                 for (var item in rows) {
+                    Msg.load("删除第" + item + "行总计" + rows + " 请勿关闭！");
                     grid.deleteRow(rows[item]);
                     deleteRow.push(rows[item]);
                 }
+                Msg.loaded();
             }
+
+
         });
 
     },
@@ -599,8 +600,10 @@ var ImportController = {
 
         for (var item in data) {
             for (var key in hasRequire) {
-                if (data[item][key] == "" || data[item][key] == null) {
-                    Msg.alert("请填写第" + item + "行" + "字段【" + hasRequire[key] + "】的值");
+                
+                if (data[item][key] == "" || data[item][key] == null || data[item][key].replace(' ', '') == "") {
+                  
+                    Msg.alert("请填写第" + (parseInt(item)+1) + "行" + "字段【" + hasRequire[key] + "】的值");
                     return;
                 }
             }
