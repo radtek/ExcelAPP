@@ -197,6 +197,7 @@ namespace ExcelAPPWeb.Service
                 var value = "";
                 if (row.ContainsKey(key))
                 {
+                    //需要判断一下 数值型 和日期型 是否为 合法字符
                     value = row[key].ToString();
                 }
                 if (key == "FLAG")

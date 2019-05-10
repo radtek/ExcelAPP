@@ -46,8 +46,8 @@ namespace ExcelAPPWeb.Service
                 case "date":
                     res = "date";
                     break;
-                case "float":
-                    res = "number(" + col.FLength.ToString() + "," + col.FPrec.ToString() + ")";
+                case "number":
+                    res = "number(20," + col.FPrec.ToString() + ")";
                     break;
                 default:
                     break;
