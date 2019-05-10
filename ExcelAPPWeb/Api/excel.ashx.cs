@@ -37,6 +37,7 @@ namespace ExcelAPPWeb
                 var op = context.Request.Form.Get("op");
                 var data = context.Request.Form.Get("data");
                 object res = "";
+                var tips = "";
                 switch (op)
                 {
                     case "BeginUpload"://开始上传从中间表---正式表
@@ -94,11 +95,11 @@ namespace ExcelAPPWeb
                         var list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ExportModel>>(context.Request.Form.Get("tmpdata"));
                         var mapdata = GetDataMap(ruleInfo, list);
 
-                        res = newsvr.ImportTmpTable(mapdata, ruleInfo);
+                        res = newsvr.ImportTmpTable(mapdata, ruleInfo, out tips);
                         break;
                     case "LoadExcelDataLocal"://导入本地数据源
 
-                        res = newsvr.ImportTmpTable(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(context.Request.Form.Get("tmpdata")), ruleInfo);
+                        res = newsvr.ImportTmpTable(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(context.Request.Form.Get("tmpdata")), ruleInfo, out tips);
                         break;
                     case "loadExcelDataNew"://导入关联表
                         {
@@ -136,7 +137,7 @@ namespace ExcelAPPWeb
                     default:
                         break;
                 }
-                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = true, data = res }));
+                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = true, data = res, tips = tips }));
             }
             catch (Exception ex)
             {

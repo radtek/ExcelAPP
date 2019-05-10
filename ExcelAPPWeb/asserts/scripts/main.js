@@ -463,11 +463,18 @@ var ImportController = {
             $("#btnUpload").removeAttr("disabled");
             Msg.load("加载Excel数据");
             idp.service.LoadExcelDataLocal(CurModel.ID, data).done(function (data) {
-                Msg.sucess("操作成功！");
-                self.refreshData();
-                if (CurModel.IsREF == "1") {
-                    self.showREF();
+
+                if (data.res) {
+                    Msg.sucess("操作成功！");
+                    self.refreshData();
+                    if (CurModel.IsREF == "1") {
+                        self.showREF();
+                    }
+                    if (data.tips) {
+                        Msg.alert(data.tips);
+                    }
                 }
+               
             })
         } else {
 
@@ -480,11 +487,19 @@ var ImportController = {
             $("#btnUpload").removeAttr("disabled");
 
             idp.service.loadExcelData(CurModel.ID, data).done(function (data) {
-                Msg.sucess("操作成功！");
-                self.refreshData();
-                if (CurModel.IsREF == "1") {
-                    self.showREF();
+
+                if (data.res) {
+                    Msg.sucess("操作成功！");
+                    self.refreshData();
+                    if (CurModel.IsREF == "1") {
+                        self.showREF();
+                    }
+                    if (data.tips) {
+                        Msg.alert(data.tips);
+                    }
                 }
+
+               
             })
         }
 

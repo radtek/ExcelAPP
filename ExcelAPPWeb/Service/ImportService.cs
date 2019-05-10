@@ -64,13 +64,13 @@ namespace ExcelAPPWeb.Service
                 filter += " and CreateTime>='" + StartDate + " 00:00:00'";
                 RQ1 = StartDate + " 00:00:00";
             }
-               
+
             if (!string.IsNullOrEmpty(EndDate))
             {
                 filter += " and CreateTime<='" + EndDate + " 23:59:59'";
                 RQ2 = EndDate + " 23:59:59";
             }
-               
+
             if (Flag == "1")
             {
 
@@ -79,7 +79,7 @@ namespace ExcelAPPWeb.Service
 
                     using (var conn = DataBaseManager.GetDbConnection())
                     {
-                        DealProcNewRq(RQ1, RQ2,model.Tmp.SwitchProc, model, new List<Dictionary<string, object>>(), conn, null);
+                        DealProcNewRq(RQ1, RQ2, model.Tmp.SwitchProc, model, new List<Dictionary<string, object>>(), conn, null);
                     }
                 }
                 catch (Exception ex)
@@ -87,7 +87,7 @@ namespace ExcelAPPWeb.Service
                     WriteLogFile("错误获取已上传数据" + ex.ToString());
                 }
 
-               
+
 
             }
             var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql("select " + model.TmpTab + ".* from " + model.TmpTab + " where 1=1 " + filter + "and CreateUser=@0 " + orderBy,
@@ -102,18 +102,19 @@ namespace ExcelAPPWeb.Service
 
 
         #region 导入excel临时数据并上传到中间表
-        public List<Dictionary<string, object>> ImportTmpTable(List<Dictionary<string, object>> dt, Model.EACmpCategory model)
+        public List<Dictionary<string, object>> ImportTmpTable(List<Dictionary<string, object>> dt, Model.EACmpCategory model,out string mes)
         {
 
             List<Dictionary<string, object>> res = new List<Dictionary<string, object>>();
             var tmpTable = model.TmpTab;
             StringBuilder sb = new StringBuilder();
             List<string> keys = new List<string>();
+            List<string> colTypes = new List<string>();
             StringBuilder values = new StringBuilder();
             sb.AppendFormat("insert into {0} (ID,CreateUser,CreateTime,GSDWBH,", tmpTable);
             values.AppendFormat("({0}0,{0}1,{0}2,{0}3,", token);//add luchg 增加单位
             List<Model.EACmpCateCols> cols = model.Cols.Where(n => n.IsShow == "1").ToList();
-
+            mes = "";
             int i = 0;
 
             foreach (var item in cols)
@@ -128,6 +129,7 @@ namespace ExcelAPPWeb.Service
                     values.Append(token + (i + 4).ToString() + ",");
                     sb.Append(item.FCode + ",");
                 }
+                colTypes.Add(item.FType);
                 keys.Add(item.FCode);
                 i++;
             }
@@ -136,7 +138,7 @@ namespace ExcelAPPWeb.Service
 
             var sql = sb.Append(values).ToString();
             TableService.CreateTable(model);
-           
+            //var mes = "";
             using (var conn = DataBaseManager.GetDbConnection())
             {
                 //conn.Open();
@@ -147,7 +149,7 @@ namespace ExcelAPPWeb.Service
                     foreach (Dictionary<string, object> row in dt)
                     {
                         var p = new DynamicParameters();
-                        DynamicParameters para = GetParams(model,keys, row);
+                        DynamicParameters para = GetParams(model, keys, row, colTypes, out mes);
                         conn.Execute(sql, para, transaction);
                     }
 
@@ -182,23 +184,48 @@ namespace ExcelAPPWeb.Service
 
 
 
-        public DynamicParameters GetParams(Model.EACmpCategory model, List<string> keys, Dictionary<string, object> row)
+        public DynamicParameters GetParams(Model.EACmpCategory model, List<string> keys, Dictionary<string, object> row, List<string> colTypes, out string mes)
         {
 
             DynamicParameters p = new DynamicParameters();
+            var sb = new StringBuilder();
             var arr = new ArrayList();
             p.Add("0", Guid.NewGuid().ToString());
             p.Add("1", UserService.GetUserId());
             p.Add("2", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             p.Add("3", model.DWBH.ToString());  //增加 单位编号  
             var i = 4;
+            var index = 0;
             foreach (string key in keys)
             {
-                var value = "";
+                object value = "";
                 if (row.ContainsKey(key))
                 {
                     //需要判断一下 数值型 和日期型 是否为 合法字符
-                    value = row[key].ToString();
+
+                    if (colTypes[index] == "number")
+                    {
+                        var intRes = 0;
+                        if (!int.TryParse(row[key].ToString(), out intRes))
+                        {
+                            sb.Append($"第{index.ToString()}行字段{key}数值金额有问题，已忽略处理");
+                        }
+                        value = intRes;
+                    }
+                    else if (colTypes[index] == "float")
+                    {
+                        decimal floatRes = 0;
+                        if (!decimal.TryParse(row[key].ToString(), out floatRes))
+                        {
+                            sb.Append($"第{index.ToString()}行字段{key}字段金额有问题，已忽略处理");
+                        }
+                        value = floatRes;
+                    }
+                    else
+                    {
+                        value = row[key].ToString();
+                    }
+
                 }
                 if (key == "FLAG")
                 {
@@ -206,7 +233,9 @@ namespace ExcelAPPWeb.Service
                 }
                 p.Add(i.ToString(), value);
                 i++;
+                index++;
             }
+            mes = sb.ToString();
 
             return p;
         }
@@ -323,11 +352,11 @@ namespace ExcelAPPWeb.Service
                     }
                     if (key == "FLAG")
                     {
-                       value = "2";
-                     }
-                     p.Add(i.ToString(), value);
+                        value = "2";
+                    }
+                    p.Add(i.ToString(), value);
                     i++;
-                   
+
                 }
             }
 
@@ -664,13 +693,13 @@ namespace ExcelAPPWeb.Service
                 if (row.ContainsKey(key))
                 {
                     if (row[key] != null)
-                    { 
+                    {
                         value = row[key].ToString();
                     }
                     p.Add(i.ToString(), value);
                     i++;
                 }
-               
+
             }
 
             return p;
@@ -683,7 +712,7 @@ namespace ExcelAPPWeb.Service
         public void DealAssExtend(string type, List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction trans)
         {
 
-            if (string.IsNullOrEmpty(model.Tmp.ImprtDLL)   || model.Tmp.ImprtDLL.Length<2) return;
+            if (string.IsNullOrEmpty(model.Tmp.ImprtDLL) || model.Tmp.ImprtDLL.Length < 2) return;
             var svr = (IExcelExtend)Activator.CreateInstance(Type.GetType(model.Tmp.ImprtDLL, false, true));
 
             if (svr == null)
@@ -717,7 +746,7 @@ namespace ExcelAPPWeb.Service
 
         public void DealProcNew(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
         {
-            if (string.IsNullOrEmpty(procName)  || procName.Length < 2) return;
+            if (string.IsNullOrEmpty(procName) || procName.Length < 2) return;
             var refid = "";
             //foreach (var item in list)
             //{
@@ -741,7 +770,7 @@ namespace ExcelAPPWeb.Service
         #endregion
         #region 处理存储过程调用日期版本
 
-        public void DealProcNewRq(string  Qsrq,string Jsrq,string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
+        public void DealProcNewRq(string Qsrq, string Jsrq, string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
         {
             if (string.IsNullOrEmpty(procName) || procName.Length < 2) return;
             var refid = "";
