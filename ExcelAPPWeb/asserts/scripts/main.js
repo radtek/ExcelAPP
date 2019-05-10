@@ -39,7 +39,7 @@ var CurModel = null;
 var hasLoaded = false;
 var deleteRow = [];
 var deleteRowRef = [];
-
+var hasRequire = {};
 
 $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
 
@@ -138,6 +138,10 @@ var ImportController = {
                     align: "left",
                     editor: getEditor(obj)
                 };
+
+                if (obj.IsRequire == "1") {
+                    hasRequire[obj.FCode] = obj.FName;
+                }
                 if (obj.FCode == "FLAG") {
                     col.render = function (row) {
                         return row["FLAG"] == "1" ? "已上传" : "未上传";
@@ -578,9 +582,19 @@ var ImportController = {
     beginUpload: function () {
         var self = this;
         var data = $("#gridInfo").leeGrid().getCheckedRows();
+
         if (data.length < 1) {
             Msg.alert("请选择选中数据!")
             return;
+        }
+
+        for (var item in data) {
+            for (var key in hasRequire) {
+                if (data[item][key] == "" || data[item][key] == null) {
+                    Msg.alert("请填写第" + item + "行" + "字段【" + hasRequire[key] + "】的值");
+                    return;
+                }
+            }
         }
         $.leeDialog.confirm("确认要上传吗？", "提示", function (flag) {
             if (flag) {

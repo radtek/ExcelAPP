@@ -170,6 +170,8 @@ namespace ExcelAPPWeb.Model
         public string IsReadOnly { get; set; }
 
 
+        public string IsRequire { get; set; }
+
         public string IsMatch { get; set; }
       
         public string HelpID { get; set; }
