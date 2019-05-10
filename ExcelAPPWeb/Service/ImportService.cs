@@ -56,9 +56,21 @@ namespace ExcelAPPWeb.Service
         public object GetDataList(Model.EACmpCategory model, string Flag, string orderBy, int Page, int Size, string StartDate, string EndDate)
         {
             var filter = "";
-
+            var RQ1 = "";
+            var RQ2 = "";
             filter += " and Flag='" + Flag + "'";
-
+            if (!string.IsNullOrEmpty(StartDate))
+            {
+                filter += " and CreateTime>='" + StartDate + " 00:00:00'";
+                RQ1 = StartDate + " 00:00:00";
+            }
+               
+            if (!string.IsNullOrEmpty(EndDate))
+            {
+                filter += " and CreateTime<='" + EndDate + " 23:59:59'";
+                RQ2 = EndDate + " 23:59:59";
+            }
+               
             if (Flag == "1")
             {
 
@@ -67,17 +79,14 @@ namespace ExcelAPPWeb.Service
 
                     using (var conn = DataBaseManager.GetDbConnection())
                     {
-                        DealProcNew(model.Tmp.SwitchProc, model, new List<Dictionary<string, object>>(), conn, null);
+                        DealProcNewRq(RQ1, RQ2,model.Tmp.SwitchProc, model, new List<Dictionary<string, object>>(), conn, null);
                     }
                 }
                 catch (Exception ex)
                 {
                 }
 
-                if (!string.IsNullOrEmpty(StartDate))
-                    filter += " and CreateTime>='" + StartDate + " 00:00:00'";
-                if (!string.IsNullOrEmpty(EndDate))
-                    filter += " and CreateTime<='" + EndDate + " 23:59:59'";
+               
 
             }
             var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql("select " + model.TmpTab + ".* from " + model.TmpTab + " where 1=1 " + filter + "and CreateUser=@0 " + orderBy,
@@ -100,8 +109,8 @@ namespace ExcelAPPWeb.Service
             StringBuilder sb = new StringBuilder();
             List<string> keys = new List<string>();
             StringBuilder values = new StringBuilder();
-            sb.AppendFormat("insert into {0} (ID,CreateUser,CreateTime,", tmpTable);
-            values.AppendFormat("({0}0,{0}1,{0}2,", token);
+            sb.AppendFormat("insert into {0} (ID,CreateUser,CreateTime,GSDWBH,", tmpTable);
+            values.AppendFormat("({0}0,{0}1,{0}2,{0}3,", token);//add luchg 增加单位
             List<Model.EACmpCateCols> cols = model.Cols.Where(n => n.IsShow == "1").ToList();
 
             int i = 0;
@@ -110,12 +119,12 @@ namespace ExcelAPPWeb.Service
             {
                 if (i == cols.Count - 1)
                 {
-                    values.Append(token + (i + 3).ToString());
+                    values.Append(token + (i + 4).ToString());
                     sb.Append(item.FCode);
                 }
                 else
                 {
-                    values.Append(token + (i + 3).ToString() + ",");
+                    values.Append(token + (i + 4).ToString() + ",");
                     sb.Append(item.FCode + ",");
                 }
                 keys.Add(item.FCode);
@@ -137,7 +146,7 @@ namespace ExcelAPPWeb.Service
                     foreach (Dictionary<string, object> row in dt)
                     {
                         var p = new DynamicParameters();
-                        DynamicParameters para = GetParams(keys, row);
+                        DynamicParameters para = GetParams(model,keys, row);
                         conn.Execute(sql, para, transaction);
                     }
 
@@ -171,7 +180,7 @@ namespace ExcelAPPWeb.Service
 
 
 
-        public DynamicParameters GetParams(List<string> keys, Dictionary<string, object> row)
+        public DynamicParameters GetParams(Model.EACmpCategory model, List<string> keys, Dictionary<string, object> row)
         {
 
             DynamicParameters p = new DynamicParameters();
@@ -179,7 +188,8 @@ namespace ExcelAPPWeb.Service
             p.Add("0", Guid.NewGuid().ToString());
             p.Add("1", UserService.GetUserId());
             p.Add("2", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            var i = 3;
+            p.Add("3", model.DWBH.ToString());  //增加 单位编号  
+            var i = 4;
             foreach (string key in keys)
             {
                 var value = "";
@@ -708,6 +718,35 @@ namespace ExcelAPPWeb.Service
             dict.Add("YWID", model.ID);
             dict.Add("DATAID", refid);
             dict.Add("DWBH", model.DWBH);
+            dict.Add("TMPTABLE", model.TmpTab);//增加 luchg 20190510 
+            ProcHelper.ExecProc(dict, procName, conn, trans);
+            //Db.Execute($"exec {procName} @0,@1,@2 ", model.ID, refid, UserService.GetUserId());
+        }
+
+
+        #endregion
+        #region 处理存储过程调用日期版本
+
+        public void DealProcNewRq(string  Qsrq,string Jsrq,string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
+        {
+            if (string.IsNullOrEmpty(procName)) return;
+            var refid = "";
+            //foreach (var item in list)
+            //{
+            //    refid += item["ID"].ToString() + ",";
+            //}
+
+            var user = UserService.GetUser();
+
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict.Add("UserID", user.Id);
+            dict.Add("UserName", user.Name);
+            dict.Add("YWID", model.ID);
+            dict.Add("DATAID", refid);
+            dict.Add("DWBH", model.DWBH);
+            dict.Add("TMPTABLE", model.TmpTab);//增加 luchg 20190510
+            dict.Add("QSRQ", Qsrq);//增加 luchg 20190510 
+            dict.Add("JSRQ", Jsrq);//增加 luchg 20190510 
             ProcHelper.ExecProc(dict, procName, conn, trans);
             //Db.Execute($"exec {procName} @0,@1,@2 ", model.ID, refid, UserService.GetUserId());
         }

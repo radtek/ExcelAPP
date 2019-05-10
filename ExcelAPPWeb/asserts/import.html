@@ -62,7 +62,7 @@
                     <button class="lee-btn lee-btn-primary" disabled id="btnUpload" onclick="ImportController.beginUpload()">确认上传</button>
                     <button class="lee-btn lee-btn-danger" disabled id="btnCancel" onclick="ImportController.cancelUpload()">取消上传</button>
                     <button class="lee-btn " style="display:none;" id="btnCustom" onclick="ImportController.custom()">自定义</button>
-                    <button class="lee-btn lee-btn-primary"  style="display:none;"  id="btnTip" onclick="ImportController.showTip()">填报说明</button>
+
                     <span class="export-tip">已经加载数据30条，导入成功0条，失败0条</span>
                 </div>
             </div>
@@ -70,7 +70,7 @@
         <div class="deleteWrap" style="position: absolute;right: 0;z-index: 1111;width: 100px;top: 40px;">
             <button class="lee-btn lee-btn-xs lee-btn-danger" id="btnRemove" onclick="ImportController.removeRows()">删除选中行</button>
         </div>
-        <div class="dateWrap hasWrap" style="position: absolute;right: 0;z-index: 1111;width: 620px;top: 34px;display:none;">
+        <div class="dateWrap hasWrap" style="position: absolute;right: 0;z-index: 1111;width: 720px;top: 34px;display:none;">
             <div class="lee-table-form-border  table-query" style="margin:0;">
                 <div class="table-item" style="width:250px;">
                     <div class="table-label">
@@ -88,9 +88,9 @@
                         <input id="txtQueryDateEnd" readonly />
                     </div>
                 </div>
-                <div class="table-item" style="width:120px;line-height:34px;">
-                    <button class="lee-btn lee-btn-xs lee-btn-primary" id="btnCustom" onclick="ImportController.refreshData()">查询</button>
-                    <button class="lee-btn lee-btn-xs lee-btn-primary" id="btnRef" onclick="ImportController.showREF()">关联导入</button>
+                <div class="table-item" style="width:170px;line-height:34px;">
+                    <button class="lee-btn lee-btn-primary" id="btnCustom" onclick="ImportController.refreshData()">查询</button>
+                    <button class="lee-btn lee-btn-danger" id="btnRef" onclick="ImportController.showREF()">关联导入</button>
                 </div>
             </div>
         </div>
@@ -175,6 +175,47 @@
 
     <script src="scripts/service.js"></script>
     <script src="scripts/main.js"></script>
+
+
+    <script>
+	function date() {
+				var date = new Date();
+				var month = parseInt(date.getMonth() + 1);
+				var day = date.getDate();
+
+				if (month < 10) {
+					month = '0' + month
+				}
+				if (day < 10) {
+					day = '0' + day
+				}
+				return date.getFullYear() + '-' + month + '-' + day;
+
+			}
+			$('#txtQueryDateEnd').val(date());
+
+			function getCurrentMonthFirst() {
+				var date = new Date();
+				date.setDate(1);
+				var month = parseInt(date.getMonth() + 1);
+				var day = date.getDate();
+				if (month < 10) {
+					month = '0' + month
+				}
+				if (day < 10) {
+					day = '0' + day
+				}
+				return date.getFullYear() + '-' + month + '-' + day;
+			}
+			$('#txtQueryDate').val(getCurrentMonthFirst());
+
+
+    </script>
+
+
+
+
+
 </body>
 
 </html>

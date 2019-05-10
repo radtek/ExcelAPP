@@ -112,10 +112,6 @@ var ImportController = {
             if (CurModel.IsCustom == "1") {
                 $("#btnCustom").show().html(CurModel.CustomName);
             }
-            if (CurModel.UPURL) {
-                $("#btnTip").show();
-            }
-
 
         });
 
@@ -329,7 +325,14 @@ var ImportController = {
                 //if (rowdata.FLAG == "1" && currentIndex == "1") return false;
             },
             parms: function () {
-
+                if ($("#txtQueryDate").val().length != 10) {
+                    alert("起始日期不能为空或格式不正确");
+                    return '';
+                }
+                if ($("#txtQueryDateEnd").val().length != 10) {
+                    alert("结束日期不能为空或格式不正确");
+                    return '';
+                }
                 var res = {
                     "id": CurModel.ID,
                     "flag": currentIndex,
@@ -387,18 +390,6 @@ var ImportController = {
     setImportTips: function (msg) {
         //设置导入提示信息
         $(".export-tip").html(msg);
-    },
-    showTip: function () {
-        $.leeDialog.open({
-            title: "填报说明",
-            name: 'tipswindow',
-            isHidden: false,
-            showMax: true,
-            width: 900,
-            slide: false,
-            height: 400,
-            url: CurModel.UPURL
-        });
     },
     showREF: function () {
         this.dgRef = $.leeDialog.open({

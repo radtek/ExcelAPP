@@ -62,7 +62,7 @@ namespace ExcelAPPWeb.Service
             sql.Append("ID varchar(36) not null,");
             sql.Append("FLAG char(1),");
             sql.Append("YWID varchar(36),");
-            sql.Append("DWBH varchar(60),");
+            sql.Append("GSDWBH varchar(60),");
             sql.Append("CreateTime varchar(20),");
             sql.Append("CreateUser varchar(36),");
             sql.Append("ColorZT char(1),");
@@ -70,7 +70,7 @@ namespace ExcelAPPWeb.Service
             {
                 if (item.FCode != "FLAG" && item.FCode != "ID"
                     && item.FCode != "YWID"
-                    && item.FCode != "DWBH"
+                    && item.FCode != "GSDWBH"
                     && item.FCode != "CreateTime"
                     && item.FCode != "CreateUser"
                     && item.FCode != "ColorZT"
