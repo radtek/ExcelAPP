@@ -416,6 +416,8 @@ namespace ExcelApp.JSBridge
                     string file = fileDialog.FileName;//返回文件的完整路径        
                     if (!FileHash.ContainsKey(id))                           //MessageBox.Show(file);
                         FileHash.Add(id, file);
+                    else
+                        FileHash[id] = file;
                     //filepath = file;
 
                     ExecScript("setFilePath('" + id + "','" + Path.GetFileName(file) + "')");
