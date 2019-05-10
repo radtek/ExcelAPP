@@ -475,7 +475,7 @@
                 var qryfilter = [];
                 var keyword = $("#txtKeyWord").val();
 
-                var filter = "";
+                var filter = " " + this.filter;
                 if (keyword) {
                     if (this.fields.length > 0)
                         filter += " and (";

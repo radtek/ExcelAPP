@@ -87,6 +87,9 @@ namespace ExcelAPPWeb.Model
         public string IsReadonly { get; set; }
         public string HelpID { get; set; }
 
+
+
+        public string HelpFitler { get; set; }
         public string IsMatch { get; set; }
         public string IsRequire { get; set; }
 
