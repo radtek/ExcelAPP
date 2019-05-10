@@ -177,11 +177,11 @@ var ImportController = {
                     getFilter: function () { 
                         var row = this.host_grid_row;
                         var filter = obj.HelpFitler;
-
+                        filter = filter.replace("{GS_DWBH}", CurModel.DWBH);
                         for (var item in row) {
                             filter = filter.replace("{" + item + "}", row[item]);
                         }
-                        filter = filter.replace("{GS_DWBH}", CurModel.DWBH);
+                     
                         return filter;
                     },
                     service: {
