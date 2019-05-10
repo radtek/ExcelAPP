@@ -176,6 +176,9 @@ namespace ExcelAPPWeb.Model
       
         public string HelpID { get; set; }
 
+
+        public string HelpFitler { get; set; }
+
         public string SCols { get; set; }
         public string RCols { get; set; }
 

@@ -39,6 +39,8 @@ namespace ExcelAPPWeb
                         var helpID = context.Request.Form.Get("id");
                         var filter = context.Request.Form.Get("filter");
                         var order = context.Request.Form.Get("order");
+                        var row = context.Request.Form.Get("row");
+                        var dwbh = context.Request.Form.Get("dwbh");
                         var page = int.Parse(context.Request.Form.Get("page"));
                         var pageSize = int.Parse(context.Request.Form.Get("pageSize"));
                         res = service.GetDataList(helpID, filter, order, page, pageSize);
