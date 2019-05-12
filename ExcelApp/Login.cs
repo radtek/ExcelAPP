@@ -39,7 +39,7 @@ namespace ExcelApp
         }
         private void LoadHandler_OnLoadStart(object sender, Chromium.Event.CfxOnLoadStartEventArgs e)
         {
-            Chromium.ShowDevTools();
+            //Chromium.ShowDevTools();
         }
     }
 }
