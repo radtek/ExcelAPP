@@ -59,11 +59,12 @@
                 <div class="table-item" style="width:66.6%;line-height:34px;">
                     <button class="lee-btn fileWrap" onclick="ImportController.chooseFile()">选择</button>
                     <button class="lee-btn lee-btn-primary" onclick="ImportController.loadExcelData()">加载数据</button>
-                    <button class="lee-btn lee-btn-primary" disabled id="btnUpload" onclick="ImportController.beginUpload()">确认上传</button>
+                    <button class="lee-btn lee-btn-primary"  id="btnUpload" onclick="ImportController.beginUpload()">确认上传</button>
                     <button class="lee-btn lee-btn-danger" disabled id="btnCancel" onclick="ImportController.cancelUpload()">取消上传</button>
-                    <button class="lee-btn " style="display:none;" id="btnCustom" onclick="ImportController.custom()">自定义</button>
+                    <button class="lee-btn" style="display:none;" id="btnCustom" onclick="ImportController.custom()">自定义</button>
 
                     <span class="export-tip">已经加载数据30条，导入成功0条，失败0条</span>
+                    <button class="lee-btn lee-btn-info" onclick="ImportController.Help()">操作说明</button>
                 </div>
             </div>
         </div>
@@ -165,7 +166,7 @@
                 <button class="lee-btn lee-btn-primary" disabled id="btnUploadRef" onclick="ImportController.beginUploadRef()">上传并关闭</button>
             </div>
         </div>
-        <div><span class="ref-tip">说明信息</span></div>
+        <div><span class="ref-tip" style="font-size:25px;font-family:微软雅黑;color:rgb(255,170,170);">说明信息</span></div>
         <div id="refWrap">
             <div id="gridRel"></div>
         </div>

@@ -111,22 +111,23 @@ namespace ExcelAPPWeb.Service
             List<string> keys = new List<string>();
             List<string> colTypes = new List<string>();
             StringBuilder values = new StringBuilder();
-            sb.AppendFormat("insert into {0} (ID,CreateUser,CreateTime,GSDWBH,", tmpTable);
-            values.AppendFormat("({0}0,{0}1,{0}2,{0}3,", token);//add luchg 增加单位
+            StringBuilder sbmes = new StringBuilder();
+            sb.AppendFormat("insert into {0} (ID,CreateUser,CreateTime,GSDWBH,COLORZT,", tmpTable);
+            values.AppendFormat("({0}0,{0}1,{0}2,{0}3,{0}4,", token);//add luchg 增加单位
             List<Model.EACmpCateCols> cols = model.Cols.Where(n => n.IsShow == "1").ToList();
             mes = "";
             int i = 0;
-
+            int s = 0;
             foreach (var item in cols)
             {
                 if (i == cols.Count - 1)
                 {
-                    values.Append(token + (i + 4).ToString());
+                    values.Append(token + (i + 5).ToString());
                     sb.Append(item.FCode);
                 }
                 else
                 {
-                    values.Append(token + (i + 4).ToString() + ",");
+                    values.Append(token + (i + 5).ToString() + ",");
                     sb.Append(item.FCode + ",");
                 }
                 colTypes.Add(item.FType);
@@ -150,9 +151,15 @@ namespace ExcelAPPWeb.Service
                     {
                         var p = new DynamicParameters();
                         DynamicParameters para = GetParams(model, keys, row, colTypes, out mes);
+                        s++;
+                        if (mes!="")
+                        {
+                            sbmes.Append($"第{s.ToString()}行{mes}");
+                            mes = "";
+                        }
                         conn.Execute(sql, para, transaction);
                     }
-
+                    mes = sbmes.ToString();
                     foreach (var item in cols)
                     {
                         if (!string.IsNullOrWhiteSpace(item.CalcSQL))
@@ -194,43 +201,92 @@ namespace ExcelAPPWeb.Service
             p.Add("1", UserService.GetUserId());
             p.Add("2", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             p.Add("3", model.DWBH.ToString());  //增加 单位编号  
-            var i = 4;
+            var i = 5;
             var index = 0;
             foreach (string key in keys)
             {
                 object value = "";
+               
                 if (row.ContainsKey(key))
                 {
-                    //需要判断一下 数值型 和日期型 是否为 合法字符
+                    #region 需要判断一下 数值型 和日期型 是否为 合法字符
 
-                    if (colTypes[index] == "number")
+                    if (colTypes[index] == "int")
                     {
                         var intRes = 0;
+                       if ( row[key] != null)
+                        { 
+
                         if (!int.TryParse(row[key].ToString(), out intRes))
                         {
-                            sb.Append($"第{index.ToString()}行字段{key}数值金额有问题，已忽略处理");
-                        }
+                                if (row[key].ToString() != "")
+                                {
+                                    sb.Append($"第{index.ToString()}列字段{key}数值金额[" + row[key].ToString() + "]有问题，已忽略处理");
+                                    p.Add("4", "1");
+                                }
+                            }
                         value = intRes;
-                    }
-                    else if (colTypes[index] == "float")
-                    {
-                        decimal floatRes = 0;
-                        if (!decimal.TryParse(row[key].ToString(), out floatRes))
-                        {
-                            sb.Append($"第{index.ToString()}行字段{key}字段金额有问题，已忽略处理");
                         }
-                        value = floatRes;
+                       else
+                        { value =0;
+                        }
+                    }
+                    else if (colTypes[index] == "number")
+                    {
+                        if (row[key] != null)
+                        {
+                            decimal floatRes = 0;
+                            if (!decimal.TryParse(row[key].ToString() , out floatRes))
+                            {
+                                if (row[key].ToString() != "")
+                                {
+                                    sb.Append($"第{index.ToString()}列字段{key}字段金额[" + row[key].ToString() + "]有问题，已忽略处理");
+                                    p.Add("4", "1");
+                                }
+
+                            }
+                            value = floatRes;
+                        }
+                        else
+                        {
+                            value = 0;
+                        }
+
+                    }
+                    else if (colTypes[index] == "date")
+                    {
+                        if (row[key] != null)
+                        {
+                            DateTime dtDate;
+                            if (DateTime.TryParse(row[key].ToString(), out dtDate))
+                            {
+                                sb.Append($"第{index.ToString()}列字段{key}字段日期" + row[key].ToString() + "有问题，已忽略处理");
+                                p.Add("4", "1");  // 
+                            }
+                            value = dtDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            
+                        }
+                        else
+                        {
+                            value = "1900-01-01 00:00:00";
+                        }
+
                     }
                     else
                     {
-                        value = row[key].ToString();
+                        if (row[key] != null)
+                        {
+                            value = row[key].ToString();
+                        }
+                        else
+                        {
+                            value = "";
+                        }
+                        p.Add("4", " ");  // 
                     }
-
+                    #endregion
                 }
-                if (key == "FLAG")
-                {
-                    value = "0";
-                }
+                
                 p.Add(i.ToString(), value);
                 i++;
                 index++;
@@ -245,18 +301,21 @@ namespace ExcelAPPWeb.Service
 
         #region 上传数据到中间表
 
-        private string GetUpdateSql(Model.EACmpCategory model, out List<string> keys)
+        private string GetUpdateSql(Model.EACmpCategory model, out List<string> keys,out List<string> colTypes)
         {
             StringBuilder sb = new StringBuilder();
             keys = new List<string>();
-            sb.AppendFormat("update {0} set ", model.TmpTab);
+            colTypes = new List<string>();
+            sb.AppendFormat("update {0} set    ", model.TmpTab);
             List<Model.EACmpCateCols> cols = model.Cols.Where(n => n.IsShow == "1").ToList();
             var i = 1;
+            sb.Append("COLORZT=" + token + i.ToString() + ",");
+             i = 2;
 
             foreach (var item in cols)
             {
 
-                if (i == cols.Count)
+                if (i - 1 == cols.Count)
                 {
                     sb.Append(item.FCode + "=" + token + i.ToString() + " ");
                 }
@@ -265,25 +324,28 @@ namespace ExcelAPPWeb.Service
                     sb.Append(item.FCode + "=" + token + i.ToString() + ",");
                 }
                 keys.Add(item.FCode);
+                colTypes.Add(item.FType);
                 i++;
             }
 
             sb.Append(" where id=" + token + "0");
             return sb.ToString();
         }
-        public void UploadData(Model.EACmpCategory model, string ExcelData, string DelData, Action<string> onProgress, Action<string> onError, Action<string> onScucess)
+        public void UploadData(Model.EACmpCategory model, string ExcelData, string DelData, Action<string> onProgress, Action<string> onError, Action<string> onScucess, out string mes)
         {
-
+            mes = "";
             try
             {
                 List<string> keys = new List<string>();
+                List<string> colTypes = new List<string>();
                 List<Dictionary<string, object>> list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(ExcelData);
+                StringBuilder sbmes = new StringBuilder();
                 if (list.Count == 0)
                 {
                     onError("没有上传选中数据");
                     return;
                 }
-                var sql = GetUpdateSql(model, out keys);
+                var sql = GetUpdateSql(model, out keys,out colTypes);
                 int count = 0;
                 using (var conn = DataBaseManager.GetDbConnection())
                 {
@@ -296,12 +358,17 @@ namespace ExcelAPPWeb.Service
                         {
                             count++;
                             var p = new DynamicParameters();
-                            DynamicParameters para = GetParamsUpdate(keys, row);
+                            DynamicParameters para = GetParamsUpdate(keys, row, colTypes, out mes);
                             conn.Execute(sql, para, transaction);
+                            if (mes != "")
+                            {
+                                sbmes.Append($"第{count.ToString()}行{mes}");
+                                mes = "";
+                            }
                         }
 
-
-                        List<Dictionary<string, object>> delList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(DelData);
+                        mes = sbmes.ToString();
+                        List <Dictionary<string, object>> delList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(DelData);
                         foreach (Dictionary<string, object> row in delList)
                         {
                             conn.Execute("delete from " + model.TmpTab + " where ID=" + token + "ID",
@@ -335,31 +402,102 @@ namespace ExcelAPPWeb.Service
         }
 
 
-        public DynamicParameters GetParamsUpdate(List<string> keys, Dictionary<string, object> row)
+        public DynamicParameters GetParamsUpdate(List<string> keys, Dictionary<string, object> row, List<string> colTypes, out string mes)
         {
 
             var p = new DynamicParameters();
             p.Add("0", row["ID"].ToString());
-            var i = 1;
+           
+            var i = 2;
+            var sb = new StringBuilder();
+            var index = 0;
             foreach (string key in keys)
             {
-                var value = "";
+                object value = "";
                 if (row.ContainsKey(key))
                 {
-                    if (row[key] != null)
+                    #region 需要判断一下 数值型 和日期型 是否为 合法字符
+
+                    if (colTypes[index] == "int")
                     {
-                        value = row[key].ToString();
+                        var intRes = 0;
+                        if (row[key] != null)
+                        {
+
+                            if (!int.TryParse(row[key].ToString(), out intRes))
+                            {
+                                sb.Append($"第{index.ToString()}列字段{key}数值金额" + row[key].ToString() + "有问题，已忽略处理");
+                                p.Add("1", "1");
+                            }
+                            value = intRes;
+                        }
+                        else
+                        {
+                            value = 0;
+                        }
+                    }
+                    else if (colTypes[index] == "number")
+                    {
+                        if (row[key] != null)
+                        {
+                            decimal floatRes = 0;
+                            if (!decimal.TryParse(row[key].ToString(), out floatRes))
+                            {
+                                sb.Append($"第{index.ToString()}列字段{key}字段金额" + row[key].ToString() + "有问题，已忽略处理");
+                                p.Add("1", "1");
+                            }
+                            value = floatRes;
+                        }
+                        else
+                        {
+                            value = 0;
+                        }
+
+                    }
+                    else if (colTypes[index] == "date")
+                    {
+                        if (row[key] != null)
+                        {
+                            DateTime dtDate;
+                            if (DateTime.TryParse(row[key].ToString(), out dtDate))
+                            {
+                                sb.Append($"第{index.ToString()}列字段{key}字段日期" + row[key].ToString() + "有问题，已忽略处理");
+                                p.Add("1", "1");
+                            }
+                            value = dtDate.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                        else
+                        {
+                            value = "1900-01-01 00:00:00";
+                        }
+
+                    }
+                    else
+                    {
+                        if (row[key] != null)
+                        {
+                            value = row[key].ToString();
+                        }
+                        else
+                        {
+                            value = "";
+                        }
+                        p.Add("1", " ");
                     }
                     if (key == "FLAG")
                     {
                         value = "2";
                     }
+                    #endregion
+
+                   // WriteLogFile("p" + key + i.ToString()+ value+ sb.ToString());
                     p.Add(i.ToString(), value);
                     i++;
-
+                    index++;
                 }
             }
-
+          
+            mes = sb.ToString();
             return p;
         }
 
@@ -487,13 +625,35 @@ namespace ExcelAPPWeb.Service
                 IDbTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    DealProcNew(model.RefProc, model, new List<Dictionary<string, object>>(), conn, transaction);
-                    DealAssExtend("refdel", new List<Dictionary<string, object>>(), model, conn, transaction);
+                    //增加 期间范围内数据清空
+                    WriteLogFile("date" + date);
+                    //2019 - 05 - 01 - 2019 - 06 - 30
+                    var filter = " 1=1 ";
+                    var StartDate = "";
+                    var EndDate = "";
+
+                    if (date.Length > 5)
+                        {
+                        filter = "";
+                        StartDate = date.Replace(" ", "").Substring(0, 10);
+                        EndDate = date.Replace(" ", "").Substring(11, 10);
+                        filter += "  CreateTime>='" + StartDate + " 00:00:00'";
+                        filter += " and CreateTime<='" + EndDate + " 23:59:59'";
+
+                    }
+                    WriteLogFile("SQDELETE  EARefTable   where  YWID='" + model.ID + "'  AND  DWBH='" + model.DWBH + "'  AND  " + filter + "  AND   USERID=" + UserService.GetUserId() + "CreateUser"  );
+                    conn.Execute("DELETE  EARefTable   where  YWID='"+ model.ID+ "'  AND  DWBH='"+ model.DWBH+ "'  AND  "+ filter + "  AND   USERID=" + token + "CreateUser",
+                          new { CreateUser = UserService.GetUserId() },
+                          transaction);
+
+                   // DealProcNew(model.RefProc, model, new List<Dictionary<string, object>>(), conn, transaction);
+                   // DealAssExtend("refdel", new List<Dictionary<string, object>>(), model, conn, transaction);
                     transaction.Commit();
 
                 }
                 catch (Exception ex)
                 {
+                    WriteLogFile("删除关联表数据" + ex.ToString());
                     transaction.Rollback();
                     throw ex;
                 }
@@ -630,6 +790,7 @@ namespace ExcelAPPWeb.Service
 
                             conn.Execute("update EARefTable set Flag='1' where id=" + token + "ID", new { ID = row["ID"].ToString() }, transaction);
                         }
+                       
                         DealProcNew(model.RefProc, model, list, conn, transaction);
                         DealAssExtend("ref", list, model, conn, transaction);
 
@@ -814,7 +975,7 @@ namespace ExcelAPPWeb.Service
         #endregion
 
         #region 记录操作日志文件版本
-        public static void WriteLogFile(string txt)
+        public  void WriteLogFile(string txt)
         {
             string path = @"C:\InterFace\";
             if (!Directory.Exists(path))

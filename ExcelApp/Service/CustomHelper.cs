@@ -48,6 +48,8 @@ namespace ExcelApp.Service
             var table = model.CODE;//表名称
             var fields = string.IsNullOrEmpty(model.SFields) ? (table + ".*") : model.SFields;
             var sql = $"select {fields} from {table} where 1=1 {model.SFilter}  {filter}";
+           
+           
             var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql(sql));
 
             return new

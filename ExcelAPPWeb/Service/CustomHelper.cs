@@ -48,6 +48,7 @@ namespace ExcelAPPWeb.Service
             var table = model.CODE;//表名称
             var fields = string.IsNullOrEmpty(model.SFields) ? (table + ".*") : model.SFields;
             var sql = $"select {fields} from {table} where 1=1 {model.SFilter}  {filter}";
+            sql = sql.Replace("{Userid}", UserService.GetUserId());
             var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql(sql));
 
             return new
@@ -73,7 +74,12 @@ namespace ExcelAPPWeb.Service
         public List<Model.EAFunc> GetFuncList()
         {
             //Sql sql = new Sql(@"select * from FBDataSource  where  ID=@0", helpid);
-            return Db.Fetch<Model.EAFunc>("select * from EAFunc where 1=1");
+            // sql = sql.Replace("{Userid}",);
+            /* select * from    EAFunc  where  (  select id  from  EAFunc  where   GNBH in (SELECT BIZOPID  FROM GSPROLEASS ,GSPBIZOBJECTOP, ( SELECT ROLEID FROM GSPPOSASS WHERE POSITIONID IN (select POSITIONID from GSPUSERASS
+              where USERID='"+ UserService.GetUserId()+"' )) C  WHERE GSPBIZOBJECTOP.CODE =GSPROLEASS.BIZOPID and GSPROLEASS.ROLEID = C.ROLEID ) ) like  id||'%' 
+
+              */
+            return Db.Fetch<Model.EAFunc>("select * from EAFunc where 1=1 order by  CODE");
         }
     }
 }

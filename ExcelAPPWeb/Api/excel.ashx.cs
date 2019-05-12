@@ -43,7 +43,7 @@ namespace ExcelAPPWeb
                     case "BeginUpload"://开始上传从中间表---正式表
                         var delData = context.Request.Form.Get("rdata");
 
-                        service.UploadData(ruleInfo, data, delData, (string mes) =>
+                        service.UploadData(ruleInfo, data, delData,(string mes) =>
                          {
 
 
@@ -55,7 +55,7 @@ namespace ExcelAPPWeb
                              res = mes;
 
 
-                         });
+                         }, out tips);
                         break;
                     case "UploadDataRef"://上传关联表
                         var delData1 = context.Request.Form.Get("rdata");

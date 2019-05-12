@@ -98,8 +98,13 @@ namespace ExcelAPPWeb.Model
         /// </summary>
         public string CustomName { get; set; }
 
-
-
+        /// <summary>
+        /// 关联帮助说明
+        /// </summary>
+        public string REFHELP { get; set; }
+        /// <summary>
+        /// 上传帮助
+        /// </summary>
         public string UPURL { get; set; }
 
         public string CreateUser { get; set; }

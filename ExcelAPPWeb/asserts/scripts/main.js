@@ -35,6 +35,7 @@ var hasLoaded = false;
 var deleteRow = [];
 var deleteRowRef = [];
 var hasRequire = {};
+var helpurl = "";
 
 $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
 
@@ -113,7 +114,8 @@ var ImportController = {
             if (CurModel.IsCustom == "1") {
                 $("#btnCustom").show().html(CurModel.CustomName);
             }
-
+            $(".ref-tip").show().html(CurModel.REFHELP);
+            helpurl = CurModel.UPURL;
         });
 
 
@@ -171,138 +173,140 @@ var ImportController = {
             if (obj.IsReadOnly == "1") return null;
             if (obj.FCode == "FLAG") return null;
             if (obj.HelpID) {
-                var opts = {
-                    "valueField": obj.BindCol,
-                    "textField": obj.BindCol,
-                    type: "lookup", helpID: obj.HelpID,
-                    getFilter: function () { 
-                        var row = this.host_grid_row;
-                        var filter = obj.HelpFitler;
-                        filter = filter.replace("{GS_DWBH}", CurModel.DWBH);
-                        for (var item in row) {
-                            filter = filter.replace("{" + item + "}", row[item]);
-                        }
-                     
-                        return filter;
-                    },
-                    service: {
-                        getQueryHelpSwitch: function (helpID, value, codeField, textField, filter) {
-
-                            var defer = $.Deferred();
-                            var data = idp.service.getHelpData(
-                                helpID,
-                                " and " + obj.BindCol + " like '" + value + "%'",
-                                "",
-                                1,
-                                1000
-                            ).done(function (data) {
-
-                                defer.resolve({ res: data.res, data: data.data.Rows });
-                            });
-                            return defer.promise();
-                        }
-                    }
-
-                };
-
-                var arr = [];
-                var rcol = obj.RCols.split(",");
-                var scol = obj.SCols.split(",");
-                for (var i in rcol) {
-                    arr.push({
-                        FField: scol[i],
-                        HField: rcol[i]
-                    });
-                }
-
-                opts.isMatch = obj.IsMatch;
-                opts.matchName = obj.MatchRule;
-
-                opts.mapFields = arr;
-
-                opts.url = "lookup.html?id=";
-
-                opts.onConfirmSelect = function (g, p, data, srcID) {
-                    function getMapObj(mapFields, data) {
-                        var vsobj = {};
-                        for (var i = 0; i < mapFields.length; i++) {
-                            var HField = mapFields[i]["HField"];
-                            var FField = mapFields[i]["FField"];
-                            vsobj[FField] = data[HField] ? data[HField] : "";
-                        }
-                        return vsobj;
-                    }
-
-                    if (p.gridEditParm) {
-                        // 多选模式 返回多条// 多选模式返回逗号合并// 如果是单选模式g
-                        var mapFields = p.mapFields;
-                        var vsobj = getMapObj(p.mapFields, data[0]);
-
-                        var before = JSON.parse(JSON.stringify(p.gridEditParm.record));
-                        var gridManger = p.host_grid;
-                        p.gridEditParm.record = $.extend(p.gridEditParm.record, vsobj);
-
-                        gridManger.updateRow(p.gridEditParm.rowindex, vsobj);
-
-                        gridManger.endEdit();
-
-                        vsobj[obj.FCode] = data[0][opts.valueField];
-                        if (opts.isMatch == "1")
-                            DealOtherRow(before, vsobj, gridManger, self.matchFields);
-                        var cell = gridManger.getCellObj(p.gridEditParm.record, p.gridEditParm.column);
-                        window.setTimeout(function () { gridManger._applyEditor(cell) }, 100);
-
-
-                    }
-                }
-
-                function DealOtherRow(record, vsobj, gridManger, matchFields) {
-                    var data = $("#gridInfo").leeUI().data;
-
-                    var fields = opts.matchName;
-                    if (!fields) return;
-                    var codeField = fields.split(",")[0];
-
-                    var nameField = fields.split(",")[1];
-                    for (var item in data.Rows) {
-                        var row = data.Rows[item];
-                        var isUpdate = false;
-                        if (record["ID"] != row["ID"]) {
-
-                            if (row[codeField] == record[codeField] && row[nameField] == record[nameField]) {
-                                isUpdate = true;
+                if (obj.HelpID.length > 3) {
+                    var opts = {
+                        "valueField": obj.BindCol,
+                        "textField": obj.BindCol,
+                        type: "lookup", helpID: obj.HelpID,
+                        getFilter: function () {
+                            var row = this.host_grid_row;
+                            var filter = obj.HelpFitler;
+                            filter = filter.replace("{GS_DWBH}", CurModel.DWBH);
+                            for (var item in row) {
+                                filter = filter.replace("{" + item + "}", row[item]);
                             }
-                            if (isUpdate) {
-                                gridManger.updateRow(row, vsobj);
+
+                            return filter;
+                        },
+                        service: {
+                            getQueryHelpSwitch: function (helpID, value, codeField, textField, filter) {
+
+                                var defer = $.Deferred();
+                                var data = idp.service.getHelpData(
+                                    helpID,
+                                    " and " + obj.BindCol + " like '" + value + "%'",
+                                    "",
+                                    1,
+                                    1000
+                                ).done(function (data) {
+
+                                    defer.resolve({ res: data.res, data: data.data.Rows });
+                                });
+                                return defer.promise();
                             }
                         }
 
+                    };
+
+                    var arr = [];
+                    var rcol = obj.RCols.split(",");
+                    var scol = obj.SCols.split(",");
+                    for (var i in rcol) {
+                        arr.push({
+                            FField: scol[i],
+                            HField: rcol[i]
+                        });
                     }
 
-                }
+                    opts.isMatch = obj.IsMatch;
+                    opts.matchName = obj.MatchRule;
 
-                //opts.service = {
-                //    getQueryHelpSwitch: function (helpID, value, codeField, textField, filter) {
+                    opts.mapFields = arr;
 
-                //    }
-                //};
+                    opts.url = "lookup.html?id=";
 
-                opts.onClearValue = function (g, p, data, srcID) {
-                    if (p.gridEditParm) {
-                        var vsobj = {};
-                        var mapFields = p.mapFields;
-                        for (var i = 0; i < mapFields.length; i++) {
-                            var FField = mapFields[i]["FField"];
-                            vsobj[FField] = "";//这里得处理一下数字or日期
+                    opts.onConfirmSelect = function (g, p, data, srcID) {
+                        function getMapObj(mapFields, data) {
+                            var vsobj = {};
+                            for (var i = 0; i < mapFields.length; i++) {
+                                var HField = mapFields[i]["HField"];
+                                var FField = mapFields[i]["FField"];
+                                vsobj[FField] = data[HField] ? data[HField] : "";
+                            }
+                            return vsobj;
                         }
-                        var gridManger = p.host_grid;
-                        p.gridEditParm.record = $.extend(p.gridEditParm.record, vsobj);
-                        gridManger.updateRow(p.gridEditParm.rowindex, vsobj);
-                        gridManger.endEdit();
-                    }
-                }
 
-                return opts;
+                        if (p.gridEditParm) {
+                            // 多选模式 返回多条// 多选模式返回逗号合并// 如果是单选模式g
+                            var mapFields = p.mapFields;
+                            var vsobj = getMapObj(p.mapFields, data[0]);
+
+                            var before = JSON.parse(JSON.stringify(p.gridEditParm.record));
+                            var gridManger = p.host_grid;
+                            p.gridEditParm.record = $.extend(p.gridEditParm.record, vsobj);
+
+                            gridManger.updateRow(p.gridEditParm.rowindex, vsobj);
+
+                            gridManger.endEdit();
+
+                            vsobj[obj.FCode] = data[0][opts.valueField];
+                            if (opts.isMatch == "1")
+                                DealOtherRow(before, vsobj, gridManger, self.matchFields);
+                            var cell = gridManger.getCellObj(p.gridEditParm.record, p.gridEditParm.column);
+                            window.setTimeout(function () { gridManger._applyEditor(cell) }, 100);
+
+
+                        }
+                    }
+
+                    function DealOtherRow(record, vsobj, gridManger, matchFields) {
+                        var data = $("#gridInfo").leeUI().data;
+
+                        var fields = opts.matchName;
+                        if (!fields) return;
+                        var codeField = fields.split(",")[0];
+
+                        var nameField = fields.split(",")[1];
+                        for (var item in data.Rows) {
+                            var row = data.Rows[item];
+                            var isUpdate = false;
+                            if (record["ID"] != row["ID"]) {
+
+                                if (row[codeField] == record[codeField] && row[nameField] == record[nameField]) {
+                                    isUpdate = true;
+                                }
+                                if (isUpdate) {
+                                    gridManger.updateRow(row, vsobj);
+                                }
+                            }
+
+                        }
+
+                    }
+
+                    //opts.service = {
+                    //    getQueryHelpSwitch: function (helpID, value, codeField, textField, filter) {
+
+                    //    }
+                    //};
+
+                    opts.onClearValue = function (g, p, data, srcID) {
+                        if (p.gridEditParm) {
+                            var vsobj = {};
+                            var mapFields = p.mapFields;
+                            for (var i = 0; i < mapFields.length; i++) {
+                                var FField = mapFields[i]["FField"];
+                                vsobj[FField] = "";//这里得处理一下数字or日期
+                            }
+                            var gridManger = p.host_grid;
+                            p.gridEditParm.record = $.extend(p.gridEditParm.record, vsobj);
+                            gridManger.updateRow(p.gridEditParm.rowindex, vsobj);
+                            gridManger.endEdit();
+                        }
+                    }
+
+                    return opts;
+                }
             }
 
 
@@ -518,6 +522,7 @@ var ImportController = {
 
         idp.service.loadExcelDataNew(CurModel.ID, data).done(function (data) {
             Msg.sucess("操作成功！");
+            $(".ref-tip").show().html("");
             self.initREFGrid(data.data);
 
         });
@@ -604,6 +609,10 @@ var ImportController = {
             self.refreshData();
         })
     },
+    Help: function () {
+        var self = this;
+        alert(helpurl);
+    },
     beginUpload: function () {
         var self = this;
         var data = $("#gridInfo").leeGrid().getCheckedRows();
@@ -627,10 +636,15 @@ var ImportController = {
             if (flag) {
                 Msg.load("正在上传");
                 idp.service.beginUpload(CurModel.ID, JSON.stringify(data), JSON.stringify(deleteRow)).done(function (data) {
+
+                    if (data.tips) {
+                        Msg.alert(data.tips);
+                    }
                     if (data.res) {
                         Msg.sucess("上传成功！");
                         self.refreshData();
                     }
+
                 })
             }
         });
@@ -679,7 +693,7 @@ var ImportController = {
     removeRef: function () {
         //removeRef
 
-
+        var self = this;
         $.leeDialog.confirm("确认要移除历史?", "提示", function (flag) {
             if (flag) {
                 var date = $("#txtQueryDateRef").val()
@@ -687,6 +701,7 @@ var ImportController = {
                     if (data.res) {
                         Msg.sucess("操作成功！");
                         self.refreshRefData();
+                        self.dgRef.close();
                     }
                 });
             }
