@@ -50,6 +50,10 @@
                             <img src="./img/code_img.png" alt="">
                         </div>
                     </div>-->
+                    <div>
+                       
+                        <label for="ifRememberLogin"> <input type="checkbox" id="ifRememberLogin" style="height:auto;width:auto;margin-bottom:3px;" />记住登录信息</label>
+                     </div>
                     <div class="yes_login">
                         <a href="javascript:void(0)" id="loginBtn">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
                     </div>
@@ -57,10 +61,16 @@
             </div>
         </div>
         <script>
+
+
             $(function () {
                 $("#loginBtn").click(function () {
                     idp.service.login($("#txtUserName").val(), $("#txtUserPwd").val()).done(function (data) {
                         if (data.res) {
+
+                            if ($("#ifRememberLogin").prop("checked")) {
+                                APIBridge.SetLogin($("#txtUserName").val(), $("#txtUserPwd").val());
+                            }
                             APIBridge.Login(data.data);
                         } else {
                             APIBridge.Warn(data.msg);
@@ -68,6 +78,16 @@
                     })
                 })
             });
+            InitLoginInfo();
+            function InitLoginInfo() {
+                alert(1);
+                APIBridge.GetLogin();
+            }
+
+            function SetLogin(user, pwd) {
+                $("#txtUserName").val(user);
+                $("#txtUserPwd").val(pwd);
+            }
         </script>
 
 </body>

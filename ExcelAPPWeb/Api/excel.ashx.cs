@@ -43,19 +43,19 @@ namespace ExcelAPPWeb
                     case "BeginUpload"://开始上传从中间表---正式表
                         var delData = context.Request.Form.Get("rdata");
 
-                        service.UploadData(ruleInfo, data, delData,(string mes) =>
-                         {
+                        service.UploadData(ruleInfo, data, delData, (string mes) =>
+                          {
 
 
-                         }, (string mes) =>
-                         {
-                             throw new Exception(mes);
-                         }, (string mes) =>
-                         {
-                             res = mes;
+                          }, (string mes) =>
+                          {
+                              throw new Exception(mes);
+                          }, (string mes) =>
+                          {
+                              res = mes;
 
 
-                         }, out tips);
+                          }, out tips);
                         break;
                     case "UploadDataRef"://上传关联表
                         var delData1 = context.Request.Form.Get("rdata");
@@ -116,7 +116,13 @@ namespace ExcelAPPWeb
                         }
 
                         break;
+                    case "deleteRow"://删除上传行数据
+                        {
+                            var ids = context.Request.Form.Get("ids");
+                            res = newsvr.DeleteUpload(ruleInfo, ids);
+                        }
 
+                        break;
                     case "Custom"://自定义按钮点击
                         service.CustomDealData(data, ruleInfo, (string mes) =>
                          {

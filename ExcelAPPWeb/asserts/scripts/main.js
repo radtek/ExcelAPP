@@ -43,26 +43,38 @@ $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
     var cell = $(this).closest(".lee-grid-row-cell");
     var row = $(this).closest(".lee-grid-row");
     var rowobj = grid.getRow(row.attr("id").split("|")[2]);
-    grid.deleteRow(rowobj);
-    deleteRow.push(rowobj);
+    //grid.deleteRow(rowobj);
+    //deleteRow.push(rowobj);
     e.stopPropagation();
 });
 var ImportController = {
 
     removeRows: function () {
+        var self = this;
         var grid = $("#gridInfo").leeUI();
         var rows = grid.getCheckedRows();
         if (!rows.length) return;
 
         $.leeDialog.confirm("确认要-删除选中数据吗？", "提示", function (flag) {
             if (flag) {
-                Msg.load();
+                Msg.load("删除中..请稍后");
+                var ids = [];
                 for (var item in rows) {
-                    Msg.load("删除第" + item + "行总计" + rows + " 请勿关闭！");
-                    grid.deleteRow(rows[item]);
-                    deleteRow.push(rows[item]);
+                    ids.push(rows[item]["ID"]);
                 }
-                Msg.loaded();
+                idp.service.deleteRow(CurModel.ID, ids.join(",")).done(function (data) {
+                    Msg.loaded();
+                    if (data.res) {
+                        Msg.alert(data.data);
+                        self.refreshData();
+                    }
+                });
+                //for (var item in rows) {
+                //    Msg.load("删除第" + item + "行总计" + rows + " 请勿关闭！");
+                //    grid.deleteRow(rows[item]);
+                //    deleteRow.push(rows[item]);
+                //}
+
             }
 
 
@@ -150,6 +162,15 @@ var ImportController = {
                         return row["FLAG"] == "1" ? "已上传" : "未上传";
                     }
                 }
+                if (obj.IsSum == "1") {
+                    col.totalSummary =
+                        {
+                            render: function (suminf, column, cell) {
+                                return '<div>合计:' + suminf.sum + '</div>';
+                            },
+                            type: 'sum'
+                        };
+                }
                 cols.push(col);
             })
 
@@ -172,6 +193,11 @@ var ImportController = {
         function getEditor(obj) {
             if (obj.IsReadOnly == "1") return null;
             if (obj.FCode == "FLAG") return null;
+
+            
+            if (obj.FType == "date") {
+                return { type: "date" };
+            }
             if (obj.HelpID) {
                 if (obj.HelpID.length > 3) {
                     var opts = {
@@ -316,9 +342,8 @@ var ImportController = {
 
             if (obj.FType == "number") {
                 return { type: "number" };
-            } if (obj.FType == "date") {
-                return { type: "date" };
             }
+
 
         }
 
@@ -337,7 +362,7 @@ var ImportController = {
             height: "100%",
             headerRowHeight: 28,
             rowHeight: 28,
-            autoColWidth: true,
+            //autoColWidth: true,
             onBeforeSelectRow: function (rowdata, rowid, rowobj) {
                 //alert(rowdata.FLAG);
                 //if (rowdata.FLAG == "1" && currentIndex == "1") return false;
@@ -478,7 +503,7 @@ var ImportController = {
                         Msg.alert(data.tips);
                     }
                 }
-               
+
             })
         } else {
 
@@ -503,7 +528,7 @@ var ImportController = {
                     }
                 }
 
-               
+
             })
         }
 
@@ -624,10 +649,10 @@ var ImportController = {
 
         for (var item in data) {
             for (var key in hasRequire) {
-                
+
                 if (data[item][key] == "" || data[item][key] == null || data[item][key].replace(' ', '') == "") {
-                  
-                    Msg.alert("请填写第" + (parseInt(item)+1) + "行" + "字段【" + hasRequire[key] + "】的值");
+
+                    Msg.alert("请填写第" + (parseInt(item) + 1) + "行" + "字段【" + hasRequire[key] + "】的值");
                     return;
                 }
             }

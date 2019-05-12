@@ -622,3 +622,7 @@ textarea:read-only,
         height: 100%
     }
 }
+
+.lee-grid-totalsummary .lee-grid-totalsummary-cell-inner {
+margin:0;
+}

@@ -102,7 +102,7 @@ namespace ExcelAPPWeb.Service
 
 
         #region 导入excel临时数据并上传到中间表
-        public List<Dictionary<string, object>> ImportTmpTable(List<Dictionary<string, object>> dt, Model.EACmpCategory model,out string mes)
+        public List<Dictionary<string, object>> ImportTmpTable(List<Dictionary<string, object>> dt, Model.EACmpCategory model, out string mes)
         {
 
             List<Dictionary<string, object>> res = new List<Dictionary<string, object>>();
@@ -152,7 +152,7 @@ namespace ExcelAPPWeb.Service
                         var p = new DynamicParameters();
                         DynamicParameters para = GetParams(model, keys, row, colTypes, out mes);
                         s++;
-                        if (mes!="")
+                        if (mes != "")
                         {
                             sbmes.Append($"第{s.ToString()}行{mes}");
                             mes = "";
@@ -206,7 +206,7 @@ namespace ExcelAPPWeb.Service
             foreach (string key in keys)
             {
                 object value = "";
-               
+
                 if (row.ContainsKey(key))
                 {
                     #region 需要判断一下 数值型 和日期型 是否为 合法字符
@@ -214,21 +214,22 @@ namespace ExcelAPPWeb.Service
                     if (colTypes[index] == "int")
                     {
                         var intRes = 0;
-                       if ( row[key] != null)
-                        { 
-
-                        if (!int.TryParse(row[key].ToString(), out intRes))
+                        if (row[key] != null)
                         {
+
+                            if (!int.TryParse(row[key].ToString(), out intRes))
+                            {
                                 if (row[key].ToString() != "")
                                 {
                                     sb.Append($"第{index.ToString()}列字段{key}数值金额[" + row[key].ToString() + "]有问题，已忽略处理");
                                     p.Add("4", "1");
                                 }
                             }
-                        value = intRes;
+                            value = intRes;
                         }
-                       else
-                        { value =0;
+                        else
+                        {
+                            value = 0;
                         }
                     }
                     else if (colTypes[index] == "number")
@@ -236,7 +237,7 @@ namespace ExcelAPPWeb.Service
                         if (row[key] != null)
                         {
                             decimal floatRes = 0;
-                            if (!decimal.TryParse(row[key].ToString() , out floatRes))
+                            if (!decimal.TryParse(row[key].ToString(), out floatRes))
                             {
                                 if (row[key].ToString() != "")
                                 {
@@ -264,7 +265,7 @@ namespace ExcelAPPWeb.Service
                                 p.Add("4", "1");  // 
                             }
                             value = dtDate.ToString("yyyy-MM-dd HH:mm:ss");
-                            
+
                         }
                         else
                         {
@@ -286,7 +287,7 @@ namespace ExcelAPPWeb.Service
                     }
                     #endregion
                 }
-                
+
                 p.Add(i.ToString(), value);
                 i++;
                 index++;
@@ -301,7 +302,7 @@ namespace ExcelAPPWeb.Service
 
         #region 上传数据到中间表
 
-        private string GetUpdateSql(Model.EACmpCategory model, out List<string> keys,out List<string> colTypes)
+        private string GetUpdateSql(Model.EACmpCategory model, out List<string> keys, out List<string> colTypes)
         {
             StringBuilder sb = new StringBuilder();
             keys = new List<string>();
@@ -310,7 +311,7 @@ namespace ExcelAPPWeb.Service
             List<Model.EACmpCateCols> cols = model.Cols.Where(n => n.IsShow == "1").ToList();
             var i = 1;
             sb.Append("COLORZT=" + token + i.ToString() + ",");
-             i = 2;
+            i = 2;
 
             foreach (var item in cols)
             {
@@ -345,7 +346,7 @@ namespace ExcelAPPWeb.Service
                     onError("没有上传选中数据");
                     return;
                 }
-                var sql = GetUpdateSql(model, out keys,out colTypes);
+                var sql = GetUpdateSql(model, out keys, out colTypes);
                 int count = 0;
                 using (var conn = DataBaseManager.GetDbConnection())
                 {
@@ -368,7 +369,7 @@ namespace ExcelAPPWeb.Service
                         }
 
                         mes = sbmes.ToString();
-                        List <Dictionary<string, object>> delList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(DelData);
+                        List<Dictionary<string, object>> delList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(DelData);
                         foreach (Dictionary<string, object> row in delList)
                         {
                             conn.Execute("delete from " + model.TmpTab + " where ID=" + token + "ID",
@@ -407,7 +408,7 @@ namespace ExcelAPPWeb.Service
 
             var p = new DynamicParameters();
             p.Add("0", row["ID"].ToString());
-           
+
             var i = 2;
             var sb = new StringBuilder();
             var index = 0;
@@ -490,13 +491,13 @@ namespace ExcelAPPWeb.Service
                     }
                     #endregion
 
-                   // WriteLogFile("p" + key + i.ToString()+ value+ sb.ToString());
+                    // WriteLogFile("p" + key + i.ToString()+ value+ sb.ToString());
                     p.Add(i.ToString(), value);
                     i++;
                     index++;
                 }
             }
-          
+
             mes = sb.ToString();
             return p;
         }
@@ -572,6 +573,52 @@ namespace ExcelAPPWeb.Service
 
         #endregion
 
+        #region 取消上传中间表
+        /// <summary>
+        /// 取消上传
+        /// </summary>
+        /// <param name="ExcelData"></param>
+        public string DeleteUpload(Model.EACmpCategory model, string ids)
+        {
+            try
+            {
+
+
+                var arr = ids.Split(',');
+
+
+
+                string sql = string.Format("delete from {0} where id=" + token + "ID", model.TmpTab);
+
+                using (var conn = DataBaseManager.GetDbConnection())
+                {
+                    //conn.Open();
+                    IDbTransaction transaction = conn.BeginTransaction();
+                    try
+                    {
+                        foreach (string id in arr)
+                        {
+                            conn.Execute(sql, new { ID = id }, transaction);
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return "删除成功";
+
+        }
+
+        #endregion
+
 
         #region 自定义按钮点击事件
         public void CustomDealData(string ExcelData, Model.EACmpCategory model, Action<string> onProgress, Action<string> onError, Action<string> onScucess)
@@ -633,7 +680,7 @@ namespace ExcelAPPWeb.Service
                     var EndDate = "";
 
                     if (date.Length > 5)
-                        {
+                    {
                         filter = "";
                         StartDate = date.Replace(" ", "").Substring(0, 10);
                         EndDate = date.Replace(" ", "").Substring(11, 10);
@@ -641,13 +688,13 @@ namespace ExcelAPPWeb.Service
                         filter += " and CreateTime<='" + EndDate + " 23:59:59'";
 
                     }
-                    WriteLogFile("SQDELETE  EARefTable   where  YWID='" + model.ID + "'  AND  DWBH='" + model.DWBH + "'  AND  " + filter + "  AND   USERID=" + UserService.GetUserId() + "CreateUser"  );
-                    conn.Execute("DELETE  EARefTable   where  YWID='"+ model.ID+ "'  AND  DWBH='"+ model.DWBH+ "'  AND  "+ filter + "  AND   USERID=" + token + "CreateUser",
+                    WriteLogFile("SQDELETE  EARefTable   where  YWID='" + model.ID + "'  AND  DWBH='" + model.DWBH + "'  AND  " + filter + "  AND   USERID=" + UserService.GetUserId() + "CreateUser");
+                    conn.Execute("DELETE  EARefTable   where  YWID='" + model.ID + "'  AND  DWBH='" + model.DWBH + "'  AND  " + filter + "  AND   USERID=" + token + "CreateUser",
                           new { CreateUser = UserService.GetUserId() },
                           transaction);
 
-                   // DealProcNew(model.RefProc, model, new List<Dictionary<string, object>>(), conn, transaction);
-                   // DealAssExtend("refdel", new List<Dictionary<string, object>>(), model, conn, transaction);
+                    // DealProcNew(model.RefProc, model, new List<Dictionary<string, object>>(), conn, transaction);
+                    // DealAssExtend("refdel", new List<Dictionary<string, object>>(), model, conn, transaction);
                     transaction.Commit();
 
                 }
@@ -790,7 +837,7 @@ namespace ExcelAPPWeb.Service
 
                             conn.Execute("update EARefTable set Flag='1' where id=" + token + "ID", new { ID = row["ID"].ToString() }, transaction);
                         }
-                       
+
                         DealProcNew(model.RefProc, model, list, conn, transaction);
                         DealAssExtend("ref", list, model, conn, transaction);
 
@@ -975,7 +1022,7 @@ namespace ExcelAPPWeb.Service
         #endregion
 
         #region 记录操作日志文件版本
-        public  void WriteLogFile(string txt)
+        public void WriteLogFile(string txt)
         {
             string path = @"C:\InterFace\";
             if (!Directory.Exists(path))

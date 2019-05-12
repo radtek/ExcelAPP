@@ -197,6 +197,8 @@ namespace ExcelAPPWeb.Model
         public string BindCol { get; set; }
 
 
+        public string IsSum { get; set; }
+
     }
 
 }

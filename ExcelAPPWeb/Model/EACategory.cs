@@ -91,6 +91,8 @@ namespace ExcelAPPWeb.Model
 
         public string HelpFitler { get; set; }
         public string IsMatch { get; set; }
+
+        public string IsSum { get; set; }
         public string IsRequire { get; set; }
 
         public string MatchRule { get; set; }

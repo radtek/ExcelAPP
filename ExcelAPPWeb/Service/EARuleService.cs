@@ -29,7 +29,9 @@ namespace ExcelAPPWeb.Service
         {
             Model.EACmpCategory model = Db.SingleById<Model.EACmpCategory>(id);
             model.Cols = Db.Fetch<Model.EACmpCateCols>(new Sql(
-                @"select a.*,b.HelpID,b.IsShow,b.FType,b.IsReadOnly,b.SCols,b.RCols, b.BindCol,b.FLength,b.FPrec,b.IsMatch,b.MatchRule,b.IsReadOnly,b.IsRequire,b.HelpFitler from EACmpCateCols  a left join EACatCols  b on a.FCode=b.FCode and b.RID=@1  where a.RID=@0", model.ID, model.CID));
+                @"select a.*,b.HelpID,b.IsShow,b.FType,b.IsReadOnly,b.SCols,b.RCols, b.BindCol,
+                b.FLength,b.FPrec,b.IsMatch,b.MatchRule,b.IsReadOnly,b.IsRequire,b.HelpFitler,b.IsSum 
+                from EACmpCateCols  a left join EACatCols  b on a.FCode=b.FCode and b.RID=@1  where a.RID=@0", model.ID, model.CID));
             model.Tmp = GetPublicInfo(model.CID);
             return model;
         }
@@ -42,7 +44,10 @@ namespace ExcelAPPWeb.Service
             if (list.Count > 0)
             {
                 Model.EACmpCategory model = list[0];
-                model.Cols = Db.Fetch<Model.EACmpCateCols>(new Sql("select a.*,b.BindCol,b.Width,b.HelpID,b.IsShow,b.FPrec, b.FLength,b.FType,b.IsReadOnly,b.SCols,b.RCols,b.IsMatch,b.MatchRule,b.IsRequire,b.HelpFitler from EACmpCateCols  a left join EACatCols  b on a.FCode=b.FCode and b.RID=@1  where a.RID=@0 order by a.SortOrder asc", model.ID, model.CID));
+                model.Cols = Db.Fetch<Model.EACmpCateCols>(new Sql(
+                    @"select a.*,b.BindCol,b.Width,b.HelpID,b.IsShow,b.FPrec, b.FLength,b.FType,b.IsReadOnly,
+                    b.SCols,b.RCols,b.IsMatch,b.MatchRule,b.IsRequire,b.HelpFitler,b.IsSum 
+                    from EACmpCateCols  a left join EACatCols  b on a.FCode=b.FCode and b.RID=@1  where a.RID=@0 order by a.SortOrder asc", model.ID, model.CID));
                 model.Tmp = GetPublicInfo(model.CID);
                 return model;
             }

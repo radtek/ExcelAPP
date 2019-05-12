@@ -43,6 +43,9 @@ CREATE TABLE EACatCols
 	SCols      clob,/*赋值字段*/
 	SortOrder  int,/*列排序*/
 	Width      VARCHAR (40),/*列宽度*/
+	MatchRule  VARCHAR(200),/*关联字段 用于批量帮助更新*/
+	HelpFilter varchar(500),/*帮助过滤*/
+	IsSum      char(1) DEFAULT ('0'),/*是否合计*/
 	CONSTRAINT PK_EACATCOLS PRIMARY KEY (ID)
 	)
 GO

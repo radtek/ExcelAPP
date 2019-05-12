@@ -210,8 +210,14 @@ idp.service = (function (win, $, core) {
             tmpdata: data
         });
     }
-
-
+    service.deleteRow = function (ruleid, ids) {
+        return this.requestApi("excel.ashx", {
+            op: "deleteRow",
+            ruleid: ruleid,
+            ids: ids
+        });
+    }
+    
     service.loadConfig = function (dwbh, lbid) {
         return this.requestApi("rule.ashx", {
             op: "LoadConfig",
