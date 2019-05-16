@@ -137,6 +137,9 @@
     <Compile Include="Service\EARuleService.cs" />
     <Compile Include="Service\ImportService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

@@ -245,3 +245,8 @@ GO
 
 
 
+create table YZ_E_File_File 
+( FileId  varchar2 (60) , FileName  varchar2 (60) , FilePath  varchar2 (60) , FileType  varchar2 (60) , AddTime DATE  DEFAULT sysdate)
+
+create table  YZ_E_SDNOTICE_READ (READID VARCHAR2(60)  default   SYS_GUID() ,READNAME VARCHAR2(60),READTIME DATE default sysdate ,RComment VARCHAR2(4000))
+

@@ -111,6 +111,32 @@ namespace ExcelAPPWeb.Service
             return user.Id;
             //return model.Id;
         }
+
+
+        /// <summary>
+        /// 获取用户code
+        /// </summary>
+        /// <returns></returns>
+        public static string GetUserCode()
+        {
+            var cookie = CookieHelper.GetCookie("EAToken");
+
+            JsonWebToken.Decode(cookie, "XB#4%", true);
+
+
+            var parts = cookie.Split('.');
+            //if (parts.Length != 3) throw new Exception("invalid Session Info!");
+            var payload = parts[1];
+            var payloadJson = Encoding.UTF8.GetString(Base64UrlDecode(payload));
+
+
+            var user = Newtonsoft.Json.JsonConvert.DeserializeObject<Model.GSPUser>(payloadJson);
+
+            //// Session build 
+            //user = StateChecker.CheckAuthString(cookie);
+            return user.Code;
+            //return model.Id;
+        }
         public static Model.GSPUser GetUser()
         {
             var cookie = CookieHelper.GetCookie("EAToken");

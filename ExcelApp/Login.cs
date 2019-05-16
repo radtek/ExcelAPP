@@ -22,7 +22,7 @@ namespace ExcelApp
 
             this.StartPosition = FormStartPosition.CenterScreen;
             var host = ConfigurationManager.AppSettings["Host"].ToString();
-            this.LoadUrl($"http://{host}/Excel/asserts/login.html");
+            this.LoadUrl($"{host}/Excel/asserts/login.html");
             //this.LoadUrl("http://www.baidu.com");
             InitializeComponent();
 

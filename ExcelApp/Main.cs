@@ -22,7 +22,7 @@ namespace ExcelApp
         {
 
             var host = ConfigurationManager.AppSettings["Host"].ToString();
-            this.LoadUrl($"http://{host}/Excel/asserts/frame.html");
+            this.LoadUrl($"{host}/Excel/asserts/frame.html");
             InitializeComponent();
 
             LoadHandler.OnLoadStart += LoadHandler_OnLoadStart;

@@ -38,7 +38,7 @@
             this.ClientSize = new System.Drawing.Size(1253, 698);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "Main";
+            this.Text = "[OMS数据交换平台]";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.ResumeLayout(false);
 

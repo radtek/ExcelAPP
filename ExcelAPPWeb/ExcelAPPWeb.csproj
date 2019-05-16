@@ -16,7 +16,7 @@
     <RootNamespace>ExcelAPPWeb</RootNamespace>
     <AssemblyName>ExcelAPPWeb</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -178,6 +178,8 @@
     <Content Include="asserts\scripts\service.js" />
     <Content Include="asserts\styles\app.css" />
     <Content Include="asserts\styles\font-awesome.min.css" />
+    <Content Include="bitbug_favicon.ico" />
+    <Content Include="JumpDrpLogin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +203,13 @@
     </Compile>
     <Compile Include="Dappper\OracleDynamicParameters.cs" />
     <Compile Include="DB\DataBaseManager.cs" />
+    <Compile Include="JumpDrpLogin.aspx.cs">
+      <DependentUpon>JumpDrpLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JumpDrpLogin.aspx.designer.cs">
+      <DependentUpon>JumpDrpLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Model\EACategory.cs" />
     <Compile Include="Model\EACmpCategory.cs" />
     <Compile Include="Model\EAFunc.cs" />
@@ -226,6 +235,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bitbug_favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -237,7 +249,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1402</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Excel</IISUrl>
+          <IISUrl>http://localhost:1402/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

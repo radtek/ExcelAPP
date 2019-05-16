@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.SuspendLayout();
             // 
             // Login
@@ -39,6 +40,7 @@
             this.ClientSize = new System.Drawing.Size(1000, 320);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.InactiveBorderColor = System.Drawing.Color.RoyalBlue;
             this.InactiveShadowColor = System.Drawing.Color.SteelBlue;
             this.Name = "Login";
