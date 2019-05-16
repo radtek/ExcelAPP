@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace ExcelAPPWeb
@@ -147,6 +148,14 @@ namespace ExcelAPPWeb
             }
             catch (Exception ex)
             {
+
+                var mes = Regex.Replace(ex.Message, @"[\u4e00-\u9fa5]", ""); //去除汉字
+
+
+                var mes2 = Regex.Replace(ex.Message, @"[^\u4e00-\u9fa5]", ""); //只留汉字
+
+
+
                 context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = false, msg = ex.Message, stack = ex.StackTrace }));
 
             }

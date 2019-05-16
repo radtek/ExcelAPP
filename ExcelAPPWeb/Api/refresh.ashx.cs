@@ -1,4 +1,6 @@
 ﻿using ExcelAPPWeb.Service;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +38,9 @@ namespace ExcelAPPWeb.Api
                 var model = svr.GetRuleInfo(ruleID);
 
                 var data = dsvr.GetDataList(model, type, order, int.Parse(pageIndex), int.Parse(pageSize), startDate, endDate);
-
-                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(  data ));
+                IsoDateTimeConverter timeFormat = new IsoDateTimeConverter();
+                timeFormat.DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(data, Formatting.Indented, timeFormat));
             }
             catch (Exception ex)
             {

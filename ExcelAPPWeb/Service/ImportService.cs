@@ -258,6 +258,11 @@ namespace ExcelAPPWeb.Service
                     {
                         if (row[key] != null)
                         {
+                            var date = row[key].ToString();
+                            if (date.Length == 8)//八位日期
+                            {
+                                row[key] = date.Substring(0, 4) + "-" + date.Substring(4, 2) + date.Substring(6, 2);
+                            }
                             DateTime dtDate;
                             if (DateTime.TryParse(row[key].ToString(), out dtDate))
                             {

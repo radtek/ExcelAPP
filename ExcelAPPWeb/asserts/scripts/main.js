@@ -171,6 +171,13 @@ var ImportController = {
                             type: 'sum'
                         };
                 }
+                //if (obj.FType == "date") {
+                //    col.render = function (rowdata, rowindex, value, column) {
+                //        if (value) {
+
+                //        }
+                //    }
+                //}
                 cols.push(col);
             })
 
@@ -194,9 +201,9 @@ var ImportController = {
             if (obj.IsReadOnly == "1") return null;
             if (obj.FCode == "FLAG") return null;
 
-            
+
             if (obj.FType == "date") {
-                return { type: "date" };
+                return { type: "date", showType: "datetime" };
             }
             if (obj.HelpID) {
                 if (obj.HelpID.length > 3) {
