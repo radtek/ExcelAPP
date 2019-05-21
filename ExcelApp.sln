@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ora", "ora", "{8FD32DA3-8E0
 		ora_table.sql = ora_table.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelClient", "ExcelClient\ExcelClient.csproj", "{15C37258-5403-4A3F-96D0-DCF9F9EF1042}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,22 @@ Global
 		{EBB6E3A0-6FF8-405A-842A-F5545D7A0843}.Release|x64.Build.0 = Release|Any CPU
 		{EBB6E3A0-6FF8-405A-842A-F5545D7A0843}.Release|x86.ActiveCfg = Release|Any CPU
 		{EBB6E3A0-6FF8-405A-842A-F5545D7A0843}.Release|x86.Build.0 = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|ARM.Build.0 = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|x64.Build.0 = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Debug|x86.Build.0 = Debug|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|ARM.ActiveCfg = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|ARM.Build.0 = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|x64.ActiveCfg = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|x64.Build.0 = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|x86.ActiveCfg = Release|Any CPU
+		{15C37258-5403-4A3F-96D0-DCF9F9EF1042}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
