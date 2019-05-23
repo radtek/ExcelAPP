@@ -74,6 +74,9 @@ namespace ExcelAPPWeb.Model
         /// 是否启用关联
         /// </summary>
         public string IsREF { get; set; }
+        public string AFTERIMPORTSQL { get; set; }
+        public string CHECKSQL { get; set; }
+
 
 
         /// <summary>

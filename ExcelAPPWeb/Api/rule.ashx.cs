@@ -32,6 +32,9 @@ namespace ExcelAPPWeb
                         var lbid = context.Request.Form.Get("lbid");
                         res = service.GetRuleInfo(dwbh, lbid);
                         break;
+                    case "GetUserInfo"://用户信息
+                        res = UserService.GetUser();
+                        break;
                     default:
                         break;
                 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 namespace ExcelAPPWeb.Service
 {
 
@@ -171,6 +172,33 @@ namespace ExcelAPPWeb.Service
                             conn.Execute("update " + tmpTable + " set " + item.FCode + "=" + item.CalcSQL + " and CreateUser=" + token + "CreateUser ", new { CreateUser = UserService.GetUserId() }, transaction);
                         }
                     }
+
+                    //增加 导入后sql
+                    if (model.AFTERIMPORTSQL.Length > 2)
+                    {
+                        string str2 = model.AFTERIMPORTSQL;
+                        string[] strArray = str2.Split(new char[] { ";".ToCharArray()[0] });
+
+                        for (int y = 0; y < strArray.Length; y++)
+                        {
+                           var sqlcheck= strArray[y];
+                            conn.Execute(" " + sqlcheck + " and FLAG='0' and CreateUser=" + token + "CreateUser ", new { CreateUser = UserService.GetUserId() }, transaction);
+
+                        }
+                    }
+                    if (model.CHECKSQL.Length > 2)
+                    {
+                        string str2 =model.CHECKSQL;
+                        string[] strArray = str2.Split(new char[] { ";".ToCharArray()[0] });
+
+                        for (int y = 0; y < strArray.Length; y++)
+                        {
+                            var sqlcheck = strArray[y];
+                            conn.Execute(" " + sqlcheck + " and FLAG='0' and CreateUser=" + token + "CreateUser ", new { CreateUser = UserService.GetUserId() }, transaction);
+
+                        }
+                    }
+
                     DealProcNew(model.Tmp.LoadProc, model, dt, conn, transaction);
                     transaction.Commit();
                 }
@@ -178,6 +206,7 @@ namespace ExcelAPPWeb.Service
                 {
                     transaction.Rollback();
                     WriteLogFile("错误导入excel临时数据并上传到中间表" + ex.ToString());
+                    var mes2 = Regex.Replace(ex.Message, @"[^\u4e00-\u9fa5]", ""); //只留汉字
                     throw ex;
                 }
             }
@@ -264,17 +293,17 @@ namespace ExcelAPPWeb.Service
                                 row[key] = date.Substring(0, 4) + "-" + date.Substring(4, 2) + date.Substring(6, 2);
                             }
                             DateTime dtDate;
-                            if (DateTime.TryParse(row[key].ToString(), out dtDate))
+                            if (!DateTime.TryParse(row[key].ToString(), out dtDate))
                             {
                                 sb.Append($"第{index.ToString()}列字段{key}字段日期" + row[key].ToString() + "有问题，已忽略处理");
                                 p.Add("4", "1");  // 
                             }
-                            value = dtDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            value = dtDate;//.ToString("yyyy-MM-dd HH:mm:ss")
 
                         }
                         else
                         {
-                            value = "1900-01-01 00:00:00";
+                            value = Convert.ToDateTime("1900-01-01 00:00:00");
                         }
 
                     }

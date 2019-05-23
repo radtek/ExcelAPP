@@ -642,8 +642,22 @@ var ImportController = {
         })
     },
     Help: function () {
+
+
         var self = this;
-        alert(helpurl);
+        idp.service.GetUserInfo().done(function (data) {
+            var CurModel = data.data;
+            currentuserid = CurModel.Id;
+            currentusername = CurModel.Name;
+            currentcode = CurModel.Code;
+            // currentgsdwbh = $("#txtOrgInfo").leeUI().getValue();
+            if (helpurl.length > 1) {
+                var helpurln = helpurl + CurModel.Code + "&p_USERNAME=" + currentcode;
+                open(helpurln);
+            }
+        });
+
+       
     },
     beginUpload: function () {
         var self = this;

@@ -217,7 +217,11 @@ idp.service = (function (win, $, core) {
             ids: ids
         });
     }
-    
+    service.GetUserInfo = function () {
+        return this.requestApi("rule.ashx", {
+            op: "GetUserInfo"
+        });
+    }
     service.loadConfig = function (dwbh, lbid) {
         return this.requestApi("rule.ashx", {
             op: "LoadConfig",

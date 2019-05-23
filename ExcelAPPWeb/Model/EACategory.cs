@@ -66,6 +66,9 @@ namespace ExcelAPPWeb.Model
         public string LastModifyUser { get; set; }
 
         public string LastModifyTime { get; set; }
+        public string AFTERIMPORTSQL { get; set; }
+        public string CHECKSQL { get; set; }
+      
 
     }
 
