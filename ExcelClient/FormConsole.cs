@@ -15,11 +15,11 @@ using DevExpress.XtraEditors;
 
 namespace ExcelClient
 {
-    public partial class frmConsole : DevExpress.XtraEditors.XtraForm
+    public partial class FormConsole : DevExpress.XtraEditors.XtraForm
     {
         private DevExpress.XtraNavBar.NavBarGroup nbgBase1;
 
-        public frmConsole()
+        public FormConsole()
         {
             InitializeComponent();
 
@@ -50,6 +50,8 @@ namespace ExcelClient
             );
         }
 
+
+         
         void pnlLogo_DoubleClick(object sender, EventArgs e)
         {
 
@@ -157,6 +159,10 @@ namespace ExcelClient
         }
         #endregion
 
+
+
+
+
         #region 显示OR激话Mdi子窗体（单例）
         /// <summary>
         /// 显示OR激话Mdi子窗体（单例）
@@ -177,6 +183,9 @@ namespace ExcelClient
             form.Show();
         }
         #endregion
+
+
+
 
         #region Mdi Page 处理
         private void mdiManager1_MouseUp(object sender, MouseEventArgs e)
