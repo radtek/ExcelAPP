@@ -222,6 +222,17 @@ idp.service = (function (win, $, core) {
             op: "GetUserInfo"
         });
     }
+    service.GetCookie = function () {
+        return this.requestApi("rule.ashx", {
+            op: "GetCookie"
+        });
+    }
+    service.SetCookie = function (dwbh) {
+        return this.requestApi("rule.ashx", {
+            op: "SetCookie",
+            dwbh: dwbh
+        });
+    }
     service.loadConfig = function (dwbh, lbid) {
         return this.requestApi("rule.ashx", {
             op: "LoadConfig",

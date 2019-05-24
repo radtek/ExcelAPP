@@ -174,6 +174,8 @@
                 for (var item in openTabId) {
                     $("#tabInfo").leeUI().removeTabItem(openTabId[item]);
                 }
+				  //增加全局变量赋值
+            SetCookie($("#txtOrgInfo").leeUI().getValue());
             },
             service: {
                 getQueryHelpSwitch: function (helpID, value, codeField, textField, filter) {
@@ -194,18 +196,20 @@
             },
             getFilter: function () { }
         });
-        selectFirst();
-
+        
+        GetCookie();
         function selectFirst() {
+          
             idp.service.getHelpData(
                 "LSBZDW",
-                "",
+                " AND LSBZDW_DWBH  LIKE '" + currentgsdwbh + "%'",
                 "",
                 1,
                 1000
             ).done(function (data) {
                 if (data.res && data.data.Rows.length > 0) {
                     $("#txtOrgInfo").leeUI().confirmSelect(data.data.Rows);
+
                 }
 
             });
@@ -345,8 +349,18 @@
                 }
             });
         }
-
-
+        function SetCookie(dwbh)
+        {
+            idp.service.SetCookie(dwbh).done(function (data) {
+                currentgsdwbh = dwbh;
+            });
+        }
+        function GetCookie() {
+            idp.service.GetCookie().done(function (data) {
+                currentgsdwbh = data.msg;
+                selectFirst();
+            });
+        }
     </script>
 </body>
 

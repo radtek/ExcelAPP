@@ -15,11 +15,12 @@ $("#tabinfo").leeTab({
             $("#btnCancel").attr("disabled", "disabled");
             $("#btnUpload").removeAttr("disabled");
             $("#gridInfo").leeUI().options.disabled = false;
-
+            $("#btnCustom").removeAttr("disabled");
             $(".deleteWrap").show();
             $(".hasWrap").hide();
         } else {
-
+            btnCustom
+            $("#btnCustom").attr("disabled", "disabled");
             $(".deleteWrap").hide();
             $(".hasWrap").show();
             $("#btnUpload").attr("disabled", "disabled");
@@ -134,9 +135,10 @@ var ImportController = {
 
 
                 var col = {
-                    display: obj.FName, name: obj.FCode,
+                    display: obj.HelpID.length > 2 ? obj.FName+'[选择]' : obj.FName, name: obj.FCode,
                     width: obj.Width ? obj.Width : 100,
                     align: "left",
+                    required:obj.IsRequire == "1"?true:false,
                     editor: getEditor(obj)
                 };
 

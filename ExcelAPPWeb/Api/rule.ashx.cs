@@ -22,7 +22,7 @@ namespace ExcelAPPWeb
             {
                 var service = new EARuleService();
                 context.Response.ContentType = "text/plain";
-
+                var GSDWBH = "";
                 var op = context.Request.Form.Get("op");
                 object res = "";
                 switch (op)
@@ -35,10 +35,26 @@ namespace ExcelAPPWeb
                     case "GetUserInfo"://用户信息
                         res = UserService.GetUser();
                         break;
+                    case "SetCookie"://用户信息
+                        GSDWBH = context.Request.Form.Get("dwbh");
+                       // CookieHelper.DelCookie("GSDWBH");
+                        CookieHelper.WriteCookie("GSDWBH", GSDWBH,3600);
+                      
+                        break;
+                    case "GetCookie"://用户信息
+                        GSDWBH = CookieHelper.GetCookie("GSDWBH");
+                        if (string.IsNullOrEmpty(GSDWBH))
+                        {
+                            GSDWBH = "";
+                        }
+                        break;
                     default:
                         break;
                 }
+                if (op!= "GetCookie" && op != "SetCookie")
                 context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = true, data = res }));
+                else
+                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = true, msg = GSDWBH }));
             }
             catch (Exception ex)
             {

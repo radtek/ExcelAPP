@@ -43,8 +43,8 @@ $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
     var cell = $(this).closest(".lee-grid-row-cell");
     var row = $(this).closest(".lee-grid-row");
     var rowobj = grid.getRow(row.attr("id").split("|")[2]);
-    //grid.deleteRow(rowobj);
-    //deleteRow.push(rowobj);
+    grid.deleteRow(rowobj);
+    deleteRow.push(rowobj);
     e.stopPropagation();
 });
 var ImportController = {

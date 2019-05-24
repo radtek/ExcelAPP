@@ -290,7 +290,7 @@ namespace ExcelAPPWeb.Service
                             var date = row[key].ToString();
                             if (date.Length == 8)//八位日期
                             {
-                                row[key] = date.Substring(0, 4) + "-" + date.Substring(4, 2) + date.Substring(6, 2);
+                                row[key] = date.Substring(0, 4) + "-" + date.Substring(4, 2) + "-" + date.Substring(6, 2);
                             }
                             DateTime dtDate;
                             if (!DateTime.TryParse(row[key].ToString(), out dtDate))
@@ -493,17 +493,23 @@ namespace ExcelAPPWeb.Service
                     {
                         if (row[key] != null)
                         {
+                            var date = row[key].ToString();
+                            if (date.Length == 8)//八位日期
+                            {
+                                row[key] = date.Substring(0, 4) + "-" + date.Substring(4, 2) + "-" + date.Substring(6, 2);
+                            }
                             DateTime dtDate;
-                            if (DateTime.TryParse(row[key].ToString(), out dtDate))
+                            if (!DateTime.TryParse(row[key].ToString(), out dtDate))
                             {
                                 sb.Append($"第{index.ToString()}列字段{key}字段日期" + row[key].ToString() + "有问题，已忽略处理");
-                                p.Add("1", "1");
+                                p.Add("4", "1");  // 
                             }
-                            value = dtDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            value = dtDate;//.ToString("yyyy-MM-dd HH:mm:ss")
+
                         }
                         else
                         {
-                            value = "1900-01-01 00:00:00";
+                            value = Convert.ToDateTime("1900-01-01 00:00:00");
                         }
 
                     }
@@ -657,17 +663,38 @@ namespace ExcelAPPWeb.Service
         #region 自定义按钮点击事件
         public void CustomDealData(string ExcelData, Model.EACmpCategory model, Action<string> onProgress, Action<string> onError, Action<string> onScucess)
         {
-
-
+            var mes = "";
+            StringBuilder sbmes = new StringBuilder();
             try
             {
                 List<Dictionary<string, object>> list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(ExcelData);
-
+                if (list.Count == 0)
+                {
+                    onError("没有上传选中数据");
+                    return;
+                }
+                List<string> keys = new List<string>();
+                List<string> colTypes = new List<string>();
+                var sql = GetUpdateSql(model, out keys, out colTypes);
+                int count = 0;
                 using (var conn = DataBaseManager.GetDbConnection())
                 {
                     IDbTransaction transaction = conn.BeginTransaction();
                     try
                     {
+                        foreach (Dictionary<string, object> row in list)
+                        {
+                            count++;
+                            var p = new DynamicParameters();
+                            DynamicParameters para = GetParamsUpdate(keys, row, colTypes, out mes);
+                            conn.Execute(sql, para, transaction);
+                            if (mes != "")
+                            {
+                                sbmes.Append($"第{count.ToString()}行{mes}");
+                                mes = "";
+                            }
+                        }
+                        mes = sbmes.ToString();
                         DealProcNew(model.CustomProc, model, list, conn, transaction);
                         DealAssExtend("custom", list, model, conn, transaction);
 
@@ -1004,6 +1031,10 @@ namespace ExcelAPPWeb.Service
             dict.Add("DATAID", refid);
             dict.Add("DWBH", model.DWBH);
             dict.Add("TMPTABLE", model.TmpTab);//增加 luchg 20190510 
+
+            WriteLogFile("存储"+ procName+ user.Id + "user.Name:" + user.Name + "ID:" + model.ID + "DWBH:" + model.DWBH + "TmpTab:" + model.TmpTab);
+
+
             ProcHelper.ExecProc(dict, procName, conn, trans);
             //Db.Execute($"exec {procName} @0,@1,@2 ", model.ID, refid, UserService.GetUserId());
         }
