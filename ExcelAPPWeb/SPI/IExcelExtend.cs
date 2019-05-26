@@ -13,18 +13,18 @@ namespace ExcelAPPWeb.SPI
     /// </summary>
     public interface IExcelExtend
     {
-        void AfterRefDelete(List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
+        void AfterRefDelete(List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
 
 
-        void AfterRefUpload(List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
+        void AfterRefUpload(List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
 
-        void AfterUpload(List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
+        void AfterUpload(List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
 
 
 
-        void AfterCancel(List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
+        void AfterCancel(List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
 
-        void CustomBtnClick(List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
+        void CustomBtnClick(List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction transaction);
 
     }
 }

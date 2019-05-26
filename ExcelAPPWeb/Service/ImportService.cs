@@ -20,7 +20,7 @@ namespace ExcelAPPWeb.Service
     public class ImportService
     {
         public Database Db = DataBaseManager.GetDB();//获取当前database
-
+        public static bool IsOra = DataBaseManager.GetDBType().Equals(DBType.ORA);
 
         public string token = DataBaseManager.GetToken();
         #region 获取临时表所有数据
@@ -198,8 +198,17 @@ namespace ExcelAPPWeb.Service
 
                         }
                     }
+                    var resdll = new List<IDictionary<string, object>>();
+                    if (IsOra)
+                    {
+                        resdll = DealProcNewOrc(model.Tmp.LoadProc, model, dt, conn, transaction);
+                    }
+                    else
+                    {
+                        resdll = DealProcNew(model.Tmp.LoadProc, model, dt, conn, transaction);
+                    }
 
-                    DealProcNew(model.Tmp.LoadProc, model, dt, conn, transaction);
+                    
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -410,9 +419,20 @@ namespace ExcelAPPWeb.Service
                                 new { ID = row["ID"].ToString() }, transaction);
                         }
 
-                        DealProcNew(model.ImprtProc, model, list, conn, transaction);
+                        var resdll = new List<IDictionary<string, object>>();
+                      
+                        if (IsOra)
+                        {
+                            resdll = DealProcNewOrc(model.ImprtProc, model, list, conn, transaction);
+                        }
+                        else
+                        {
+                            resdll = DealProcNew(model.ImprtProc, model, list, conn, transaction);
+                        }
+                      //  List<Dictionary<string, object>> resdllex = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(resdll.ToString());
+                        //  DealProcNew(model.ImprtProc, model, list, conn, transaction);
                         //处理程序集
-                        DealAssExtend("upload", list, model, conn, transaction);
+                        DealAssExtend("upload", resdll, model, conn, transaction);
                         //更新上传后状态
                         conn.Execute("update " + model.TmpTab + " set FLAG='1' where FLAG='2' and CreateUser=" + token + "CreateUser",
                             new { CreateUser = UserService.GetUserId() },
@@ -585,12 +605,21 @@ namespace ExcelAPPWeb.Service
 
 
 
+                        var resdll = new List<IDictionary<string, object>>();
+                        if (IsOra)
+                        {
+                            resdll = DealProcNewOrc(model.CancelProc, model, list, conn, transaction);
+                        }
+                        else
+                        {
+                            resdll = DealProcNew(model.CancelProc, model, list, conn, transaction);
+                        }
 
-                        DealProcNew(model.CancelProc, model, list, conn, transaction);
 
                         //处理程序集
+                       // List<Dictionary<string, object>> resdllex = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(resdll.ToString());
 
-                        DealAssExtend("cancel", list, model, conn, transaction);
+                        DealAssExtend("cancel", resdll, model, conn, transaction);
 
                         transaction.Commit();
                     }
@@ -695,8 +724,22 @@ namespace ExcelAPPWeb.Service
                             }
                         }
                         mes = sbmes.ToString();
-                        DealProcNew(model.CustomProc, model, list, conn, transaction);
-                        DealAssExtend("custom", list, model, conn, transaction);
+
+                         var resdll = new List<IDictionary<string, object>>();
+                  
+
+                        if (IsOra)
+                        {
+                            resdll = DealProcNewOrc(model.CustomProc, model, list, conn, transaction);
+                        }
+                        else
+                        {
+                            resdll = DealProcNew(model.CustomProc, model, list, conn, transaction);
+                        }
+
+                        // List<Dictionary<string, object>> resdllex = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(resdll.ToString());
+
+                        DealAssExtend("custom", resdll, model, conn, transaction);
 
                         transaction.Commit();
 
@@ -899,8 +942,19 @@ namespace ExcelAPPWeb.Service
                             conn.Execute("update EARefTable set Flag='1' where id=" + token + "ID", new { ID = row["ID"].ToString() }, transaction);
                         }
 
-                        DealProcNew(model.RefProc, model, list, conn, transaction);
-                        DealAssExtend("ref", list, model, conn, transaction);
+                        var resdll = new List<IDictionary<string, object>>();
+                        if (IsOra)
+                        {
+                            resdll = DealProcNewOrc(model.RefProc, model, list, conn, transaction);
+                        }
+                        else
+                        {
+                            resdll = DealProcNew(model.RefProc, model, list, conn, transaction);
+                        }
+
+
+                        
+                        DealAssExtend("ref", resdll, model, conn, transaction);
 
                         transaction.Commit();
                     }
@@ -978,7 +1032,7 @@ namespace ExcelAPPWeb.Service
 
 
         #region DLL 事件扩展调用
-        public void DealAssExtend(string type, List<Dictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction trans)
+        public void DealAssExtend(string type, List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction trans)
         {
 
             if (string.IsNullOrEmpty(model.Tmp.ImprtDLL) || model.Tmp.ImprtDLL.Length < 2) return;
@@ -1013,9 +1067,10 @@ namespace ExcelAPPWeb.Service
 
         #region 处理存储过程调用
 
-        public void DealProcNew(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
+        public List<IDictionary<string, object>>  DealProcNew(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
         {
-            if (string.IsNullOrEmpty(procName) || procName.Length < 2) return;
+            var res = new List<IDictionary<string, object>>();
+            if (string.IsNullOrEmpty(procName) || procName.Length < 2) return res;
             var refid = "";
             //foreach (var item in list)
             //{
@@ -1035,12 +1090,50 @@ namespace ExcelAPPWeb.Service
             WriteLogFile("存储"+ procName+ user.Id + "user.Name:" + user.Name + "ID:" + model.ID + "DWBH:" + model.DWBH + "TmpTab:" + model.TmpTab);
 
 
-            ProcHelper.ExecProc(dict, procName, conn, trans);
+            res= ProcHelper.GetProcDataSQL(dict, procName, conn, trans);
+            return res;
             //Db.Execute($"exec {procName} @0,@1,@2 ", model.ID, refid, UserService.GetUserId());
         }
 
 
         #endregion
+
+
+        #region 处理存储过程调用orcale返回data
+
+        public  List<IDictionary<string, object>> DealProcNewOrc(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
+        {
+            var res = new List<IDictionary<string, object>>();
+            if (string.IsNullOrEmpty(procName) || procName.Length < 2) return res;
+            var refid = "";
+            //foreach (var item in list)
+            //{
+            //    refid += item["ID"].ToString() + ",";
+            //}
+
+            var user = UserService.GetUser();
+
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict.Add("UserID", user.Id);
+            dict.Add("UserName", user.Name);
+            dict.Add("YWID", model.ID);
+            dict.Add("DATAID", refid);
+            dict.Add("DWBH", model.DWBH);
+            dict.Add("TMPTABLE", model.TmpTab);//增加 luchg 20190510 
+
+            WriteLogFile("存储" + procName + user.Id + "user.Name:" + user.Name + "ID:" + model.ID + "DWBH:" + model.DWBH + "TmpTab:" + model.TmpTab);
+
+
+            res= ProcHelper.GetProcDataOracle(dict, procName, conn, trans);
+
+            return res;
+            //Db.Execute($"exec {procName} @0,@1,@2 ", model.ID, refid, UserService.GetUserId());
+        }
+
+
+        #endregion
+
+
         #region 处理存储过程调用日期版本
 
         public void DealProcNewRq(string Qsrq, string Jsrq, string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)

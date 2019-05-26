@@ -444,21 +444,21 @@ textarea:read-only,
 
 
 .done, .done td {
-    background: #fff8ba !important;
+    background: rgb( 50, 155, 155 ) !important;
 }
 
 
 
 .done, .red td {
-    background: red !important;
+    background: rgb(233, 30, 99) !important;
 }
 
 .done, .yellow td {
-    background: yellow !important;
+    background: rgb(255, 179, 0) !important;
 }
 
 .done, .green td {
-    background: green !important;
+    background: rgb(114, 213, 114) !important;
 }
 
 .lee-progress {
