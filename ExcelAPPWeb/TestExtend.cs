@@ -74,7 +74,7 @@ namespace ExcelAPPWeb
             try
             {
              var YWID = model.ID.Replace(model.DWBH,"");
-             new YzDrpInterFace().DrpIMInterFace(YWID, list, db, transaction);
+             new YzDrpInterFace().DrpIMInterFace(YWID, list, model, db, transaction);
             }
             catch (Exception ex)
             {

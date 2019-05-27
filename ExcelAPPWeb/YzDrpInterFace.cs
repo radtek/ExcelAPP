@@ -16,6 +16,7 @@ using System.Data.SqlClient;
 using Newtonsoft.Json.Linq;
 using Dapper;
 using Newtonsoft.Json;
+using ExcelAPPWeb.Model;
 namespace ExcelAPPWeb
 {
     public class YzDrpInterFace
@@ -24,7 +25,7 @@ namespace ExcelAPPWeb
         string appid = ConfigurationSettings.AppSettings["InterFaceAppID"];
         string usercode = ConfigurationSettings.AppSettings["InterFaceUserCode"];
         Encoding encode = Encoding.Default;
-        public  string DrpIMInterFace(string ywid, List<IDictionary<string, object>> list, IDbConnection db, IDbTransaction transaction)
+        public  string DrpIMInterFace(string ywid, List<IDictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
             {
             var  reparm= JsonConvert.SerializeObject(new { Bills = list });
             string parms = "",ret="", classsetcode="";
@@ -85,10 +86,11 @@ namespace ExcelAPPWeb
                         throw new Exception("错误！" + Convert.ToString(seter.Tables[0].Rows[i]["FailReason"]).Trim());
                     }
                     Dictionary<string, object> dict = new Dictionary<string, object>();
-                    dict.Add("YWID", ywid);
-                    dict.Add("PKID", Convert.ToString(seter.Tables[0].Rows[i]["PKID"]).Trim());
-                    dict.Add("BillID", Convert.ToString(seter.Tables[0].Rows[i]["BillID"]).Trim());
-                    dict.Add("BillCode", Convert.ToString(seter.Tables[0].Rows[i]["BillCode"]).Trim());
+                    dict.Add("p_QueryCode", ywid);
+                    dict.Add("p_GSDWBH", model.DWBH);
+                    dict.Add("p_PKID", Convert.ToString(seter.Tables[0].Rows[i]["PKID"]).Trim());
+                    dict.Add("p_BillID", Convert.ToString(seter.Tables[0].Rows[i]["BillID"]).Trim());
+                    dict.Add("p_BillCode", Convert.ToString(seter.Tables[0].Rows[i]["BillCode"]).Trim());
                     Service.ProcHelper.ExecProc(dict, "Sp_Drp_YZInterFaceAF", db, transaction);
                 }
             }

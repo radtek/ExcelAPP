@@ -328,6 +328,10 @@ namespace ExcelAPPWeb.Service
                         }
                         p.Add("4", " ");  // 
                     }
+                    if (key == "FLAG")
+                    {
+                        value = "0";
+                    }
                     #endregion
                 }
 
@@ -432,7 +436,7 @@ namespace ExcelAPPWeb.Service
                       //  List<Dictionary<string, object>> resdllex = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(resdll.ToString());
                         //  DealProcNew(model.ImprtProc, model, list, conn, transaction);
                         //处理程序集
-                        DealAssExtend("upload", resdll, model, conn, transaction);
+                        DealAssExtend("upload", model.IMPRTDLL, resdll, model, conn, transaction);
                         //更新上传后状态
                         conn.Execute("update " + model.TmpTab + " set FLAG='1' where FLAG='2' and CreateUser=" + token + "CreateUser",
                             new { CreateUser = UserService.GetUserId() },
@@ -619,7 +623,7 @@ namespace ExcelAPPWeb.Service
                         //处理程序集
                        // List<Dictionary<string, object>> resdllex = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(resdll.ToString());
 
-                        DealAssExtend("cancel", resdll, model, conn, transaction);
+                        DealAssExtend("cancel", model.CANCELDLL, resdll, model, conn, transaction);
 
                         transaction.Commit();
                     }
@@ -739,7 +743,7 @@ namespace ExcelAPPWeb.Service
 
                         // List<Dictionary<string, object>> resdllex = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(resdll.ToString());
 
-                        DealAssExtend("custom", resdll, model, conn, transaction);
+                        DealAssExtend("custom", model.CUSTOMDLL, resdll, model, conn, transaction);
 
                         transaction.Commit();
 
@@ -954,7 +958,7 @@ namespace ExcelAPPWeb.Service
 
 
                         
-                        DealAssExtend("ref", resdll, model, conn, transaction);
+                        DealAssExtend("ref", model.REFDLL, resdll, model, conn, transaction);
 
                         transaction.Commit();
                     }
@@ -1032,17 +1036,18 @@ namespace ExcelAPPWeb.Service
 
 
         #region DLL 事件扩展调用
-        public void DealAssExtend(string type, List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction trans)
+        public void DealAssExtend(string type,string TmpDll, List<IDictionary<string, object>> list, Model.EACmpCategory model, IDbConnection db, IDbTransaction trans)
         {
 
-            if (string.IsNullOrEmpty(model.Tmp.ImprtDLL) || model.Tmp.ImprtDLL.Length < 2) return;
-            var svr = (IExcelExtend)Activator.CreateInstance(Type.GetType(model.Tmp.ImprtDLL, false, true));
+            if (string.IsNullOrEmpty(TmpDll) || TmpDll.Length < 2) return;
+            var svr = (IExcelExtend)Activator.CreateInstance(Type.GetType(TmpDll, false, true));
 
             if (svr == null)
                 throw new Exception("未能获取到dll信息");
             switch (type)
             {
-                case "upload":
+                case "upload" :
+
                     svr.AfterUpload(list, model, db, trans);
                     break;
                 case "cancel":

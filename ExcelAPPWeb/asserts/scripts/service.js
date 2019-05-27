@@ -1,8 +1,8 @@
 ﻿var dg = null;
 var Msg = {
-    alert: function (msg, title) {
-        title = title || "提示";
-        $.leeDialog && $.leeDialog.alert(msg, title, 'warn');
+    alert: function (msg, title, callback) {
+        $.leeDialog && $.leeDialog.alert(msg, title, 'warn', callback, { width: 620 });
+
     },
     danger: function (msg, title, callback) {
         title = title || "异常";

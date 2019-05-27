@@ -710,6 +710,7 @@ var ImportController = {
                     if (data.res) {
                         Msg.loaded();
                         Msg.sucess("上传成功！");
+                        ImportController.refreshData();
                         self.refreshRefData();
                         self.dgRef.close();
                     }
@@ -746,6 +747,7 @@ var ImportController = {
                 idp.service.removeRef(CurModel.ID, date).done(function (data) {
                     if (data.res) {
                         Msg.sucess("操作成功！");
+                        ImportController.refreshData();
                         self.refreshRefData();
                         self.dgRef.close();
                     }

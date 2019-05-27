@@ -94,8 +94,10 @@ namespace ExcelAPPWeb.Model
         /// 自定义按钮调用执行存储过程
         /// </summary>
         public string CustomProc { get; set; }
-
-
+        public string IMPRTDLL { get; set; }
+        public string CANCELDLL { get; set; }
+        public string CUSTOMDLL { get; set; }
+        public string REFDLL { get; set; }
         /// <summary>
         /// 自定义按钮名称
         /// </summary>
