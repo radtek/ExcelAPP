@@ -16,6 +16,7 @@ $("#tabinfo").leeTab({
             $("#btnUpload").removeAttr("disabled");
             $("#gridInfo").leeUI().options.disabled = false;
             $("#btnCustom").removeAttr("disabled");
+            $("#btnExcel").removeAttr("disabled");
             $(".deleteWrap").show();
             $(".hasWrap").hide();
         } else {
@@ -26,6 +27,9 @@ $("#tabinfo").leeTab({
             $("#btnUpload").attr("disabled", "disabled");
             $("#btnCancel").removeAttr("disabled");
             $("#gridInfo").leeUI().options.disabled = true;
+            $("#btnExcel").attr("disabled", "disabled");
+            
+
         }
     }
 });

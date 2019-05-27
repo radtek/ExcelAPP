@@ -58,7 +58,7 @@
                 </div>-->
                 <div class="table-item" style="width:66.6%;line-height:34px;">
                     <button class="lee-btn fileWrap" onclick="ImportController.chooseFile()">选择</button>
-                    <button class="lee-btn lee-btn-primary" onclick="ImportController.loadExcelData()">加载数据</button>
+                    <button class="lee-btn lee-btn-primary"  id="btnExcel"  onclick="ImportController.loadExcelData()">加载数据</button>
                     <button class="lee-btn lee-btn-primary"  id="btnUpload" onclick="ImportController.beginUpload()">确认上传</button>
                     <button class="lee-btn lee-btn-danger" disabled id="btnCancel" onclick="ImportController.cancelUpload()">取消上传</button>
                     <button class="lee-btn lee-btn-info" style="display:none;" id="btnCustom" onclick="ImportController.custom()">自定义</button>
