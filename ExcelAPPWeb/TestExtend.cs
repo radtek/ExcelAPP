@@ -20,7 +20,7 @@ namespace ExcelAPPWeb
         /// <param name="db"></param>
         /// <param name="transaction"></param>
 
-        public void AfterRefDelete(List<Dictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
+        public void AfterRefDelete(List<IDictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace ExcelAPPWeb
         /// <param name="model"></param>
         /// <param name="db"></param>
         /// <param name="transaction"></param>
-        public void AfterRefUpload(List<Dictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
+        public void AfterRefUpload(List<IDictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
         {
             throw new Exception("不能关联上传" + model.ID);
         }
@@ -45,13 +45,12 @@ namespace ExcelAPPWeb
         /// <param name="model"></param>
         /// <param name="db"></param>
         /// <param name="transaction"></param>
-        public void AfterCancel(List<Dictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
+        public void AfterCancel(List<IDictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
         {
 
 
-            var info = db.Query<dynamic>("select  * from lsbzdw ", transaction: transaction).ToList();
+            var info = db.Query<dynamic>("select  * from lsbzdw where  rownum=1 ", transaction: transaction).ToList();
             var diclist = info.Select(x => (IDictionary<string, object>)x).ToList();
-
             throw new Exception("不能取消上传" + model.ID + "单位数据" + Newtonsoft.Json.JsonConvert.SerializeObject(diclist));
         }
 
@@ -63,10 +62,24 @@ namespace ExcelAPPWeb
         /// <param name="model"></param>
         /// <param name="db"></param>
         /// <param name="transaction"></param>
-        public void AfterUpload(List<Dictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
+        public void AfterUpload(List<IDictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
         {
-            var count = db.ExecuteScalar<int>("select count(*) from lsbzdw ", transaction: transaction);
-            throw new Exception("不能上传" + model.ID + "单位个数" + count.ToString());
+            //var count = db.ExecuteScalar<int>("select count(*) from lsbzdw ", transaction: transaction);
+            //throw new Exception("不能上传" + model.ID + "单位个数" + count.ToString());
+            /* var info = db.Query<dynamic>("select  * from lsbzdw where  rownum=1 ", transaction: transaction).ToList();
+             var diclist = info.Select(x => (IDictionary<string, object>)x).ToList();
+             new ExcelAPPWeb.Service.ImportService().WriteLogFile("获取" + Newtonsoft.Json.JsonConvert.SerializeObject(new { Bills = list }));
+             throw new Exception("不能取消上传" + model.ID + "单位数据" + Newtonsoft.Json.JsonConvert.SerializeObject(diclist));
+             */
+            try
+            {
+             var YWID = model.ID.Replace(model.DWBH,"");
+             new YzDrpInterFace().DrpIMInterFace(YWID, list, model, db, transaction);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -77,7 +90,7 @@ namespace ExcelAPPWeb
         /// <param name="model"></param>
         /// <param name="db"></param>
         /// <param name="transaction"></param>
-        public void CustomBtnClick(List<Dictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
+        public void CustomBtnClick(List<IDictionary<string, object>> list, EACmpCategory model, IDbConnection db, IDbTransaction transaction)
         {
             throw new NotImplementedException();
         }

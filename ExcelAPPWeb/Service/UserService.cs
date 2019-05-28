@@ -85,7 +85,15 @@ namespace ExcelAPPWeb.Service
         {
 
         }
-
+        /// <summary>
+        /// 获取当前单位
+        /// </summary>
+        /// <returns></returns>
+        public static string GetGsdwh()
+        {
+            var GSDWBH = CookieHelper.GetCookie("GSDWBH");
+            return GSDWBH;
+        }
 
         /// <summary>
         /// 获取用户Id

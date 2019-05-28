@@ -15,16 +15,21 @@ $("#tabinfo").leeTab({
             $("#btnCancel").attr("disabled", "disabled");
             $("#btnUpload").removeAttr("disabled");
             $("#gridInfo").leeUI().options.disabled = false;
-
+            $("#btnCustom").removeAttr("disabled");
+            $("#btnExcel").removeAttr("disabled");
             $(".deleteWrap").show();
             $(".hasWrap").hide();
         } else {
-
+            btnCustom
+            $("#btnCustom").attr("disabled", "disabled");
             $(".deleteWrap").hide();
             $(".hasWrap").show();
             $("#btnUpload").attr("disabled", "disabled");
             $("#btnCancel").removeAttr("disabled");
             $("#gridInfo").leeUI().options.disabled = true;
+            $("#btnExcel").attr("disabled", "disabled");
+            
+
         }
     }
 });
@@ -134,9 +139,10 @@ var ImportController = {
 
 
                 var col = {
-                    display: obj.FName, name: obj.FCode,
+                    display: obj.HelpID.length > 2 ? obj.FName+'[选择]' : obj.FName, name: obj.FCode,
                     width: obj.Width ? obj.Width : 100,
                     align: "left",
+                    required:obj.IsRequire == "1"?true:false,
                     editor: getEditor(obj)
                 };
 
@@ -222,7 +228,7 @@ var ImportController = {
                 opts.mapFields = arr;
 
                 opts.url = "lookup.html?id=";
-
+                opts.isChildOnly = true;
                 opts.onConfirmSelect = function (g, p, data, srcID) {
                     function getMapObj(mapFields, data) {
                         var vsobj = {};
@@ -615,6 +621,14 @@ var ImportController = {
         }
 
         for (var item in data) {
+            if (data[item]["COLORZT"] == "1") {
+                Msg.alert("写第" + (parseInt(item) + 1) + "行该数据已经上传过,你不能重复上传");
+                return;
+            }
+            if (data[item]["COLORZT"] == "4") {
+                Msg.alert("写第" + (parseInt(item) + 1) + "行该数据已经进行后续处理你不能取消上传");
+                return;
+            }
             for (var key in hasRequire) {
 
                 if (data[item][key] == "" || data[item][key] == null || data[item][key].replace(' ', '') == "") {
@@ -622,6 +636,7 @@ var ImportController = {
                     Msg.alert("请填写第" + (parseInt(item) + 1) + "行" + "字段【" + hasRequire[key] + "】的值");
                     return;
                 }
+                
             }
         }
         $.leeDialog.confirm("确认要上传吗？", "提示", function (flag) {

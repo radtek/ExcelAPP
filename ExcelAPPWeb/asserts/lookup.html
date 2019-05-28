@@ -86,9 +86,9 @@
             position: absolute;
         }
 
-        button .icon + span {
-            margin-left: 20px;
-        }
+            button .icon + span {
+                margin-left: 20px;
+            }
 
 
         .layui-laydate-content td,
@@ -167,10 +167,10 @@
             padding: 5px;
         }
 
-        .lee-search-wrap .search:hover {
-            background: #f2f2f2;
-            border-color: #b4b7bf;
-        }
+            .lee-search-wrap .search:hover {
+                background: #f2f2f2;
+                border-color: #b4b7bf;
+            }
 
 
 
@@ -186,9 +186,9 @@
             color: #929292;
         }
 
-        .close:hover {
-            background: #f2f2f2;
-        }
+            .close:hover {
+                background: #f2f2f2;
+            }
     </style>
     <div id="lookupfavor">
         <div class="datawrap" title="数据">
@@ -198,7 +198,7 @@
                     <input class="lee-search-words" id="txtKeyWord" type="text" placeholder="请输入查询关键字">
                     <i class="lee-ion-close close"></i>
                     <button class="search" id="btnSearch">
-                        <i class="icon-Find" style=" display: block;"></i>
+                        <i class="icon-Find" style=" display block;"></i>
                     </button>
                 </div>
             </div>
@@ -254,7 +254,7 @@
                 service.getHelpInfo(this.config.sqlid).done(function (data) {
                     self.showView(data.data);
                 });
-                var data = JSON.parse(data);
+                //var data = JSON.parse(data);
                 //self.setTreeConfig(data)
 
             },
@@ -279,7 +279,7 @@
 
                 if (data.HelpType == "1") {
                     this.setTreeConfig(data);
-
+                    this.istree = true;
                 }
 
                 var self = this;
@@ -500,10 +500,12 @@
                 var self = this;
                 var data = this.grid.getCheckedRows();
                 if (data.length == 0) return null;
-                if (this.config.type == "1" && data) {
+                if (this.istree && data) {
+
                     if (this.options.isChildOnly) {
                         for (var item in data) {
-                            if (data[item][self.treeInfo.ischild] == "0") {
+
+                            if (data[item][self.treeConfig.isdetail] == "0") {
                                 leeUI.Error("非明细节点不能选择！");
                                 return false;
                                 break;

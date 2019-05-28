@@ -114,14 +114,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(792, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1189, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 550);
-            this.barDockControlBottom.Size = new System.Drawing.Size(792, 23);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1189, 23);
             // 
             // barDockControlLeft
             // 
@@ -134,7 +134,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(792, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1189, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 550);
             // 
             // bsiSys
@@ -178,7 +178,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(792, 69);
+            this.pnlTop.Size = new System.Drawing.Size(1189, 69);
             this.pnlTop.TabIndex = 4;
             // 
             // pnlLogo
@@ -395,7 +395,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 573);
+            this.ClientSize = new System.Drawing.Size(1189, 573);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.barDockControlLeft);

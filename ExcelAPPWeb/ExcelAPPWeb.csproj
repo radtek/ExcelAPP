@@ -230,6 +230,7 @@
     <Compile Include="Service\UserService.cs" />
     <Compile Include="SPI\IExcelExtend.cs" />
     <Compile Include="TestExtend.cs" />
+    <Compile Include="YzDrpInterFace.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -249,7 +250,8 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1402</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl></IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

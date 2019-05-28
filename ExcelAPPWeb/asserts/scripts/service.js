@@ -1,8 +1,8 @@
 ﻿var dg = null;
 var Msg = {
-    alert: function (msg, title) {
-        title = title || "提示";
-        $.leeDialog && $.leeDialog.alert(msg, title, 'warn');
+    alert: function (msg, title, callback) {
+        $.leeDialog && $.leeDialog.alert(msg, title, 'warn', callback, { width: 620 });
+
     },
     danger: function (msg, title, callback) {
         title = title || "异常";
@@ -217,7 +217,22 @@ idp.service = (function (win, $, core) {
             ids: ids
         });
     }
-    
+    service.GetUserInfo = function () {
+        return this.requestApi("rule.ashx", {
+            op: "GetUserInfo"
+        });
+    }
+    service.GetCookie = function () {
+        return this.requestApi("rule.ashx", {
+            op: "GetCookie"
+        });
+    }
+    service.SetCookie = function (dwbh) {
+        return this.requestApi("rule.ashx", {
+            op: "SetCookie",
+            dwbh: dwbh
+        });
+    }
     service.loadConfig = function (dwbh, lbid) {
         return this.requestApi("rule.ashx", {
             op: "LoadConfig",

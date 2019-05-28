@@ -43,8 +43,8 @@ $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
     var cell = $(this).closest(".lee-grid-row-cell");
     var row = $(this).closest(".lee-grid-row");
     var rowobj = grid.getRow(row.attr("id").split("|")[2]);
-    //grid.deleteRow(rowobj);
-    //deleteRow.push(rowobj);
+    grid.deleteRow(rowobj);
+    deleteRow.push(rowobj);
     e.stopPropagation();
 });
 var ImportController = {
@@ -642,8 +642,22 @@ var ImportController = {
         })
     },
     Help: function () {
+
+
         var self = this;
-        alert(helpurl);
+        idp.service.GetUserInfo().done(function (data) {
+            var CurModel = data.data;
+            currentuserid = CurModel.Id;
+            currentusername = CurModel.Name;
+            currentcode = CurModel.Code;
+            // currentgsdwbh = $("#txtOrgInfo").leeUI().getValue();
+            if (helpurl.length > 1) {
+                var helpurln = helpurl + CurModel.Code + "&p_USERNAME=" + currentcode;
+                open(helpurln);
+            }
+        });
+
+       
     },
     beginUpload: function () {
         var self = this;
@@ -696,6 +710,7 @@ var ImportController = {
                     if (data.res) {
                         Msg.loaded();
                         Msg.sucess("上传成功！");
+                        ImportController.refreshData();
                         self.refreshRefData();
                         self.dgRef.close();
                     }
@@ -732,6 +747,7 @@ var ImportController = {
                 idp.service.removeRef(CurModel.ID, date).done(function (data) {
                     if (data.res) {
                         Msg.sucess("操作成功！");
+                        ImportController.refreshData();
                         self.refreshRefData();
                         self.dgRef.close();
                     }

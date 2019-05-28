@@ -49,6 +49,7 @@ namespace ExcelAPPWeb.Service
             var fields = string.IsNullOrEmpty(model.SFields) ? (table + ".*") : model.SFields;
             var sql = $"select {fields} from {table} where 1=1 {model.SFilter}  {filter}";
             sql = sql.Replace("{Userid}", UserService.GetUserId());
+            sql = sql.Replace("{GS_DWBH}", UserService.GetGsdwh());
             var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql(sql));
 
             return new
