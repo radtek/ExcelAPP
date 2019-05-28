@@ -112,6 +112,7 @@
     <Compile Include="JSBridge\JSLoginObject.cs" />
     <Compile Include="JSBridge\JSMainObject.cs" />
     <Compile Include="JSBridge\NPOIData.cs" />
+    <Compile Include="JSBridge\NPOITOExcel.cs" />
     <Compile Include="JSBridge\ProcHelper.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>

@@ -49,6 +49,23 @@ $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
 });
 var ImportController = {
 
+    export: function () {
+        var grid = $("#gridInfo").leeUI();
+        var data = grid.getData();
+        var columns = grid.options.columns;
+        var cols = [];
+        for (var item in columns) {
+            if (columns[item]["name"] == "操作")
+                continue;
+            cols.push({
+                "0": columns[item]["name"],
+                "1": columns[item]["display"],
+                "2": columns[item]["width"]
+            })
+
+        }
+        parent.APIBridge.Export(JSON.stringify(cols), JSON.stringify(data));
+    },
     removeRows: function () {
         var self = this;
         var grid = $("#gridInfo").leeUI();
@@ -657,7 +674,7 @@ var ImportController = {
             }
         });
 
-       
+
     },
     beginUpload: function () {
         var self = this;

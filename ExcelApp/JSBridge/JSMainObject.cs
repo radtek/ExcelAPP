@@ -54,6 +54,8 @@ namespace ExcelApp.JSBridge
             AddFunction("Test").Execute += TestConnection;
             AddFunction("ShowDev").Execute += ShowDevTools;
 
+            AddFunction("Export").Execute += Export;
+
         }
 
 
@@ -75,6 +77,50 @@ namespace ExcelApp.JSBridge
                     CurrentRuleList.Add(id, Newtonsoft.Json.JsonConvert.DeserializeObject<Model.EACmpCategory>(model));
             }
         }
+
+
+        private void Export(object sender, Chromium.Remote.Event.CfrV8HandlerExecuteEventArgs e)
+        {
+
+            if (e.Arguments.Length > 0)
+            {
+
+                var currentFilePath = "";
+                var result = false;
+                var dsTitle = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(e.Arguments[0].ToString());
+                var dsData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(e.Arguments[1].ToString());
+
+                NPOITOExcel svr = new NPOITOExcel();
+                var res = svr.tOExcel(dsTitle, dsData);
+                var saveFileDialog = new SaveFileDialog()
+                {
+                    AddExtension = true,
+                    Filter = "支持的文件|*.xlsx",
+                    OverwritePrompt = true,
+                    FileName = "导出文件"
+                };
+
+                if (saveFileDialog.ShowDialog(parentForm) == DialogResult.OK)
+                {
+                    currentFilePath = saveFileDialog.FileName;
+                    result = true;
+
+                }
+
+                if (result)
+                {
+                    using (FileStream fs = new FileStream(currentFilePath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(res, 0, res.Length);
+                        fs.Close();
+                    }
+                }
+            }
+
+        }
+
+
+
 
         /// <summary>
         /// 获取帮助数据
