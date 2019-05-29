@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NetDimension.NanUI;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +18,16 @@ namespace ExcelClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormConsole());
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-CN");
+            Bootstrap.ApplicationDataDirectory = Directory.GetCurrentDirectory() + @"\Cache";
+            if (Bootstrap.Load())
+            {
+
+                Bootstrap.RegisterAssemblyResources(System.Reflection.Assembly.GetExecutingAssembly());
+
+                Application.Run(new Login());
+            }
         }
     }
 }

@@ -29,12 +29,12 @@ namespace ExcelClient
             // pnlTop.Controls.Add(banner);
             //pnlTop.Controls.Add(pnlLogo);
             /* --此部分需注意，以免乱-- */
-            pnlLogo.Dock = DockStyle.Left;
+            //pnlLogo.Dock = DockStyle.Left;
             // banner.Dock = DockStyle.Fill;
             pnlTop.ResumeLayout(false);
 
             UserLookAndFeel.Default.StyleChanged += Default_StyleChanged;
-            pnlLogo.DoubleClick += pnlLogo_DoubleClick;
+            //pnlLogo.DoubleClick += pnlLogo_DoubleClick;
             this.nbgBase1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.nbgBase1.Caption = "基础资料1";
             this.nbgBase1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
@@ -51,7 +51,7 @@ namespace ExcelClient
         }
 
 
-         
+
         void pnlLogo_DoubleClick(object sender, EventArgs e)
         {
 
@@ -69,14 +69,14 @@ namespace ExcelClient
             {
                 pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             }
-             
-            pnlLogo.BackColor = pnlTop.BackColor;
+
+            // pnlLogo.BackColor = pnlTop.BackColor;
             pnlTop.Refresh();
         }
 
         private void frmConsole_Load(object sender, EventArgs e)
         {
-            ShowOrActiveForm(typeof(Form1));
+            ShowOrActiveForm(typeof(Main));
             SplashScreenManager.CloseForm(false);
             this.WindowState = FormWindowState.Maximized;
         }
@@ -181,6 +181,8 @@ namespace ExcelClient
             Form form = type.Assembly.CreateInstance(type.ToString()) as Form;
             form.MdiParent = this;
             form.Show();
+            Main f1 = (Main)form;
+            f1.SetURL("123", "0101");
         }
         #endregion
 
@@ -241,6 +243,23 @@ namespace ExcelClient
             }
         */
         #endregion
+
         #endregion
+
+
+
+        private void buttonEditDW_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            MessageBox.Show("1asdf");
+
+            Form1 frm = new Form1();
+            var dg = frm.ShowDialog();
+            if (dg.Equals(DialogResult.OK))
+            {
+                MessageBox.Show(frm.strName);
+                buttonEditDW.Text = frm.strName;
+            }
+
+        }
     }
 }

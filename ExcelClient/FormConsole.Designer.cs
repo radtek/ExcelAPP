@@ -42,7 +42,8 @@
             this.biCloseAllExcept = new DevExpress.XtraBars.BarButtonItem();
             this.bsiSkin = new DevExpress.XtraBars.BarSubItem();
             this.pnlTop = new DevExpress.XtraEditors.PanelControl();
-            this.pnlLogo = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.buttonEditDW = new DevExpress.XtraEditors.ButtonEdit();
             this.pnlMain = new DevExpress.XtraEditors.PanelControl();
             this.nbMain = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgBusiness = new DevExpress.XtraNavBar.NavBarGroup();
@@ -66,15 +67,18 @@
             this.nbiLog = new DevExpress.XtraNavBar.NavBarItem();
             this.mdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.pmTabbed = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).BeginInit();
             this.pnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditDW.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -174,32 +178,41 @@
             // pnlTop
             // 
             this.pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlTop.Controls.Add(this.pnlLogo);
+            this.pnlTop.Controls.Add(this.panelControl1);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1189, 69);
+            this.pnlTop.Size = new System.Drawing.Size(1189, 35);
             this.pnlTop.TabIndex = 4;
             // 
-            // pnlLogo
+            // labelControl2
             // 
-            this.pnlLogo.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlLogo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLogo.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogo.Name = "pnlLogo";
-            this.pnlLogo.Size = new System.Drawing.Size(208, 69);
-            this.pnlLogo.TabIndex = 0;
-            this.pnlLogo.DoubleClick += new System.EventHandler(this.pnlLogo_DoubleClick);
+            this.labelControl2.Location = new System.Drawing.Point(5, 10);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(48, 14);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "选择单位";
+            // 
+            // buttonEditDW
+            // 
+            this.buttonEditDW.Location = new System.Drawing.Point(59, 8);
+            this.buttonEditDW.MenuManager = this.barManager1;
+            this.buttonEditDW.Name = "buttonEditDW";
+            this.buttonEditDW.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.buttonEditDW.Size = new System.Drawing.Size(283, 20);
+            this.buttonEditDW.TabIndex = 1;
+            this.buttonEditDW.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditDW_ButtonClick);
             // 
             // pnlMain
             // 
             this.pnlMain.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlMain.Controls.Add(this.nbMain);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMain.Location = new System.Drawing.Point(0, 69);
+            this.pnlMain.Location = new System.Drawing.Point(0, 35);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(8, 6, 12, 4);
-            this.pnlMain.Size = new System.Drawing.Size(208, 481);
+            this.pnlMain.Size = new System.Drawing.Size(146, 515);
             this.pnlMain.TabIndex = 5;
             // 
             // nbMain
@@ -230,11 +243,11 @@
             this.nbMain.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
             this.nbMain.Location = new System.Drawing.Point(8, 6);
             this.nbMain.Name = "nbMain";
-            this.nbMain.OptionsNavPane.ExpandedWidth = 188;
+            this.nbMain.OptionsNavPane.ExpandedWidth = 140;
             this.nbMain.OptionsNavPane.ShowOverflowButton = false;
             this.nbMain.OptionsNavPane.ShowOverflowPanel = false;
             this.nbMain.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.nbMain.Size = new System.Drawing.Size(188, 471);
+            this.nbMain.Size = new System.Drawing.Size(140, 505);
             this.nbMain.TabIndex = 0;
             this.nbMain.Text = "功能模块";
             this.nbMain.Resize += new System.EventHandler(this.nbMain_Resize);
@@ -252,7 +265,7 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1)});
             this.nbgBusiness.Name = "nbgBusiness";
             this.nbgBusiness.SelectedLinkIndex = 4;
-            this.nbgBusiness.TopVisibleLinkIndex = 2;
+            this.nbgBusiness.TopVisibleLinkIndex = 1;
             // 
             // nbiSale
             // 
@@ -391,6 +404,17 @@
             this.pmTabbed.Manager = this.barManager1;
             this.pmTabbed.Name = "pmTabbed";
             // 
+            // panelControl1
+            // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.buttonEditDW);
+            this.panelControl1.Controls.Add(this.labelControl2);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelControl1.Location = new System.Drawing.Point(835, 0);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(354, 35);
+            this.panelControl1.TabIndex = 3;
+            // 
             // FormConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -410,12 +434,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).EndInit();
             this.pnlTop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditDW.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).EndInit();
             this.pnlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nbMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -456,7 +483,9 @@
         private DevExpress.XtraNavBar.NavBarItem nbiRBAC;
         private DevExpress.XtraNavBar.NavBarItem nbiDatabase;
         private DevExpress.XtraNavBar.NavBarItem nbiLog;
-        private DevExpress.XtraEditors.PanelControl pnlLogo;
         private DevExpress.XtraNavBar.NavBarItem navBarItem1;
+        private DevExpress.XtraEditors.ButtonEdit buttonEditDW;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
     }
 }

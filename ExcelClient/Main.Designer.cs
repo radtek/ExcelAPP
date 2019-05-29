@@ -1,6 +1,6 @@
 ﻿namespace ExcelClient
 {
-    partial class FormCef
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.SuspendLayout();
             // 
-            // FormCef
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 457);
-            this.Name = "FormCef";
-            this.Text = "FormCef";
+            this.ClientSize = new System.Drawing.Size(1253, 698);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "Main";
+            this.Text = "[OMS数据交换平台]";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.ResumeLayout(false);
 
         }
