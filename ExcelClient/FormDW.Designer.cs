@@ -1,6 +1,6 @@
 ﻿namespace ExcelClient
 {
-    partial class Form1
+    partial class FormDW
     {
         /// <summary>
         /// 必需的设计器变量。

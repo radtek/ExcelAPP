@@ -51,9 +51,9 @@
                         </div>
                     </div>-->
                     <div>
-                       
+
                         <label for="ifRememberLogin"> <input type="checkbox" id="ifRememberLogin" style="height:auto;width:auto;margin-bottom:3px;" />记住登录信息</label>
-                     </div>
+                    </div>
                     <div class="yes_login">
                         <a href="javascript:void(0)" id="loginBtn">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
                     </div>
@@ -71,7 +71,8 @@
                             if ($("#ifRememberLogin").prop("checked")) {
                                 APIBridge.SetLogin($("#txtUserName").val(), $("#txtUserPwd").val());
                             }
-                            APIBridge.Login(data.data);
+
+                            APIBridge.Login(data.data, document.cookie);
                         } else {
                             APIBridge.Warn(data.msg);
                         }

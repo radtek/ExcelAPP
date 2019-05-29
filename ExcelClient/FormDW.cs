@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraTreeList;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,15 +12,49 @@ using System.Windows.Forms;
 
 namespace ExcelClient
 {
-    public partial class Form1 : DevExpress.XtraEditors.XtraForm
+    public partial class FormDW : DevExpress.XtraEditors.XtraForm
     {
-        public Form1()
+
+        public class RestModel
+        {
+
+            public string res { get; set; }
+            public RestModelData data { get; set; }
+        }
+        public class RestModelData
+        {
+
+            public DataTable Rows { get; set; }
+        }
+        public FormDW()
         {
             InitializeComponent();
             treeList1.OptionsBehavior.EnableFiltering = true;
             ///treeList1.OptionsView.ShowAutoFilterRow = true;
             treeList1.OptionsFilter.FilterMode = FilterMode.Smart;
             treeList1.OptionsBehavior.Editable = false;
+
+
+            var client = new RestClient("http://localhost:1402/api/help.ashx");
+            var request = new RestRequest(Method.POST);
+            //request.AddHeader("Postman-Token", "ef2f2b5e-1172-4cee-8edf-ba1a35fc1971");
+            //request.AddHeader("Cookie", UserInfo.Cookie);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            var parm = UserInfo.Cookie.Split(';');
+            request.AddParameter(parm[0].Split('=')[0], parm[0].Split('=')[1], ParameterType.Cookie);
+            request.AddHeader("Set-Cookie", UserInfo.Cookie);
+            request.AddParameter("op", "GetHelpData");
+            request.AddParameter("id", "LSBZDW");
+            request.AddParameter("filter", "");
+            request.AddParameter("order", "");
+            request.AddParameter("row", "");
+            request.AddParameter("page", 1);
+            request.AddParameter("pageSize", 500);
+
+            IRestResponse response = client.Execute(request);
+            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<RestModel>(response.Content);
+
+
             DataTable dt = new DataTable();
 
             DataColumn dc1 = new DataColumn();
@@ -46,45 +81,21 @@ namespace ExcelClient
             dt.Columns.Add(dc4);
 
 
-            DataRow dr1 = dt.NewRow();
-            dr1[0] = "BB";
-            dr1[1] = 0;
-            dr1[2] = "";
-            dr1[3] = "32";
-
-            DataRow dr2 = dt.NewRow();
-            dr2[0] = "BB1";
-            dr2[1] = 1;
-            dr2[2] = 0;
-            dr2[3] = "123";
-
-            DataRow dr3 = dt.NewRow();
-            dr3[0] = "M1";
-            dr3[1] = 2;
-            dr3[2] = 1;
-            dr3[3] = "123";
-
-            DataRow dr4 = dt.NewRow();
-            dr4[0] = "M2";
-            dr4[1] = 3;
-            dr4[2] = 0;
-            dr4[3] = "123";
-
-            DataRow dr5 = dt.NewRow();
-            dr4[0] = "M2";
-            dr4[1] = 3;
-            dr4[2] = 0;
-            dr4[3] = "123";
-
-            dt.Rows.Add(dr1);
-            dt.Rows.Add(dr2);
-            dt.Rows.Add(dr3);
-            dt.Rows.Add(dr4);
-            dt.Rows.Add(dr5);
-            treeList1.DataSource = dt;
-
+            foreach (DataRow row in model.data.Rows.Rows)
+            {
+                DataRow dr1 = dt.NewRow();
+                dr1[0] = row["LSBZDW_DWBH"];
+                dr1[1] = row["LSBZDW_DWNM"];
+                dr1[2] = row["LSBZDW_DWNM"].ToString().Substring(0, (int.Parse(row["LSBZDW_JS"].ToString())-1) * 4);
+                dr1[3] = row["LSBZDW_DWMC"];
+                dt.Rows.Add(dr1);
+            }
+ 
             //treeList1.KeyFieldName = "DWBH";
             //treeList1.ParentFieldName = "PDWBH";
+            treeList1.DataSource =dt;
+
+
 
 
 
@@ -141,15 +152,16 @@ namespace ExcelClient
 
 
         public string strName = "";
+        public string strKey = "";
         private void treeList1_DoubleClick(object sender, EventArgs e)
         {
 
-            string strKey = treeList1.FocusedNode.GetValue("DWBH").ToString();
+            strKey = treeList1.FocusedNode.GetValue("DWBH").ToString();
             strName = treeList1.FocusedNode.GetValue("DWMC").ToString();
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-          
+
         }
     }
 }

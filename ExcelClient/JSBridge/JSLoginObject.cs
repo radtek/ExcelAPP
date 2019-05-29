@@ -39,7 +39,7 @@ namespace ExcelClient.JSBridge
                 ChangeConfig("LoginUser", user);
                 ChangeConfig("LoginPassWord", pwd);
             }
-           
+
 
         }
 
@@ -99,13 +99,17 @@ namespace ExcelClient.JSBridge
         /// <param name="e"></param>
         private void Login(object sender, Chromium.Remote.Event.CfrV8HandlerExecuteEventArgs e)
         {
+            if (e.Arguments.Length > 0)
+            {
+                var cookie = e.Arguments[1].ToString();
+                UserInfo.Cookie = cookie;
+            }
+
+
             parentForm.Hide();
             var form2 = new FormConsole();
             form2.Show(parentForm);
             return;
-
-
-
 
 
         }
