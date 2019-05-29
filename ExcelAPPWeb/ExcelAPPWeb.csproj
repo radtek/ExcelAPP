@@ -16,7 +16,7 @@
     <RootNamespace>ExcelAPPWeb</RootNamespace>
     <AssemblyName>ExcelAPPWeb</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -132,6 +132,7 @@
     <Content Include="asserts\libs\laydate\theme\default\font\iconfont.woff" />
     <Content Include="Api\refresh.ashx" />
     <Content Include="Api\ref.ashx" />
+    <Content Include="WSGetData.asmx" />
     <None Include="packages.config" />
     <Content Include="Api\rule.ashx" />
     <None Include="Web.Debug.config">
@@ -201,8 +202,11 @@
     <Compile Include="Api\test.ashx.cs">
       <DependentUpon>test.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ComputeHash.cs" />
     <Compile Include="Dappper\OracleDynamicParameters.cs" />
     <Compile Include="DB\DataBaseManager.cs" />
+    <Compile Include="GS_PublicVar.cs" />
+    <Compile Include="JTGLPubQryFavMgr.cs" />
     <Compile Include="JumpDrpLogin.aspx.cs">
       <DependentUpon>JumpDrpLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -229,8 +233,18 @@
     <Compile Include="Service\TableService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="SPI\IExcelExtend.cs" />
+    <Compile Include="StringToDataSet.cs" />
     <Compile Include="TestExtend.cs" />
+    <Compile Include="WSGetData.asmx.cs">
+      <DependentUpon>WSGetData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="YzDrpInterFace.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WSGetData.asmx.resx">
+      <DependentUpon>WSGetData.asmx.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
