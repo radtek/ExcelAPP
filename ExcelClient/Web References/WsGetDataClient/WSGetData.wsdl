@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginByPID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginByPIDResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getDBType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDBTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDBTypeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataSet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataSetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataSetResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataSetProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getDataSetProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataSetProcResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execsql">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="execsqlResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getDataXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXMLProcResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLWithSchema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLWithSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXMLWithSchemaResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLWithSchemaProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXMLWithSchemaProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXMLWithSchemaProcResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXmlByteResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByteProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByteProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXmlByteProcResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByteWithSchema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByteWithSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXmlByteWithSchemaResult" type="tns:ArrayOfBase64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBase64Binary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="base64Binary" nillable="true" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getDataXmlByteWithSchemaProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataXmlByteWithSchemaProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataXmlByteWithSchemaProcResult" type="tns:ArrayOfBase64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipByteResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipByteProcResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteWithSchema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteWithSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipByteWithSchemaResult" type="tns:ArrayOfBase64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteWithSchemaProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipByteWithSchemaProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipByteWithSchemaProcResult" type="tns:ArrayOfBase64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipStringProcResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringWithSchema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringWithSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipStringWithSchemaResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringWithSchemaProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataZipStringWithSchemaProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataZipStringWithSchemaProcResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataFormatByte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataFormatByteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataFormatByteResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataFormatByteProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataFormatByteProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataFormatByteProcResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZipDataFormatByte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZipDataFormatByteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getZipDataFormatByteResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZipDataFormatByteProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="processID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProcName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paramArr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="valueArr" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZipDataFormatByteProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getZipDataFormatByteProcResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginByPIDSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginByPID" />
+  </wsdl:message>
+  <wsdl:message name="LoginByPIDSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginByPIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDBTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:getDBType" />
+  </wsdl:message>
+  <wsdl:message name="getDBTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:getDBTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataSet" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataSetProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataSetProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="execsqlSoapIn">
+    <wsdl:part name="parameters" element="tns:execsql" />
+  </wsdl:message>
+  <wsdl:message name="execsqlSoapOut">
+    <wsdl:part name="parameters" element="tns:execsqlResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXML" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXMLProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXMLProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLWithSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXMLWithSchema" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLWithSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXMLWithSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLWithSchemaProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXMLWithSchemaProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataXMLWithSchemaProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXMLWithSchemaProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXmlByte" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteWithSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteWithSchema" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteWithSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteWithSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteWithSchemaProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteWithSchemaProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataXmlByteWithSchemaProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataXmlByteWithSchemaProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipByte" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipByteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipByteProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipByteProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteWithSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipByteWithSchema" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteWithSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipByteWithSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteWithSchemaProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipByteWithSchemaProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipByteWithSchemaProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipByteWithSchemaProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipString" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipStringProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipStringProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringWithSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipStringWithSchema" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringWithSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipStringWithSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringWithSchemaProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataZipStringWithSchemaProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataZipStringWithSchemaProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataZipStringWithSchemaProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataFormatByteSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataFormatByte" />
+  </wsdl:message>
+  <wsdl:message name="getDataFormatByteSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataFormatByteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataFormatByteProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getDataFormatByteProc" />
+  </wsdl:message>
+  <wsdl:message name="getDataFormatByteProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataFormatByteProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZipDataFormatByteSoapIn">
+    <wsdl:part name="parameters" element="tns:getZipDataFormatByte" />
+  </wsdl:message>
+  <wsdl:message name="getZipDataFormatByteSoapOut">
+    <wsdl:part name="parameters" element="tns:getZipDataFormatByteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZipDataFormatByteProcSoapIn">
+    <wsdl:part name="parameters" element="tns:getZipDataFormatByteProc" />
+  </wsdl:message>
+  <wsdl:message name="getZipDataFormatByteProcSoapOut">
+    <wsdl:part name="parameters" element="tns:getZipDataFormatByteProcResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSGetDataSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginByPID">
+      <wsdl:input message="tns:LoginByPIDSoapIn" />
+      <wsdl:output message="tns:LoginByPIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDBType">
+      <wsdl:input message="tns:getDBTypeSoapIn" />
+      <wsdl:output message="tns:getDBTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataSet">
+      <wsdl:input message="tns:getDataSetSoapIn" />
+      <wsdl:output message="tns:getDataSetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataSetProc">
+      <wsdl:input message="tns:getDataSetProcSoapIn" />
+      <wsdl:output message="tns:getDataSetProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="execsql">
+      <wsdl:input message="tns:execsqlSoapIn" />
+      <wsdl:output message="tns:execsqlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXML">
+      <wsdl:input message="tns:getDataXMLSoapIn" />
+      <wsdl:output message="tns:getDataXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLProc">
+      <wsdl:input message="tns:getDataXMLProcSoapIn" />
+      <wsdl:output message="tns:getDataXMLProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLWithSchema">
+      <wsdl:input message="tns:getDataXMLWithSchemaSoapIn" />
+      <wsdl:output message="tns:getDataXMLWithSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLWithSchemaProc">
+      <wsdl:input message="tns:getDataXMLWithSchemaProcSoapIn" />
+      <wsdl:output message="tns:getDataXMLWithSchemaProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByte">
+      <wsdl:input message="tns:getDataXmlByteSoapIn" />
+      <wsdl:output message="tns:getDataXmlByteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteProc">
+      <wsdl:input message="tns:getDataXmlByteProcSoapIn" />
+      <wsdl:output message="tns:getDataXmlByteProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteWithSchema">
+      <wsdl:input message="tns:getDataXmlByteWithSchemaSoapIn" />
+      <wsdl:output message="tns:getDataXmlByteWithSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteWithSchemaProc">
+      <wsdl:input message="tns:getDataXmlByteWithSchemaProcSoapIn" />
+      <wsdl:output message="tns:getDataXmlByteWithSchemaProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByte">
+      <wsdl:input message="tns:getDataZipByteSoapIn" />
+      <wsdl:output message="tns:getDataZipByteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteProc">
+      <wsdl:input message="tns:getDataZipByteProcSoapIn" />
+      <wsdl:output message="tns:getDataZipByteProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteWithSchema">
+      <wsdl:input message="tns:getDataZipByteWithSchemaSoapIn" />
+      <wsdl:output message="tns:getDataZipByteWithSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteWithSchemaProc">
+      <wsdl:input message="tns:getDataZipByteWithSchemaProcSoapIn" />
+      <wsdl:output message="tns:getDataZipByteWithSchemaProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipString">
+      <wsdl:input message="tns:getDataZipStringSoapIn" />
+      <wsdl:output message="tns:getDataZipStringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringProc">
+      <wsdl:input message="tns:getDataZipStringProcSoapIn" />
+      <wsdl:output message="tns:getDataZipStringProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringWithSchema">
+      <wsdl:input message="tns:getDataZipStringWithSchemaSoapIn" />
+      <wsdl:output message="tns:getDataZipStringWithSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringWithSchemaProc">
+      <wsdl:input message="tns:getDataZipStringWithSchemaProcSoapIn" />
+      <wsdl:output message="tns:getDataZipStringWithSchemaProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataFormatByte">
+      <wsdl:input message="tns:getDataFormatByteSoapIn" />
+      <wsdl:output message="tns:getDataFormatByteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataFormatByteProc">
+      <wsdl:input message="tns:getDataFormatByteProcSoapIn" />
+      <wsdl:output message="tns:getDataFormatByteProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getZipDataFormatByte">
+      <wsdl:input message="tns:getZipDataFormatByteSoapIn" />
+      <wsdl:output message="tns:getZipDataFormatByteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getZipDataFormatByteProc">
+      <wsdl:input message="tns:getZipDataFormatByteProcSoapIn" />
+      <wsdl:output message="tns:getZipDataFormatByteProcSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSGetDataSoap" type="tns:WSGetDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginByPID">
+      <soap:operation soapAction="http://tempuri.org/LoginByPID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDBType">
+      <soap:operation soapAction="http://tempuri.org/getDBType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataSet">
+      <soap:operation soapAction="http://tempuri.org/getDataSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataSetProc">
+      <soap:operation soapAction="http://tempuri.org/getDataSetProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execsql">
+      <soap:operation soapAction="http://tempuri.org/execsql" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXML">
+      <soap:operation soapAction="http://tempuri.org/getDataXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLProc">
+      <soap:operation soapAction="http://tempuri.org/getDataXMLProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLWithSchema">
+      <soap:operation soapAction="http://tempuri.org/getDataXMLWithSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLWithSchemaProc">
+      <soap:operation soapAction="http://tempuri.org/getDataXMLWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByte">
+      <soap:operation soapAction="http://tempuri.org/getDataXmlByte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteProc">
+      <soap:operation soapAction="http://tempuri.org/getDataXmlByteProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteWithSchema">
+      <soap:operation soapAction="http://tempuri.org/getDataXmlByteWithSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteWithSchemaProc">
+      <soap:operation soapAction="http://tempuri.org/getDataXmlByteWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByte">
+      <soap:operation soapAction="http://tempuri.org/getDataZipByte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteProc">
+      <soap:operation soapAction="http://tempuri.org/getDataZipByteProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteWithSchema">
+      <soap:operation soapAction="http://tempuri.org/getDataZipByteWithSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteWithSchemaProc">
+      <soap:operation soapAction="http://tempuri.org/getDataZipByteWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipString">
+      <soap:operation soapAction="http://tempuri.org/getDataZipString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringProc">
+      <soap:operation soapAction="http://tempuri.org/getDataZipStringProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringWithSchema">
+      <soap:operation soapAction="http://tempuri.org/getDataZipStringWithSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringWithSchemaProc">
+      <soap:operation soapAction="http://tempuri.org/getDataZipStringWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataFormatByte">
+      <soap:operation soapAction="http://tempuri.org/getDataFormatByte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataFormatByteProc">
+      <soap:operation soapAction="http://tempuri.org/getDataFormatByteProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZipDataFormatByte">
+      <soap:operation soapAction="http://tempuri.org/getZipDataFormatByte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZipDataFormatByteProc">
+      <soap:operation soapAction="http://tempuri.org/getZipDataFormatByteProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSGetDataSoap12" type="tns:WSGetDataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginByPID">
+      <soap12:operation soapAction="http://tempuri.org/LoginByPID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDBType">
+      <soap12:operation soapAction="http://tempuri.org/getDBType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataSet">
+      <soap12:operation soapAction="http://tempuri.org/getDataSet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataSetProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataSetProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execsql">
+      <soap12:operation soapAction="http://tempuri.org/execsql" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXML">
+      <soap12:operation soapAction="http://tempuri.org/getDataXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataXMLProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLWithSchema">
+      <soap12:operation soapAction="http://tempuri.org/getDataXMLWithSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXMLWithSchemaProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataXMLWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByte">
+      <soap12:operation soapAction="http://tempuri.org/getDataXmlByte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataXmlByteProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteWithSchema">
+      <soap12:operation soapAction="http://tempuri.org/getDataXmlByteWithSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataXmlByteWithSchemaProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataXmlByteWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByte">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipByte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipByteProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteWithSchema">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipByteWithSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipByteWithSchemaProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipByteWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipString">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipStringProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringWithSchema">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipStringWithSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataZipStringWithSchemaProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataZipStringWithSchemaProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataFormatByte">
+      <soap12:operation soapAction="http://tempuri.org/getDataFormatByte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataFormatByteProc">
+      <soap12:operation soapAction="http://tempuri.org/getDataFormatByteProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZipDataFormatByte">
+      <soap12:operation soapAction="http://tempuri.org/getZipDataFormatByte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZipDataFormatByteProc">
+      <soap12:operation soapAction="http://tempuri.org/getZipDataFormatByteProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSGetData">
+    <wsdl:port name="WSGetDataSoap" binding="tns:WSGetDataSoap">
+      <soap:address location="http://localhost:1402/WSGetData.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSGetDataSoap12" binding="tns:WSGetDataSoap12">
+      <soap12:address location="http://localhost:1402/WSGetData.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
