@@ -205,6 +205,7 @@
     <Compile Include="ComputeHash.cs" />
     <Compile Include="Dappper\OracleDynamicParameters.cs" />
     <Compile Include="DB\DataBaseManager.cs" />
+    <Compile Include="DesEncrypt.cs" />
     <Compile Include="GS_PublicVar.cs" />
     <Compile Include="JTGLPubQryFavMgr.cs" />
     <Compile Include="JumpDrpLogin.aspx.cs">

@@ -29,6 +29,10 @@ namespace ExcelAPPWeb
         /// <returns></returns> 
         public DataSet ConvertToDataSet<T>(IList<T> list)
         {
+
+          
+
+
             if (list == null || list.Count <= 0)
             {
                 return null;
@@ -65,10 +69,10 @@ namespace ExcelAPPWeb
 
         private string DecSql(string sql)
         {
-            //if (sql.IndexOf(encstr) != -1)
-            //{
-            //    sql = GSIDP.GSYS.BaseCom.DesEncrypt.Decrypt(sql.Substring(encstr.Length));
-            //}
+            if (sql.IndexOf(encstr) != -1)
+            {
+                sql = DesEncrypt.Decrypt(sql.Substring(encstr.Length));
+            }
             return sql;
         }
 
