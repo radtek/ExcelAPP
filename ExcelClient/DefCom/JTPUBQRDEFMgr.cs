@@ -68,8 +68,8 @@ where JTPUBQRDEF_ID='{0}' ;";
                 ety.JTPUBQRDEF_TYPE, ety.JTPUBQRDEF_SQL.Replace("'", "''"), ety.JTPUBQRDEF_DWFIELD, ety.JTPUBQRDEF_RQFIELD,
                 ety.JTPUBQRDEF_WHERE, ety.JTPUBQRDEF_DBSRC, ety.JTPUBQRDEF_ORA.Replace("'", "''"));
 
-            sql += string.Format("DELETE FROM LSOTGS WHERE F_ID='{0}';", ety.JTPUBQRDEF_ID);
-            sql += "INSERT INTO LSOTGS(F_ID,F_GSBH,F_OTBH,F_TEXT,F_OTBZ,F_JS,F_ALIGN)";
+            sql += string.Format("DELETE FROM EAOTGS WHERE F_ID='{0}';", ety.JTPUBQRDEF_ID);
+            sql += "INSERT INTO EAOTGS(F_ID,F_GSBH,F_OTBH,F_TEXT,F_OTBZ,F_JS,F_ALIGN)";
             sql += string.Format("Values('{0}','01','01','{1}','H','1','L');", ety.JTPUBQRDEF_ID, ety.JTPUBQRDEF_SUBTIL);
             sql += " end; ";
             WebSvrGetData.execsql(this.ProcessID, sql, mgr);
@@ -109,9 +109,9 @@ values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');", id, qryID, dtwhere.Ro
 
         public void delete(string id)
         {
-            string sql=@"begin delete from LSTIGSDEVQRY where F_ID='{0}';
-delete from LSOTGS where F_ID='{0}';
-delete from LSZBGS where F_ID='{0}'; 
+            string sql= @"begin delete from EATIGSDEVQRY where F_ID='{0}';
+delete from EAOTGS where F_ID='{0}';
+delete from EAZBGS where F_ID='{0}'; 
 delete from JTPUBQRDEF where JTPUBQRDEF_ID='{0}'; 
 delete from JTPUBQRPARAMDEF where PARAMDEF_QRYID='{0}'; end;";
             sql=string.Format(sql,id);

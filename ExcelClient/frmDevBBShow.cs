@@ -10,6 +10,8 @@ using System.Configuration;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Columns;
 using System.Text.RegularExpressions;
+using DevExpress.LookAndFeel;
+
 namespace ExcelClient
 {
     public partial class frmDevBBShow : DevExpress.XtraEditors.XtraForm
@@ -58,11 +60,15 @@ namespace ExcelClient
         private void frmDevBBShow_Load(object sender, EventArgs e)
         {
             barTabInfoSet.Visibility = DevExpress.XtraBars.BarItemVisibility.Never; //隐藏账表设置按钮，设置格式有问题
-            gridControl1.LookAndFeel.UseDefaultLookAndFeel = false;
-            gridControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            //gridControl1.LookAndFeel.UseDefaultLookAndFeel = false;
+            //gridControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.Text = "";
             dockBBSet.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
-            // mgr.Url = "http://localhost/JTGLPubQry2010/JTGLPubQry_Svr/WSGetData.asmx";          
+            // mgr.Url = "http://localhost/JTGLPubQry2010/JTGLPubQry_Svr/WSGetData.asmx";     
+
+
+
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             DevQryPubFun.WrapService(mgr);
 
         }
@@ -288,16 +294,16 @@ namespace ExcelClient
 
             string sql = "";
             //下载数据库
-            string vsTitleTable = "LSTIGS" + PsYear;
+            string vsTitleTable = "EATIGS" + PsYear;
             if (PsTitleTable.Trim() != "")
             {
                 vsTitleTable = PsTitleTable;
                 //自定义字段样式
-                sql = string.Format("select * from  LSTIGSDEVQRY where F_ID='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{1}')  ", this.PsID, this.PsDWBH);
+                sql = string.Format("select * from  EATIGSDEVQRY where F_ID='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{1}')  ", this.PsID, this.PsDWBH);
                 dtDevQry = getDataTable(sql);
                 if (dtDevQry.Rows.Count == 0)
                 {
-                    sql = string.Format("select * from  LSTIGSDEVQRY where F_ID='{0}' and (f_dwbh='' or f_dwbh=' ' ) ", this.PsID);
+                    sql = string.Format("select * from  EATIGSDEVQRY where F_ID='{0}' and (f_dwbh='' or f_dwbh=' ' ) ", this.PsID);
                     dtDevQry = getDataTable(sql);
                 }
                 if (dtDevQry.Rows.Count == 0)
@@ -325,11 +331,11 @@ namespace ExcelClient
                     }
                 }
                 //默认保存的样式
-                sql = string.Format("select * from LSTIGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{2}') ", this.PsID, PsYear, this.PsDWBH);
+                sql = string.Format("select * from EATIGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{2}') ", this.PsID, PsYear, this.PsDWBH);
                 dtLSTIGSDef = getDataTable(sql);
                 if (dtLSTIGSDef.Rows.Count == 0)
                 {
-                    sql = string.Format("select * from LSTIGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' )  ", this.PsID, PsYear);
+                    sql = string.Format("select * from EATIGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' )  ", this.PsID, PsYear);
                     dtLSTIGSDef = getDataTable(sql);
                 }
             }
@@ -354,19 +360,19 @@ namespace ExcelClient
                     }
                 }
             }
-            sql = string.Format("select F_DWBH,F_ID,F_GSBH,F_GSMC,F_CAPT,F_CAPH,F_SCAPH,F_BTGD,F_ROWH,F_BWGD,F_SPACE,F_SYBZ from LSZBGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{2}') ", this.PsID, this.PsYear, this.PsDWBH);
+            sql = string.Format("select F_DWBH,F_ID,F_GSBH,F_GSMC,F_CAPT,F_CAPH,F_SCAPH,F_BTGD,F_ROWH,F_BWGD,F_SPACE,F_SYBZ from EAZBGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{2}') ", this.PsID, this.PsYear, this.PsDWBH);
             dtLSZBGSOrg = getDataTable(sql);
             if (dtLSZBGSOrg.Rows.Count == 0)
             {
-                sql = string.Format("select F_DWBH,F_ID,F_GSBH,F_GSMC,F_CAPT,F_CAPH,F_SCAPH,F_BTGD,F_ROWH,F_BWGD,F_SPACE,F_SYBZ from LSZBGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' )", this.PsID, this.PsYear);
+                sql = string.Format("select F_DWBH,F_ID,F_GSBH,F_GSMC,F_CAPT,F_CAPH,F_SCAPH,F_BTGD,F_ROWH,F_BWGD,F_SPACE,F_SYBZ from EAZBGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' )", this.PsID, this.PsYear);
                 dtLSZBGSOrg = getDataTable(sql);
             }
 
-            sql = string.Format("select * from LSOTGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{2}') ", this.PsID, this.PsYear, this.PsDWBH);
+            sql = string.Format("select * from EAOTGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' or f_dwbh='{2}') ", this.PsID, this.PsYear, this.PsDWBH);
             dtLSOTGSOrg = getDataTable(sql);
             if (dtLSOTGSOrg.Rows.Count == 0)
             {
-                sql = string.Format("select * from LSOTGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' ) ", this.PsID, this.PsYear);
+                sql = string.Format("select * from EAOTGS{1} where f_id='{0}' and (f_dwbh='' or f_dwbh=' ' ) ", this.PsID, this.PsYear);
                 dtLSOTGSOrg = getDataTable(sql);
             }
             bindQryStyle();
@@ -1641,10 +1647,10 @@ psPID
                     if (rows.Length > 0)
                     {
                         string sql = @"begin 
-                        delete from LSOTGS{0} where F_ID = '{1}'   and F_GSBH='{2}' and  F_DWBH='{3}';
-                        delete from LSZBGS{0} where F_ID = '{1}'   and F_GSBH='{2}' and F_DWBH='{3}';
-                        delete from LSTIGS{0} where F_ID = '{1}'   and F_GSBH='{2}' and F_DWBH='{3}'; 
-                        delete   from LSTIGSDEVQRY  where F_ID='{1}' and F_GSBH='{2}' and F_DWBH='{3}';
+                        delete from EAOTGS{0} where F_ID = '{1}'   and F_GSBH='{2}' and  F_DWBH='{3}';
+                        delete from EAZBGS{0} where F_ID = '{1}'   and F_GSBH='{2}' and F_DWBH='{3}';
+                        delete from EATIGS{0} where F_ID = '{1}'   and F_GSBH='{2}' and F_DWBH='{3}'; 
+                        delete   from EATIGSDEVQRY  where F_ID='{1}' and F_GSBH='{2}' and F_DWBH='{3}';
                         end;";
                         sql = string.Format(sql, this.PsYear, this.PsID, rows[0]["F_GSBH"].ToString(), this.PsDWBH);
                         WebSvrGetData.execsql(DevQryPubFun.GSYDBSrc, sql, mgr);

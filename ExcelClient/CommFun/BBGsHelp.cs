@@ -17,7 +17,7 @@ namespace ExcelClient
         public static void saveBBTitle(string processID, WsGetDataClient.WSGetData mgr, DataTable dt,string psDWBH,string psYear,string psType,string psBH,string psMC)
         {
             psDWBH = string.IsNullOrEmpty(psDWBH) ? " " : psDWBH;
-            string sql = @"insert into LSZBGS{12} (F_DWBH, F_ID, F_GSBH, F_GSMC,
+            string sql = @"insert into EAZBGS{12} (F_DWBH, F_ID, F_GSBH, F_GSMC,
     F_CAPT, F_CAPH, F_SCAPH, F_BTGD, F_ROWH, F_BWGD, F_SPACE, F_SYBZ)values
     ('{0}', '{1}', '{2}', '{3}','{4}', {5}, {6}, {7}, {8}, {9}, {10}, '{11}') ";
    
@@ -26,12 +26,12 @@ namespace ExcelClient
                 DataRow row=dt.Rows[0];
                 if (psType == "edit")
                 {
-                    sql = @" update LSZBGS{12} set F_GSMC='{3}',F_CAPT='{4}', F_CAPH={5}, F_SCAPH={6},
+                    sql = @" update EAZBGS{12} set F_GSMC='{3}',F_CAPT='{4}', F_CAPH={5}, F_SCAPH={6},
                     F_BTGD={7}, F_ROWH={8}, F_BWGD={9}, F_SPACE={10}, F_SYBZ='{11}'  where F_DWBH='{0}' and F_ID='{1}' and   F_GSBH='{2}' ";
                 }
                 else
                 {
-                    WebSvrGetData.execsql(processID, string.Format("delete from LSZBGS{0} where F_DWBH='{1}' and F_ID='{2}' and  F_GSBH='{3}' ", psYear, psDWBH, row["F_ID"].ToString(), psBH), mgr);
+                    WebSvrGetData.execsql(processID, string.Format("delete from EAZBGS{0} where F_DWBH='{1}' and F_ID='{2}' and  F_GSBH='{3}' ", psYear, psDWBH, row["F_ID"].ToString(), psBH), mgr);
                      
                 }
                 sql = string.Format(sql, psDWBH, row["F_ID"].ToString(),psBH,
@@ -45,14 +45,14 @@ namespace ExcelClient
         public static void saveBBSubTitle(string processID, WsGetDataClient.WSGetData mgr, DataTable dt, string psDWBH, string psYear, string psType, string psBH)
         {
             psDWBH = string.IsNullOrEmpty(psDWBH) ? " " : psDWBH;
-            string sql = @"insert into LSOTGS{8} (F_DWBH, F_ID, F_GSBH, F_OTBH, F_TEXT, F_OTBZ, F_JS, F_ALIGN)values
+            string sql = @"insert into EAOTGS{8} (F_DWBH, F_ID, F_GSBH, F_OTBH, F_TEXT, F_OTBZ, F_JS, F_ALIGN)values
         ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');";
-            string sqldel = "delete from LSOTGS{0} WHERE F_DWBH='{1}' AND  F_ID='{2}' AND F_GSBH='{3}' AND F_OTBH='{4}' ; ";
+            string sqldel = "delete from EAOTGS{0} WHERE F_DWBH='{1}' AND  F_ID='{2}' AND F_GSBH='{3}' AND F_OTBH='{4}' ; ";
             if (dt.Rows.Count > 0)
             {
                 if (psType == "edit")
                 {
-                    sql = @" update LSOTGS{8} set    F_TEXT='{4}', F_OTBZ='{5}', F_JS='{6}', F_ALIGN='{7}'
+                    sql = @" update EAOTGS{8} set    F_TEXT='{4}', F_OTBZ='{5}', F_JS='{6}', F_ALIGN='{7}'
                      where F_DWBH='{0}' and  F_ID='{1}' and F_GSBH='{2}' and F_OTBH='{3}';";
                 } 
                  string vssql="";
@@ -80,14 +80,14 @@ F_DISP, F_REAL, F_HJBZ, F_PXBZ, F_YHBZ, F_FHBZ, F_HZBZ, F_COLOR)values
 '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}');";
             string sqldel = "delete from {0} WHERE F_DWBH='{1}' AND  F_ID='{2}' AND F_GSBH='{3}' AND F_TIBH='{4}' ; ";
             string vssql = "";
-            string tbname = "LSTIGS" + psYear;
+            string tbname = "EATIGS" + psYear;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 DataRow row = dt.Rows[i];
                 if (row["F_FIELD"].ToString() == "F_DT_FIELD" || row["F_FIELD"].ToString() == "F_NUM_FIELD"
                     || row["F_FIELD"].ToString() == "F_TXT_FIELD")
                 {
-                    tbname = "LSTIGSDEVQRY";
+                    tbname = "EATIGSDEVQRY";
                 }
                 vssql += string.Format(sqldel,tbname, psDWBH, row["F_ID"].ToString(), psBH,
                     row["F_TIBH"].ToString());
@@ -127,7 +127,7 @@ F_DISP='{12}', F_REAL='{13}', F_HJBZ='{14}', F_PXBZ='{15}', F_YHBZ='{16}', F_FHB
                 } */
                 string vssql=" ";
 
-                string tbname = "LSTIGS" + psYear;
+                string tbname = "EATIGS" + psYear;
                 vssql += string.Format("delete from {0} where  F_DWBH='{1}' and F_ID='{2}' and  F_GSBH='{3}'; ", tbname, psDWBH, dt.Rows[0]["F_ID"].ToString(), psBH);
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -135,7 +135,7 @@ F_DISP='{12}', F_REAL='{13}', F_HJBZ='{14}', F_PXBZ='{15}', F_YHBZ='{16}', F_FHB
                     if (row["F_FIELD"].ToString() == "F_DT_FIELD" || row["F_FIELD"].ToString() == "F_NUM_FIELD"
                         || row["F_FIELD"].ToString() == "F_TXT_FIELD")
                     {
-                        tbname = "LSTIGSDEVQRY";
+                        tbname = "EATIGSDEVQRY";
                     }
 
                     vssql += string.Format(sql, psDWBH, row["F_ID"].ToString(), psBH,

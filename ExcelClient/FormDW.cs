@@ -1,8 +1,10 @@
 ﻿using DevExpress.XtraTreeList;
+using ExcelClient.RestService;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -34,25 +36,7 @@ namespace ExcelClient
             treeList1.OptionsFilter.FilterMode = FilterMode.Smart;
             treeList1.OptionsBehavior.Editable = false;
 
-
-            var client = new RestClient("http://localhost:1402/api/help.ashx");
-            var request = new RestRequest(Method.POST);
-            //request.AddHeader("Postman-Token", "ef2f2b5e-1172-4cee-8edf-ba1a35fc1971");
-            //request.AddHeader("Cookie", UserInfo.Cookie);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            var parm = UserInfo.Cookie.Split(';');
-            request.AddParameter(parm[0].Split('=')[0], parm[0].Split('=')[1], ParameterType.Cookie);
-            request.AddHeader("Set-Cookie", UserInfo.Cookie);
-            request.AddParameter("op", "GetHelpData");
-            request.AddParameter("id", "LSBZDW");
-            request.AddParameter("filter", "");
-            request.AddParameter("order", "");
-            request.AddParameter("row", "");
-            request.AddParameter("page", 1);
-            request.AddParameter("pageSize", 500);
-
-            IRestResponse response = client.Execute(request);
-            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<RestModel>(response.Content);
+            var model = DWService.GetDWData(""); 
 
 
             DataTable dt = new DataTable();
@@ -75,10 +59,16 @@ namespace ExcelClient
             dc4.ColumnName = "DWMC";
             dc4.DataType = typeof(string);
 
+
+            DataColumn dc5 = new DataColumn();
+            dc5.ColumnName = "MX";
+            dc5.DataType = typeof(string);
+
             dt.Columns.Add(dc1);
             dt.Columns.Add(dc2);
             dt.Columns.Add(dc3);
             dt.Columns.Add(dc4);
+            dt.Columns.Add(dc5);
 
 
             foreach (DataRow row in model.data.Rows.Rows)
@@ -86,14 +76,15 @@ namespace ExcelClient
                 DataRow dr1 = dt.NewRow();
                 dr1[0] = row["LSBZDW_DWBH"];
                 dr1[1] = row["LSBZDW_DWNM"];
-                dr1[2] = row["LSBZDW_DWNM"].ToString().Substring(0, (int.Parse(row["LSBZDW_JS"].ToString())-1) * 4);
+                dr1[2] = row["LSBZDW_DWNM"].ToString().Substring(0, (int.Parse(row["LSBZDW_JS"].ToString()) - 1) * 4);
                 dr1[3] = row["LSBZDW_DWMC"];
+                dr1[4] = row["LSBZDW_MX"];
                 dt.Rows.Add(dr1);
             }
- 
+
             //treeList1.KeyFieldName = "DWBH";
             //treeList1.ParentFieldName = "PDWBH";
-            treeList1.DataSource =dt;
+            treeList1.DataSource = dt;
 
 
 
@@ -158,6 +149,12 @@ namespace ExcelClient
 
             strKey = treeList1.FocusedNode.GetValue("DWBH").ToString();
             strName = treeList1.FocusedNode.GetValue("DWMC").ToString();
+            var mx = treeList1.FocusedNode.GetValue("MX").ToString();
+            if (mx != "1")
+            {
+                MessageBox.Show("请选择明细级单位");
+                return;
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Close();

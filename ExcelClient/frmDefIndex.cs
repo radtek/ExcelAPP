@@ -40,7 +40,7 @@ namespace ExcelClient
             try
             {
                 DataRow row = getCtrlValue();
-                string sql = string.Format(@"UPDATE CUSTOMFIELDS  set DISPLAYNAME='{2}',INPUTTYPE='{3}',ISDISPLAY='{4}',
+                string sql = string.Format(@"UPDATE EACUSTOMFIELDS  set DISPLAYNAME='{2}',INPUTTYPE='{3}',ISDISPLAY='{4}',
 GETINFOFROM='{5}',GETINFOWHERE='{6}',ISREQUIRED='{7}',DEFAULTVALUE='{8}',DISPLAYORDER='{9}'
   where  CLASSSETCODE='{0}' and  FIELDNAME='{1}' ", this.ID, row["FIELDNAME"].ToString(), row["DISPLAYNAME"].ToString(),
                                                   row["INPUTTYPE"].ToString(), row["ISDISPLAY"].ToString(),
@@ -63,7 +63,7 @@ GETINFOFROM='{5}',GETINFOWHERE='{6}',ISREQUIRED='{7}',DEFAULTVALUE='{8}',DISPLAY
         private void bindGrid()
         {
             string sql = string.Format(@"select FIELDNAME ,DISPLAYNAME,INPUTTYPE,ISDISPLAY,GETINFOFROM,GETINFOWHERE,ISREQUIRED,DEFAULTVALUE ,DISPLAYORDER
-FROM CUSTOMFIELDS WHERE CLASSSETCODE='{0}'", this.ID);
+FROM EACUSTOMFIELDS WHERE CLASSSETCODE='{0}'", this.ID);
             dt = getDataTable(sql);
             gridControl1.DataSource = dt;
 

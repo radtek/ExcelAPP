@@ -102,7 +102,7 @@ namespace ExcelClient
         {
             if (dtData != null && dtData.Rows.Count > 0)
                 dtData.Rows.Clear();
-            dtData = getDataTable("select * from LSTIGS where F_ID='" + ID + "' and F_DWBH=' '  ");
+            dtData = getDataTable("select * from EATIGS where F_ID='" + ID + "' and F_DWBH=' '  ");
         }
         private void bindGrid()
         {

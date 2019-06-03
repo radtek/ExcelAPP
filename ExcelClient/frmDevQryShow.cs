@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.LookAndFeel;
 using DevExpress.Skins;
 using DevExpress.Skins.Info;
 using DevExpress.UserSkins;
@@ -30,13 +31,13 @@ namespace ExcelClient
 
             //defaultLookAndFeel1.LookAndFeel.Style = DevExpress.UserSkins.GSSkins;
             //SkinManager.Default.RegisterSkin(new SkinBlobXmlCreator("Coffee", "SkinData.", typeof(BonusSkins).Assembly, null));
-            defaultLookAndFeel1.LookAndFeel.SkinName = "GS V5";
+           
             //defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2007 Silver";
             //defaultLookAndFeel1.LookAndFeel.SkinName = "The Asphalt World";
-            //defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2010 Silver"; 
-           
-             
-            frmBBShow= new frmDevBBShow();
+            defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2013"; 
+
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            frmBBShow = new frmDevBBShow();
             frmBBShow.Text = "查询--" + this.PsTitle; 
             frmBBShow.ProcessID = this.ProcessID;
             frmBBShow.PsTitle = PsTitle;

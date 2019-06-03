@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using System.Configuration; 
+using System.Configuration;
+using DevExpress.LookAndFeel;
 
 namespace ExcelClient
 {
@@ -40,6 +41,9 @@ namespace ExcelClient
             //defaultLookAndFeel1.LookAndFeel.SkinName = "GS V5";        
             //this.Text = "";             
             //mgr.Url = "http://10.24.11.123/JTGL_PubQry/JTGLPubQry_Svr/WSGetData.asmx";
+
+
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             DevQryPubFun.WrapService(mgr); 
         }
 

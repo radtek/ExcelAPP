@@ -206,7 +206,7 @@ namespace ExcelClient
             StringBuilder sb = new StringBuilder();
           
 
-            sb.AppendFormat("delete from CUSTOMFIELDS where CLASSSETCODE='{0}' and FIELDNAME not in (select PARAMDEF_NAME from JTPUBQRPARAMDEF where PARAMDEF_QRYID='{0}');", ety.JTPUBQRDEF_ID);
+            sb.AppendFormat("delete from EACUSTOMFIELDS where CLASSSETCODE='{0}' and FIELDNAME not in (select PARAMDEF_NAME from JTPUBQRPARAMDEF where PARAMDEF_QRYID='{0}');", ety.JTPUBQRDEF_ID);
             foreach (DataRow row in DtWhere.Rows)
             {  
                 int i = Convert.ToInt32(row["PARAMDEF_ORD"]);
@@ -220,8 +220,8 @@ namespace ExcelClient
         }
         private string insertCUSTOMFIELDSSQL(string classsetcode, string fieldName,int ord )
         {
-           string sql= string.Format(@"INSERT INTO CUSTOMFIELDS (CLASSSETCODE,ACTTABLE, FIELDNAME ,DISPLAYNAME,INPUTTYPE,ISDISPLAY,GETINFOFROM,GETINFOWHERE,ISREQUIRED,DEFAULTVALUE,DISPLAYORDER) select
- '{0}','QRYINDEX','{1}',' ','0','1','','','0','',{2} from dual where NOT EXISTS(SELECT 1 FROM CUSTOMFIELDS WHERE  CLASSSETCODE='{0}' AND  FIELDNAME='{1}') ;", classsetcode, fieldName, ord + "");
+           string sql= string.Format(@"INSERT INTO EACUSTOMFIELDS (CLASSSETCODE,ACTTABLE, FIELDNAME ,DISPLAYNAME,INPUTTYPE,ISDISPLAY,GETINFOFROM,GETINFOWHERE,ISREQUIRED,DEFAULTVALUE,DISPLAYORDER) select
+ '{0}','QRYINDEX','{1}',' ','0','1','','','0','',{2} from dual where NOT EXISTS(SELECT 1 FROM EACUSTOMFIELDS WHERE  CLASSSETCODE='{0}' AND  FIELDNAME='{1}') ;", classsetcode, fieldName, ord + "");
            string dbtype = mgr.getDBType(this.ProcessID);
          
            if (dbtype != "ora")

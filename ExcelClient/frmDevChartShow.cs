@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraCharts;
+using DevExpress.LookAndFeel;
 
 namespace ExcelClient
 {
@@ -78,6 +79,8 @@ namespace ExcelClient
             //((XYDiagram)this.chartControl.Diagram).AxisY.Title.Visible = true;
             //((XYDiagram)this.chartControl.Diagram).AxisX.Label.Antialiasing = true;
             //chartControl1.Series
+
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
         }
 
      

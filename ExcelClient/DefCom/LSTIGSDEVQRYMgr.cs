@@ -18,7 +18,7 @@ namespace ExcelClient
 
         public void delete(string ID)
         {
-            string sql = string.Format("delete from LSTIGS where F_ID='{0}'", ID);
+            string sql = string.Format("delete from EATIGS where F_ID='{0}'", ID);
             WebSvrGetData.execsql(this.ProcessID, sql, mgr);
              
         }
@@ -28,18 +28,18 @@ namespace ExcelClient
             JTPUBQRDEFMgr defmgr = new JTPUBQRDEFMgr(mgr, ProcessID);
             JTPUBQRDEFEty ety = defmgr.getEty(ID);
             string sql = "begin ";
-            sql += string.Format("DELETE FROM LSZBGS WHERE F_ID='{0}' and F_DWBH=' ';", ID);
-            sql += "INSERT INTO LSZBGS(F_DWBH,F_ID,F_GSBH,F_GSMC,F_CAPT,F_CAPH,F_SCAPH,F_BTGD,F_ROWH,F_BWGD,F_SPACE,F_SYBZ) ";
+            sql += string.Format("DELETE FROM EAZBGS WHERE F_ID='{0}' and F_DWBH=' ';", ID);
+            sql += "INSERT INTO EAZBGS(F_DWBH,F_ID,F_GSBH,F_GSMC,F_CAPT,F_CAPH,F_SCAPH,F_BTGD,F_ROWH,F_BWGD,F_SPACE,F_SYBZ) ";
             sql += string.Format("VALUES (' ','{0}','01','系统格式','{1}',30,30,20,20,0,10,'0');", ID, ety.JTPUBQRDEF_TITLE);
-            sql += string.Format("DELETE FROM LSOTGS WHERE F_ID='{0}'   and F_DWBH=' ';", ID);
-            sql += "INSERT INTO LSOTGS(F_DWBH,F_ID,F_GSBH,F_OTBH,F_TEXT,F_OTBZ,F_JS,F_ALIGN)";
+            sql += string.Format("DELETE FROM EAOTGS WHERE F_ID='{0}'   and F_DWBH=' ';", ID);
+            sql += "INSERT INTO EAOTGS(F_DWBH,F_ID,F_GSBH,F_OTBH,F_TEXT,F_OTBZ,F_JS,F_ALIGN)";
             sql += string.Format("Values(' ','{0}','01','01','{1}','H','1','L');", ID, ety.JTPUBQRDEF_SUBTIL);
-            sql += string.Format("delete from LSTIGS where F_ID='{0}' and F_DWBH=' ';", ID);
+            sql += string.Format("delete from EATIGS where F_ID='{0}' and F_DWBH=' ';", ID);
             if (dt.Rows.Count > 0)
             {
                 /*F_DWBH,F_ID,F_FHBZ,F_GSBH,F_TIBH,F_JS,F_FIELD,F_TEXT,F_TYPE,F_ALIGN,
 F_WIDTH,F_PREC,F_HJBZ,F_YHBZ*/
-                string vsinsert = @"INSERT INTO LSTIGS(F_DWBH,F_ID,F_GSBH,F_TIBH,F_JS,F_FIELD,F_TEXT,F_TYPE,F_ALIGN,F_WIDTH,F_PROP,F_PREC,F_DISP,F_REAL,F_HJBZ,F_PXBZ,F_YHBZ,F_FHBZ,F_HZBZ,F_TSTEXT,F_GROUP,F_TSHID,F_ISGD,F_PSUMTYPE,F_FORMAT)
+                string vsinsert = @"INSERT INTO EATIGS(F_DWBH,F_ID,F_GSBH,F_TIBH,F_JS,F_FIELD,F_TEXT,F_TYPE,F_ALIGN,F_WIDTH,F_PROP,F_PREC,F_DISP,F_REAL,F_HJBZ,F_PXBZ,F_YHBZ,F_FHBZ,F_HZBZ,F_TSTEXT,F_GROUP,F_TSHID,F_ISGD,F_PSUMTYPE,F_FORMAT)
 Values(' ','{0}','01','{1}','{2}','{3}','{4}','{5}','{6}',{7},' ','{8}',' ',' ','{9}','0','{10}','0','0','{11}','{12}','{13}','{14}','{15}','{16}');";
                 foreach (DataRow row in dt.Rows)
                 {

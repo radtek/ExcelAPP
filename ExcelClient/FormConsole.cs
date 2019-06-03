@@ -14,6 +14,7 @@ using DevExpress.XtraTabbedMdi;
 using DevExpress.XtraEditors;
 using RestSharp;
 using System.Configuration;
+using ExcelClient.RestService;
 
 namespace ExcelClient
 {
@@ -26,6 +27,7 @@ namespace ExcelClient
             InitializeComponent();
 
             InitTree();
+            InitDW();
             pnlTop.SuspendLayout();
             /* --最后Add的优先级最高-- */
             // pnlTop.Controls.Add(banner);
@@ -35,29 +37,27 @@ namespace ExcelClient
             // banner.Dock = DockStyle.Fill;
             pnlTop.ResumeLayout(false);
 
-            UserLookAndFeel.Default.StyleChanged += Default_StyleChanged;
-            //pnlLogo.DoubleClick += pnlLogo_DoubleClick;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsole));
+            //UserLookAndFeel.Default.StyleChanged += Default_StyleChanged;
 
-            //var nbiGoods = new DevExpress.XtraNavBar.NavBarItem();
-            //nbiGoods.Caption = "商品资料11";
-            //nbiGoods.LargeImage = ((System.Drawing.Image)(resources.GetObject("nbiGoods.LargeImage")));
-            //nbiGoods.Name = "nbiGoods11";
-            //nbiGoods.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbiGoods_LinkClicked);
-            //nbiGoods.Tag = "11";
 
-            //this.nbgBase1 = new DevExpress.XtraNavBar.NavBarGroup();
-            //this.nbgBase1.Caption = "测试22";
-            //this.nbgBase1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            //this.nbgBase1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            //new DevExpress.XtraNavBar.NavBarItemLink(nbiGoods) });
-            //this.nbgBase1.Name = "nbgBase1";
-            //this.nbgBase1.TopVisibleLinkIndex = 1;
-            //this.nbMain.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
-            //this.nbgBase1 }
-            //);
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+
         }
 
+
+        public void InitDW()
+        {
+
+
+            var model= DWService.GetDWData(" and lsbzdw_mx='1'");
+            if (model.data.Rows.Rows.Count > 0) {
+                DataRow row = model.data.Rows.Rows[0];
+
+                buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
+                CurDWBH = row["LSBZDW_DWBH"].ToString();
+            }
+
+        }
 
         public class FuncModel
         {
@@ -331,7 +331,7 @@ namespace ExcelClient
             var dg = frm.ShowDialog();
             if (dg.Equals(DialogResult.OK))
             {
-                MessageBox.Show(frm.strName);
+                //MessageBox.Show(frm.strName);
                 buttonEditDW.Text = frm.strName;
                 CurDWBH = frm.strKey;
             }

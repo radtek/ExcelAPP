@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPivotGrid;
 using DevExpress.XtraCharts;
+using DevExpress.LookAndFeel;
 
 namespace ExcelClient
 {
@@ -117,11 +118,11 @@ namespace ExcelClient
 
         private void frmDevPivotShow_Load(object sender, EventArgs e)
         {
-         
-                
-            pivotGridControl1.LookAndFeel.UseDefaultLookAndFeel = false;
-            pivotGridControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            pivotGridControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Flat;
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+
+            //pivotGridControl1.LookAndFeel.UseDefaultLookAndFeel = false;
+            //pivotGridControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            //pivotGridControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Flat;
  
              
            
@@ -147,7 +148,7 @@ namespace ExcelClient
                 dockField.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Visible;
                 barBtnChartClick();
             }
-
+            
         }
         private void setFilterDefault()
         {

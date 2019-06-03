@@ -132,6 +132,7 @@
     <Content Include="asserts\libs\laydate\theme\default\font\iconfont.woff" />
     <Content Include="Api\refresh.ashx" />
     <Content Include="Api\ref.ashx" />
+    <Content Include="asserts\qry.aspx" />
     <Content Include="WSGetData.asmx" />
     <None Include="packages.config" />
     <Content Include="Api\rule.ashx" />
@@ -201,6 +202,13 @@
     </Compile>
     <Compile Include="Api\test.ashx.cs">
       <DependentUpon>test.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="asserts\qry.aspx.cs">
+      <DependentUpon>qry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="asserts\qry.aspx.designer.cs">
+      <DependentUpon>qry.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComputeHash.cs" />
     <Compile Include="Dappper\OracleDynamicParameters.cs" />
