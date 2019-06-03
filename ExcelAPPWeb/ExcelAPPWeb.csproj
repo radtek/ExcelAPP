@@ -247,6 +247,12 @@
       <DependentUpon>WSGetData.asmx.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExcelDataBase\ExcelDataBase.csproj">
+      <Project>{fe6d12b5-b4cb-47f6-a848-6a5dca7c9554}</Project>
+      <Name>ExcelDataBase</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

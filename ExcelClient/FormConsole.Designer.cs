@@ -425,6 +425,7 @@
             this.NAME.FieldName = "NAME";
             this.NAME.MinWidth = 33;
             this.NAME.Name = "NAME";
+            this.NAME.OptionsColumn.AllowEdit = false;
             this.NAME.Visible = true;
             this.NAME.VisibleIndex = 0;
             // 

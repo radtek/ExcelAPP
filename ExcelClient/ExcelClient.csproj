@@ -123,6 +123,7 @@
     <Compile Include="DefCom\JTPUBQRDEFEty.cs" />
     <Compile Include="DefCom\JTPUBQRDEFMgr.cs" />
     <Compile Include="DefCom\LSTIGSDEVQRYMgr.cs" />
+    <Compile Include="DevQryShow.cs" />
     <Compile Include="FormDW.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +141,30 @@
     </Compile>
     <Compile Include="FormConsole.Designer.cs">
       <DependentUpon>FormConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDefEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDefEdit.designer.cs">
+      <DependentUpon>frmDefEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDefIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDefIndex.designer.cs">
+      <DependentUpon>frmDefIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDefList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDefList.designer.cs">
+      <DependentUpon>frmDefList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDefListTit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDefListTit.designer.cs">
+      <DependentUpon>frmDefListTit.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDevBBShow.cs">
       <SubType>Form</SubType>
@@ -205,6 +230,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormConsole.resx">
       <DependentUpon>FormConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDefEdit.resx">
+      <DependentUpon>frmDefEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDefIndex.resx">
+      <DependentUpon>frmDefIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDefList.resx">
+      <DependentUpon>frmDefList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDefListTit.resx">
+      <DependentUpon>frmDefListTit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDevBBShow.resx">
       <DependentUpon>frmDevBBShow.cs</DependentUpon>

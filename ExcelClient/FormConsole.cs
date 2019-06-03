@@ -13,6 +13,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraTabbedMdi;
 using DevExpress.XtraEditors;
 using RestSharp;
+using System.Configuration;
 
 namespace ExcelClient
 {
@@ -38,23 +39,23 @@ namespace ExcelClient
             //pnlLogo.DoubleClick += pnlLogo_DoubleClick;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsole));
 
-            var nbiGoods = new DevExpress.XtraNavBar.NavBarItem();
-            nbiGoods.Caption = "商品资料11";
-            nbiGoods.LargeImage = ((System.Drawing.Image)(resources.GetObject("nbiGoods.LargeImage")));
-            nbiGoods.Name = "nbiGoods11";
-            nbiGoods.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbiGoods_LinkClicked);
-            nbiGoods.Tag = "11";
+            //var nbiGoods = new DevExpress.XtraNavBar.NavBarItem();
+            //nbiGoods.Caption = "商品资料11";
+            //nbiGoods.LargeImage = ((System.Drawing.Image)(resources.GetObject("nbiGoods.LargeImage")));
+            //nbiGoods.Name = "nbiGoods11";
+            //nbiGoods.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nbiGoods_LinkClicked);
+            //nbiGoods.Tag = "11";
 
-            this.nbgBase1 = new DevExpress.XtraNavBar.NavBarGroup();
-            this.nbgBase1.Caption = "测试22";
-            this.nbgBase1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.nbgBase1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(nbiGoods) });
-            this.nbgBase1.Name = "nbgBase1";
-            this.nbgBase1.TopVisibleLinkIndex = 1;
-            this.nbMain.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
-            this.nbgBase1 }
-            );
+            //this.nbgBase1 = new DevExpress.XtraNavBar.NavBarGroup();
+            //this.nbgBase1.Caption = "测试22";
+            //this.nbgBase1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            //this.nbgBase1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            //new DevExpress.XtraNavBar.NavBarItemLink(nbiGoods) });
+            //this.nbgBase1.Name = "nbgBase1";
+            //this.nbgBase1.TopVisibleLinkIndex = 1;
+            //this.nbMain.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
+            //this.nbgBase1 }
+            //);
         }
 
 
@@ -122,7 +123,9 @@ namespace ExcelClient
         private void frmConsole_Load(object sender, EventArgs e)
         {
 
-            var url = "http://10.8.2.107:9001/drp/NoticeIndex.html?p_USERID=" + UserInfo.UserCode + "&p_USERNAME=" + UserInfo.UserName;
+            // 打开首页
+            var host = ConfigurationManager.AppSettings["Host"].ToString();
+            var url = host + "/drp/NoticeIndex.html?p_USERID=" + UserInfo.UserCode + "&p_USERNAME=" + UserInfo.UserName;
 
             FormCef form = new FormCef();
             form.SetURL(url);
@@ -324,6 +327,7 @@ namespace ExcelClient
             //MessageBox.Show("1asdf");
 
             FormDW frm = new FormDW();
+            frm.StartPosition = FormStartPosition.CenterScreen;
             var dg = frm.ShowDialog();
             if (dg.Equals(DialogResult.OK))
             {
@@ -353,6 +357,11 @@ namespace ExcelClient
             {
                 openURL(name, ID, treeList1.FocusedNode.GetValue("URLInfo").ToString());
             }
+
+            if (strType == "0")
+            {
+                openDefInfo(name, ID);
+            }
             //URLInfo
             //FormInfo
 
@@ -361,6 +370,7 @@ namespace ExcelClient
         public static string CurDWBH = "";
 
         public static Dictionary<string, Form> FormList = new Dictionary<string, Form>();
+
         private void openRefInfo(string name, string ruleID)
         {
             if (FormList.ContainsKey(ruleID))
@@ -376,9 +386,30 @@ namespace ExcelClient
             form.MdiParent = this;
             form.Show();
             FormList[ruleID] = form;
-
-
         }
+
+        /// <summary>
+        /// 打开多维分析设计页面
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
+        private void openDefInfo(string name, string id)
+        {
+            if (FormList.ContainsKey(id))
+            {
+                FormList[id].Activate();
+                return;
+            }
+
+            frmDefList form = new frmDefList();
+            form.Text = name;
+            form.Tag = id;
+            form.MdiParent = this;
+            form.Show();
+            FormList[id] = form;
+        }
+
+
         private void openURL(string name, string ruleID, string url)
         {
             if (FormList.ContainsKey(ruleID))

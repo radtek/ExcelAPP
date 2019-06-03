@@ -12,7 +12,7 @@ namespace ExcelDataBase
         public const string DefDB = "GSY";//gsidp所在数据库       
         public const string GSDB = "GSDB";//gs所在数据库
         public const string nocacheSessionDB = "NoCacheSessionDB";//web.config配置项，不缓存DB。在数据库链接不设置的时候才起作用，即web.config中ConnectionStrings中不能设置GSY的链接信息 。
-        public static bool EnabledSession = true;
+        public static bool EnabledSession = false;
 
         private static Dictionary<string, Database> DBCache = new Dictionary<string, Database>();
 

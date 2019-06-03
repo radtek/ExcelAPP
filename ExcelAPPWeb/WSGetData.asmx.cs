@@ -11,6 +11,7 @@ using NPoco;
 using ExcelAPPWeb.DB;
 using System.Collections.Generic;
 using ExcelAPPWeb.Service;
+using ExcelDataBase;
 
 namespace ExcelAPPWeb
 {
@@ -30,7 +31,7 @@ namespace ExcelAPPWeb
         public DataSet ConvertToDataSet<T>(IList<T> list)
         {
 
-          
+
 
 
             if (list == null || list.Count <= 0)
@@ -102,10 +103,8 @@ namespace ExcelAPPWeb
             try
             {
                 sql = DecSql(sql);
-                Database db = DataBaseManager.GetDB();
-                var list = db.Fetch<Dictionary<string, object>>(sql);
-                DataSet ds = ConvertToDataSet(list);
-                return ds;
+
+                return DbFunction.ExecuteDataSet(sql);
             }
             catch (Exception ex)
             {
@@ -113,92 +112,91 @@ namespace ExcelAPPWeb
             }
         }
 
-        [WebMethod(EnableSession = true)]
-        public DataSet getDataSetProc(string processID, string ProcName, string[] paramArr, string[] valueArr)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            using (var conn = DataBaseManager.GetDbConnection())
-            {
-                //conn.Open();
-                IDbTransaction transaction = conn.BeginTransaction();
-                int i = 0;
-                foreach (var key in paramArr)
-                {
-                    dict.Add("key", valueArr[i]);
-                    i++;
-                }
-
-
-                var list = ProcHelper.GetProcDataOracle(dict, ProcName, conn, transaction);
-                DataSet ds = ConvertToDataSet(list);
-                return ds;
-            }
-        }
         //[WebMethod(EnableSession = true)]
         //public DataSet getDataSetProc(string processID, string ProcName, string[] paramArr, string[] valueArr)
         //{
-
-        //    DataSet ds = new DataSet();
-        //    Database db = DataBaseManager.GetDB();
-
-        //    try
+        //    Dictionary<string, object> dict = new Dictionary<string, object>();
+        //    using (var conn = DataBaseManager.GetDbConnection())
         //    {
-        //        int paramLen = 0;
-        //        DbParam[] myParam = null;
-
-        //        if (paramArr != null)
+        //        //conn.Open();
+        //        IDbTransaction transaction = conn.BeginTransaction();
+        //        int i = 0;
+        //        foreach (var key in paramArr)
         //        {
-        //            paramLen = paramArr.Length;
-        //        }
-        //        if (db.DBType == DataBaseType.ORA)
-        //            paramLen = paramLen + 1;
-
-        //        if (paramLen > 0)
-        //            myParam = new DbParam[paramLen];
-
-
-        //        if (paramArr != null)
-        //        {
-        //            for (int i = 0; i < paramArr.Length; i++)
-        //            {
-        //                DbParam vsparam = new DbParam();
-
-        //                vsparam.dataType = DataType.VarChar;
-        //                vsparam.paramDirct = ParameterDirection.Input;
-        //                vsparam.paramName = paramArr[i];
-        //                vsparam.paramValue = valueArr[i];
-        //                vsparam.sqlType = SqlType.Proc;
-        //                myParam[i] = vsparam;
-        //            }
-        //        }
-        //        if (db.DBType == DataBaseType.ORA)
-        //        {
-        //            DbParam vsparam = new DbParam();
-
-        //            vsparam.dataType = DataType.Cursor;
-        //            vsparam.paramDirct = ParameterDirection.Output;
-        //            vsparam.paramName = "Re_CURSOR";
-        //            vsparam.paramValue = "";
-        //            vsparam.sqlType = SqlType.Proc;
-        //            myParam[myParam.Length - 1] = vsparam;
+        //            dict.Add("key", valueArr[i]);
+        //            i++;
         //        }
 
-        //        ds = db.ExecuteDataSet(ProcName, myParam);
+
+        //        var list = ProcHelper.GetProcDataOracle(dict, ProcName, conn, transaction);
+        //        DataSet ds = ConvertToDataSet(list);
+        //        return ds;
         //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    return ds;
         //}
+        [WebMethod(EnableSession = true)]
+        public DataSet getDataSetProc(string processID, string ProcName, string[] paramArr, string[] valueArr)
+        {
+
+            DataSet ds = new DataSet();
+            // Database db = DataBaseManager.GetDB();
+            ExcelDataBase.Database db = DbFunction.GetDB("");
+
+            try
+            {
+                int paramLen = 0;
+                DbParam[] myParam = null;
+
+                if (paramArr != null)
+                {
+                    paramLen = paramArr.Length;
+                }
+                if (db.DBType == DataBaseType.ORA)
+                    paramLen = paramLen + 1;
+
+                if (paramLen > 0)
+                    myParam = new DbParam[paramLen];
+
+
+                if (paramArr != null)
+                {
+                    for (int i = 0; i < paramArr.Length; i++)
+                    {
+                        DbParam vsparam = new DbParam();
+
+                        vsparam.dataType = DataType.VarChar;
+                        vsparam.paramDirct = ParameterDirection.Input;
+                        vsparam.paramName = paramArr[i];
+                        vsparam.paramValue = valueArr[i];
+                        vsparam.sqlType = SqlType.Proc;
+                        myParam[i] = vsparam;
+                    }
+                }
+                if (db.DBType == DataBaseType.ORA)
+                {
+                    DbParam vsparam = new DbParam();
+
+                    vsparam.dataType = DataType.Cursor;
+                    vsparam.paramDirct = ParameterDirection.Output;
+                    vsparam.paramName = "Re_CURSOR";
+                    vsparam.paramValue = "";
+                    vsparam.sqlType = SqlType.Proc;
+                    myParam[myParam.Length - 1] = vsparam;
+                }
+
+                ds = db.ExecuteDataSet(ProcName, myParam);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ds;
+        }
 
         [WebMethod(EnableSession = true)]
         public void execsql(string processID, string sql)
         {
             sql = DecSql(sql);
-
-            Database db = DataBaseManager.GetDB();
-            db.Execute(sql);
+            DbFunction.ExecuteNonQuery(sql);
 
         }
 

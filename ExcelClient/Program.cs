@@ -27,19 +27,21 @@ namespace ExcelClient
                 Bootstrap.RegisterAssemblyResources(System.Reflection.Assembly.GetExecutingAssembly());
 
 
-                frmDevQryShow frm = new frmDevQryShow();
-                frm.ProcessID = "1";
-                frm.PsDWBH = "0001";
-                frm.PsJEJD = "2";
-                frm.PsYear = "";
-                frm.PsSLJD = "2";
-                frm.PsSelect = "select * from lsbzdw ";
-                frm.PsSubTitle = "33";
-                frm.PsTitle = "123";
-                frm.IsPivot = "1";
-                Application.Run(frm);
+                //frmDevQryShow frm = new frmDevQryShow();
+                //frm.ProcessID = "1";
+                //frm.PsDWBH = "0001";
+                //frm.PsJEJD = "2";
 
-                //Application.Run(new Login());
+                //frm.PsID = "92f90dfa46d64febb70bb09971949bfe";
+                //frm.PsYear = "";
+                //frm.PsSLJD = "2";
+                //frm.PsSelect = "select * from lsbzdw ";
+                //frm.PsSubTitle = "33";
+                //frm.PsTitle = "123";
+                //frm.IsPivot = "1";
+                //Application.Run(new frmDefList());
+
+                Application.Run(new Login());
             }
         }
     }
