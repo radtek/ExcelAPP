@@ -89,14 +89,14 @@ namespace ExcelClient
             // 
             this.CU_FIELDNAME.EditValue = "";
             this.CU_FIELDNAME.Enabled = false;
-            this.CU_FIELDNAME.Location = new System.Drawing.Point(409, 21);
+            this.CU_FIELDNAME.Location = new System.Drawing.Point(477, 24);
             this.CU_FIELDNAME.Name = "CU_FIELDNAME";
-            this.CU_FIELDNAME.Size = new System.Drawing.Size(446, 21);
+            this.CU_FIELDNAME.Size = new System.Drawing.Size(520, 20);
             this.CU_FIELDNAME.TabIndex = 2;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(323, 24);
+            this.labelControl1.Location = new System.Drawing.Point(377, 28);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(84, 14);
             this.labelControl1.TabIndex = 1;
@@ -105,14 +105,14 @@ namespace ExcelClient
             // CU_DISPLAYNAME
             // 
             this.CU_DISPLAYNAME.EditValue = "";
-            this.CU_DISPLAYNAME.Location = new System.Drawing.Point(409, 48);
+            this.CU_DISPLAYNAME.Location = new System.Drawing.Point(477, 56);
             this.CU_DISPLAYNAME.Name = "CU_DISPLAYNAME";
-            this.CU_DISPLAYNAME.Size = new System.Drawing.Size(446, 21);
+            this.CU_DISPLAYNAME.Size = new System.Drawing.Size(520, 20);
             this.CU_DISPLAYNAME.TabIndex = 9;
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(347, 51);
+            this.labelControl3.Location = new System.Drawing.Point(405, 59);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(60, 14);
             this.labelControl3.TabIndex = 10;
@@ -120,7 +120,7 @@ namespace ExcelClient
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(347, 105);
+            this.labelControl2.Location = new System.Drawing.Point(405, 122);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(60, 14);
             this.labelControl2.TabIndex = 14;
@@ -128,7 +128,7 @@ namespace ExcelClient
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(347, 78);
+            this.labelControl4.Location = new System.Drawing.Point(405, 91);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(60, 14);
             this.labelControl4.TabIndex = 11;
@@ -136,7 +136,7 @@ namespace ExcelClient
             // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(347, 132);
+            this.labelControl6.Location = new System.Drawing.Point(405, 154);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(60, 14);
             this.labelControl6.TabIndex = 15;
@@ -144,29 +144,28 @@ namespace ExcelClient
             // 
             // btnColse
             // 
-            this.btnColse.Location = new System.Drawing.Point(511, 440);
+            this.btnColse.Location = new System.Drawing.Point(596, 513);
             this.btnColse.Name = "btnColse";
-            this.btnColse.Size = new System.Drawing.Size(75, 23);
+            this.btnColse.Size = new System.Drawing.Size(87, 27);
             this.btnColse.TabIndex = 24;
             this.btnColse.Text = "关闭";
             this.btnColse.Click += new System.EventHandler(this.btnColse_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(266, 440);
+            this.btnSave.Location = new System.Drawing.Point(310, 513);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 23;
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // gridControl1
             // 
-            this.gridControl1.EmbeddedNavigator.Name = "";
-            this.gridControl1.Location = new System.Drawing.Point(12, 4);
+            this.gridControl1.Location = new System.Drawing.Point(14, 5);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(299, 420);
+            this.gridControl1.Size = new System.Drawing.Size(349, 490);
             this.gridControl1.TabIndex = 28;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -202,7 +201,7 @@ namespace ExcelClient
             // CU_VALTYPE
             // 
             this.CU_VALTYPE.EditValue = "录入";
-            this.CU_VALTYPE.Location = new System.Drawing.Point(409, 129);
+            this.CU_VALTYPE.Location = new System.Drawing.Point(477, 150);
             this.CU_VALTYPE.Name = "CU_VALTYPE";
             this.CU_VALTYPE.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -216,14 +215,14 @@ namespace ExcelClient
             "当前月份",
             "当前岗位"});
             this.CU_VALTYPE.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.CU_VALTYPE.Size = new System.Drawing.Size(446, 21);
+            this.CU_VALTYPE.Size = new System.Drawing.Size(520, 20);
             this.CU_VALTYPE.TabIndex = 25;
             this.CU_VALTYPE.SelectedIndexChanged += new System.EventHandler(this.CU_VALTYPE_SelectedIndexChanged);
             // 
             // CU_INPUTTYPE
             // 
             this.CU_INPUTTYPE.EditValue = "文本";
-            this.CU_INPUTTYPE.Location = new System.Drawing.Point(409, 75);
+            this.CU_INPUTTYPE.Location = new System.Drawing.Point(477, 87);
             this.CU_INPUTTYPE.Name = "CU_INPUTTYPE";
             this.CU_INPUTTYPE.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -235,13 +234,13 @@ namespace ExcelClient
             "帮助控件",
             "年度控件"});
             this.CU_INPUTTYPE.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.CU_INPUTTYPE.Size = new System.Drawing.Size(446, 21);
+            this.CU_INPUTTYPE.Size = new System.Drawing.Size(520, 20);
             this.CU_INPUTTYPE.TabIndex = 29;
             // 
             // CU_ISDISPLAY
             // 
             this.CU_ISDISPLAY.EditValue = "是";
-            this.CU_ISDISPLAY.Location = new System.Drawing.Point(409, 102);
+            this.CU_ISDISPLAY.Location = new System.Drawing.Point(477, 119);
             this.CU_ISDISPLAY.Name = "CU_ISDISPLAY";
             this.CU_ISDISPLAY.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -249,21 +248,21 @@ namespace ExcelClient
             "否",
             "是"});
             this.CU_ISDISPLAY.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.CU_ISDISPLAY.Size = new System.Drawing.Size(446, 21);
+            this.CU_ISDISPLAY.Size = new System.Drawing.Size(520, 20);
             this.CU_ISDISPLAY.TabIndex = 30;
             // 
             // CU_GETINFOFROM
             // 
             this.CU_GETINFOFROM.EditValue = "";
-            this.CU_GETINFOFROM.Location = new System.Drawing.Point(409, 156);
+            this.CU_GETINFOFROM.Location = new System.Drawing.Point(477, 182);
             this.CU_GETINFOFROM.Name = "CU_GETINFOFROM";
-            this.CU_GETINFOFROM.Size = new System.Drawing.Size(446, 21);
+            this.CU_GETINFOFROM.Size = new System.Drawing.Size(520, 20);
             this.CU_GETINFOFROM.TabIndex = 31;
             this.CU_GETINFOFROM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CU_GETINFOFROM_KeyPress);
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(347, 159);
+            this.labelControl5.Location = new System.Drawing.Point(405, 185);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(60, 14);
             this.labelControl5.TabIndex = 32;
@@ -271,7 +270,7 @@ namespace ExcelClient
             // 
             // labelControl7
             // 
-            this.labelControl7.Location = new System.Drawing.Point(347, 282);
+            this.labelControl7.Location = new System.Drawing.Point(405, 329);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(60, 14);
             this.labelControl7.TabIndex = 34;
@@ -280,7 +279,7 @@ namespace ExcelClient
             // CU_ISREQUIRED
             // 
             this.CU_ISREQUIRED.EditValue = "否";
-            this.CU_ISREQUIRED.Location = new System.Drawing.Point(409, 353);
+            this.CU_ISREQUIRED.Location = new System.Drawing.Point(477, 412);
             this.CU_ISREQUIRED.Name = "CU_ISREQUIRED";
             this.CU_ISREQUIRED.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -288,12 +287,12 @@ namespace ExcelClient
             "否",
             "是"});
             this.CU_ISREQUIRED.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.CU_ISREQUIRED.Size = new System.Drawing.Size(446, 21);
+            this.CU_ISREQUIRED.Size = new System.Drawing.Size(520, 20);
             this.CU_ISREQUIRED.TabIndex = 36;
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(347, 356);
+            this.labelControl8.Location = new System.Drawing.Point(405, 415);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(60, 14);
             this.labelControl8.TabIndex = 35;
@@ -302,14 +301,14 @@ namespace ExcelClient
             // CU_DEFAULTVALUE
             // 
             this.CU_DEFAULTVALUE.EditValue = "";
-            this.CU_DEFAULTVALUE.Location = new System.Drawing.Point(409, 380);
+            this.CU_DEFAULTVALUE.Location = new System.Drawing.Point(477, 443);
             this.CU_DEFAULTVALUE.Name = "CU_DEFAULTVALUE";
-            this.CU_DEFAULTVALUE.Size = new System.Drawing.Size(446, 21);
+            this.CU_DEFAULTVALUE.Size = new System.Drawing.Size(520, 20);
             this.CU_DEFAULTVALUE.TabIndex = 37;
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(359, 383);
+            this.labelControl9.Location = new System.Drawing.Point(419, 447);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
             this.labelControl9.TabIndex = 38;
@@ -317,32 +316,34 @@ namespace ExcelClient
             // 
             // GETINFOFROM
             // 
-            this.GETINFOFROM.Location = new System.Drawing.Point(409, 179);
+            this.GETINFOFROM.HotTrackSelectMode = DevExpress.XtraEditors.HotTrackSelectMode.SelectItemOnHotTrackEx;
+            this.GETINFOFROM.Location = new System.Drawing.Point(477, 209);
             this.GETINFOFROM.Name = "GETINFOFROM";
-            this.GETINFOFROM.Size = new System.Drawing.Size(446, 94);
+            this.GETINFOFROM.Size = new System.Drawing.Size(520, 110);
             this.GETINFOFROM.TabIndex = 39;
             this.GETINFOFROM.SelectedIndexChanged += new System.EventHandler(this.GETINFOFROM_SelectedIndexChanged);
             // 
             // CU_GETINFOWHERE
             // 
             this.CU_GETINFOWHERE.EditValue = "";
-            this.CU_GETINFOWHERE.Location = new System.Drawing.Point(409, 279);
+            this.CU_GETINFOWHERE.Location = new System.Drawing.Point(477, 325);
             this.CU_GETINFOWHERE.Name = "CU_GETINFOWHERE";
-            this.CU_GETINFOWHERE.Size = new System.Drawing.Size(446, 68);
+            this.CU_GETINFOWHERE.Size = new System.Drawing.Size(520, 79);
             this.CU_GETINFOWHERE.TabIndex = 40;
             this.CU_GETINFOWHERE.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Warning;
+            this.CU_GETINFOWHERE.UseOptimizedRendering = true;
             // 
             // CU_DISPLAYORDER
             // 
             this.CU_DISPLAYORDER.EditValue = "";
-            this.CU_DISPLAYORDER.Location = new System.Drawing.Point(409, 407);
+            this.CU_DISPLAYORDER.Location = new System.Drawing.Point(477, 475);
             this.CU_DISPLAYORDER.Name = "CU_DISPLAYORDER";
-            this.CU_DISPLAYORDER.Size = new System.Drawing.Size(446, 21);
+            this.CU_DISPLAYORDER.Size = new System.Drawing.Size(520, 20);
             this.CU_DISPLAYORDER.TabIndex = 41;
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(347, 410);
+            this.labelControl10.Location = new System.Drawing.Point(405, 478);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(60, 14);
             this.labelControl10.TabIndex = 42;
@@ -350,9 +351,9 @@ namespace ExcelClient
             // 
             // frmDefIndex
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 510);
+            this.ClientSize = new System.Drawing.Size(1025, 595);
             this.Controls.Add(this.CU_DISPLAYORDER);
             this.Controls.Add(this.labelControl10);
             this.Controls.Add(this.CU_GETINFOWHERE);

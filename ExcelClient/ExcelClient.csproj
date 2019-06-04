@@ -195,6 +195,7 @@
       <DependentUpon>frmDevQryShow.cs</DependentUpon>
     </Compile>
     <Compile Include="JSBridge\ExportModel.cs" />
+    <Compile Include="JSBridge\JSDEVObject.cs" />
     <Compile Include="JSBridge\JSLoginObject.cs" />
     <Compile Include="JSBridge\JSMainObject.cs" />
     <Compile Include="JSBridge\NPOIData.cs" />

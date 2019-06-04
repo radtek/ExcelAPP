@@ -29,7 +29,7 @@ namespace ExcelClient
         }
         private void frmDefIndex_Load(object sender, EventArgs e)
         {
-            dtHelp = getDataTable("SELECT ID F_HELP,CODE F_HEBH,NAME F_TITL FROM EAHELP");
+            dtHelp = getDataTable("SELECT ID F_HELP,CODE F_HEBH,NAME F_TITL,CodeField as CF,NameField as NF FROM EAHELP");
             bindGrid();
             setCtrlValue();
         }
@@ -121,7 +121,7 @@ FROM EACUSTOMFIELDS WHERE CLASSSETCODE='{0}'", this.ID);
             GETINFOFROM.Items.Add(" ");
             foreach (DataRow row in rows)
             {
-                GETINFOFROM.Items.Add(row[0] + "~" + row[1] + "~" + row[2]);
+                GETINFOFROM.Items.Add(row[0] + "~" + row[1] + "~" + row[2] + "~" + row[3] + "~" + row[4]);
             }
 
         }
@@ -175,7 +175,7 @@ FROM EACUSTOMFIELDS WHERE CLASSSETCODE='{0}'", this.ID);
             string selval = GETINFOFROM.SelectedItem.ToString();
             if (selval != " ")
             {
-                CU_GETINFOFROM.Text = selval.Substring(0, selval.LastIndexOf("~"));
+                CU_GETINFOFROM.Text = selval;
             }
         }
 

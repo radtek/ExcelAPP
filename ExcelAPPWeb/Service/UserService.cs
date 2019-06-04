@@ -15,8 +15,7 @@ namespace ExcelAPPWeb.Service
     public static class UserService
     {
 
-
-        public static Database Db = new Database("DataPlatformDB");
+         
 
         /// <summary>
         /// 判断是否登录
@@ -50,6 +49,8 @@ namespace ExcelAPPWeb.Service
         {
             pwd = Encrpt(pwd);
             mes = "";
+
+            Database Db = new Database("DataPlatformDB");
             var list = Db.Fetch<Model.GSPUser>(new Sql("select * from gspuser where code=@0 and password=@1", userName, pwd));
             if (list.Count > 0)
             {

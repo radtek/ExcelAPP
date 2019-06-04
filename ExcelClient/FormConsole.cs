@@ -49,8 +49,9 @@ namespace ExcelClient
         {
 
 
-            var model= DWService.GetDWData(" and lsbzdw_mx='1'");
-            if (model.data.Rows.Rows.Count > 0) {
+            var model = DWService.GetDWData(" and lsbzdw_mx='1'");
+            if (model.data.Rows.Rows.Count > 0)
+            {
                 DataRow row = model.data.Rows.Rows[0];
 
                 buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
@@ -409,6 +410,21 @@ namespace ExcelClient
             FormList[id] = form;
         }
 
+        public void openDev(string id, string name,Form form)
+        {
+            if (FormList.ContainsKey(id))
+            {
+                FormList[id].Activate();
+                return;
+            }
+            form.Text = name;
+            form.Tag = id;
+            form.MdiParent = this;
+            form.Show();
+            FormList[id] = form;
+
+        }
+
 
         private void openURL(string name, string ruleID, string url)
         {
@@ -421,6 +437,7 @@ namespace ExcelClient
             FormCef form = new FormCef();
             form.SetURL(url);
             form.Text = name;
+            form.parentFF = this;
             form.Tag = ruleID;
             form.MdiParent = this;
             form.Show();

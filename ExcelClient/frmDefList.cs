@@ -43,7 +43,7 @@ namespace ExcelClient
             //mgr.Url = "http://10.24.11.123/JTGL_PubQry/JTGLPubQry_Svr/WSGetData.asmx";
 
 
-            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            //UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             DevQryPubFun.WrapService(mgr); 
         }
 

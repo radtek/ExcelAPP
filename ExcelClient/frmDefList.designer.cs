@@ -96,7 +96,7 @@ namespace ExcelClient
             this.tbMC.EditValue = "";
             this.tbMC.Location = new System.Drawing.Point(322, 9);
             this.tbMC.Name = "tbMC";
-            this.tbMC.Size = new System.Drawing.Size(175, 21);
+            this.tbMC.Size = new System.Drawing.Size(175, 20);
             this.tbMC.TabIndex = 1;
             // 
             // labelControl3
@@ -121,7 +121,7 @@ namespace ExcelClient
             this.tbBH.EditValue = "";
             this.tbBH.Location = new System.Drawing.Point(77, 9);
             this.tbBH.Name = "tbBH";
-            this.tbBH.Size = new System.Drawing.Size(175, 21);
+            this.tbBH.Size = new System.Drawing.Size(175, 20);
             this.tbBH.TabIndex = 0;
             // 
             // labelControl1
@@ -141,7 +141,7 @@ namespace ExcelClient
             this.panelControl2.Controls.Add(this.btnadd);
             this.panelControl2.Controls.Add(this.btnEdit);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 685);
+            this.panelControl2.Location = new System.Drawing.Point(0, 684);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(1176, 65);
             this.panelControl2.TabIndex = 6;
@@ -206,7 +206,7 @@ namespace ExcelClient
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 40);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1176, 645);
+            this.panelControl3.Size = new System.Drawing.Size(1176, 644);
             this.panelControl3.TabIndex = 7;
             // 
             // gridControl1
@@ -215,7 +215,7 @@ namespace ExcelClient
             this.gridControl1.Location = new System.Drawing.Point(2, 2);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1172, 641);
+            this.gridControl1.Size = new System.Drawing.Size(1172, 640);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -280,7 +280,7 @@ namespace ExcelClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 750);
+            this.ClientSize = new System.Drawing.Size(1176, 749);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);

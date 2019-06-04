@@ -233,6 +233,7 @@
     <Compile Include="Api\rule.ashx.cs">
       <DependentUpon>rule.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Query\QueryModel.cs" />
     <Compile Include="Service\CookieHelper.cs" />
     <Compile Include="Service\CustomHelper.cs" />
     <Compile Include="Service\EARuleService.cs" />
