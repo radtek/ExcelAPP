@@ -71,7 +71,12 @@ namespace ExcelClient
         }
         public void InitTree()
         {
-            var client = new RestClient("http://localhost/excel/api/help.ashx");
+
+            var host = ConfigurationManager.AppSettings["Host"].ToString();
+            var client = new RestClient(host + "/excel/api/help.ashx");
+
+
+            //var client = new RestClient("http://localhost/excel/api/help.ashx");
             var request = new RestRequest(Method.POST);
             //request.AddHeader("Postman-Token", "ef2f2b5e-1172-4cee-8edf-ba1a35fc1971");
             //request.AddHeader("cache-control", "no-cache");

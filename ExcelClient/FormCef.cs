@@ -21,7 +21,7 @@ namespace ExcelClient
         {
             InitializeComponent();
             LoadHandler.OnLoadStart += LoadHandler_OnLoadStart;
-           
+            this.BorderWidth = 0;
         }
 
 

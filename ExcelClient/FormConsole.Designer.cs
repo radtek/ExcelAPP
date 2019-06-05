@@ -449,6 +449,7 @@
             // 
             this.mdiManager1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.mdiManager1.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.mdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.mdiManager1.Controller = this.barAndDockingController1;
             this.mdiManager1.MdiParent = this;
             this.mdiManager1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mdiManager1_MouseUp);

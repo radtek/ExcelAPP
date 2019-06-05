@@ -19,6 +19,7 @@ namespace ExcelClient
         public frmDevBBShow()
         {
             InitializeComponent();
+ 
         }
         #region  变量定义
         WsGetDataClient.WSGetData mgr = new WsGetDataClient.WSGetData();
@@ -70,6 +71,7 @@ namespace ExcelClient
 
             UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             DevQryPubFun.WrapService(mgr);
+            
 
         }
 
