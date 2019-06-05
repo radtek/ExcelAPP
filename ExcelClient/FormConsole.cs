@@ -37,6 +37,10 @@ namespace ExcelClient
             // banner.Dock = DockStyle.Fill;
             pnlTop.ResumeLayout(false);
 
+
+            DevExpress.Skins.SkinManager.EnableFormSkins();
+            DevExpress.Skins.SkinManager.EnableMdiFormSkins();
+
             //UserLookAndFeel.Default.StyleChanged += Default_StyleChanged;
 
             DevExpress.XtraEditors.WindowsFormsSettings.DefaultFont = new Font("微软雅黑", 10);
