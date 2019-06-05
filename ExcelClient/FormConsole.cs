@@ -39,8 +39,11 @@ namespace ExcelClient
 
             //UserLookAndFeel.Default.StyleChanged += Default_StyleChanged;
 
-
+            DevExpress.XtraEditors.WindowsFormsSettings.DefaultFont = new Font("微软雅黑", 10);
+            //DevExpress.Utils.AppearanceObject.DefaultFont = new System.Drawing.Font("Tahoma", 12);
             UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            pnlMain.Width = 300;
+           
 
         }
 

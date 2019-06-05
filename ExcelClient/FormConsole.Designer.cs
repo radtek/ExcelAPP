@@ -71,6 +71,8 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.mdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.pmTabbed = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).BeginInit();
             this.pnlTop.SuspendLayout();
@@ -83,12 +85,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
             this.bar3});
+            this.barManager1.Controller = this.barAndDockingController1;
             this.barManager1.DockControls.Add(this.barDockControlTop);
             this.barManager1.DockControls.Add(this.barDockControlBottom);
             this.barManager1.DockControls.Add(this.barDockControlLeft);
@@ -122,14 +126,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1189, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1093, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 550);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1189, 23);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1093, 23);
             // 
             // barDockControlLeft
             // 
@@ -142,7 +146,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1189, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1093, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 550);
             // 
             // bsiSys
@@ -186,7 +190,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1189, 35);
+            this.pnlTop.Size = new System.Drawing.Size(1093, 35);
             this.pnlTop.TabIndex = 4;
             // 
             // panelControl1
@@ -195,7 +199,7 @@
             this.panelControl1.Controls.Add(this.buttonEditDW);
             this.panelControl1.Controls.Add(this.labelControl2);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl1.Location = new System.Drawing.Point(835, 0);
+            this.panelControl1.Location = new System.Drawing.Point(739, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(354, 35);
             this.panelControl1.TabIndex = 3;
@@ -227,8 +231,8 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMain.Location = new System.Drawing.Point(0, 35);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(8, 6, 12, 4);
-            this.pnlMain.Size = new System.Drawing.Size(269, 515);
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(2);
+            this.pnlMain.Size = new System.Drawing.Size(270, 515);
             this.pnlMain.TabIndex = 5;
             // 
             // nbMain
@@ -411,11 +415,13 @@
             this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.NAME});
             this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeList1.Location = new System.Drawing.Point(8, 6);
+            this.treeList1.Location = new System.Drawing.Point(2, 2);
             this.treeList1.Name = "treeList1";
+            this.treeList1.OptionsView.ShowHorzLines = false;
+            this.treeList1.OptionsView.ShowIndicator = false;
             this.treeList1.OptionsView.ShowVertLines = false;
             this.treeList1.SelectImageList = this.imageList1;
-            this.treeList1.Size = new System.Drawing.Size(249, 505);
+            this.treeList1.Size = new System.Drawing.Size(266, 511);
             this.treeList1.TabIndex = 0;
             this.treeList1.DoubleClick += new System.EventHandler(this.treeList1_DoubleClick);
             // 
@@ -433,11 +439,17 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "png.png");
+            this.imageList1.Images.SetKeyName(0, "hl6.Appearance.Image.png");
             this.imageList1.Images.SetKeyName(1, "file.gif");
+            this.imageList1.Images.SetKeyName(2, "png.png");
+            this.imageList1.Images.SetKeyName(3, "图片1.jpg");
+            this.imageList1.Images.SetKeyName(4, "hl1.Appearance.Image.png");
             // 
             // mdiManager1
             // 
+            this.mdiManager1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.mdiManager1.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.mdiManager1.Controller = this.barAndDockingController1;
             this.mdiManager1.MdiParent = this;
             this.mdiManager1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mdiManager1_MouseUp);
             // 
@@ -450,11 +462,25 @@
             this.pmTabbed.Manager = this.barManager1;
             this.pmTabbed.Name = "pmTabbed";
             // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(270, 35);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 515);
+            this.splitter1.TabIndex = 10;
+            this.splitter1.TabStop = false;
+            // 
+            // barAndDockingController1
+            // 
+            this.barAndDockingController1.PropertiesBar.DefaultGlyphSize = new System.Drawing.Size(16, 16);
+            this.barAndDockingController1.PropertiesBar.DefaultLargeGlyphSize = new System.Drawing.Size(32, 32);
+            // 
             // FormConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1189, 573);
+            this.ClientSize = new System.Drawing.Size(1093, 573);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.barDockControlLeft);
@@ -480,6 +506,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -527,5 +554,7 @@
         private DevExpress.XtraTreeList.TreeList treeList1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn NAME;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Splitter splitter1;
+        private DevExpress.XtraBars.BarAndDockingController barAndDockingController1;
     }
 }

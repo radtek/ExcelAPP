@@ -1,6 +1,7 @@
 ﻿using NetDimension.NanUI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,8 +26,7 @@ namespace ExcelClient
             {
 
                 Bootstrap.RegisterAssemblyResources(System.Reflection.Assembly.GetExecutingAssembly());
-
-
+             
                 //frmDevQryShow frm = new frmDevQryShow();
                 //frm.ProcessID = "1";
                 //frm.PsDWBH = "0001";
