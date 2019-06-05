@@ -339,6 +339,15 @@ namespace ExcelClient
                 //MessageBox.Show(frm.strName);
                 buttonEditDW.Text = frm.strName;
                 CurDWBH = frm.strKey;
+
+                //切换单位关闭所有的窗体
+                foreach (Form f in this.MdiChildren)
+                {
+                    if (f.Tag.ToString() == "main") continue;
+
+                    FormList.Remove(f.Tag.ToString());
+                    f.Close();
+                }
             }
 
         }
