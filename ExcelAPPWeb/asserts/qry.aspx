@@ -139,7 +139,7 @@
                 para.push(row.FieldName);
                 var qvalue = $ele.leeUI().getValue();
                 value.push($ele.leeUI().getValue());
-                if (row.IsRequired = "1" && !qvalue) {
+                if (row.IsRequired == "1" && !qvalue) {
                     $.leeDialog && $.leeDialog.alert("请填写" + row.DisplayName + "的值", "", 'success');
                     return;
                 }
