@@ -56,8 +56,8 @@
                 <div id="filter_title">往来单位查询</div>
 
                 <div id="filter_line"></div>
-
-
+                
+                <div id="filter_bottom"></div>
                 <div class="table-item" style="width: 100%; line-height: 34px;">
                     <div class="table-label">
                     </div>
@@ -88,15 +88,27 @@
                 html.push('        <input id="txt' + row.FieldName + '" />');
                 html.push('    </div>');
                 html.push('  </div> ');
-                $("#filter_line").after(html.join(""));
+                $("#filter_bottom").before(html.join(""));
 
                 var $ele = $("#txt" + row.FieldName);
                 switch (row.InputType) {
                     case "0":
                         $ele.leeTextBox();
                         break;
+                    case "2":
+                        $ele.leeDate();
+                        break;
                     case "1":
                         $ele.leeTextBox({ number: true });
+                        break;
+                    case "5"://日期区间
+                        $ele.leeDate({ range: true, showType: "" });
+                        break;
+                    case "6"://月度区间
+                        $ele.leeDate({ range: true, showType: "month" });
+                        break;
+                    case "7"://年度区间
+                        $ele.leeDate({ range: true, showType: "year" });
                         break;
                     case "4":
                         var info = row.GetInfoFrom;
@@ -127,12 +139,22 @@
                 para.push(row.FieldName);
                 var qvalue = $ele.leeUI().getValue();
                 value.push($ele.leeUI().getValue());
-                if (row.IsRequired && !qvalue) {
+                if (row.IsRequired = "1" && !qvalue) {
                     $.leeDialog && $.leeDialog.alert("请填写" + row.DisplayName + "的值", "", 'success');
                     return;
                 }
-                if (qvalue != "")
-                    sqlwhere += " and " + row.FieldName + row.CMP + "'" + $ele.leeUI().getValue() + "' ";
+                if (qvalue != "") {
+
+                    if (row.InputType == "5" || row.InputType == "6" || row.InputType == "7") {
+                        var arr = qvalue.split(" - ");
+                        sqlwhere += " and (" + row.FieldName + ">='" + arr[0] + "' and " + row.FieldName + "<='" + arr[0] + "')";
+
+                    } else {
+                        sqlwhere += " and " + row.FieldName + row.CMP + "'" + $ele.leeUI().getValue() + "' ";
+                    }
+
+
+                }
 
 
             }

@@ -28,7 +28,6 @@ namespace ExcelClient
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -52,7 +51,6 @@ namespace ExcelClient
             this.colTItle = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSubTil = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDWField = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -329,7 +327,6 @@ namespace ExcelClient
         private DevExpress.XtraGrid.Columns.GridColumn colTItle;
         private DevExpress.XtraGrid.Columns.GridColumn colSubTil;
         private DevExpress.XtraGrid.Columns.GridColumn colDWField;
-        protected DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraEditors.SimpleButton btnmenu;
  
     }

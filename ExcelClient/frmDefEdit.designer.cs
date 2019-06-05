@@ -350,8 +350,6 @@ namespace ExcelClient
             this.colisusr.ColumnEdit = this.rpcmbisusr;
             this.colisusr.FieldName = "PARAMDEF_ISUSR";
             this.colisusr.Name = "colisusr";
-            this.colisusr.Visible = true;
-            this.colisusr.VisibleIndex = 3;
             this.colisusr.Width = 122;
             // 
             // rpcmbisusr
@@ -369,8 +367,6 @@ namespace ExcelClient
             this.colCMPSTR.Caption = "自定义比较符";
             this.colCMPSTR.FieldName = "PARAMDEF_CMPSTR";
             this.colCMPSTR.Name = "colCMPSTR";
-            this.colCMPSTR.Visible = true;
-            this.colCMPSTR.VisibleIndex = 4;
             this.colCMPSTR.Width = 283;
             // 
             // colord
@@ -379,7 +375,7 @@ namespace ExcelClient
             this.colord.FieldName = "PARAMDEF_ORD";
             this.colord.Name = "colord";
             this.colord.Visible = true;
-            this.colord.VisibleIndex = 5;
+            this.colord.VisibleIndex = 3;
             this.colord.Width = 70;
             // 
             // btnaddField

@@ -232,7 +232,9 @@ namespace ExcelClient
             "日期",
             "下拉列表",
             "帮助控件",
-            "年度控件"});
+            "日期区间",
+            "月度区间",
+            "年度区间"});
             this.CU_INPUTTYPE.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.CU_INPUTTYPE.Size = new System.Drawing.Size(520, 20);
             this.CU_INPUTTYPE.TabIndex = 29;

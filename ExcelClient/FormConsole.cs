@@ -272,6 +272,7 @@ namespace ExcelClient
             XtraMdiTabPage page = mdiManager1.SelectedPage;
             if (page != null)
             {
+                if (page.MdiChild.Tag.ToString() == "main") return;
                 page.MdiChild.Close();
                 FormList.Remove(page.MdiChild.Tag.ToString());
             }
@@ -282,6 +283,8 @@ namespace ExcelClient
         {
             foreach (Form f in this.MdiChildren)
             {
+                if (f.Tag.ToString() == "main") continue;
+
                 FormList.Remove(f.Tag.ToString());
                 f.Close();
             }
@@ -294,6 +297,7 @@ namespace ExcelClient
             {
                 if (f != page.MdiChild)
                 {
+                    if (f.Tag.ToString() == "main") continue;
                     FormList.Remove(f.Tag.ToString());
                     f.Close();
                     f.Dispose();
@@ -410,7 +414,7 @@ namespace ExcelClient
             FormList[id] = form;
         }
 
-        public void openDev(string id, string name,Form form)
+        public void openDev(string id, string name, Form form)
         {
             if (FormList.ContainsKey(id))
             {
@@ -442,6 +446,11 @@ namespace ExcelClient
             form.MdiParent = this;
             form.Show();
             FormList[ruleID] = form;
+        }
+
+        private void FormConsole_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

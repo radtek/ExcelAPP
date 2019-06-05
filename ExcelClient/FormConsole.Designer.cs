@@ -464,7 +464,8 @@
             this.IsMdiContainer = true;
             this.Name = "FormConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmConsole";
+            this.Text = "OMS数据交换V2.1.6";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormConsole_FormClosed);
             this.Load += new System.EventHandler(this.frmConsole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).EndInit();

@@ -254,6 +254,7 @@ create table  YZ_E_SDNOTICE_READ (READID VARCHAR2(60)  default   SYS_GUID() ,REA
 
 
 
+/*多维分析建表语句*/
 
 /*查询自定义字段*/
 
