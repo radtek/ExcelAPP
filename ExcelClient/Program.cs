@@ -26,7 +26,7 @@ namespace ExcelClient
             {
 
                 Bootstrap.RegisterAssemblyResources(System.Reflection.Assembly.GetExecutingAssembly());
-                            
+                       
                 //frmDevQryShow frm = new frmDevQryShow();
                 //frm.ProcessID = "1";
                 //frm.PsDWBH = "0001";
