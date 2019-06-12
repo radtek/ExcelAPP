@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+
+  <MuilWindow>
+    <RelationItem ID="Cascal"></RelationItem>
+    <RelationItem ID="HisPingPu"></RelationItem>
+    <RelationItem ID="VirPingPu"></RelationItem> 
+  </MuilWindow>
+
+  <Cascal> 
+    <RelationItem ID="HisPingPu"></RelationItem>
+    <RelationItem ID="VirPingPu"></RelationItem>
+  </Cascal>
+  <HisPingPu>
+    <RelationItem ID="Cascal"></RelationItem> 
+    <RelationItem ID="VirPingPu"></RelationItem>
+  </HisPingPu>
+
+  <VirPingPu>
+    <RelationItem ID="Cascal"></RelationItem>
+    <RelationItem ID="HisPingPu"></RelationItem> 
+  </VirPingPu>
+
+</Settings>

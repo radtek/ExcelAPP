@@ -1,0 +1,33 @@
+<Settings>
+  <Modules>
+    <Item ID="ecc6d7b8-68be-4af8-97de-dc180ebbdd67" Code="日常工作" Description="" Enable="true" Visible="true" Name="日常工作" ShowText="日常工作" CallType="Winfrom" Version="2" OrderNo="1" ToolTip="true" Type="模块">
+      <Item ID="37f29933-6830-4271-a546-acc715d0f124" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FormDW" MultilInstance="false" Params="" Code="FrmKqList" Description="" Image="ACLM.png" Enable="true" Visible="true" Name="日常点名" ShowText="日常点名" CallType="Winfrom" Version="3" OrderNo="1" ToolTip="true" Type="功能" />
+      <Item ID="4d1c9f0b-7af8-4931-8f4d-cce731474861" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FormDW" MultilInstance="false" Params="" Code="FrmKqListHisTory" Description="" Image="chaxungoujianqi.png" Enable="true" Visible="true" Name="点名记录" ShowText="点名记录" CallType="Winfrom" Version="2" OrderNo="2" ToolTip="true" Type="功能" />
+    </Item>
+    <Item ID="8d01518c-4dd2-404b-995a-759ec47ca57e" Code="留狱请假" Description="" Enable="true" Visible="true" Name="留狱请假" ShowText="留狱请假" CallType="Winfrom" Version="2" OrderNo="2" ToolTip="true" Type="模块">
+      <Item ID="c92e9f36-5c97-464b-ad47-e49aa145105e" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FormDW" MultilInstance="false" Params="" Code="FrmQJList" Description="" Image="BriefCase.png" Enable="true" Visible="true" Name="留狱请假" ShowText="留狱请假" CallType="Winfrom" Version="3" OrderNo="1" ToolTip="true" Type="功能" />
+      <Item ID="9742725f-da93-4df5-8c84-8c011ba91aa4" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FormDW" MultilInstance="true" Params="" Code="FrmQJListHisTory" Description="" Image="历史价格查询.png" Enable="true" Visible="true" Name="历史记录" ShowText="历史记录" CallType="Winfrom" Version="5" OrderNo="2" ToolTip="true" Type="功能" />
+    </Item>
+    <Item ID="a82b68ac-2fdf-425f-9688-c642fbdd0593" Code="外出管理" Description="" Enable="true" Visible="true" Name="外出管理" ShowText="外出管理" CallType="Winfrom" Version="1" OrderNo="3" ToolTip="true" Type="模块">
+      <Item ID="fa0ef52e-6edd-412a-ab2d-1c0e23ba6e76" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmOutList" MultilInstance="false" Params="" Code="FrmOutList" Description="" Image="ACLM.png" Enable="true" Visible="true" Name="外出管理" ShowText="外出管理" CallType="Winfrom" Version="3" OrderNo="1" ToolTip="true" Type="功能" />
+      <Item ID="4d6c993c-a9af-4ee1-95af-91f1b3c351c9" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmOutListHisTory" MultilInstance="true" Params="" Code="FrmOutListHisTory" Description="" Image="历史价格查询.png" Enable="true" Visible="true" Name="历史记录" ShowText="历史记录" CallType="Winfrom" Version="4" OrderNo="2" ToolTip="true" Type="功能" />
+    </Item>
+    <Item ID="34b80f53-fc2e-46f3-acaf-7f9afb887009" Code="物品领用" Description="" Enable="true" Visible="true" Name="物品领用" ShowText="物品领用" CallType="Winfrom" Version="2" OrderNo="4" ToolTip="true" Type="模块">
+      <Item ID="815cc304-6c09-4962-93c4-c3813117dae8" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmMaterialOutList" MultilInstance="false" Params="" Code="FrmMaterialOutList" Description="" Image="导入付款记录.png" Enable="true" Visible="true" Name="物品领用" ShowText="物品领用" CallType="Winfrom" Version="4" OrderNo="1" ToolTip="true" Type="功能" />
+      <Item ID="d86be531-8196-4a83-b6e9-1732023ae9c8" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmMaterialOutListHisTory" MultilInstance="true" Params="" Code="FrmMaterialOutListHisTory" Description="" Image="历史价格查询.png" Enable="true" Visible="true" Name="历史记录" ShowText="历史记录" CallType="Winfrom" Version="4" OrderNo="2" ToolTip="true" Type="功能" />
+      <Item ID="d5f603e3-3df7-4c1c-b881-12d041c6d938" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmMaterialInfo" MultilInstance="false" Params="" Code="FrmMaterialInfo" Description="" Image="采购合同.png" Enable="true" Visible="true" Name="物品信息" ShowText="物品信息" CallType="Winfrom" Version="3" OrderNo="3" ToolTip="true" Type="功能" />
+    </Item>
+    <Item ID="fc6e3917-c308-4408-9792-a29aa7885750" Code="JBXX" Description="" Enable="true" Visible="true" Name="基本信息" ShowText="基本信息" CallType="Winfrom" Version="3" OrderNo="5" ToolTip="true" Type="模块">
+      <Item ID="ee906f62-ab5d-41d5-8600-8b9e0c675aeb" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmCriminalInfoList" MultilInstance="false" Params="" Code="FrmCriminalInfoList" Description="" Image="ACLM.png" Enable="true" Visible="true" Name="罪犯信息" ShowText="罪犯信息" CallType="Winfrom" Version="2" OrderNo="1" ToolTip="true" Type="功能" />
+      <Item ID="d9dd093d-e267-45b3-aac5-81a754d6ab69" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmUserInfo" MultilInstance="false" Params="" Code="Frm_PersonInfoList" Description="" Image="OnLineUser.png" Enable="true" Visible="true" Name="干警信息" ShowText="干警信息" CallType="Winfrom" Version="7" OrderNo="2" ToolTip="true" Type="功能" />
+      <Item ID="9b35e3a9-d0ca-4e8a-8490-4df8706e21af" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmGJPB" MultilInstance="false" Params="" Code="FrmGJPB" Description="" Image="OnLineUser.png" Enable="true" Visible="true" Name="值班表" ShowText="值班表" CallType="Winfrom" Version="2" OrderNo="3" ToolTip="true" Type="功能" />
+      <Item ID="673ea281-c93c-428d-b041-eba7baf8bc11" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmDevice" MultilInstance="false" Params="" Code="FrmDevice" Description="" Image="Code.png" Enable="true" Visible="true" Name="设备管理" ShowText="设备管理" CallType="Winfrom" Version="1" OrderNo="4" ToolTip="true" Type="功能" />
+      <Item ID="ccecff18-bda0-4023-80be-7fcdd9145cf3" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmKQTimeSet" MultilInstance="false" Params="" Code="FrmKQTimeSet" Description="" Image="configModel.png" Enable="true" Visible="true" Name="时间设置" ShowText="时间设置" CallType="Winfrom" Version="2" OrderNo="5" ToolTip="true" Type="功能" />
+      <Item ID="6f350e92-5e2f-4f5f-8720-68170ce2d4d0" CallAssembly="ExcelClient.exe" CallClassOrUrl="ExcelClient.FrmAlertMisuc" MultilInstance="false" Params="" Code="FrmAlertMisuc" Description="" Image="BriefCase.png" Enable="true" Visible="true" Name="提醒设置" ShowText="提醒设置" CallType="Winfrom" Version="2" OrderNo="6" ToolTip="true" Type="功能" />
+    </Item>
+
+  </Modules>
+  <DockPanels>
+    <Item ID="b2281f87-56b5-42eb-ae71-93fdf0928942" CallAssembly="Gold.dll" CallClassOrUrl="Gold.DockPanel.NaviDockPanel" MultilInstance="false" Params="" Code="FuncNavigator" Description="" Enable="true" Visible="true" Name="功能导航" ShowText="功能导航" CallType="Winfrom" Version="7" OrderNo="8" DockingStyle="Left" GroupType="" ToolTip="true" Type="停靠窗口" />
+  </DockPanels>
+</Settings>

@@ -1,12 +1,13 @@
 ﻿using Chromium.WebBrowser;
+using Gold;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-
+using System.Windows.Forms;
+using System.Xml; 
 namespace ExcelClient.JSBridge
 {
     class JSLoginObject : JSObject
@@ -105,10 +106,24 @@ namespace ExcelClient.JSBridge
                 UserInfo.Cookie = cookie;
             }
 
+            parentForm.DialogResult = System.Windows.Forms.DialogResult.OK;
+         parentForm.Hide();
+            dynamic t = null;
+            try
+            {
+                Desktop.Instance.Initialize();
+                //var form2 = new FormConsole();
+                  t = Desktop.Instance.MainWindow;
 
-            parentForm.Hide();
-            var form2 = new FormConsole();
-            form2.Show(parentForm);
+
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                
+            }
+            t.Show();
             return;
 
 

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+
+  <!--首页部分-->
+  <Start>
+    
+    <Module ID="StartId" Name="首页"   CallAssembly="Gold.dll" CallClassOrUrl="Gold.XtraForm1"
+            Description="首页信息" 
+            MenuID="Start"
+            ToolBarID="Start"  Target="MainFrame" Url=""   /> 
+  </Start>
+
+  <!--默认菜单-->
+  <Default>
+    <Module ID="DefaultMenu" Name="默认菜单"   Assembly="" Class=""
+            Description="默认菜单信息"
+            MenuFile="DefaultMenu\DefaultMenu.xml"
+            MenuID="Default"
+            ToolBarID="Default"  Target="MainFrame" Url=""   />
+
+  </Default>
+
+  <!--停靠窗口-->
+  <DockPanels>
+    <Module ID="Funtion" Name="功能导航"   Assembly="Gold.dll" Class="Gold.DockPanel.NaviDockPanel"
+            Description="功能导航"
+                 Dock="Left" Group="1" Enabled="false" Visible="true"
+                  MenuFile="FuctionSet\Moudle.xml" />
+
+  </DockPanels>
+
+  <!--组件部分-->
+  <Compontents>
+    <Component ID="User" Name="用户" Image="ItemMaster.gif">
+      <DataModule Assembly="ProductManager.dll" Class="">
+      </DataModule>
+      <ManagerModule Assembly="Wit.BaseModule.Organize.dll" Class="Wit.BaseModule.Organize.UserManager">
+      </ManagerModule>
+      <PropertyForm Assembly="" Class="">
+      </PropertyForm>
+      <WebPropertyForm Address="">
+      </WebPropertyForm>
+    </Component>
+
+    <Component ID="Access" Name="权限控制" Image="ItemMaster.gif">
+      <DataModule Assembly="ProductManager.dll" Class="">
+      </DataModule>
+      <ManagerModule Assembly="Wit.BaseModule.Organize.dll" Class="Wit.BaseModule.Organize.UserManager">
+      </ManagerModule>
+      <PropertyForm Assembly="" Class="">
+      </PropertyForm>
+      <WebPropertyForm Address="">
+      </WebPropertyForm>
+    </Component>
+  </Compontents>
+
+</Settings>

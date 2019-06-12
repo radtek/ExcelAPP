@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <System>
+    <SystemTitle Text=" " IsShowUserInfo="false" FirstLogin="true" Image="image1.ico" />
+    <AboutWindow Title="关于Sharp框架" TitleImage="MBase.ico" ContentImage="AboutContent.jpg" Email="luyonglie@163.com" ContentText="Sharp测试版" CompanyName="北京风云科技" ProccesName="Sharp框架" Warning="本计算机程序受著作权法和国际条约保护，如未经授权而擅自复制\r\n或传播本程序（或其中任何部分），将受到严厉的民事和刑事制裁，\r\n并将在法律许可的最大限度内受到起诉。" />
+    <SysHelp Name="操作手册.doc" />
+    <SkinName Name="Blue" />
+    <Logon Assembly="ExcelClient.exe" Class="ExcelClient.Login" />
+    <Purview Assembly="Gold.dll" Class="Gold.PurviewManagers.AccControlNull" />
+    <Organize Assembly="Wit.Log.dll" Class="Wit.Log.LogFacade" />
+    <SafeCheck Assembly="Gold.dll" Class="Gold.SafeSessionCheck.SafeNull" />
+    <DefaultLog Assembly="Wit.Log.dll" Class="Wit.Log.LogFacade" />
+  </System>
+  <Custom>
+    <SystemVersionCheck Tzm="-999" End="2015/11/24 14:05:15" />
+    <updatesqlkey currentVersion="3" />
+    <logType type="0" />
+    <CDMASet COM="COM3" route="9600" />
+  </Custom>
+</Settings>
