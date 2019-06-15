@@ -94,10 +94,6 @@
     <Reference Include="DevExpress.XtraTreeList.v14.1">
       <HintPath>refdll\DevExpress.XtraTreeList.v14.1.dll</HintPath>
     </Reference>
-    <Reference Include="Gold, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Gold.DLL</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -134,6 +130,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -154,6 +151,7 @@
     <Compile Include="CommFun\DevPrint.cs" />
     <Compile Include="CommFun\DevQryPubFun.cs" />
     <Compile Include="CommFun\JsonConvert.cs" />
+    <Compile Include="CommFun\JsonWebToken.cs" />
     <Compile Include="CommFun\LocalDataOper.cs" />
     <Compile Include="CommFun\ReflectClass.cs" />
     <Compile Include="CommFun\ReflectForm.cs" />
@@ -184,6 +182,12 @@
     </Compile>
     <Compile Include="FormConsole.Designer.cs">
       <DependentUpon>FormConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormR.Designer.cs">
+      <DependentUpon>FormR.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDefEdit.cs">
       <SubType>Form</SubType>
@@ -264,6 +268,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestService\DWService.cs" />
+    <Compile Include="RestService\FuncService.cs" />
     <Compile Include="ucBanner.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -284,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormConsole.resx">
       <DependentUpon>FormConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormR.resx">
+      <DependentUpon>FormR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDefEdit.resx">
       <DependentUpon>frmDefEdit.cs</DependentUpon>
@@ -318,9 +326,6 @@
     <EmbeddedResource Include="ucBanner.resx">
       <DependentUpon>ucBanner.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Config\System\操作手册.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -352,152 +357,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\FuctionSet\Moudle -明文.xml" />
-    <Content Include="Config\FuctionSet\Moudle.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\37f29933-6830-4271-a546-acc715d0f124.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\4d1c9f0b-7af8-4931-8f4d-cce731474861.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\4d6c993c-a9af-4ee1-95af-91f1b3c351c9.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\673ea281-c93c-428d-b041-eba7baf8bc11.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\6f350e92-5e2f-4f5f-8720-68170ce2d4d0.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\815cc304-6c09-4962-93c4-c3813117dae8.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\96416063-98ea-413b-81e1-fc572582f757.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\9742725f-da93-4df5-8c84-8c011ba91aa4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\9b35e3a9-d0ca-4e8a-8490-4df8706e21af.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\b64e66fa-4e2e-4c6e-9372-8d3e132311e5.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\c92e9f36-5c97-464b-ad47-e49aa145105e.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\ccecff18-bda0-4023-80be-7fcdd9145cf3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\d5f603e3-3df7-4c1c-b881-12d041c6d938.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\d86be531-8196-4a83-b6e9-1732023ae9c8.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\d9dd093d-e267-45b3-aac5-81a754d6ab69.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\deb68fd9-5a2c-40c7-8776-d20548e92e62.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\DefaultMenu\DefaultMenu.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\ee906f62-ab5d-41d5-8600-8b9e0c675aeb.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\fa0ef52e-6edd-412a-ab2d-1c0e23ba6e76.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\RelationMenuItemSeting\RelationMenuItemSeting.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\Menu\StartId.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\System\FrameWorkSetting.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Config\System\Init.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.BonusSkins.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.Charts.v10.2.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.Data.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.OfficeSkins.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.PivotGrid.v10.2.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.RichEdit.v10.2.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.Utils.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.Xpo.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraBars.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraCharts.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraEditors.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraGrid.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraLayout.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraNavBar.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraPivotGrid.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraReports.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraRichEdit.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraScheduler.v10.2.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraScheduler.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraTreeList.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraVerticalGrid.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevExpress.XtraWizard.v10.2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DevPressChineseLanguage.DLL">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Gold.DLL">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Images\144.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1714,14 +1573,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\NanUI.png" />
-    <Content Include="Sharp.Common.DLL">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Sharp.Data.DLL">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="加密解密工具\Sharp.Common.dll" />
-    <Content Include="加密解密工具\test.exe" />
+    <None Include="Resources\图片1.jpg" />
     <None Include="Web References\WsGetDataClient\WSGetData.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -1743,9 +1595,7 @@
       <CachedSettingsPropName>ExcelClient_WsGetDataClient_WSGetData</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="refdll\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NetDimension.NanUI.Cef3239.3.3239.1723.0\build\NetDimension.NanUI.Cef3239.targets" Condition="Exists('..\packages\NetDimension.NanUI.Cef3239.3.3239.1723.0\build\NetDimension.NanUI.Cef3239.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

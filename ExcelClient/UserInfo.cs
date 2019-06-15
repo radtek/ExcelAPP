@@ -11,6 +11,7 @@ namespace ExcelClient
 
         public static string UserName = "";
         public static string UserCode = "";
+        public static string UserId = "";
         public static string Cookie = "";
     }
 }

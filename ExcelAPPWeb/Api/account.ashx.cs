@@ -24,8 +24,10 @@ namespace ExcelAPPWeb
                 var usercode = context.Request.Form.Get("usercode");
                 var pwd = context.Request.Form.Get("pwd");
                 var msg = "";
-                var flag = UserService.CheckUser(usercode, pwd, out msg);
-                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = flag, msg = msg }));
+                string userCode = "";
+                string userId = "";
+                var flag = UserService.CheckUser(usercode, pwd, out msg, out userId, out userCode);
+                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new { res = flag, msg = msg, userCode, userId }));
             }
             catch (Exception ex)
             {

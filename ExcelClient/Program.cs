@@ -1,7 +1,5 @@
 ﻿using DevExpress.Skins;
 using DevExpress.UserSkins;
-using Gold.Service;
-using Gold.Utils;
 using NetDimension.NanUI;
 using System;
 using System.Collections.Generic;
@@ -25,18 +23,18 @@ namespace ExcelClient
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-          SkinManager.EnableFormSkins();
+            //SkinManager.EnableFormSkins();
             SkinManager.EnableMdiFormSkins();
-            SkinManager.EnableFormSkinsIfNotVista(); 
-          BonusSkins.Register();
+            SkinManager.EnableFormSkinsIfNotVista();
+            BonusSkins.Register();
             OfficeSkins.Register();
 
 
-          
-            DictionOrFilePathOperator.UserNo = "root";
-            ServiceManager.ResourceService.ImagesPath = AppDomain.CurrentDomain.BaseDirectory + "Images\\";
 
-            string systemProperty = ServiceManager.SystemService.GetSystemProperty("SystemTitle", "FirstLogin");
+            //DictionOrFilePathOperator.UserNo = "root";
+            // ServiceManager.ResourceService.ImagesPath = AppDomain.CurrentDomain.BaseDirectory + "Images\\";
+
+            //string systemProperty = ServiceManager.SystemService.GetSystemProperty("SystemTitle", "FirstLogin");
 
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-CN");
@@ -73,6 +71,6 @@ namespace ExcelClient
         }
 
 
-         
+
     }
 }

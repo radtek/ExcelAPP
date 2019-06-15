@@ -69,7 +69,7 @@ namespace ExcelClient
 
 
 
-            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            //UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             DevQryPubFun.WrapService(mgr);
             
 

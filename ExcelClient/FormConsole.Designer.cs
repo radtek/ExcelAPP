@@ -32,6 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsole));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar3 = new DevExpress.XtraBars.Bar();
+            this.skinBarSubItem1 = new DevExpress.XtraBars.SkinBarSubItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -43,9 +47,13 @@
             this.bsiSkin = new DevExpress.XtraBars.BarSubItem();
             this.pnlTop = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.buttonEditDW = new DevExpress.XtraEditors.ButtonEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.pnlMain = new DevExpress.XtraEditors.PanelControl();
+            this.treeList1 = new DevExpress.XtraTreeList.TreeList();
+            this.NAME = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.nbMain = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgBusiness = new DevExpress.XtraNavBar.NavBarGroup();
             this.nbiSale = new DevExpress.XtraNavBar.NavBarItem();
@@ -66,14 +74,14 @@
             this.nbiRBAC = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiDatabase = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiLog = new DevExpress.XtraNavBar.NavBarItem();
-            this.treeList1 = new DevExpress.XtraTreeList.TreeList();
-            this.NAME = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.mdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.pmTabbed = new DevExpress.XtraBars.PopupMenu(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
+            this.serviceController1 = new System.ServiceProcess.ServiceController();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).BeginInit();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -81,11 +89,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditDW.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).BeginInit();
             this.pnlMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -103,8 +112,11 @@
             this.biClose,
             this.biCloseAll,
             this.biCloseAllExcept,
-            this.bsiSkin});
-            this.barManager1.MaxItemId = 5;
+            this.bsiSkin,
+            this.skinBarSubItem1,
+            this.barHeaderItem1,
+            this.barStaticItem1});
+            this.barManager1.MaxItemId = 10;
             this.barManager1.StatusBar = this.bar3;
             this.barManager1.Merge += new DevExpress.XtraBars.BarManagerMergeEventHandler(this.barManager1_Merge);
             this.barManager1.UnMerge += new DevExpress.XtraBars.BarManagerMergeEventHandler(this.barManager1_UnMerge);
@@ -116,38 +128,69 @@
             this.bar3.DockCol = 0;
             this.bar3.DockRow = 0;
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.skinBarSubItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barHeaderItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1)});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
             this.bar3.Text = "状态栏";
+            // 
+            // skinBarSubItem1
+            // 
+            this.skinBarSubItem1.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
+            this.skinBarSubItem1.Caption = "皮肤";
+            this.skinBarSubItem1.Glyph = ((System.Drawing.Image)(resources.GetObject("skinBarSubItem1.Glyph")));
+            this.skinBarSubItem1.Id = 5;
+            this.skinBarSubItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("skinBarSubItem1.LargeGlyph")));
+            this.skinBarSubItem1.Name = "skinBarSubItem1";
+            // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "当前用户：";
+            this.barHeaderItem1.Id = 7;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "User";
+            this.barStaticItem1.Id = 8;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barAndDockingController1
+            // 
+            this.barAndDockingController1.PropertiesBar.DefaultGlyphSize = new System.Drawing.Size(16, 16);
+            this.barAndDockingController1.PropertiesBar.DefaultLargeGlyphSize = new System.Drawing.Size(32, 32);
             // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1093, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(931, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 550);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1093, 23);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 501);
+            this.barDockControlBottom.Size = new System.Drawing.Size(931, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 550);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 501);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1093, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 550);
+            this.barDockControlRight.Location = new System.Drawing.Point(931, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 501);
             // 
             // bsiSys
             // 
@@ -185,39 +228,53 @@
             // 
             // pnlTop
             // 
+            this.pnlTop.Appearance.BackColor = System.Drawing.Color.DodgerBlue;
+            this.pnlTop.Appearance.Options.UseBackColor = true;
             this.pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlTop.Controls.Add(this.panelControl1);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1093, 35);
+            this.pnlTop.Size = new System.Drawing.Size(931, 23);
             this.pnlTop.TabIndex = 4;
+            this.pnlTop.Visible = false;
+            this.pnlTop.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTop_Paint);
             // 
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.buttonEditDW);
-            this.panelControl1.Controls.Add(this.labelControl2);
+            this.panelControl1.Controls.Add(this.simpleButton1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl1.Location = new System.Drawing.Point(739, 0);
+            this.panelControl1.Location = new System.Drawing.Point(446, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(354, 35);
+            this.panelControl1.Size = new System.Drawing.Size(485, 23);
             this.panelControl1.TabIndex = 3;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(452, 1);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(21, 22);
+            this.simpleButton1.TabIndex = 3;
+            this.simpleButton1.Text = "X";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // buttonEditDW
             // 
-            this.buttonEditDW.Location = new System.Drawing.Point(59, 8);
+            this.buttonEditDW.Location = new System.Drawing.Point(3, 22);
             this.buttonEditDW.MenuManager = this.barManager1;
             this.buttonEditDW.Name = "buttonEditDW";
             this.buttonEditDW.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEditDW.Size = new System.Drawing.Size(283, 20);
+            this.buttonEditDW.Size = new System.Drawing.Size(247, 20);
             this.buttonEditDW.TabIndex = 1;
             this.buttonEditDW.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditDW_ButtonClick);
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(5, 10);
+            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.labelControl2.LineColor = System.Drawing.Color.Black;
+            this.labelControl2.Location = new System.Drawing.Point(7, 5);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(48, 14);
             this.labelControl2.TabIndex = 2;
@@ -226,14 +283,49 @@
             // pnlMain
             // 
             this.pnlMain.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlMain.Controls.Add(this.nbMain);
-            this.pnlMain.Controls.Add(this.treeList1);
+            this.pnlMain.Controls.Add(this.panel2);
+            this.pnlMain.Controls.Add(this.panel1);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMain.Location = new System.Drawing.Point(0, 35);
+            this.pnlMain.Location = new System.Drawing.Point(0, 23);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(2);
-            this.pnlMain.Size = new System.Drawing.Size(270, 515);
+            this.pnlMain.Size = new System.Drawing.Size(270, 478);
             this.pnlMain.TabIndex = 5;
+            // 
+            // treeList1
+            // 
+            this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.NAME});
+            this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeList1.Location = new System.Drawing.Point(0, 0);
+            this.treeList1.Name = "treeList1";
+            this.treeList1.OptionsView.ShowHorzLines = false;
+            this.treeList1.OptionsView.ShowIndicator = false;
+            this.treeList1.OptionsView.ShowVertLines = false;
+            this.treeList1.SelectImageList = this.imageList1;
+            this.treeList1.Size = new System.Drawing.Size(266, 426);
+            this.treeList1.TabIndex = 0;
+            this.treeList1.DoubleClick += new System.EventHandler(this.treeList1_DoubleClick);
+            // 
+            // NAME
+            // 
+            this.NAME.Caption = "菜单名称";
+            this.NAME.FieldName = "NAME";
+            this.NAME.MinWidth = 33;
+            this.NAME.Name = "NAME";
+            this.NAME.OptionsColumn.AllowEdit = false;
+            this.NAME.Visible = true;
+            this.NAME.VisibleIndex = 0;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "hl6.Appearance.Image.png");
+            this.imageList1.Images.SetKeyName(1, "file.gif");
+            this.imageList1.Images.SetKeyName(2, "png.png");
+            this.imageList1.Images.SetKeyName(3, "图片1.jpg");
+            this.imageList1.Images.SetKeyName(4, "hl1.Appearance.Image.png");
             // 
             // nbMain
             // 
@@ -260,7 +352,7 @@
             this.nbiLog,
             this.navBarItem1});
             this.nbMain.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
-            this.nbMain.Location = new System.Drawing.Point(84, 332);
+            this.nbMain.Location = new System.Drawing.Point(564, 341);
             this.nbMain.Name = "nbMain";
             this.nbMain.OptionsNavPane.ExpandedWidth = 54;
             this.nbMain.OptionsNavPane.ShowOverflowButton = false;
@@ -410,41 +502,6 @@
             this.nbiLog.LargeImage = ((System.Drawing.Image)(resources.GetObject("nbiLog.LargeImage")));
             this.nbiLog.Name = "nbiLog";
             // 
-            // treeList1
-            // 
-            this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.NAME});
-            this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeList1.Location = new System.Drawing.Point(2, 2);
-            this.treeList1.Name = "treeList1";
-            this.treeList1.OptionsView.ShowHorzLines = false;
-            this.treeList1.OptionsView.ShowIndicator = false;
-            this.treeList1.OptionsView.ShowVertLines = false;
-            this.treeList1.SelectImageList = this.imageList1;
-            this.treeList1.Size = new System.Drawing.Size(266, 511);
-            this.treeList1.TabIndex = 0;
-            this.treeList1.DoubleClick += new System.EventHandler(this.treeList1_DoubleClick);
-            // 
-            // NAME
-            // 
-            this.NAME.Caption = "菜单名称";
-            this.NAME.FieldName = "NAME";
-            this.NAME.MinWidth = 33;
-            this.NAME.Name = "NAME";
-            this.NAME.OptionsColumn.AllowEdit = false;
-            this.NAME.Visible = true;
-            this.NAME.VisibleIndex = 0;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "hl6.Appearance.Image.png");
-            this.imageList1.Images.SetKeyName(1, "file.gif");
-            this.imageList1.Images.SetKeyName(2, "png.png");
-            this.imageList1.Images.SetKeyName(3, "图片1.jpg");
-            this.imageList1.Images.SetKeyName(4, "hl1.Appearance.Image.png");
-            // 
             // mdiManager1
             // 
             this.mdiManager1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -465,22 +522,39 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(270, 35);
+            this.splitter1.Location = new System.Drawing.Point(270, 23);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 515);
+            this.splitter1.Size = new System.Drawing.Size(3, 478);
             this.splitter1.TabIndex = 10;
             this.splitter1.TabStop = false;
             // 
-            // barAndDockingController1
+            // panel1
             // 
-            this.barAndDockingController1.PropertiesBar.DefaultGlyphSize = new System.Drawing.Size(16, 16);
-            this.barAndDockingController1.PropertiesBar.DefaultLargeGlyphSize = new System.Drawing.Size(32, 32);
+            this.panel1.Controls.Add(this.buttonEditDW);
+            this.panel1.Controls.Add(this.labelControl2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(266, 48);
+            this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.treeList1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(2, 50);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(266, 426);
+            this.panel2.TabIndex = 2;
             // 
             // FormConsole
             // 
+            this.Appearance.BackColor = System.Drawing.Color.White;
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 573);
+            this.ClientSize = new System.Drawing.Size(931, 528);
+            this.Controls.Add(this.nbMain);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlTop);
@@ -495,19 +569,21 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormConsole_FormClosed);
             this.Load += new System.EventHandler(this.frmConsole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).EndInit();
             this.pnlTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditDW.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).EndInit();
             this.pnlMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nbMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nbMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -557,5 +633,12 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Splitter splitter1;
         private DevExpress.XtraBars.BarAndDockingController barAndDockingController1;
+        private System.ServiceProcess.ServiceController serviceController1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraBars.SkinBarSubItem skinBarSubItem1;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

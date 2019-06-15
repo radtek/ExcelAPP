@@ -21,7 +21,7 @@ namespace ExcelClient
     public partial class FormConsole : DevExpress.XtraEditors.XtraForm
     {
         private DevExpress.XtraNavBar.NavBarGroup nbgBase1;
-
+        int x, y;
         public FormConsole()
         {
             InitializeComponent();
@@ -45,12 +45,35 @@ namespace ExcelClient
 
             DevExpress.XtraEditors.WindowsFormsSettings.DefaultFont = new Font("微软雅黑", 10);
             //DevExpress.Utils.AppearanceObject.DefaultFont = new System.Drawing.Font("Tahoma", 12);
-            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
-            pnlMain.Width = 300;
-           
+            UserLookAndFeel.Default.SetSkinStyle("Office 2010 ");
+            pnlMain.Width = 290;
+
+            barStaticItem1.Caption = UserInfo.UserName;
+
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.ShowInTaskbar = false;
+
+            //this.pnlTop.MouseDown += FrmLogin_MouseDown;
+            //this.pnlTop.MouseMove += FrmLogin_MouseMove;
+
+            //this.WindowState = FormWindowState.Normal;
 
         }
-
+        void FrmLogin_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                this.Location = new Point(this.Location.X + (e.X - x), this.Location.Y + (e.Y - y));
+            }
+        }
+        void FrmLogin_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                x = e.X;
+                y = e.Y;
+            }
+        }
 
         public void InitDW()
         {
@@ -67,32 +90,18 @@ namespace ExcelClient
 
         }
 
-        public class FuncModel
-        {
+        //public class FuncModel
+        //{
 
-            public string res { get; set; }
-            public DataTable data { get; set; }
-        }
+        //    public string res { get; set; }
+        //    public DataTable data { get; set; }
+        //}
         public void InitTree()
         {
-
-            var host = ConfigurationManager.AppSettings["Host"].ToString();
-            var client = new RestClient(host + "/excel/api/help.ashx");
+            FuncService svr = new FuncService();
 
 
-            //var client = new RestClient("http://localhost/excel/api/help.ashx");
-            var request = new RestRequest(Method.POST);
-            //request.AddHeader("Postman-Token", "ef2f2b5e-1172-4cee-8edf-ba1a35fc1971");
-            //request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            //request.AddHeader("SessionId", "1ef7d3b2-6ef1-4e39-8dc6-50eb6976c76");
-
-            request.AddParameter("op", "GetFunc");
-
-            //request.AddParameter("application/x-www-form-urlencoded", "file=444&key=6QGVVkEJkH1d8oiMtvboPc&secret=36a837aacbd14026861c22ac9ae07de6&pid=2", ParameterType.RequestBody);
-            //IRestResponse<FuncModel> response = client.Execute<FuncModel>(request);
-            IRestResponse response = client.Execute(request);
-            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<FuncModel>(response.Content);
+            var model = svr.GetMenuList();
 
             treeList1.ParentFieldName = "Pid";
             treeList1.CustomDrawNodeImages += treeList_CustomDrawNodeImages;
@@ -472,6 +481,16 @@ namespace ExcelClient
         private void FormConsole_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pnlTop_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

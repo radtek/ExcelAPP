@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace ExcelAPPWeb.Service
 {
-    
+
     /// <summary>
     /// 用户服务 登录 等操作
     /// </summary>
     public static class UserService
     {
 
-         
+
 
         /// <summary>
         /// 判断是否登录
@@ -45,16 +45,19 @@ namespace ExcelAPPWeb.Service
         /// <param name="pwd"></param>
         /// <param name="mes"></param>
         /// <returns></returns>
-        public static bool CheckUser(string userName, string pwd, out string mes)
+        public static bool CheckUser(string userName, string pwd, out string mes, out string userId, out string userCode)
         {
             pwd = Encrpt(pwd);
             mes = "";
-
+            userId = "";
+            userCode = "";
             Database Db = new Database("DataPlatformDB");
             var list = Db.Fetch<Model.GSPUser>(new Sql("select * from gspuser where code=@0 and password=@1", userName, pwd));
             if (list.Count > 0)
             {
                 SetLoginInfo(list[0]);
+                userId = list[0].Id;
+                userCode = list[0].Code;
                 return true;
             }
             else
@@ -161,8 +164,8 @@ namespace ExcelAPPWeb.Service
 
             var user = Newtonsoft.Json.JsonConvert.DeserializeObject<Model.GSPUser>(payloadJson);
 
-             
-            return user; 
+
+            return user;
         }
         private static byte[] Base64UrlDecode(string input)
         {

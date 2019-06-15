@@ -1,5 +1,4 @@
 ﻿using Chromium.WebBrowser;
-using Gold;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml; 
+using System.Xml;
 namespace ExcelClient.JSBridge
 {
     class JSLoginObject : JSObject
@@ -51,9 +50,9 @@ namespace ExcelClient.JSBridge
             {
                 XmlDocument xDoc = new XmlDocument();
                 //获取App.config文件绝对路径
-                String basePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                string basePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
                 basePath = basePath.Substring(0, basePath.Length - 10);
-                String path = basePath + "App.config";
+                string path = basePath + "App.config";
                 xDoc.Load(path);
 
                 XmlNode xNode;
@@ -102,31 +101,54 @@ namespace ExcelClient.JSBridge
         {
             if (e.Arguments.Length > 0)
             {
+                var a1 = e.Arguments[0].ToString();
                 var cookie = e.Arguments[1].ToString();
                 UserInfo.Cookie = cookie;
+                SetUserContext(cookie);
             }
 
             parentForm.DialogResult = System.Windows.Forms.DialogResult.OK;
-         parentForm.Hide();
-            dynamic t = null;
-            try
+            parentForm.Hide();
+
+            var form2 = new FormConsole();
+            form2.Show();
+
+
+
+        }
+
+
+
+        private void SetUserContext(string cookie)
+        {
+
+            cookie = cookie.Replace("EAToken=", "");
+            JsonWebToken.Decode(cookie, "XB#4%", true);
+            var parts = cookie.Split('.');
+            //if (parts.Length != 3) throw new Exception("invalid Session Info!");
+            var payload = parts[1];
+            var payloadJson = Encoding.UTF8.GetString(Base64UrlDecode(payload));
+            var user = Newtonsoft.Json.JsonConvert.DeserializeObject<Model.GSPUser>(payloadJson);
+            UserInfo.UserCode = user.Code;
+            UserInfo.UserName = user.Name;
+            UserInfo.UserId = user.Id;
+
+        }
+
+        private static byte[] Base64UrlDecode(string input)
+        {
+            var output = input;
+            output = output.Replace('-', '+'); // 62nd char of encoding  
+            output = output.Replace('_', '/'); // 63rd char of encoding  
+            switch (output.Length % 4) // Pad with trailing '='s  
             {
-                Desktop.Instance.Initialize();
-                //var form2 = new FormConsole();
-                  t = Desktop.Instance.MainWindow;
-
-
-              
+                case 0: break; // No pad chars in this case  
+                case 2: output += "=="; break; // Two pad chars  
+                case 3: output += "="; break; // One pad char  
+                default: throw new System.Exception("Illegal base64url string!");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                
-            }
-            t.Show();
-            return;
-
-
+            var converted = Convert.FromBase64String(output); // Standard base64 decoder  
+            return converted;
         }
 
 
