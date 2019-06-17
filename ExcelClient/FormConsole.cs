@@ -26,8 +26,7 @@ namespace ExcelClient
         {
             InitializeComponent();
 
-            InitTree();
-            InitDW();
+          
             pnlTop.SuspendLayout();
             /* --最后Add的优先级最高-- */
             // pnlTop.Controls.Add(banner);
@@ -61,7 +60,7 @@ namespace ExcelClient
             //this.WindowState = FormWindowState.Normal;
 
         }
- 
+
         public void InitDW()
         {
 
@@ -73,6 +72,7 @@ namespace ExcelClient
 
                 buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
                 CurDWBH = row["LSBZDW_DWBH"].ToString();
+                frmLogin.setCookie("GSDWBH", CurDWBH);
             }
 
         }
@@ -131,6 +131,11 @@ namespace ExcelClient
 
         private void frmConsole_Load(object sender, EventArgs e)
         {
+
+
+            InitTree();
+            InitDW();
+
 
             // 打开首页
             var host = ConfigurationManager.AppSettings["Host"].ToString();
@@ -295,11 +300,23 @@ namespace ExcelClient
         {
             foreach (Form f in this.MdiChildren)
             {
-                if (f.Tag.ToString() == "main") continue;
+                //if (f.Tag.ToString() == "main") continue;
 
                 FormList.Remove(f.Tag.ToString());
                 f.Close();
             }
+        }
+
+        private void mdiManager1_PageRemoved(object sender, MdiTabPageEventArgs e)
+        {
+            XtraMdiTabPage page = e.Page;
+            if (page != null)
+            {
+                //if (page.MdiChild.Tag.ToString() == "main") return;
+                FormList.Remove(page.MdiChild.Tag.ToString());
+            }
+
+
         }
 
         private void biCloseAllExcept_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -360,7 +377,16 @@ namespace ExcelClient
                     FormList.Remove(f.Tag.ToString());
                     f.Close();
                 }
+
+                frmLogin.setCookie("GSDWBH", CurDWBH);
             }
+
+
+        }
+        public Login frmLogin;
+        public void SetParentForm(Login setFrm)
+        {
+            frmLogin = setFrm;
 
         }
         /// <summary>
@@ -486,7 +512,7 @@ namespace ExcelClient
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            barStaticItem4.Caption= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            barStaticItem4.Caption = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
         public static bool IsMenuShow = true;
@@ -505,8 +531,10 @@ namespace ExcelClient
                 pnlMain.Visible = true;
                 IsMenuShow = true;
             }
-            
+
         }
+
+
 
         private void pnlTop_Paint(object sender, PaintEventArgs e)
         {

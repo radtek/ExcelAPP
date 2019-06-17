@@ -344,7 +344,7 @@ namespace ExcelClient.JSBridge
                         FileHash[id] = file;
                     //filepath = file;
 
-                    ExecScript("setFilePath('" + id + "','" + Path.GetFileName(file) + "')");
+                    ExecScript("ImportController.setFilePath('" + Path.GetFileName(file) + "')");
                 }
             }
         }
@@ -367,7 +367,7 @@ namespace ExcelClient.JSBridge
                         FileHashRel[id] = file;
                     //filepath = file;
 
-                    ExecScript("setFilePathNew('" + id + "','" + Path.GetFileName(file) + "')");
+                    ExecScript("ImportController.setFilePathNew('" + Path.GetFileName(file) + "')");
                 }
             }
         }

@@ -51,7 +51,7 @@ namespace ExcelClient.JSBridge
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }
- 
+
         public bool ChangeConfig1(string AppKey, string AppValue)
         {
             bool result = true;
@@ -120,7 +120,9 @@ namespace ExcelClient.JSBridge
             parentForm.Hide();
 
             var form2 = new FormConsole();
+            form2.SetParentForm(parentForm);
             form2.Show();
+            
 
 
 
@@ -130,17 +132,27 @@ namespace ExcelClient.JSBridge
 
         private void SetUserContext(string cookie)
         {
+            var cookieArr = cookie.Split(';');
+            foreach (var item in cookieArr)
+            {
+                var valArr = item.Split('=');
+                if (valArr[0] == "EAToken")
+                {
+                    JsonWebToken.Decode(valArr[1], "XB#4%", true);
+                    var parts = cookie.Split('.');
+                    //if (parts.Length != 3) throw new Exception("invalid Session Info!");
+                    var payload = parts[1];
+                    var payloadJson = Encoding.UTF8.GetString(Base64UrlDecode(payload));
+                    var user = Newtonsoft.Json.JsonConvert.DeserializeObject<Model.GSPUser>(payloadJson);
+                    UserInfo.UserCode = user.Code;
+                    UserInfo.UserName = user.Name;
+                    UserInfo.UserId = user.Id;
+                }
 
-            cookie = cookie.Replace("EAToken=", "");
-            JsonWebToken.Decode(cookie, "XB#4%", true);
-            var parts = cookie.Split('.');
-            //if (parts.Length != 3) throw new Exception("invalid Session Info!");
-            var payload = parts[1];
-            var payloadJson = Encoding.UTF8.GetString(Base64UrlDecode(payload));
-            var user = Newtonsoft.Json.JsonConvert.DeserializeObject<Model.GSPUser>(payloadJson);
-            UserInfo.UserCode = user.Code;
-            UserInfo.UserName = user.Name;
-            UserInfo.UserId = user.Id;
+
+            }
+            // cookie = cookie.Replace("EAToken=", "");
+
 
         }
 

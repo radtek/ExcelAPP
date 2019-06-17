@@ -33,12 +33,11 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.skinBarSubItem1 = new DevExpress.XtraBars.SkinBarSubItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
-            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
-            this.barToggleSwitchItem1 = new DevExpress.XtraBars.BarToggleSwitchItem();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -50,6 +49,8 @@
             this.biCloseAllExcept = new DevExpress.XtraBars.BarButtonItem();
             this.bsiSkin = new DevExpress.XtraBars.BarSubItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.barToggleSwitchItem1 = new DevExpress.XtraBars.BarToggleSwitchItem();
             this.pnlTop = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -86,7 +87,6 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).BeginInit();
@@ -162,6 +162,13 @@
             this.skinBarSubItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("skinBarSubItem1.LargeGlyph")));
             this.skinBarSubItem1.Name = "skinBarSubItem1";
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "隐藏导航";
+            this.barButtonItem1.Id = 15;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // barStaticItem2
             // 
             this.barStaticItem2.Caption = "当前用户:";
@@ -190,19 +197,6 @@
             this.barStaticItem4.Id = 12;
             this.barStaticItem4.Name = "barStaticItem4";
             this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barCheckItem1
-            // 
-            this.barCheckItem1.Caption = "barCheckItem1";
-            this.barCheckItem1.Checked = true;
-            this.barCheckItem1.Id = 13;
-            this.barCheckItem1.Name = "barCheckItem1";
-            // 
-            // barToggleSwitchItem1
-            // 
-            this.barToggleSwitchItem1.Caption = "barToggleSwitchItem1";
-            this.barToggleSwitchItem1.Id = 14;
-            this.barToggleSwitchItem1.Name = "barToggleSwitchItem1";
             // 
             // barAndDockingController1
             // 
@@ -276,6 +270,19 @@
             this.barHeaderItem1.Caption = "当前用户：";
             this.barHeaderItem1.Id = 7;
             this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "barCheckItem1";
+            this.barCheckItem1.Checked = true;
+            this.barCheckItem1.Id = 13;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // barToggleSwitchItem1
+            // 
+            this.barToggleSwitchItem1.Caption = "barToggleSwitchItem1";
+            this.barToggleSwitchItem1.Id = 14;
+            this.barToggleSwitchItem1.Name = "barToggleSwitchItem1";
             // 
             // pnlTop
             // 
@@ -584,6 +591,7 @@
             this.mdiManager1.Controller = this.barAndDockingController1;
             this.mdiManager1.MdiParent = this;
             this.mdiManager1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mdiManager1_MouseUp);
+            this.mdiManager1.PageRemoved += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.mdiManager1_PageRemoved);
             // 
             // pmTabbed
             // 
@@ -605,13 +613,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "隐藏导航";
-            this.barButtonItem1.Id = 15;
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // FormConsole
             // 

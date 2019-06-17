@@ -29,7 +29,7 @@ namespace ExcelClient
             LoadHandler.OnLoadStart += LoadHandler_OnLoadStart;
 
             GlobalObject.Add("APIBridge", new JSLoginObject(this));
-
+            //Chromium.ShowDevTools();
 
         }
 
@@ -39,7 +39,17 @@ namespace ExcelClient
         }
         private void LoadHandler_OnLoadStart(object sender, Chromium.Event.CfxOnLoadStartEventArgs e)
         {
-            //Chromium.ShowDevTools();
+            var host = ConfigurationManager.AppSettings["Host"].ToString();
+            var url = $"{host}/Excel/asserts/login.html";
+            Chromium.ShowDevTools();
+
+             
+
+        }
+
+        public void setCookie(string key, string value)
+        {
+            ExecuteJavascript("setCookie('" + key + "','" + value + "')");
         }
     }
 }

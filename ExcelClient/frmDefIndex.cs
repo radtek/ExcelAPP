@@ -29,7 +29,7 @@ namespace ExcelClient
         }
         private void frmDefIndex_Load(object sender, EventArgs e)
         {
-            dtHelp = getDataTable("SELECT ID F_HELP,CODE F_HEBH,NAME F_TITL,CodeField as CF,NameField as NF FROM EAHELP");
+            dtHelp = getDataTable("SELECT ID as F_HELP,CODE as F_HEBH,NAME as F_TITL,CodeField as CF,NameField as NF FROM EAHELP");
             bindGrid();
             setCtrlValue();
         }
@@ -62,8 +62,8 @@ GETINFOFROM='{5}',GETINFOWHERE='{6}',ISREQUIRED='{7}',DEFAULTVALUE='{8}',DISPLAY
         }
         private void bindGrid()
         {
-            string sql = string.Format(@"select FIELDNAME ,DISPLAYNAME,INPUTTYPE,ISDISPLAY,GETINFOFROM,GETINFOWHERE,ISREQUIRED,DEFAULTVALUE ,DISPLAYORDER
-FROM EACUSTOMFIELDS WHERE CLASSSETCODE='{0}'", this.ID);
+            string sql = string.Format(@"select FIELDNAME ,DISPLAYNAME,INPUTTYPE,ISDISPLAY,GETINFOFROM,GETINFOWHERE,ISREQUIRED,DEFAULTVALUE,DISPLAYORDER
+ FROM EACUSTOMFIELDS WHERE CLASSSETCODE='{0}'", this.ID);
             dt = getDataTable(sql);
             gridControl1.DataSource = dt;
 

@@ -105,6 +105,7 @@
     <Content Include="asserts\css\images\png.png" />
     <Content Include="asserts\custom.html" />
     <Content Include="asserts\fonts\fontawesome-webfont.woff2" />
+    <Content Include="asserts\libs\jquery.cookie.js" />
     <Content Include="asserts\libs\laydate\laydate.js" />
     <Content Include="asserts\libs\laydate\laydate.min.js" />
     <Content Include="asserts\libs\laydate\theme\default\font\iconfont.svg" />
