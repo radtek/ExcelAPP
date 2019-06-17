@@ -489,6 +489,25 @@ namespace ExcelClient
             barStaticItem4.Caption= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
+        public static bool IsMenuShow = true;
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            if (IsMenuShow)
+            {
+                barButtonItem1.Caption = "显示导航";
+                pnlMain.Visible = false;
+                IsMenuShow = false;
+            }
+            else
+            {
+                barButtonItem1.Caption = "隐藏导航";
+                pnlMain.Visible = true;
+                IsMenuShow = true;
+            }
+            
+        }
+
         private void pnlTop_Paint(object sender, PaintEventArgs e)
         {
 

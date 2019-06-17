@@ -37,6 +37,8 @@
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.barToggleSwitchItem1 = new DevExpress.XtraBars.BarToggleSwitchItem();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -84,6 +86,7 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).BeginInit();
@@ -122,8 +125,11 @@
             this.barStaticItem1,
             this.barStaticItem2,
             this.barStaticItem3,
-            this.barStaticItem4});
-            this.barManager1.MaxItemId = 13;
+            this.barStaticItem4,
+            this.barCheckItem1,
+            this.barToggleSwitchItem1,
+            this.barButtonItem1});
+            this.barManager1.MaxItemId = 16;
             this.barManager1.StatusBar = this.bar3;
             this.barManager1.Merge += new DevExpress.XtraBars.BarManagerMergeEventHandler(this.barManager1_Merge);
             this.barManager1.UnMerge += new DevExpress.XtraBars.BarManagerMergeEventHandler(this.barManager1_UnMerge);
@@ -137,6 +143,7 @@
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.skinBarSubItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem3),
@@ -183,6 +190,19 @@
             this.barStaticItem4.Id = 12;
             this.barStaticItem4.Name = "barStaticItem4";
             this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "barCheckItem1";
+            this.barCheckItem1.Checked = true;
+            this.barCheckItem1.Id = 13;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // barToggleSwitchItem1
+            // 
+            this.barToggleSwitchItem1.Caption = "barToggleSwitchItem1";
+            this.barToggleSwitchItem1.Id = 14;
+            this.barToggleSwitchItem1.Name = "barToggleSwitchItem1";
             // 
             // barAndDockingController1
             // 
@@ -361,13 +381,15 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "蓝箱子.png");
-            this.imageList1.Images.SetKeyName(1, "黄箱子.png");
-            this.imageList1.Images.SetKeyName(2, "hl6.Appearance.Image.png");
-            this.imageList1.Images.SetKeyName(3, "file.gif");
-            this.imageList1.Images.SetKeyName(4, "png.png");
-            this.imageList1.Images.SetKeyName(5, "图片1.jpg");
-            this.imageList1.Images.SetKeyName(6, "hl1.Appearance.Image.png");
+            this.imageList1.Images.SetKeyName(0, "蓝.png");
+            this.imageList1.Images.SetKeyName(1, "黄.png");
+            this.imageList1.Images.SetKeyName(2, "蓝箱子.png");
+            this.imageList1.Images.SetKeyName(3, "黄箱子.png");
+            this.imageList1.Images.SetKeyName(4, "hl6.Appearance.Image.png");
+            this.imageList1.Images.SetKeyName(5, "file.gif");
+            this.imageList1.Images.SetKeyName(6, "png.png");
+            this.imageList1.Images.SetKeyName(7, "图片1.jpg");
+            this.imageList1.Images.SetKeyName(8, "hl1.Appearance.Image.png");
             // 
             // panel1
             // 
@@ -584,6 +606,13 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "隐藏导航";
+            this.barButtonItem1.Id = 15;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // FormConsole
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
@@ -681,5 +710,8 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem3;
         private DevExpress.XtraBars.BarStaticItem barStaticItem4;
         private System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem1;
+        private DevExpress.XtraBars.BarToggleSwitchItem barToggleSwitchItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }

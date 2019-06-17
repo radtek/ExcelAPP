@@ -25,20 +25,20 @@ namespace ExcelClient
         }
 
         frmDevBBShow frmBBShow = null;
-     
+
         private void frmDevQryShow_Load(object sender, EventArgs e)
         {
 
             //defaultLookAndFeel1.LookAndFeel.Style = DevExpress.UserSkins.GSSkins;
             //SkinManager.Default.RegisterSkin(new SkinBlobXmlCreator("Coffee", "SkinData.", typeof(BonusSkins).Assembly, null));
-           
+
             //defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2007 Silver";
             //defaultLookAndFeel1.LookAndFeel.SkinName = "The Asphalt World";
-            defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2013"; 
+            //defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2013"; 
 
-            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            // UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             frmBBShow = new frmDevBBShow();
-            frmBBShow.Text = "查询--" + this.PsTitle; 
+            frmBBShow.Text = "查询--" + this.PsTitle;
             frmBBShow.ProcessID = this.ProcessID;
             frmBBShow.PsTitle = PsTitle;
             frmBBShow.PsID = PsID;
@@ -47,9 +47,9 @@ namespace ExcelClient
             frmBBShow.PsSLJD = PsSLJD;
             frmBBShow.PsTitleTable = PsTitleTable;
             frmBBShow.PsSelect = PsSelect;
-            frmBBShow.PsSubTitle = PsSubTitle; 
+            frmBBShow.PsSubTitle = PsSubTitle;
             frmBBShow.PsDWBH = PsDWBH;
-            frmBBShow.PsUsr = PsUsr; 
+            frmBBShow.PsUsr = PsUsr;
             frmBBShow.IsPivot = IsPivot;
             frmBBShow.OrderKey = this.OrderKey;
             frmBBShow.LinkQryID = this.LinkQryID;
@@ -59,7 +59,7 @@ namespace ExcelClient
             frmBBShow.TopLevel = false;
             frmBBShow.Location = new Point(0, 0);
             frmBBShow.TopMost = false;
-            frmBBShow.ControlBox = false;            
+            frmBBShow.ControlBox = false;
             frmBBShow.Parent = this.tabpagegrid;
             frmBBShow.OpenStyle = this.OpenStyle;
             frmBBShow.Dock = DockStyle.Fill;
@@ -72,7 +72,7 @@ namespace ExcelClient
             frmBBShow.QryValue = this.QryValue;
             frmBBShow.Show();
         }
- 
+
 
         #region 查询变量
         /*
@@ -121,7 +121,9 @@ psPID
         }
         public string PsTitle
         {
-            set { this._psTitle = value;
+            set
+            {
+                this._psTitle = value;
                 this.Text = "查询--" + this.PsTitle;
             }
             get { return this._psTitle; }
@@ -161,7 +163,7 @@ psPID
             set { this._psSubTitle = value; }
             get { return this._psSubTitle; }
         }
-         
+
         public string PsBBver
         {
             set { this._psBBver = value; }
@@ -177,7 +179,7 @@ psPID
                     _isPivot = "0";
                 return this._isPivot;
             }
-        } 
+        }
         private string _processID = "";
         public string ProcessID
         {
@@ -256,7 +258,7 @@ psPID
         }
 
 
-        private string _QryParam=null;
+        private string _QryParam = null;
         /// <summary>
         /// 多个参数用&拆分
         /// </summary>
@@ -265,7 +267,7 @@ psPID
             set { this._QryParam = value; }
             get { return this._QryParam; }
         }
-        private string _QryValue=null;
+        private string _QryValue = null;
         /// <summary>
         /// 多个参数用&拆分，值有多个如时间等用`（esc下键）拆分
         /// </summary>
@@ -278,15 +280,15 @@ psPID
 
         private void frmDevQryShow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(frmBBShow!=null)
+            if (frmBBShow != null)
                 frmBBShow.Close();
         }
 
-      
+
 
         private void tabctrl_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
-           // e.Page.Controls[0].Focus();
+            // e.Page.Controls[0].Focus();
             SetTabFocus(e.Page);
         }
 
@@ -306,8 +308,8 @@ psPID
             }
         }
 
-    
 
-       
+
+
     }
 }

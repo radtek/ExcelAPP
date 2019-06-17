@@ -43,7 +43,16 @@ namespace ExcelClient.JSBridge
 
         }
 
-        public bool ChangeConfig(string AppKey, string AppValue)
+        public void ChangeConfig(string keyName, string newKeyValue)
+        {
+            //修改配置文件中键为keyName的项的值
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings[keyName].Value = newKeyValue;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+ 
+        public bool ChangeConfig1(string AppKey, string AppValue)
         {
             bool result = true;
             try

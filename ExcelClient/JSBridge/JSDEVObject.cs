@@ -50,7 +50,7 @@ namespace ExcelClient.JSBridge
                 frm.ProcessID = model.pid;
                 frm.PsDWBH = model.dwbh;
                 frm.PsJEJD = model.jejd;
-
+                frm.PsUsr = UserInfo.UserCode;
                 frm.PsID = model.id;
                 frm.PsYear = "";// DateTime.Now.Year.ToString();
                 frm.PsSLJD = model.jejd;
