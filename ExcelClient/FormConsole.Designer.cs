@@ -33,8 +33,10 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.skinBarSubItem1 = new DevExpress.XtraBars.SkinBarSubItem();
-            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -45,15 +47,18 @@
             this.biCloseAll = new DevExpress.XtraBars.BarButtonItem();
             this.biCloseAllExcept = new DevExpress.XtraBars.BarButtonItem();
             this.bsiSkin = new DevExpress.XtraBars.BarSubItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.pnlTop = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.buttonEditDW = new DevExpress.XtraEditors.ButtonEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.pnlMain = new DevExpress.XtraEditors.PanelControl();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.treeList1 = new DevExpress.XtraTreeList.TreeList();
             this.NAME = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.nbMain = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgBusiness = new DevExpress.XtraNavBar.NavBarGroup();
             this.nbiSale = new DevExpress.XtraNavBar.NavBarItem();
@@ -78,8 +83,7 @@
             this.pmTabbed = new DevExpress.XtraBars.PopupMenu(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTop)).BeginInit();
@@ -89,12 +93,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditDW.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).BeginInit();
             this.pnlMain.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -115,8 +119,11 @@
             this.bsiSkin,
             this.skinBarSubItem1,
             this.barHeaderItem1,
-            this.barStaticItem1});
-            this.barManager1.MaxItemId = 10;
+            this.barStaticItem1,
+            this.barStaticItem2,
+            this.barStaticItem3,
+            this.barStaticItem4});
+            this.barManager1.MaxItemId = 13;
             this.barManager1.StatusBar = this.bar3;
             this.barManager1.Merge += new DevExpress.XtraBars.BarManagerMergeEventHandler(this.barManager1_Merge);
             this.barManager1.UnMerge += new DevExpress.XtraBars.BarManagerMergeEventHandler(this.barManager1_UnMerge);
@@ -130,8 +137,10 @@
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.skinBarSubItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barHeaderItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem3),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem4)});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
@@ -146,11 +155,13 @@
             this.skinBarSubItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("skinBarSubItem1.LargeGlyph")));
             this.skinBarSubItem1.Name = "skinBarSubItem1";
             // 
-            // barHeaderItem1
+            // barStaticItem2
             // 
-            this.barHeaderItem1.Caption = "当前用户：";
-            this.barHeaderItem1.Id = 7;
-            this.barHeaderItem1.Name = "barHeaderItem1";
+            this.barStaticItem2.Caption = "当前用户:";
+            this.barStaticItem2.Id = 10;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            this.barStaticItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barStaticItem2_ItemClick);
             // 
             // barStaticItem1
             // 
@@ -158,6 +169,20 @@
             this.barStaticItem1.Id = 8;
             this.barStaticItem1.Name = "barStaticItem1";
             this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Caption = "当前时间:";
+            this.barStaticItem3.Id = 11;
+            this.barStaticItem3.Name = "barStaticItem3";
+            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem4
+            // 
+            this.barStaticItem4.Caption = "00:00:00";
+            this.barStaticItem4.Id = 12;
+            this.barStaticItem4.Name = "barStaticItem4";
+            this.barStaticItem4.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barAndDockingController1
             // 
@@ -226,6 +251,12 @@
             this.bsiSkin.Id = 4;
             this.bsiSkin.Name = "bsiSkin";
             // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "当前用户：";
+            this.barHeaderItem1.Id = 7;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
             // pnlTop
             // 
             this.pnlTop.Appearance.BackColor = System.Drawing.Color.DodgerBlue;
@@ -292,6 +323,15 @@
             this.pnlMain.Size = new System.Drawing.Size(270, 478);
             this.pnlMain.TabIndex = 5;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.treeList1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(2, 50);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(266, 426);
+            this.panel2.TabIndex = 2;
+            // 
             // treeList1
             // 
             this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
@@ -321,11 +361,23 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "hl6.Appearance.Image.png");
-            this.imageList1.Images.SetKeyName(1, "file.gif");
-            this.imageList1.Images.SetKeyName(2, "png.png");
-            this.imageList1.Images.SetKeyName(3, "图片1.jpg");
-            this.imageList1.Images.SetKeyName(4, "hl1.Appearance.Image.png");
+            this.imageList1.Images.SetKeyName(0, "蓝箱子.png");
+            this.imageList1.Images.SetKeyName(1, "黄箱子.png");
+            this.imageList1.Images.SetKeyName(2, "hl6.Appearance.Image.png");
+            this.imageList1.Images.SetKeyName(3, "file.gif");
+            this.imageList1.Images.SetKeyName(4, "png.png");
+            this.imageList1.Images.SetKeyName(5, "图片1.jpg");
+            this.imageList1.Images.SetKeyName(6, "hl1.Appearance.Image.png");
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonEditDW);
+            this.panel1.Controls.Add(this.labelControl2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(266, 48);
+            this.panel1.TabIndex = 1;
             // 
             // nbMain
             // 
@@ -528,24 +580,9 @@
             this.splitter1.TabIndex = 10;
             this.splitter1.TabStop = false;
             // 
-            // panel1
+            // timer1
             // 
-            this.panel1.Controls.Add(this.buttonEditDW);
-            this.panel1.Controls.Add(this.labelControl2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(2, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 48);
-            this.panel1.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.treeList1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(2, 50);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(266, 426);
-            this.panel2.TabIndex = 2;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormConsole
             // 
@@ -577,13 +614,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditDW.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).EndInit();
             this.pnlMain.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nbMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mdiManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmTabbed)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -640,5 +677,9 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem4;
+        private System.Windows.Forms.Timer timer1;
     }
 }

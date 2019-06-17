@@ -45,7 +45,9 @@ namespace ExcelClient
 
             DevExpress.XtraEditors.WindowsFormsSettings.DefaultFont = new Font("微软雅黑", 10);
             //DevExpress.Utils.AppearanceObject.DefaultFont = new System.Drawing.Font("Tahoma", 12);
-            UserLookAndFeel.Default.SetSkinStyle("Office 2010 ");
+            //UserLookAndFeel.Default.SetSkinStyle("Office 2013 White");
+
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
             pnlMain.Width = 290;
 
             barStaticItem1.Caption = UserInfo.UserName;
@@ -59,22 +61,7 @@ namespace ExcelClient
             //this.WindowState = FormWindowState.Normal;
 
         }
-        void FrmLogin_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                this.Location = new Point(this.Location.X + (e.X - x), this.Location.Y + (e.Y - y));
-            }
-        }
-        void FrmLogin_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                x = e.X;
-                y = e.Y;
-            }
-        }
-
+ 
         public void InitDW()
         {
 
@@ -125,22 +112,22 @@ namespace ExcelClient
 
         }
 
-        void Default_StyleChanged(object sender, EventArgs e)
-        {
-            string skinName = UserLookAndFeel.Default.SkinName;
-            bool border = skinName.StartsWith("Sharp", StringComparison.OrdinalIgnoreCase);
-            if (border)
-            {
-                pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-            }
-            else
-            {
-                pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            }
+        //void Default_StyleChanged(object sender, EventArgs e)
+        //{
+        //    string skinName = UserLookAndFeel.Default.SkinName;
+        //    bool border = skinName.StartsWith("Sharp", StringComparison.OrdinalIgnoreCase);
+        //    if (border)
+        //    {
+        //        pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+        //    }
+        //    else
+        //    {
+        //        pnlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+        //    }
 
-            // pnlLogo.BackColor = pnlTop.BackColor;
-            pnlTop.Refresh();
-        }
+        //    // pnlLogo.BackColor = pnlTop.BackColor;
+        //    pnlTop.Refresh();
+        //}
 
         private void frmConsole_Load(object sender, EventArgs e)
         {
@@ -159,6 +146,10 @@ namespace ExcelClient
 
             SplashScreenManager.CloseForm(false);
             this.WindowState = FormWindowState.Maximized;
+
+
+            timer1.Interval = 1000;
+            timer1.Start();
         }
 
         private void nbiGoods_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -486,6 +477,16 @@ namespace ExcelClient
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void barStaticItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            barStaticItem4.Caption= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
         private void pnlTop_Paint(object sender, PaintEventArgs e)
