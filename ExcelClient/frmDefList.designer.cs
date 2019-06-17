@@ -86,7 +86,7 @@ namespace ExcelClient
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1176, 40);
+            this.panelControl1.Size = new System.Drawing.Size(1176, 36);
             this.panelControl1.TabIndex = 5;
             // 
             // tbMC
@@ -107,9 +107,9 @@ namespace ExcelClient
             // 
             // btnQry
             // 
-            this.btnQry.Location = new System.Drawing.Point(540, 7);
+            this.btnQry.Location = new System.Drawing.Point(503, 8);
             this.btnQry.Name = "btnQry";
-            this.btnQry.Size = new System.Drawing.Size(87, 27);
+            this.btnQry.Size = new System.Drawing.Size(53, 22);
             this.btnQry.TabIndex = 2;
             this.btnQry.Text = "查询";
             this.btnQry.Click += new System.EventHandler(this.btnQry_Click);
@@ -139,61 +139,62 @@ namespace ExcelClient
             this.panelControl2.Controls.Add(this.btnadd);
             this.panelControl2.Controls.Add(this.btnEdit);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 684);
+            this.panelControl2.Location = new System.Drawing.Point(0, 709);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1176, 65);
+            this.panelControl2.Size = new System.Drawing.Size(1176, 40);
             this.panelControl2.TabIndex = 6;
             // 
             // btnmenu
             // 
-            this.btnmenu.Location = new System.Drawing.Point(909, 24);
+            this.btnmenu.Location = new System.Drawing.Point(464, 6);
             this.btnmenu.Name = "btnmenu";
-            this.btnmenu.Size = new System.Drawing.Size(91, 27);
+            this.btnmenu.Size = new System.Drawing.Size(77, 27);
             this.btnmenu.TabIndex = 8;
             this.btnmenu.Text = "菜单定义";
+            this.btnmenu.Visible = false;
             this.btnmenu.Click += new System.EventHandler(this.btnmenu_Click);
             // 
             // btnOut
             // 
-            this.btnOut.Location = new System.Drawing.Point(778, 24);
+            this.btnOut.Location = new System.Drawing.Point(386, 6);
             this.btnOut.Name = "btnOut";
-            this.btnOut.Size = new System.Drawing.Size(87, 27);
+            this.btnOut.Size = new System.Drawing.Size(56, 27);
             this.btnOut.TabIndex = 7;
             this.btnOut.Text = "导出";
             this.btnOut.Click += new System.EventHandler(this.btnOut_Click);
             // 
             // btnTit
             // 
-            this.btnTit.Location = new System.Drawing.Point(635, 24);
+            this.btnTit.Location = new System.Drawing.Point(289, 6);
             this.btnTit.Name = "btnTit";
-            this.btnTit.Size = new System.Drawing.Size(85, 27);
+            this.btnTit.Size = new System.Drawing.Size(75, 27);
             this.btnTit.TabIndex = 6;
             this.btnTit.Text = "格式定义";
             this.btnTit.Click += new System.EventHandler(this.btnTit_Click);
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(500, 24);
+            this.btnDel.Location = new System.Drawing.Point(205, 6);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(87, 27);
+            this.btnDel.Size = new System.Drawing.Size(68, 27);
             this.btnDel.TabIndex = 5;
             this.btnDel.Text = "删除";
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnadd
             // 
-            this.btnadd.Location = new System.Drawing.Point(248, 24);
+            this.btnadd.Location = new System.Drawing.Point(33, 6);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(87, 27);
+            this.btnadd.Size = new System.Drawing.Size(67, 27);
             this.btnadd.TabIndex = 3;
             this.btnadd.Text = "增加";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(370, 24);
+            this.btnEdit.Location = new System.Drawing.Point(122, 6);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(87, 27);
+            this.btnEdit.Size = new System.Drawing.Size(60, 27);
             this.btnEdit.TabIndex = 4;
             this.btnEdit.Text = "修改";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -202,18 +203,19 @@ namespace ExcelClient
             // 
             this.panelControl3.Controls.Add(this.gridControl1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 40);
+            this.panelControl3.Location = new System.Drawing.Point(0, 36);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1176, 644);
+            this.panelControl3.Size = new System.Drawing.Size(1176, 673);
             this.panelControl3.TabIndex = 7;
             // 
             // gridControl1
             // 
+            this.gridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.Location = new System.Drawing.Point(2, 2);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1172, 640);
+            this.gridControl1.Size = new System.Drawing.Size(1172, 669);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
