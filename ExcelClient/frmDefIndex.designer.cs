@@ -144,7 +144,7 @@ namespace ExcelClient
             // 
             // btnColse
             // 
-            this.btnColse.Location = new System.Drawing.Point(596, 513);
+            this.btnColse.Location = new System.Drawing.Point(570, 466);
             this.btnColse.Name = "btnColse";
             this.btnColse.Size = new System.Drawing.Size(87, 27);
             this.btnColse.TabIndex = 24;
@@ -153,7 +153,7 @@ namespace ExcelClient
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(310, 513);
+            this.btnSave.Location = new System.Drawing.Point(477, 466);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 23;
@@ -281,7 +281,7 @@ namespace ExcelClient
             // CU_ISREQUIRED
             // 
             this.CU_ISREQUIRED.EditValue = "·ñ";
-            this.CU_ISREQUIRED.Location = new System.Drawing.Point(477, 412);
+            this.CU_ISREQUIRED.Location = new System.Drawing.Point(477, 387);
             this.CU_ISREQUIRED.Name = "CU_ISREQUIRED";
             this.CU_ISREQUIRED.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -294,7 +294,7 @@ namespace ExcelClient
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(405, 415);
+            this.labelControl8.Location = new System.Drawing.Point(405, 393);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(60, 14);
             this.labelControl8.TabIndex = 35;
@@ -303,14 +303,14 @@ namespace ExcelClient
             // CU_DEFAULTVALUE
             // 
             this.CU_DEFAULTVALUE.EditValue = "";
-            this.CU_DEFAULTVALUE.Location = new System.Drawing.Point(477, 443);
+            this.CU_DEFAULTVALUE.Location = new System.Drawing.Point(477, 414);
             this.CU_DEFAULTVALUE.Name = "CU_DEFAULTVALUE";
             this.CU_DEFAULTVALUE.Size = new System.Drawing.Size(520, 20);
             this.CU_DEFAULTVALUE.TabIndex = 37;
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(419, 447);
+            this.labelControl9.Location = new System.Drawing.Point(413, 419);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
             this.labelControl9.TabIndex = 38;
@@ -321,14 +321,14 @@ namespace ExcelClient
             this.GETINFOFROM.HotTrackSelectMode = DevExpress.XtraEditors.HotTrackSelectMode.SelectItemOnHotTrackEx;
             this.GETINFOFROM.Location = new System.Drawing.Point(477, 209);
             this.GETINFOFROM.Name = "GETINFOFROM";
-            this.GETINFOFROM.Size = new System.Drawing.Size(520, 110);
+            this.GETINFOFROM.Size = new System.Drawing.Size(520, 87);
             this.GETINFOFROM.TabIndex = 39;
             this.GETINFOFROM.SelectedIndexChanged += new System.EventHandler(this.GETINFOFROM_SelectedIndexChanged);
             // 
             // CU_GETINFOWHERE
             // 
             this.CU_GETINFOWHERE.EditValue = "";
-            this.CU_GETINFOWHERE.Location = new System.Drawing.Point(477, 325);
+            this.CU_GETINFOWHERE.Location = new System.Drawing.Point(477, 302);
             this.CU_GETINFOWHERE.Name = "CU_GETINFOWHERE";
             this.CU_GETINFOWHERE.Size = new System.Drawing.Size(520, 79);
             this.CU_GETINFOWHERE.TabIndex = 40;
@@ -338,14 +338,14 @@ namespace ExcelClient
             // CU_DISPLAYORDER
             // 
             this.CU_DISPLAYORDER.EditValue = "";
-            this.CU_DISPLAYORDER.Location = new System.Drawing.Point(477, 475);
+            this.CU_DISPLAYORDER.Location = new System.Drawing.Point(477, 440);
             this.CU_DISPLAYORDER.Name = "CU_DISPLAYORDER";
             this.CU_DISPLAYORDER.Size = new System.Drawing.Size(520, 20);
             this.CU_DISPLAYORDER.TabIndex = 41;
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(405, 478);
+            this.labelControl10.Location = new System.Drawing.Point(405, 445);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(60, 14);
             this.labelControl10.TabIndex = 42;
@@ -355,7 +355,7 @@ namespace ExcelClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 595);
+            this.ClientSize = new System.Drawing.Size(1025, 502);
             this.Controls.Add(this.CU_DISPLAYORDER);
             this.Controls.Add(this.labelControl10);
             this.Controls.Add(this.CU_GETINFOWHERE);

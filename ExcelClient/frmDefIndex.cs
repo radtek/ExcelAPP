@@ -29,7 +29,7 @@ namespace ExcelClient
         }
         private void frmDefIndex_Load(object sender, EventArgs e)
         {
-            dtHelp = getDataTable("SELECT ID as F_HELP,CODE as F_HEBH,NAME as F_TITL,CodeField as CF,NameField as NF FROM EAHELP");
+            dtHelp = getDataTable("SELECT ID as F_HELP,CODE as F_HEBH,NAME as F_TITL,CodeField as CF,NameField as NF FROM EAHELP where 1=1 ");
             bindGrid();
             setCtrlValue();
         }

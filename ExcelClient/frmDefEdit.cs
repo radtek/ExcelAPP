@@ -224,7 +224,7 @@ namespace ExcelClient
  '{0}','QRYINDEX','{1}',' ','0','1','','','0','',{2} from dual where NOT EXISTS(SELECT 1 FROM EACUSTOMFIELDS WHERE  CLASSSETCODE='{0}' AND  FIELDNAME='{1}') ;", classsetcode, fieldName, ord + "");
            string dbtype = mgr.getDBType(this.ProcessID);
          
-           if (dbtype != "ora")
+           if (dbtype != "ORA")
                sql = sql.Replace("from dual ", " ");
             
            return sql;

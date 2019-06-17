@@ -172,7 +172,7 @@ namespace ExcelClient
             this.JTPUBQRDEF_SQL.EditValue = "";
             this.JTPUBQRDEF_SQL.Location = new System.Drawing.Point(138, 189);
             this.JTPUBQRDEF_SQL.Name = "JTPUBQRDEF_SQL";
-            this.JTPUBQRDEF_SQL.Size = new System.Drawing.Size(810, 147);
+            this.JTPUBQRDEF_SQL.Size = new System.Drawing.Size(810, 65);
             this.JTPUBQRDEF_SQL.TabIndex = 17;
             this.JTPUBQRDEF_SQL.ToolTip = "sql以where 1=1 结尾带年度的表以*YY*代替年度；Proc 直接放置存储过程名称，如果数据库是Oracle最后一个参数是游标，名称Re_CURSOR：" +
     "";
@@ -197,7 +197,7 @@ namespace ExcelClient
             // 
             // lblcs
             // 
-            this.lblcs.Location = new System.Drawing.Point(93, 525);
+            this.lblcs.Location = new System.Drawing.Point(92, 349);
             this.lblcs.Name = "lblcs";
             this.lblcs.Size = new System.Drawing.Size(36, 14);
             this.lblcs.TabIndex = 19;
@@ -206,7 +206,7 @@ namespace ExcelClient
             // 
             // btnColse
             // 
-            this.btnColse.Location = new System.Drawing.Point(589, 659);
+            this.btnColse.Location = new System.Drawing.Point(588, 483);
             this.btnColse.Name = "btnColse";
             this.btnColse.Size = new System.Drawing.Size(87, 27);
             this.btnColse.TabIndex = 24;
@@ -215,7 +215,7 @@ namespace ExcelClient
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(303, 659);
+            this.btnSave.Location = new System.Drawing.Point(302, 483);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 23;
@@ -240,7 +240,7 @@ namespace ExcelClient
             // JTPUBQRDEF_WHERE
             // 
             this.JTPUBQRDEF_WHERE.EditValue = "";
-            this.JTPUBQRDEF_WHERE.Location = new System.Drawing.Point(139, 627);
+            this.JTPUBQRDEF_WHERE.Location = new System.Drawing.Point(138, 451);
             this.JTPUBQRDEF_WHERE.Name = "JTPUBQRDEF_WHERE";
             this.JTPUBQRDEF_WHERE.Size = new System.Drawing.Size(810, 20);
             this.JTPUBQRDEF_WHERE.TabIndex = 27;
@@ -249,7 +249,7 @@ namespace ExcelClient
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(67, 630);
+            this.labelControl9.Location = new System.Drawing.Point(66, 454);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(60, 14);
             this.labelControl9.TabIndex = 26;
@@ -258,7 +258,7 @@ namespace ExcelClient
             // gridControl1
             // 
             this.gridControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gridControl1.Location = new System.Drawing.Point(138, 524);
+            this.gridControl1.Location = new System.Drawing.Point(137, 348);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -380,7 +380,7 @@ namespace ExcelClient
             // 
             // btnaddField
             // 
-            this.btnaddField.Location = new System.Drawing.Point(97, 551);
+            this.btnaddField.Location = new System.Drawing.Point(96, 375);
             this.btnaddField.Name = "btnaddField";
             this.btnaddField.Size = new System.Drawing.Size(30, 27);
             this.btnaddField.TabIndex = 30;
@@ -389,7 +389,7 @@ namespace ExcelClient
             // 
             // btndelfield
             // 
-            this.btndelfield.Location = new System.Drawing.Point(97, 585);
+            this.btndelfield.Location = new System.Drawing.Point(96, 409);
             this.btndelfield.Name = "btndelfield";
             this.btndelfield.Size = new System.Drawing.Size(30, 27);
             this.btndelfield.TabIndex = 31;
@@ -398,7 +398,7 @@ namespace ExcelClient
             // 
             // btnParam
             // 
-            this.btnParam.Location = new System.Drawing.Point(444, 659);
+            this.btnParam.Location = new System.Drawing.Point(443, 483);
             this.btnParam.Name = "btnParam";
             this.btnParam.Size = new System.Drawing.Size(103, 27);
             this.btnParam.TabIndex = 32;
@@ -427,9 +427,9 @@ namespace ExcelClient
             // JTPUBQRDEF_ORA
             // 
             this.JTPUBQRDEF_ORA.EditValue = "";
-            this.JTPUBQRDEF_ORA.Location = new System.Drawing.Point(138, 342);
+            this.JTPUBQRDEF_ORA.Location = new System.Drawing.Point(138, 260);
             this.JTPUBQRDEF_ORA.Name = "JTPUBQRDEF_ORA";
-            this.JTPUBQRDEF_ORA.Size = new System.Drawing.Size(809, 176);
+            this.JTPUBQRDEF_ORA.Size = new System.Drawing.Size(809, 82);
             this.JTPUBQRDEF_ORA.TabIndex = 35;
             this.JTPUBQRDEF_ORA.ToolTip = "sql以where 1=1 结尾带年度的表以*YY*代替年度；Proc 直接放置存储过程名称，如果数据库是Oracle最后一个参数是游标，名称Re_CURSOR：" +
     "";
@@ -438,7 +438,7 @@ namespace ExcelClient
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(63, 370);
+            this.labelControl8.Location = new System.Drawing.Point(60, 295);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(69, 14);
             this.labelControl8.TabIndex = 36;
@@ -454,7 +454,7 @@ namespace ExcelClient
             // 
             // labelControl11
             // 
-            this.labelControl11.Location = new System.Drawing.Point(88, 344);
+            this.labelControl11.Location = new System.Drawing.Point(83, 275);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(34, 14);
             this.labelControl11.TabIndex = 38;
@@ -464,7 +464,7 @@ namespace ExcelClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1030, 696);
+            this.ClientSize = new System.Drawing.Size(1030, 598);
             this.Controls.Add(this.labelControl11);
             this.Controls.Add(this.labelControl10);
             this.Controls.Add(this.JTPUBQRDEF_ORA);
