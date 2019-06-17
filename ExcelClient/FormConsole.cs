@@ -26,7 +26,7 @@ namespace ExcelClient
         {
             InitializeComponent();
 
-          
+
             pnlTop.SuspendLayout();
             /* --最后Add的优先级最高-- */
             // pnlTop.Controls.Add(banner);
@@ -63,17 +63,22 @@ namespace ExcelClient
 
         public void InitDW()
         {
-
-
-            var model = DWService.GetDWData(" and lsbzdw_mx='1'");
-            if (model.data.Rows.Rows.Count > 0)
+            try
             {
-                DataRow row = model.data.Rows.Rows[0];
+                var model = DWService.GetDWData(" and lsbzdw_mx='1'");
+                if (model.data.Rows.Rows.Count > 0)
+                {
+                    DataRow row = model.data.Rows.Rows[0];
 
-                buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
-                CurDWBH = row["LSBZDW_DWBH"].ToString();
-                frmLogin.setCookie("GSDWBH", CurDWBH);
+                    buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
+                    CurDWBH = row["LSBZDW_DWBH"].ToString();
+                    frmLogin.setCookie("GSDWBH", CurDWBH);
+                }
             }
+            catch (Exception ex)
+            {
+            }
+
 
         }
 

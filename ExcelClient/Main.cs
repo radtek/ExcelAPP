@@ -36,9 +36,9 @@ namespace ExcelClient
         {
             var host = ConfigurationManager.AppSettings["Host"].ToString();
             this.LoadUrl($"{host}/Excel/asserts/import.html?id=" + ruleID + "&dwbh=" + DWBH);
-          
 
-         
+
+            LoadHandler.OnLoadStart += LoadHandler_OnLoadStart;
             GlobalObject.Add("APIBridge", new JSMainObject(this));
         }
 

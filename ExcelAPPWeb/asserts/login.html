@@ -63,7 +63,13 @@
         </div>
         <script>
             function setCookie(key, value) {
+
+
+                idp.service.SetCookie(value).done(function (data) {
+                    //currentgsdwbh = dwbh;
+                });
                 $.cookie(key, value);
+                localStorage[key] = value;
             }
 
             $(function () {
