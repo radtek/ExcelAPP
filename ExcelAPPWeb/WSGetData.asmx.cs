@@ -91,8 +91,8 @@ namespace ExcelAPPWeb
         public string getDBType(string PID)
         {
             ExcelDataBase.Database db = DbFunction.GetDB("");
-
-            return db.DBType.Equals(DBType.ORA) ? "ORA" : "MSS";
+            
+            return db.DBType.Equals(DataBaseType.ORA) ? "ORA" : "MSS";
 
             //GS_PublicVar.Dev_LoginGS(PID);
             //return Convert.ToString(CommonFunction.GlobalVariable["Genersoft.BS.Public.DbType"]).Trim();
