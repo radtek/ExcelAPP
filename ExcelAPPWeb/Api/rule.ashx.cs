@@ -41,6 +41,10 @@ namespace ExcelAPPWeb
                         CookieHelper.WriteCookie("GSDWBH", GSDWBH,3600);
                       
                         break;
+                    case "RemoveCookie"://用户信息
+                        CookieHelper.DelCookie("GSDWBH");
+
+                        break;
                     case "GetCookie"://用户信息
                         GSDWBH = CookieHelper.GetCookie("GSDWBH");
                         if (string.IsNullOrEmpty(GSDWBH))

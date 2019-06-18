@@ -233,6 +233,13 @@ idp.service = (function (win, $, core) {
             dwbh: dwbh
         });
     }
+    service.RemoveCookie = function () {
+        return this.requestApi("rule.ashx", {
+            op: "RemoveCookie"
+        });
+    }
+
+
     service.loadConfig = function (dwbh, lbid) {
         return this.requestApi("rule.ashx", {
             op: "LoadConfig",

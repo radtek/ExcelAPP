@@ -61,18 +61,47 @@ namespace ExcelClient
 
         }
 
+        public void InitFirstDW()
+        {
+
+            var model = DWService.GetDWData(" and lsbzdw_mx='1'");
+            if (model.data.Rows.Rows.Count > 0)
+            {
+                DataRow row = model.data.Rows.Rows[0];
+
+                CurDWMC = buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
+                CurDWBH = row["LSBZDW_DWBH"].ToString();
+                frmLogin.setCookie("GSDWBH", CurDWBH, CurDWMC);
+            }
+        }
+
         public void InitDW()
         {
             try
             {
-                var model = DWService.GetDWData(" and lsbzdw_mx='1'");
-                if (model.data.Rows.Rows.Count > 0)
-                {
-                    DataRow row = model.data.Rows.Rows[0];
 
-                    buttonEditDW.Text = row["LSBZDW_DWMC"].ToString();
-                    CurDWBH = row["LSBZDW_DWBH"].ToString();
-                    frmLogin.setCookie("GSDWBH", CurDWBH);
+                var setDWBH = ConfigurationManager.AppSettings["LastSetDWBH"].ToString();
+                var setDWMC = ConfigurationManager.AppSettings["LastSetDWMC"].ToString();
+
+                if (!string.IsNullOrEmpty(setDWBH) && !string.IsNullOrEmpty(setDWMC))
+                {
+                    frmLogin.setCookie("GSDWBH", setDWBH, setDWMC);
+
+                    var model = DWService.GetDWData(" and lsbzdw_dwbh='" + setDWBH + "'");
+                    if (model.data.Rows.Rows.Count > 0)
+                    {
+                        CurDWMC = buttonEditDW.Text = setDWMC;
+                        CurDWBH = setDWBH;
+                    }
+                    else
+                    {
+                        InitFirstDW();
+                    }
+
+                }
+                else
+                {
+                    InitFirstDW();
                 }
             }
             catch (Exception ex)
@@ -371,7 +400,7 @@ namespace ExcelClient
             if (dg.Equals(DialogResult.OK))
             {
                 //MessageBox.Show(frm.strName);
-                buttonEditDW.Text = frm.strName;
+                CurDWMC = buttonEditDW.Text = frm.strName;
                 CurDWBH = frm.strKey;
 
                 //切换单位关闭所有的窗体
@@ -383,7 +412,7 @@ namespace ExcelClient
                     f.Close();
                 }
 
-                frmLogin.setCookie("GSDWBH", CurDWBH);
+                frmLogin.setCookie("GSDWBH", CurDWBH, CurDWMC);
             }
 
 
@@ -425,6 +454,7 @@ namespace ExcelClient
         }
 
         public static string CurDWBH = "";
+        public static string CurDWMC = "";
 
         public static Dictionary<string, Form> FormList = new Dictionary<string, Form>();
 

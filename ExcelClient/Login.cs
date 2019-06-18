@@ -43,13 +43,22 @@ namespace ExcelClient
             var url = $"{host}/Excel/asserts/login.html";
             Chromium.ShowDevTools();
 
-             
-
         }
 
-        public void setCookie(string key, string value)
+        public void ChangeConfig(string keyName, string newKeyValue)
+        {
+            //修改配置文件中键为keyName的项的值
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings[keyName].Value = newKeyValue;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        public void setCookie(string key, string value, string dwmc)
         {
             ExecuteJavascript("setCookie('" + key + "','" + value + "')");
+            ChangeConfig("LastSetDWBH", value);
+            ChangeConfig("LastSetDWMC", dwmc);
         }
     }
 }

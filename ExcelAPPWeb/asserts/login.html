@@ -62,15 +62,19 @@
             </div>
         </div>
         <script>
+            idp.service.RemoveCookie().done(function (data) {
+            });
+
             function setCookie(key, value) {
 
 
                 idp.service.SetCookie(value).done(function (data) {
                     //currentgsdwbh = dwbh;
                 });
-                $.cookie(key, value);
-                localStorage[key] = value;
+                //$.cookie(key, value);
+                //localStorage[key] = value;
             }
+
 
             $(function () {
                 $("#loginBtn").click(function () {
