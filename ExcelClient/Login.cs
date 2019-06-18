@@ -41,7 +41,11 @@ namespace ExcelClient
         {
             var host = ConfigurationManager.AppSettings["Host"].ToString();
             var url = $"{host}/Excel/asserts/login.html";
+#if DEBUG
+
+
             Chromium.ShowDevTools();
+#endif
 
         }
 
