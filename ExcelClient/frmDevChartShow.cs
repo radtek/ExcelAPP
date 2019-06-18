@@ -80,7 +80,7 @@ namespace ExcelClient
             //((XYDiagram)this.chartControl.Diagram).AxisX.Label.Antialiasing = true;
             //chartControl1.Series
 
-            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            //UserLookAndFeel.Default.SetSkinStyle("Office 2013");
         }
 
      

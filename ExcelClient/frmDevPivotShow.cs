@@ -118,7 +118,7 @@ namespace ExcelClient
 
         private void frmDevPivotShow_Load(object sender, EventArgs e)
         {
-            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            //UserLookAndFeel.Default.SetSkinStyle("Office 2013");
 
             //pivotGridControl1.LookAndFeel.UseDefaultLookAndFeel = false;
             //pivotGridControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
@@ -766,7 +766,7 @@ and QRYFILTER_USER='{1}' and QRYFILTER_HASH='{2}' and QRYFILTER_NAME='{3}' ; end
                  fieldData, fieldSel, fieldFilter, this.QryHashString) + "   end;";
             try
             {
-                WebSvrGetData.execsql(DevQryPubFun.GSYDBSrc, sql, _mgr);
+               // WebSvrGetData.execsqlAysnc(DevQryPubFun.GSYDBSrc, sql, _mgr);
             }
             catch (Exception ex)
             {
@@ -775,7 +775,7 @@ and QRYFILTER_USER='{1}' and QRYFILTER_HASH='{2}' and QRYFILTER_NAME='{3}' ; end
             sql = "begin  " + saveFilterValue("%") + "   end;";
             try
             {
-                WebSvrGetData.execsql(DevQryPubFun.GSYDBSrc, sql, _mgr);
+                //WebSvrGetData.execsqlAysnc(DevQryPubFun.GSYDBSrc, sql, _mgr);
             }
             catch (Exception ex)
             {

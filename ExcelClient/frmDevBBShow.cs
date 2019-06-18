@@ -66,10 +66,10 @@ namespace ExcelClient
             this.Text = "";
             dockBBSet.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
             // mgr.Url = "http://localhost/JTGLPubQry2010/JTGLPubQry_Svr/WSGetData.asmx";     
+     
 
 
-
-            //UserLookAndFeel.Default.SetSkinStyle("Office 2013");
+            //UserLookAndFeel.Default.SetSkinStyle(UserLookAndFeel.Default.ActiveSkinName);
             DevQryPubFun.WrapService(mgr);
             
 

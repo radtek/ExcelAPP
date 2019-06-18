@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelClient.WsGetDataClient;
+using System;
 using System.Data;
 using System.Text;
 using System.Threading;
@@ -82,7 +83,15 @@ namespace ExcelClient
             mgr.execsql(processID, sql);
         }
 
-
+        public static void execsqlAysnc(string processID, string sql, WsGetDataClient.WSGetData mgr)
+        {
+            sql = encstr + DesEncrypt.Encrypt(sql);
+            mgr.execsqlAsync(processID, sql);
+            mgr.execsqlCompleted += new execsqlCompletedEventHandler((o, a) => {
+                Console.WriteLine(o.ToString());
+                //Response.Write(string.Format("完成时间：{0}。 结果{1}<Br>", DateTime.Now.ToString("mm:ss.ffff"), a.Result));
+            });
+        }
     }
     #region 同步获取
     public class WebSvrGetDataSync
@@ -155,6 +164,12 @@ namespace ExcelClient
         {
             sql = WebSvrGetData.encstr + DesEncrypt.Encrypt(sql);
             return StringToDataSet.getDataSetFromZipDataFormat(mgr.getZipDataFormatByte(processID, sql));
+        }
+
+        public void execsql(WsGetDataClient.WSGetData mgr, string processID, string sql)
+        {
+            sql = WebSvrGetData.encstr + DesEncrypt.Encrypt(sql);
+            mgr.execsql(processID, sql);
         }
 
     }
@@ -266,6 +281,9 @@ namespace ExcelClient
 
         }
 
+
+
+        
         public DataSet returnDataSet()
         {
             return ds;

@@ -95,8 +95,36 @@ namespace ExcelAPPWeb.Service
         /// <returns></returns>
         public static string GetGsdwh()
         {
-            var GSDWBH = CookieHelper.GetCookie("GSDWBH");
-            return GSDWBH;
+            try
+            {
+                var GSDWBH = CookieHelper.GetCookie("GSDWBH");
+                return GSDWBH;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+
+        public static string GetGSDWMC()
+        {
+            try
+            {
+                var dwmc = "";
+                var GSDWBH = CookieHelper.GetCookie("GSDWBH");
+                Database Db = new Database("DataPlatformDB");
+                var list = Db.Fetch<Dictionary<string, object>>(new Sql("select lsbzdw_dwmc from lsbzdw where lsbzdw_dwbh=@0", GSDWBH));
+                if (list.Count > 0)
+                {
+                    dwmc = list[0]["lsbzdw_dwmc"].ToString();
+                }
+                return dwmc;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
 
         /// <summary>

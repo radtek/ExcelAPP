@@ -49,6 +49,12 @@
 <body>
     <form id="form1" runat="server">
         <input type="hidden" id="txt_query" runat="server" />
+        <input type="hidden" id="txtDWBH" runat="server" />
+        <input type="hidden" id="txtDWMC" runat="server" />
+        <input type="hidden" id="txtUserCode" runat="server" />
+        <input type="hidden" id="txtUserID" runat="server" />
+        <input type="hidden" id="txtUserName" runat="server" />
+        <input type="hidden" id="txtCurDate" runat="server" />
         <div id="filter_wrap">
 
             <div class="lee-table-form-border  table-query" style="margin: 0;">
@@ -56,7 +62,7 @@
                 <div id="filter_title">往来单位查询</div>
 
                 <div id="filter_line"></div>
-                
+
                 <div id="filter_bottom"></div>
                 <div class="table-item" style="width: 100%; line-height: 34px;">
                     <div class="table-label">
@@ -73,6 +79,20 @@
     <script>
 
         var model = JSON.parse($("#txt_query").val());
+
+        function setDefaultValue(ele, row) {
+            if (row.DefaultValue) {
+                var str = row.DefaultValue;
+                str = str.replace("{GS_DWBH}", $("#txtDWBH").val());
+                str = str.replace("{GS_DWMC}", $("#txtDWMC").val());
+                str = str.replace("{USERID}", $("#txtUserID").val());
+                str = str.replace("{USERCODE}", $("#txtUserCode").val());
+                str = str.replace("{USERNAME}", $("#txtUserName").val());
+                str = str.replace("{DATE}", $("#txtCurDate").val());
+                ele.val(str);
+            }
+           
+        }
         $(function () {
             for (var i = 0; i < model.filter.length; i++) {
                 var html = [];
@@ -91,6 +111,8 @@
                 $("#filter_bottom").before(html.join(""));
 
                 var $ele = $("#txt" + row.FieldName);
+
+                setDefaultValue($ele, row);
                 switch (row.InputType) {
                     case "0":
                         $ele.leeTextBox();

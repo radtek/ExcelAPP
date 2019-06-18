@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.tabctrl = new DevExpress.XtraTab.XtraTabControl();
             this.tabpagegrid = new DevExpress.XtraTab.XtraTabPage();
             this.tabpagePivot = new DevExpress.XtraTab.XtraTabPage();
@@ -54,13 +52,13 @@
             // tabpagegrid
             // 
             this.tabpagegrid.Name = "tabpagegrid";
-            this.tabpagegrid.Size = new System.Drawing.Size(1364, 679);
+            this.tabpagegrid.Size = new System.Drawing.Size(1364, 677);
             this.tabpagegrid.Text = "表格展示";
             // 
             // tabpagePivot
             // 
             this.tabpagePivot.Name = "tabpagePivot";
-            this.tabpagePivot.Size = new System.Drawing.Size(1369, 679);
+            this.tabpagePivot.Size = new System.Drawing.Size(1364, 677);
             this.tabpagePivot.Text = "透视分析";
             // 
             // frmDevQryShow
@@ -83,7 +81,5 @@
         public DevExpress.XtraTab.XtraTabControl tabctrl;
         public DevExpress.XtraTab.XtraTabPage tabpagegrid;
         public DevExpress.XtraTab.XtraTabPage tabpagePivot;
-
-        protected DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
     }
 }

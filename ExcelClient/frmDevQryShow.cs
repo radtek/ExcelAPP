@@ -17,7 +17,7 @@ namespace ExcelClient
         public frmDevQryShow()
         {
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(DevQryShow.CultureInfo);
-            DevExpress.UserSkins.BonusSkins.Register();
+            //DevExpress.UserSkins.BonusSkins.Register();
             //DevExpress.UserSkins.OfficeSkins.Register();
             //SkinManager.Default.RegisterAssembly(typeof(GSSkins).Assembly);
             //DevExpress.UserSkins.GSSkins.
