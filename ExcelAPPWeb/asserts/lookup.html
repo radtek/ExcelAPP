@@ -501,8 +501,8 @@
                 var data = this.grid.getCheckedRows();
                 if (data.length == 0) return null;
                 if (this.istree && data) {
-
-                    if (this.options.isChildOnly) {
+				   // alert(this.options.isChildOnly);
+                   // if (this.options.isChildOnly) {
                         for (var item in data) {
 
                             if (data[item][self.treeConfig.isdetail] == "0") {
@@ -510,7 +510,7 @@
                                 return false;
                                 break;
                             }
-                        }
+                     //   }
                     }
                 }
                 if (this.options.isMul || this.options.isMulGrid)

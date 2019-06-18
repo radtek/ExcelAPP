@@ -56,8 +56,8 @@ namespace ExcelClient
                 //frm.PsSubTitle = "33";
                 //frm.PsTitle = "123";
                 //frm.IsPivot = "1";
-                //Application.Run(new frmDefList());
-
+               // Application.Run(new frmDefList());
+               // return;
                 try
                 {
                     Application.Run(new Login());

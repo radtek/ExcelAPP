@@ -176,7 +176,7 @@ namespace ExcelAPPWeb
                 foreach (DataColumn col in list[0].dt.Columns)
                 {
                     var label = row[col.ColumnName].ToString();
-                    var findInfo = ruleInfo.Cols.Where(p => p.FName == label).ToList();
+                    var findInfo = ruleInfo.Cols.Where(p => p.MatchName == label).ToList();
                     if (findInfo.Count > 0)
                     {
 

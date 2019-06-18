@@ -168,6 +168,7 @@ var ImportController = {
                     display: obj.FName, name: obj.FCode,
                     width: obj.Width ? obj.Width : 100,
                     align: "left",
+                    required: obj.IsRequire == "1" ? true : false,
                     editor: getEditor(obj)
                 };
 
@@ -413,7 +414,7 @@ var ImportController = {
             url: "../api/refresh.ashx",
             usePager: true,
             pageSize: 200,
-            pageSizeOptions: [200, 400, 600],
+            pageSizeOptions: [200, 400, 600, 5000],
             rowClsRender: function (data) {
                 if (data["COLORZT"] == "1") {
                     return "yellow";
