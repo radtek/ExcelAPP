@@ -301,9 +301,9 @@ and QRYFILTER_USER='{1}' and QRYFILTER_HASH='{2}' and QRYFILTER_NAME='{3}' ; end
                     prt.Preview();
                     break;
                 case "barsaveasxls":
-                    filename = OpenSaveFileDlg(".xls", "excel文件(*.xls)|*.xls");
+                    filename = OpenSaveFileDlg(".xlsx", "excel文件(*.xlsx)|*.xlsx");
                     if (filename == "") return;
-                    this.pivotGridControl1.ExportToXls(filename);
+                    this.pivotGridControl1.ExportToXlsx(filename);
                     break;
                 case "barsaveashtml":
                     break;
