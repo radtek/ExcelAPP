@@ -157,6 +157,7 @@ namespace ExcelClient
             this.dockManager1.Form = this;
             this.dockManager1.HiddenPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockFav});
+            this.dockManager1.MenuManager = this.barManager1;
             this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockField,
             this.dockChart,
@@ -332,26 +333,24 @@ namespace ExcelClient
             // 
             // chartControl1
             // 
-            xyDiagram1.AxisX.Range.ScrollingRange.SideMarginsEnabled = true;
-            xyDiagram1.AxisX.Range.SideMarginsEnabled = true;
             xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.Range.ScrollingRange.SideMarginsEnabled = true;
-            xyDiagram1.AxisY.Range.SideMarginsEnabled = true;
+            xyDiagram1.AxisX.WholeRange.AutoSideMargins = true;
             xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.WholeRange.AutoSideMargins = true;
             this.chartControl1.Diagram = xyDiagram1;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl1.Location = new System.Drawing.Point(0, 40);
             this.chartControl1.Name = "chartControl1";
-            sideBySideBarSeriesLabel1.LineVisible = true;
+            sideBySideBarSeriesLabel1.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
             series1.Label = sideBySideBarSeriesLabel1;
             series1.Name = "Series 1";
-            sideBySideBarSeriesLabel2.LineVisible = true;
+            sideBySideBarSeriesLabel2.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
             series2.Label = sideBySideBarSeriesLabel2;
             series2.Name = "Series 2";
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series1,
         series2};
-            sideBySideBarSeriesLabel3.LineVisible = true;
+            sideBySideBarSeriesLabel3.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
             this.chartControl1.SeriesTemplate.Label = sideBySideBarSeriesLabel3;
             this.chartControl1.Size = new System.Drawing.Size(1162, 133);
             this.chartControl1.TabIndex = 1;
@@ -403,7 +402,7 @@ namespace ExcelClient
             "面积图",
             "3D面积图",
             "雷达面积图"});
-            this.cmbChartType.Size = new System.Drawing.Size(117, 21);
+            this.cmbChartType.Size = new System.Drawing.Size(117, 20);
             this.cmbChartType.TabIndex = 6;
             this.cmbChartType.SelectedIndexChanged += new System.EventHandler(this.cmbChartType_SelectedIndexChanged);
             // 
@@ -519,7 +518,7 @@ namespace ExcelClient
             // 
             this.tbval1.Location = new System.Drawing.Point(644, 6);
             this.tbval1.Name = "tbval1";
-            this.tbval1.Size = new System.Drawing.Size(175, 21);
+            this.tbval1.Size = new System.Drawing.Size(175, 20);
             this.tbval1.TabIndex = 13;
             // 
             // lblVal
@@ -534,7 +533,7 @@ namespace ExcelClient
             // 
             this.tbVal.Location = new System.Drawing.Point(441, 7);
             this.tbVal.Name = "tbVal";
-            this.tbVal.Size = new System.Drawing.Size(175, 21);
+            this.tbVal.Size = new System.Drawing.Size(175, 20);
             this.tbVal.TabIndex = 11;
             // 
             // labelControl3
@@ -664,7 +663,7 @@ namespace ExcelClient
             // 
             // barsaveasxls
             // 
-            this.barsaveasxls.Caption = ".xls(&Excel文件)";
+            this.barsaveasxls.Caption = ".xlsx(&Excel文件)";
             this.barsaveasxls.Id = 6;
             this.barsaveasxls.Name = "barsaveasxls";
             this.barsaveasxls.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnItem_ItemClick);
@@ -746,6 +745,7 @@ namespace ExcelClient
             // repCheckEdt
             // 
             this.repCheckEdt.AutoHeight = false;
+            this.repCheckEdt.Caption = "Check";
             this.repCheckEdt.Name = "repCheckEdt";
             this.repCheckEdt.EditValueChanged += new System.EventHandler(this.repCheckEdt_EditValueChanged);
             // 
@@ -759,6 +759,7 @@ namespace ExcelClient
             // repCheckNumRed
             // 
             this.repCheckNumRed.AutoHeight = false;
+            this.repCheckNumRed.Caption = "Check";
             this.repCheckNumRed.Name = "repCheckNumRed";
             this.repCheckNumRed.EditValueChanged += new System.EventHandler(this.repCheckNumRed_EditValueChanged);
             // 
@@ -772,6 +773,7 @@ namespace ExcelClient
             // chkTotalCol
             // 
             this.chkTotalCol.AutoHeight = false;
+            this.chkTotalCol.Caption = "Check";
             this.chkTotalCol.Name = "chkTotalCol";
             this.chkTotalCol.EditValueChanged += new System.EventHandler(this.chkTotalCol_EditValueChanged);
             // 
@@ -785,6 +787,7 @@ namespace ExcelClient
             // chkTotalRow
             // 
             this.chkTotalRow.AutoHeight = false;
+            this.chkTotalRow.Caption = "Check";
             this.chkTotalRow.Name = "chkTotalRow";
             this.chkTotalRow.EditValueChanged += new System.EventHandler(this.chkTotalRow_EditValueChanged);
             // 
