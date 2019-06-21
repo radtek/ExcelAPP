@@ -301,6 +301,11 @@ namespace ExcelAPPWeb.Service
                             {
                                 row[key] = date.Substring(0, 4) + "-" + date.Substring(4, 2) + "-" + date.Substring(6, 2);
                             }
+                            else
+                            {
+                                row[key] = dateFormartC(date);
+
+                            }
                             DateTime dtDate;
                             if (!DateTime.TryParse(row[key].ToString(), out dtDate))
                             {
@@ -1205,9 +1210,33 @@ namespace ExcelAPPWeb.Service
         }
 
         #endregion
+        protected string dateFormartC(String dateString)
+        {
+        string dateStringN = "", n = "", y = "", r = "";
+        if (dateString.Contains("月") || dateString.Contains("年") || dateString.Contains("日") || dateString.Length < 12)
+        {
+        string[] sArray = dateString.Split('-');
 
+        int s = 0;
+        foreach (string i in sArray)
+        {
+            var ret = i.ToString();
+            if (ret.Length == 4 || ret.Contains("年"))
+                n = ret.Replace("年", "");
+            if (s == 1 || ret.Contains("月"))
+                y = ret.Replace("月", "").PadLeft(2, '0');
+            if ((s == 0 || s == 2 || ret.Contains("日")) && ret.Length < 4)
+                r = ret.Replace("日", "").PadLeft(2, '0');
+            s++;
 
-
-
+        }
+        dateStringN = n + "-" + y + "-" + r;
+        }
+        else
+        {
+        dateStringN = dateString;
+        }
+        return dateStringN;
+        }
     }
 }
