@@ -120,8 +120,11 @@ namespace ExcelClient
         private void treeList1_FilterNode_1(object sender, DevExpress.XtraTreeList.FilterNodeEventArgs e)
         {
             string NodeText = e.Node.GetDisplayText(treeList1.Nodes[0].Id);
-            bool IsVisible = NodeText.ToUpper().IndexOf(nodeText.ToUpper()) >= 0;
+            
+            bool IsVisible = NodeText.ToUpper().IndexOf(nodeText.ToUpper()) >= 0|| e.Node.GetValue("DWMC").ToString().IndexOf(nodeText.ToUpper())>=0;
 
+        
+            
             if (IsVisible)
             {
                 DevExpress.XtraTreeList.Nodes.TreeListNode Node = e.Node.ParentNode;
