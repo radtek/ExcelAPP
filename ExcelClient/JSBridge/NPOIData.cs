@@ -173,6 +173,11 @@ namespace ExcelClient.JSBridge
                     vsre = cell.NumericCellValue + "";
 
                 }
+                else if (cell.CellType == CellType.Numeric && DateUtil.IsCellDateFormatted(cell))
+                {
+                    vsre = cell.DateCellValue.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+
                 else
                 {
                     vsre = cell.ToString();

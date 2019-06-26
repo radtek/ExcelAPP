@@ -33,7 +33,7 @@ namespace ExcelAPPWeb.Service
         {
             var tmpTable = model.TmpTab;
 
-            return Db.Fetch<Dictionary<string, object>>(new Sql("select * from " + tmpTable + " where 1=1 and CreateUser=@0", UserService.GetUserId()));
+            return Db.Fetch<Dictionary<string, object>>(new Sql("select * from " + tmpTable + " where 1=1  and GSDWBH=@1 and CreateUser=@0", UserService.GetUserId(), UserService.GetGsdwh()));
         }
 
 

@@ -685,7 +685,7 @@ var ImportController = {
             Msg.alert("请选择选中数据!")
             return;
         }
-
+        
         for (var item in data) {
             for (var key in hasRequire) {
 
