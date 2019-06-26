@@ -39,6 +39,8 @@ namespace ExcelClient
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-CN");
             Bootstrap.ApplicationDataDirectory = Directory.GetCurrentDirectory() + @"\Cache";
+
+
             if (Bootstrap.Load())
             {
 

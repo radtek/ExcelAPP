@@ -184,7 +184,7 @@ var ImportController = {
                     col.totalSummary =
                         {
                             render: function (suminf, column, cell) {
-                                return '<div>合计:' + suminf.sum + '</div>';
+                                return '<div>合计:' + suminf.sum.toFixed(2)  + '</div>';
                             },
                             type: 'sum'
                         };
@@ -689,7 +689,7 @@ var ImportController = {
         for (var item in data) {
             for (var key in hasRequire) {
 
-                if (data[item][key] == "" || data[item][key] == null || data[item][key].replace(' ', '') == "") {
+                if (data[item][key] == "" || data[item][key] == null || $.trim(data[item][key]) == "") {
 
                     Msg.alert("请填写第" + (parseInt(item) + 1) + "行" + "字段【" + hasRequire[key] + "】的值");
                     return;

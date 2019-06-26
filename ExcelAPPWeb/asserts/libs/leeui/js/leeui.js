@@ -15882,7 +15882,10 @@ $.leeUIDefaults.Grid.formatters['ref'] = function (value) {
                 totalsummaryArr.push('columnindex="' + columnindex + '" ');
                 totalsummaryArr.push('><div class="lee-grid-totalsummary-cell-inner"');
                 if (column.align)
-                    totalsummaryArr.push(' style="text-Align:' + column.align + ';"');
+                    totalsummaryArr.push(' style="text-Align:' + column.align + ';width:' + parseInt(column._width - 8) + 'px;"');
+
+
+
                 totalsummaryArr.push('>');
                 totalsummaryArr.push(g._getTotalCellContent(column, data));
                 totalsummaryArr.push('</div></td>');
