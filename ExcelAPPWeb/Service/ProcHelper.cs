@@ -19,7 +19,10 @@ namespace ExcelAPPWeb.Service
             var p = new OracleDynamicParameters();
             foreach (var item in paramsInfo)
             {
+                if (item.Key!="DATAID")
                 p.Add(item.Key, item.Value);
+                else
+                p.Add("DATAID", item.Value,dbType:OracleDbType.Clob);
             }
             p.Add("Re_CURSOR", dbType: OracleDbType.RefCursor, direction: ParameterDirection.Output);
 

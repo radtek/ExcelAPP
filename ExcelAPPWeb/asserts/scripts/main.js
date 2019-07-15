@@ -1,6 +1,6 @@
 ﻿
 var currentIndex = 0;
-
+var Rulecode = "";
 $("#txtQueryDateEnd").leeDate({});
 $("#txtQueryDate").leeDate({});
 
@@ -47,6 +47,29 @@ $("body").on("click", ".lee-grid-row-cell-inner .grid_remove", function (e) {
     deleteRow.push(rowobj);
     e.stopPropagation();
 });
+$("body").on("click", ".lee-grid-row-cell-inner .gird_Sweep", function (e) {
+
+    var grid = $(this).closest(".lee-ui-grid").leeUI();
+    var cell = $(this).closest(".lee-grid-row-cell");
+    var row = $(this).closest(".lee-grid-row");
+    var rowobj = grid.getRow(row.attr("id").split("|")[2]);
+    var userid = rowobj.CREATEUSER;
+    var VIN = rowobj.VIN;
+    var CPH = rowobj.CPH;
+    var Filter = base64decode(userid + '^' + VIN + '^' + CPH);
+    var s_url = base64encode("http://117.121.100.20/OCR/ocr?p_pkid=" + Filter + "=yzuser=68");
+    var Tmpurl = "http://10.8.2.107/drp/QRCODE/OrcQrcode.html?p_url=" + s_url + "";
+    //参数 用户 车牌 VIN  时间戳;
+    $.leeDialog.open({
+        url: Tmpurl,
+        title: "扫码建档",
+        showMax: true,
+        width: 900,
+        height: 400,
+
+    });
+});
+
 var ImportController = {
 
     export: function () {
@@ -108,7 +131,7 @@ var ImportController = {
         var self = this;
         var dwbh = this.getQuery("dwbh");
         var lbID = this.getQuery("id");
-
+        Rulecode = lbID;
         if (dwbh == "") {
             Msg.alert("没有获取到单位信息！");
             return;
@@ -184,7 +207,7 @@ var ImportController = {
                     col.totalSummary =
                         {
                             render: function (suminf, column, cell) {
-                                return '<div>合计:' + suminf.sum.toFixed(2)  + '</div>';
+                                return '<div>合计:' + suminf.sum.toFixed(2) + '</div>';
                             },
                             type: 'sum'
                         };
@@ -202,11 +225,17 @@ var ImportController = {
             cols.push({
                 display: "操作", name: "操作",
                 sort: false,
-                width: 60,
+                width: 160,
                 align: "center",
                 render: function (g) {
-                    if (g.FLAG == "0") {
-                        return "<button class='lee-btn lee-btn-xs grid_remove'>删除</button>";
+                    if (g.FLAG == "0" && Rulecode != "WXJC") {
+                        return "<button class='lee-btn lee-btn-danger grid_remove' style='height: 25px;'>删除</button>";
+                    }
+                    if (Rulecode == "WXJC") {
+                        if (g.FLAG == "0")
+                            return "<button class='lee-btn lee-btn-primary gird_Sweep' style='height: 25px;'>扫码建档</button><button class='lee-btn lee-btn-danger grid_remove' style='height: 25px;'>删除</button>";
+                        else
+                            return "<button class='lee-btn lee-btn-primary gird_Sweep' style='height: 25px;'>扫码建档</button>";
                     }
 
                 }
@@ -685,8 +714,17 @@ var ImportController = {
             Msg.alert("请选择选中数据!")
             return;
         }
-        
+
         for (var item in data) {
+            if (data[item]["COLORZT"] == "1") {
+                Msg.alert("写第" + (parseInt(item) + 1) + "行该数据已经上传过,你不能重复上传");
+                return;
+            }
+            if (data[item]["COLORZT"] == "4") {
+                Msg.alert("写第" + (parseInt(item) + 1) + "行该数据已经进行后续处理你不能取消上传");
+                return;
+            }
+
             for (var key in hasRequire) {
 
                 if (data[item][key] == "" || data[item][key] == null || $.trim(data[item][key]) == "") {

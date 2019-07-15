@@ -86,7 +86,7 @@ namespace ExcelClient.JSBridge
                 var saveFileDialog = new SaveFileDialog()
                 {
                     AddExtension = true,
-                    Filter = "支持的文件|*.xlsx",
+                    Filter = "支持的文件|*.xls",
                     OverwritePrompt = true,
                     FileName = "导出文件"
                 };

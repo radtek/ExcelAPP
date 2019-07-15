@@ -16,7 +16,7 @@ namespace ExcelAPPWeb.Model
         /// 规则id 业务标识
         /// </summary>
         public string ID { get; set; }
-
+        public string LSBH { get; set; }
         /// <summary>
         /// 全局模板ID
         /// </summary>

@@ -201,7 +201,7 @@ namespace ExcelAPPWeb.Service
                     var resdll = new List<IDictionary<string, object>>();
                     if (IsOra)
                     {
-                        resdll = DealProcNewOrc(model.Tmp.LoadProc, model, dt, conn, transaction);
+                        resdll = DealProcNewOrcEx(model.Tmp.LoadProc, model, dt, conn, transaction);
                     }
                     else
                     {
@@ -238,7 +238,8 @@ namespace ExcelAPPWeb.Service
             p.Add("0", Guid.NewGuid().ToString());
             p.Add("1", UserService.GetUserId());
             p.Add("2", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            p.Add("3", model.DWBH.ToString());  //增加 单位编号  
+            p.Add("3", model.DWBH.ToString());  //增加 单位编号 
+            p.Add("4", "");  //
             var i = 5;
             var index = 0;
             foreach (string key in keys)
@@ -260,7 +261,7 @@ namespace ExcelAPPWeb.Service
                                 if (row[key].ToString() != "")
                                 {
                                     sb.Append($"第{index.ToString()}列字段{key}数值金额[" + row[key].ToString() + "]有问题，已忽略处理");
-                                    p.Add("4", "1");
+                                    p.Add("4", "");
                                 }
                             }
                             value = intRes;
@@ -280,7 +281,7 @@ namespace ExcelAPPWeb.Service
                                 if (row[key].ToString() != "")
                                 {
                                     sb.Append($"第{index.ToString()}列字段{key}字段金额[" + row[key].ToString() + "]有问题，已忽略处理");
-                                    p.Add("4", "1");
+                                    p.Add("4", "");
                                 }
 
                             }
@@ -310,7 +311,7 @@ namespace ExcelAPPWeb.Service
                             if (!DateTime.TryParse(row[key].ToString(), out dtDate))
                             {
                                 sb.Append($"第{index.ToString()}列字段{key}字段日期" + row[key].ToString() + "有问题，已忽略处理");
-                                p.Add("4", "1");  // 
+                                p.Add("4", "");  // 
                             }
                             value = dtDate;//.ToString("yyyy-MM-dd HH:mm:ss")
 
@@ -475,6 +476,7 @@ namespace ExcelAPPWeb.Service
             var i = 2;
             var sb = new StringBuilder();
             var index = 0;
+           
             foreach (string key in keys)
             {
                 object value = "";
@@ -491,7 +493,7 @@ namespace ExcelAPPWeb.Service
                             if (!int.TryParse(row[key].ToString(), out intRes))
                             {
                                 sb.Append($"第{index.ToString()}列字段{key}数值金额" + row[key].ToString() + "有问题，已忽略处理");
-                                p.Add("1", "1");
+                              //  p.Add("1", "1");
                             }
                             value = intRes;
                         }
@@ -508,7 +510,7 @@ namespace ExcelAPPWeb.Service
                             if (!decimal.TryParse(row[key].ToString(), out floatRes))
                             {
                                 sb.Append($"第{index.ToString()}列字段{key}字段金额" + row[key].ToString() + "有问题，已忽略处理");
-                                p.Add("1", "1");
+                            //    p.Add("1", "1");
                             }
                             value = floatRes;
                         }
@@ -531,7 +533,7 @@ namespace ExcelAPPWeb.Service
                             if (!DateTime.TryParse(row[key].ToString(), out dtDate))
                             {
                                 sb.Append($"第{index.ToString()}列字段{key}字段日期" + row[key].ToString() + "有问题，已忽略处理");
-                                p.Add("4", "1");  // 
+                              //  p.Add("4", "1");  // 
                             }
                             value = dtDate;//.ToString("yyyy-MM-dd HH:mm:ss")
 
@@ -552,15 +554,15 @@ namespace ExcelAPPWeb.Service
                         {
                             value = "";
                         }
-                        p.Add("1", " ");
+                      
                     }
                     if (key == "FLAG")
                     {
                         value = "2";
                     }
                     #endregion
-
-                    // WriteLogFile("p" + key + i.ToString()+ value+ sb.ToString());
+                    p.Add("1", " ");
+                    WriteLogFile("p" + key );
                     p.Add(i.ToString(), value);
                     i++;
                     index++;
@@ -706,11 +708,14 @@ namespace ExcelAPPWeb.Service
             try
             {
                 List<Dictionary<string, object>> list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(ExcelData);
+             /*
                 if (list.Count == 0)
                 {
                     onError("没有上传选中数据");
                     return;
                 }
+                */
+
                 List<string> keys = new List<string>();
                 List<string> colTypes = new List<string>();
                 var sql = GetUpdateSql(model, out keys, out colTypes);
@@ -933,6 +938,12 @@ namespace ExcelAPPWeb.Service
                     onError("没有上传选中数据");
                     return;
                 }
+                if (list.Count > 200 && model.RefProc.Length > 2)
+                {
+                    onError("一次取消不能超过200行数据");
+                    return;
+                }
+
                 var sql = GetUpdateRefSql(model, out keys);
                 int count = 0;
 
@@ -954,6 +965,8 @@ namespace ExcelAPPWeb.Service
                         var resdll = new List<IDictionary<string, object>>();
                         if (IsOra)
                         {
+                           
+
                             resdll = DealProcNewOrc(model.RefProc, model, list, conn, transaction);
                         }
                         else
@@ -1111,16 +1124,18 @@ namespace ExcelAPPWeb.Service
 
         #region 处理存储过程调用orcale返回data
 
-        public  List<IDictionary<string, object>> DealProcNewOrc(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
+        public List<IDictionary<string, object>> DealProcNewOrc(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
         {
             var res = new List<IDictionary<string, object>>();
             if (string.IsNullOrEmpty(procName) || procName.Length < 2) return res;
             var refid = "";
-            //foreach (var item in list)
-            //{
-            //    refid += item["ID"].ToString() + ",";
-            //}
-
+            if (list.Count > 0)
+            { 
+            foreach (var item in list)
+            {
+                refid += item["ID"].ToString() + ",";
+            }
+            }
             var user = UserService.GetUser();
 
             Dictionary<string, object> dict = new Dictionary<string, object>();
@@ -1131,7 +1146,7 @@ namespace ExcelAPPWeb.Service
             dict.Add("DWBH", model.DWBH);
             dict.Add("TMPTABLE", model.TmpTab);//增加 luchg 20190510 
 
-            WriteLogFile("存储" + procName + user.Id + "user.Name:" + user.Name + "ID:" + model.ID + "DWBH:" + model.DWBH + "TmpTab:" + model.TmpTab);
+            WriteLogFile("存储" + procName + user.Id + "user.Name:" + user.Name + "ID:" + model.ID + "DWBH:" + model.DWBH + "TmpTab:" + model.TmpTab+ " refid" + refid);
 
 
             res= ProcHelper.GetProcDataOracle(dict, procName, conn, trans);
@@ -1143,7 +1158,35 @@ namespace ExcelAPPWeb.Service
 
         #endregion
 
+        #region 处理存储过程调用orcale返回data
 
+        public List<IDictionary<string, object>> DealProcNewOrcEx(string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)
+        {
+            var res = new List<IDictionary<string, object>>();
+            if (string.IsNullOrEmpty(procName) || procName.Length < 2) return res;
+            var refid = "";
+          
+            var user = UserService.GetUser();
+
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict.Add("UserID", user.Id);
+            dict.Add("UserName", user.Name);
+            dict.Add("YWID", model.ID);
+            dict.Add("DATAID", refid);
+            dict.Add("DWBH", model.DWBH);
+            dict.Add("TMPTABLE", model.TmpTab);//增加 luchg 20190510 
+
+            WriteLogFile("存储" + procName + user.Id + "user.Name:" + user.Name + "ID:" + model.ID + "DWBH:" + model.DWBH + "TmpTab:" + model.TmpTab + " refid" + refid);
+
+
+            res = ProcHelper.GetProcDataOracle(dict, procName, conn, trans);
+
+            return res;
+            //Db.Execute($"exec {procName} @0,@1,@2 ", model.ID, refid, UserService.GetUserId());
+        }
+
+
+        #endregion
         #region 处理存储过程调用日期版本
 
         public void DealProcNewRq(string Qsrq, string Jsrq, string procName, Model.EACmpCategory model, List<Dictionary<string, object>> list, IDbConnection conn, IDbTransaction trans)

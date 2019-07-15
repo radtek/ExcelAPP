@@ -47,7 +47,7 @@ namespace ExcelAPPWeb.Service
                 model.Cols = Db.Fetch<Model.EACmpCateCols>(new Sql(
                     @"select a.*,b.BindCol,b.Width,b.HelpID,b.IsShow,b.FPrec, b.FLength,b.FType,b.IsReadOnly,
                     b.SCols,b.RCols,b.IsMatch,b.MatchRule,b.IsRequire,b.HelpFitler,b.IsSum 
-                    from EACmpCateCols  a left join EACatCols  b on a.FCode=b.FCode and b.RID=@1  where a.RID=@0 order by a.SortOrder asc", model.ID, model.CID));
+                    from EACmpCateCols  a left join EACatCols  b on a.FCode=b.FCode and b.RID=@1 AND   a.RID=@0   where   a.slsbh=@2  order by a.SortOrder asc", model.ID, model.CID, model.LSBH));
                 model.Tmp = GetPublicInfo(model.CID);
                 return model;
             }
