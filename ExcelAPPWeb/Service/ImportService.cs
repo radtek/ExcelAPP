@@ -32,8 +32,9 @@ namespace ExcelAPPWeb.Service
         public List<Dictionary<string, object>> GetDBData(Model.EACmpCategory model)
         {
             var tmpTable = model.TmpTab;
+            WriteLogFile("上传数据" + UserService.GetUserId()+UserService.GetGsdwh());
+            return Db.Fetch<Dictionary<string, object>>(new Sql("select * from " + tmpTable + " where 1=1  and GSDWBH=@1 and CreateUser=@0", UserService.GetUserId(), model.DWBH));
 
-            return Db.Fetch<Dictionary<string, object>>(new Sql("select * from " + tmpTable + " where 1=1  and GSDWBH=@1 and CreateUser=@0", UserService.GetUserId(), UserService.GetGsdwh()));
         }
 
 
@@ -91,8 +92,8 @@ namespace ExcelAPPWeb.Service
 
 
             }
-            var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql("select " + model.TmpTab + ".* from " + model.TmpTab + " where 1=1 " + filter + "and CreateUser=@0 " + orderBy,
-                UserService.GetUserId()));
+            var result = Db.Page<Dictionary<string, object>>(Page, Size, new Sql("select " + model.TmpTab + ".* from " + model.TmpTab + " where 1=1 " + filter + "and gsdwbh=@1 and CreateUser=@0 " + orderBy,
+                UserService.GetUserId(), model.DWBH));
             return new
             {
                 Rows = result.Items,
