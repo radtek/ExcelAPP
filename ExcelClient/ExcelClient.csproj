@@ -272,6 +272,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestService\DWService.cs" />
     <Compile Include="RestService\FuncService.cs" />
+    <Compile Include="RestService\VersionService.cs" />
     <Compile Include="ucBanner.cs">
       <SubType>UserControl</SubType>
     </Compile>

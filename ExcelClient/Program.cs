@@ -1,5 +1,6 @@
 ﻿using DevExpress.Skins;
 using DevExpress.UserSkins;
+using ExcelClient.RestService;
 using NetDimension.NanUI;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,9 @@ namespace ExcelClient
             SkinManager.EnableFormSkinsIfNotVista();
             BonusSkins.Register();
             OfficeSkins.Register();
-
+            //增加版本号检查 版本不一致 强制更新
+            VersionService vr = new VersionService();
+            vr.VersionUpdate();
 
 
             //DictionOrFilePathOperator.UserNo = "root";
@@ -40,28 +43,14 @@ namespace ExcelClient
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-CN");
             Bootstrap.ApplicationDataDirectory = Directory.GetCurrentDirectory() + @"\Cache";
 
-
             if (Bootstrap.Load())
             {
 
                 Bootstrap.RegisterAssemblyResources(System.Reflection.Assembly.GetExecutingAssembly());
-
-                //frmDevQryShow frm = new frmDevQryShow();
-                //frm.ProcessID = "1";
-                //frm.PsDWBH = "0001";
-                //frm.PsJEJD = "2";
-
-                //frm.PsID = "92f90dfa46d64febb70bb09971949bfe";
-                //frm.PsYear = "";
-                //frm.PsSLJD = "2";
-                //frm.PsSelect = "select * from lsbzdw ";
-                //frm.PsSubTitle = "33";
-                //frm.PsTitle = "123";
-                //frm.IsPivot = "1";
-               // Application.Run(new frmDefList());
-               // return;
                 try
                 {
+
+                   
                     Application.Run(new Login());
                 }
                 catch (Exception ew)

@@ -500,3 +500,12 @@ CREATE TABLE EAZBGS
 GO
 
 
+
+/*增加版本表 2019-07-18*/
+CREATE TABLE dbo.EAVersion
+	(
+	ID      VARCHAR (50),
+	VERSION VARCHAR (50)
+	)
+GO
+

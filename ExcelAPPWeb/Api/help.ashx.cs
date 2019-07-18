@@ -49,6 +49,9 @@ namespace ExcelAPPWeb
 
                         res = service.GetFuncList();
                         break;
+                    case "GetVersion": //获取版本信息
+                        res = service.GetVersion();
+                        break;
                     default:
                         break;
                 }
