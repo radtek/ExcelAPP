@@ -35,7 +35,8 @@ namespace ExcelClient.RestService
             //request.AddHeader("Cookie", UserInfo.Cookie);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             var parm = UserInfo.Cookie.Split(';');
-            request.AddParameter(parm[0].Split('=')[0], parm[0].Split('=')[1], ParameterType.Cookie);
+
+            request.AddParameter("EAToken", getEAToken(), ParameterType.Cookie);
             request.AddHeader("Set-Cookie", UserInfo.Cookie);
             request.AddParameter("op", "GetHelpData");
             request.AddParameter("id", "LSBZDW");
@@ -47,6 +48,21 @@ namespace ExcelClient.RestService
 
             IRestResponse response = client.Execute(request);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<RestModel>(response.Content);
+        }
+
+        public static string getEAToken()
+        {
+            var token = "";
+            var parm = UserInfo.Cookie.Split(';');
+            foreach (var p in parm)
+            {
+                var parr = p.Split('=');
+                if (parr[0].Trim() == "EAToken")
+                {
+                    token = parr[1];
+                }
+            }
+            return token;
         }
     }
 }

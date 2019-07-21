@@ -109,3 +109,11 @@ INSERT INTO EAHelp (ID, CODE, NAME, SFields, SFilter, HelpType, PathField, Level
 VALUES ('LSBZDW', 'LSBZDW', '标准单位帮助', NULL, NULL, '1', 'LSBZDW_DWNM', 'LSBZDW_JS', 'LSBZDW_MX', NULL, NULL, '4444444444444444444444', 'LSBZDW_DWBH,单位编号,200;LSBZDW_DWMC,单位名称,200', '30', 'LSBZDW_DWBH', 'LSBZDW_DWMC')
 /
 
+
+
+/*插入版本号*/
+
+/*增加版本表 2019-07-18*/
+INSERT INTO eaversion (ID, VERSION)
+VALUES ('sys', '1.0.0')
+/

@@ -82,5 +82,12 @@ namespace ExcelAPPWeb.Service
               */
             return Db.Fetch<Model.EAFunc>("select * from EAFunc where 1=1 order by  CODE");
         }
+
+
+        public string GetVersion()
+        {
+            //获取当前版本信息
+            return Db.Single<string>("select VERSION from EAVERSION where ID='sys'");
+        }
     }
 }
